@@ -1,3 +1,9 @@
+# SASS cache
+.sass-cache/
+
+
+
+
 # Logs
 logs
 *.log
