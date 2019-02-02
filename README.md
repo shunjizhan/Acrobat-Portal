@@ -4,7 +4,7 @@ This is the web application interface for users to more conveniently interact wi
 ## Tech Stack
 - React for frontend.
 - NodeJS (Express) for backend.
-- Cloud MongoDB for data storage. Currently we are using the mlab free version of cloud MongoDB, and may swtich to more official Mongo Atlas in the future.
+- Cloud MongoDB for data storage. Currently we are using the [mLab](https://mlab.com) free version of cloud MongoDB, and may swtich to more official [MongoDB Atlas](https://www.mongodb.com/cloud/atlas) in the future.
 
 ## Run
 If don't have create-react-app installed yet
