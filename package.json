@@ -1,0 +1,19 @@
+{
+  "name": "Acrobat-Web-App",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "concurrently \"cd backend && node server.js\" \"cd client && npm start\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/shunjizhan/Acrobat-Web-App.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "concurrently": "^4.1.0"
+  }
+}
