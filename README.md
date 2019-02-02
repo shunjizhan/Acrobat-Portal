@@ -17,10 +17,18 @@ npm i -g create-react-app
 
 ### install
 ```
-cd client/
+cd server/
 npm install
+
+cd ../view
+npm install
+
 cd ..
 npm install
+```
+or use the script
+```
+./install.sh
 ```
 
 ### start the app
