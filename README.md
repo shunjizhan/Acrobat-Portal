@@ -10,16 +10,30 @@ This is the web application interface for users to more conveniently interact wi
 
 
 ## Run
-If don't have create-react-app installed yet
+<!-- If don't have create-react-app installed yet
 ```
 npm i -g create-react-app
+``` -->
+
+Install:
+```
+cd client/
+npm install
+cd ..
+npm install
+```
+or 
+```
+make install
 ```
 
-Then
+Run:
 ```
-cd Acrobat-Web-App
-npm install
 npm start
+```
+or
+```
+make run
 ```
 
 
