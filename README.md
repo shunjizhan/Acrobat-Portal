@@ -22,18 +22,10 @@ npm install
 cd ..
 npm install
 ```
-or 
-```
-make install
-```
 
 ### start the app
 ```
 npm start
-```
-or
-```
-make run
 ```
 
 
