@@ -15,7 +15,7 @@ This is the web application interface for users to more conveniently interact wi
 npm i -g create-react-app
 ``` -->
 
-Install:
+### install
 ```
 cd client/
 npm install
@@ -27,7 +27,7 @@ or
 make install
 ```
 
-Run:
+### start the app
 ```
 npm start
 ```
