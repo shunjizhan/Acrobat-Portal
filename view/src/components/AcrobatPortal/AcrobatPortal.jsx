@@ -1,6 +1,7 @@
 // /client/App.js
 import React, { Component } from "react";
 import axios from "axios";
+import './AcrobatPortal.css';
 
 class App extends Component {
   // initialize our state 
@@ -104,7 +105,7 @@ class App extends Component {
   render() {
     const { data } = this.state;
     return (
-      <div>
+      <div className='AcrobatPortal'>
         <ul>
           {data.length <= 0
             ? "NO DB ENTRIES YET"
