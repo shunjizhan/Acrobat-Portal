@@ -1,0 +1,19 @@
+$blue: rgb(65, 160, 244);
+
+.button {
+    display: inline-block;
+    position: relative;
+
+    border: 1px solid $blue;
+    border-radius: 100px;
+
+    text-align: center;
+    padding: 5px 20px;
+    font-size: 130%;
+
+    &:hover {
+        cursor: pointer;
+        background-color: $blue;
+        color: white;
+    }
+}

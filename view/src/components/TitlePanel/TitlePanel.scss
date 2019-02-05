@@ -1,0 +1,36 @@
+$blue: rgb(65, 160, 244);
+$orange: rgb(244, 149, 65);
+
+#TitlePanel {
+    position: relative;
+    width: 100%;
+    height: 100px;
+    border: 1px solid blue;
+}
+
+.titleSection {
+    position: absolute;
+    border: 1px solid green;
+    padding: 10px;
+    box-sizing: border-box;
+
+    $title-width: 20%;
+    &#title { 
+        width: $title-width;
+        color: $blue;
+        font-size: 58px;
+
+        #A { color: $orange; }
+    }
+    &#description {
+        width: 20%;
+        left: $title-width;
+        font-size: 20px;
+    }
+    &#account {
+        width: 10%;
+        right: 0;
+        text-align: right;
+        font-size: 20px;
+    }
+}

@@ -1,2 +1,2 @@
 compile:
-	sass --watch view/src/components/ --style compressed
+	sass --watch view/ --style compressed
