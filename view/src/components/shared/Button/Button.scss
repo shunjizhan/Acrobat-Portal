@@ -16,4 +16,9 @@ $blue: rgb(65, 160, 244);
         background-color: $blue;
         color: white;
     }
+
+    svg {
+        padding-right: 5px;
+        // font-size: 100%;
+    }
 }

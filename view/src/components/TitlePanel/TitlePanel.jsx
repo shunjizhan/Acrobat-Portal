@@ -10,7 +10,7 @@ class TitlePanel extends Component {
             <div className='titleSection' id='title'><span id='A'>A</span>CROBAT</div>
             <div className='titleSection' id='description'>All Case Reports with Open Biomedical Annotation Terms</div>
             <div className='titleSection' id='account'>
-                <FontAwesomeIcon id='aaa' icon={['fal', 'user-secret']} />
+                <FontAwesomeIcon icon={['fal', 'user-secret']} />
                 <span id='accountText'>Account</span>
             </div>
         </div>);

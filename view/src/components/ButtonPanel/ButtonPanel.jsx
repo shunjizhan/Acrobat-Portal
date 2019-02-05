@@ -7,10 +7,10 @@ class ButtonPanel extends Component {
     render() {
         return (
         <div id='buttonPanel'>
-            <Button text='Find case reports'/>
-            <Button text='Explore the repository'/>
-            <Button text='Add a case report'/>
-            <Button text='Help' id='helpButton'/>
+            <Button text='Find case reports' icon={['far', 'search']}/>
+            <Button text='Explore the repository' icon={['far', 'folder-open']}/>
+            <Button text='Add a case report' icon={['far', 'file-alt']}/>
+            <Button text='Help' id='helpButton' icon={['far', 'mitten']}/>
         </div>);
     }
 }
