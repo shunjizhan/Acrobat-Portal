@@ -109,14 +109,13 @@ class DatabaseTest extends Component {
           {data.length <= 0
             ? "NO DB ENTRIES YET"
             : data.map(dat => (
-                <li style={{ padding: "10px" }} key={data.message}>
-                  <span style={{ color: "gray" }}> id: </span> {dat.id} <br />
-                  <span style={{ color: "gray" }}> data: </span>
-                  {dat.message}
+                <li style={{ padding: "5px" }} key={data.message}>
+                  <span style={{ color: "gray" }}> id: </span> {dat.id}
+                  <span style={{ color: "gray" }}> | data: </span> {dat.message}
                 </li>
               ))}
         </ul>
-        <div style={{ padding: "10px" }}>
+        <div style={{ padding: "5px" }}>
           <input
             type="text"
             onChange={e => this.setState({ message: e.target.value })}
@@ -127,7 +126,7 @@ class DatabaseTest extends Component {
             ADD
           </button>
         </div>
-        <div style={{ padding: "10px" }}>
+        <div style={{ padding: "5px" }}>
           <input
             type="text"
             style={{ width: "200px" }}
@@ -138,7 +137,7 @@ class DatabaseTest extends Component {
             DELETE
           </button>
         </div>
-        <div style={{ padding: "10px" }}>
+        <div style={{ padding: "5px" }}>
           <input
             type="text"
             style={{ width: "200px" }}
