@@ -1,2 +1,2 @@
-.button{display:inline-block;position:relative;border:2px solid #41a0f4;border-radius:100px;text-align:center;padding:5px 20px;font-size:130%}.button:hover{cursor:pointer;background-color:#41a0f4;color:white}.button svg{padding-right:5px}
+.button{display:inline-block;position:relative;border:2px solid rgba(65,160,244,0.8);border-radius:100px;text-align:center;padding:5px 20px;font-size:130%}.button:hover{cursor:pointer;background-color:#41a0f4;color:white}.button svg{padding-right:5px}
 /*# sourceMappingURL=Button.css.map */

@@ -16,7 +16,7 @@ $buttonPanel-height: 50px;
     position: relative;
     width: 100%;
     height: $buttonPanel-height;
-    border: 1px solid red;
+    // border: 1px solid green;
 }
 
 $titlePanel-height: 100px;
@@ -24,26 +24,45 @@ $titlePanel-height: 100px;
     position: relative;
     width: 100%;
     height: $titlePanel-height;
-    border: 1px solid blue;
+    // border: 1px solid green;
 }
 
 .buttomPanel {
+    font-size: 150%;
     display: inline-block;
-    border: 1px solid purple;
     position: absolute;
     padding: 20px 30px;
+    border: 2px solid rgba($blue, 0.5);
+    border-radius: 10px;
+    box-shadow: 5px 5px 7px rgba($blue, 0.4);
+
+    &:hover {
+        border: 2px solid rgba($blue, 0.8);
+        box-shadow: 5px 5px 7px rgba($blue, 0.6);
+    }
 }
 
 $historyPanel-width: 30%;
-$queryPanel-width: calc(100% - #{$historyPanel-width});
-$buttom-panel-height: calc(100vh - #{$buttonPanel-height} - #{$titlePanel-height});
+$queryPanel-width: calc(100% - #{$historyPanel-width} - 20px);
+$buttom-panel-height: calc(100vh - #{$buttonPanel-height} - #{$titlePanel-height} - 20px);
 #historyPanel {
     width: $historyPanel-width;
     height: $buttom-panel-height;
 }
 
 #queryPanel {
-    left: $historyPanel-width;
+    left: calc(#{$historyPanel-width} + 10px);
     width: $queryPanel-width;
     height: $buttom-panel-height;
 }
+
+
+
+
+
+
+
+
+
+
+

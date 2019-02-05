@@ -4,7 +4,7 @@ $blue: rgb(65, 160, 244);
     display: inline-block;
     position: relative;
 
-    border: 2px solid $blue;
+    border: 2px solid rgba($blue, 0.8);
     border-radius: 100px;
 
     text-align: center;
