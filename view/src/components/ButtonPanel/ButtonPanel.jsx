@@ -6,7 +6,7 @@ import './ButtonPanel.css';
 class ButtonPanel extends Component {
     render() {
         return (
-        <div id='ButtonPanel'>
+        <div id='buttonPanel'>
             <Button text='Find case reports'/>
             <Button text='Explore the repository'/>
             <Button text='Add a case report'/>

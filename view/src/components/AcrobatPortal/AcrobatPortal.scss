@@ -1,3 +1,49 @@
-#AcrobatPortal {
+$blue: rgb(65, 160, 244);
+$orange: rgb(244, 149, 65);
 
+
+#acrobatPortal {
+    position: relative;
+    // width: 100%;
+    // height: 100%;
+    // border: 5px solid red;
+}
+
+
+
+$buttonPanel-height: 50px;
+#buttonPanel {
+    position: relative;
+    width: 100%;
+    height: $buttonPanel-height;
+    border: 1px solid red;
+}
+
+$titlePanel-height: 100px;
+#titlePanel {
+    position: relative;
+    width: 100%;
+    height: $titlePanel-height;
+    border: 1px solid blue;
+}
+
+.buttomPanel {
+    display: inline-block;
+    border: 1px solid purple;
+    position: absolute;
+    padding: 20px 30px;
+}
+
+$historyPanel-width: 30%;
+$queryPanel-width: calc(100% - #{$historyPanel-width});
+$buttom-panel-height: calc(100vh - #{$buttonPanel-height} - #{$titlePanel-height});
+#historyPanel {
+    width: $historyPanel-width;
+    height: $buttom-panel-height;
+}
+
+#queryPanel {
+    left: $historyPanel-width;
+    width: $queryPanel-width;
+    height: $buttom-panel-height;
 }

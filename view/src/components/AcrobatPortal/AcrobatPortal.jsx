@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 // import DatabaseTest from '../DatabaseTest/DatabaseTest'
 import ButtonPanel from '../ButtonPanel/ButtonPanel'
 import TitlePanel from '../TitlePanel/TitlePanel'
+import HistoryPanel from '../HistoryPanel/HistoryPanel'
+import QueryPanel from '../QueryPanel/QueryPanel'
 import { buildFontAwesomeLib } from '../../utils';
 import './AcrobatPortal.css';
 
@@ -16,9 +18,11 @@ class AcrobatPortal extends Component {
 
     render() {
         return (
-            <div id='AcrobatPortal'>
+            <div id='acrobatPortal'>
                 <TitlePanel />
                 <ButtonPanel />
+                <HistoryPanel />
+                <QueryPanel />
             </div>
         );
     }
