@@ -31,9 +31,18 @@ or use the script
 ./install.sh
 ```
 
-### start the app
+### start running the app
 ```
 npm start
+```
+
+### start compiling SASS (for frontend)
+```
+sass --watch view/src/components/ --style compressed
+```
+or
+```
+make compile
 ```
 
 
