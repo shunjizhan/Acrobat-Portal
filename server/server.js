@@ -94,8 +94,10 @@ router.post("/putData", (req, res) => {
 
 
 /* ------------------------- Machine Learning API Routers ------------------------------ */
-router.get("/getPrediction", (req, res) => {
-    axios.get('http://127.0.0.1:5000/')
+router.post("/getPrediction", (req, res) => {
+    const params = req.body.data;
+    console.log(params);
+    axios.get('http://127.0.0.1:5000/', { params })
         .then(response => {
             data = response.data
             console.log(data);
