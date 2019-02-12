@@ -11,9 +11,9 @@ class ApiTest extends Component {
     click = () => {
         axios.get('http://localhost:3001/api/getPrediction')
         .then(response => {
-            const res = response.data
-            const prediction = res.data.prediction
-            // console.log(prediction);
+            const data = response.data
+            const prediction = data.prediction
+            console.log(prediction);
             this.setState({ prediction })
         })
         .catch(error => { console.log(error); });
