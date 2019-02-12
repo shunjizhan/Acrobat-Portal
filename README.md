@@ -44,3 +44,6 @@ make compile
 
 ## Notes
 - If copy the whole project repo, use `cp -a` instead of `cp -r`, since the latter will cause some [mysterious symbolink problem](https://github.com/facebook/create-react-app/issues/200).
+
+## ScreenShots
+![Main](https://github.com/shunjizhan/Acrobat-Portal/tree/master/screenshots/main.png)
