@@ -99,7 +99,7 @@ router.get("/getPrediction", (req, res) => {
         .then(response => {
             data = response.data
             console.log(data);
-            return res.json({ success: true, data: data });
+            return data
         })
         .catch(error => { console.log(error); });
 });

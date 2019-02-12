@@ -35,7 +35,7 @@ class Predict(Resource):
 
         # preparing a response object and storing the model's predictions
         response = {
-            'predictions': prediction
+            'prediction': prediction
         }
 
         # sending our response object back as json
