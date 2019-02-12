@@ -42,9 +42,9 @@ class Predict(Resource):
         return flask.jsonify(response)
 
 
-app = flask.Flask(__name__)
-api = Api(app)
-api.add_resource(Predict, '/')
 if __name__ == '__main__':
+    app = flask.Flask(__name__)
+    api = Api(app)
+    api.add_resource(Predict, '/')
     app.run(debug=True)
 
