@@ -7,7 +7,7 @@ This is the web application interface for users to more conveniently interact wi
 - [Node](https://nodejs.org/en/) and [Express](https://expressjs.com/) for backend.
 - [Flask](http://flask.pocoo.org/) and [Flask-RESTful](https://flask-restful.readthedocs.io/en/latest/) and [Pickle](https://docs.python.org/2/library/pickle.html) for machine learning RESTful APIs.
 - [MongoDB](https://www.mongodb.com/) for data storage. Currently we are using the [mLab](https://mlab.com) free version of cloud MongoDB, and may switch to [MongoDB Atlas](https://www.mongodb.com/cloud/atlas) in the future.
-[Amazon AWS](https://aws.amazon.com/) for future deployment.
+- [Amazon AWS](https://aws.amazon.com/) for future deployment.
 
 
 ## Run
@@ -49,7 +49,7 @@ make compile
 
 
 ## Notes
-- When install some npm package, use 'npm install --save [package-name]'
+- When install some npm package, use `npm install --save [package-name]`
 - If copy the whole project repo, use `cp -a` instead of `cp -r`, since the latter will cause some [mysterious symbolink problem](https://github.com/facebook/create-react-app/issues/200).
 
 
