@@ -2,6 +2,7 @@ const mongoose = require("mongoose");
 const express = require("express");
 const bodyParser = require("body-parser");
 const logger = require("morgan");
+const axios = require('axios');
 const Data = require("./data");
 
 const API_PORT = 3001;
@@ -30,10 +31,14 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(logger("dev"));
 
+
+
+
+
+/* ------------------------- Database Routers ------------------------------ */
 // this is our get method
 // this method fetches all available data in our database
 router.get("/getData", (req, res) => {
-  console.log(111111111111111);
   Data.find((err, data) => {
     if (err) return res.json({ success: false, error: err });
     return res.json({ success: true, data: data });
@@ -81,11 +86,39 @@ router.post("/putData", (req, res) => {
   });
 });
 
+/* --------------------------------------------------------------------- */
+
+
+
+
+
+
+/* ------------------------- Machine Learning API Routers ------------------------------ */
+router.post("/getPrediction", (req, res) => {
+    const params = req.body.data;
+    console.log(params);
+    axios.get('http://127.0.0.1:5000/', { params })
+        .then(response => {
+            data = response.data
+            console.log(data);
+            return res.json(data);
+        })
+        .catch(error => { console.log(error); });
+});
+
+
+
+
 // append /api for our http requests
 app.use("/api", router);
 
 // launch our backend into a port
 app.listen(API_PORT, () => console.log(`LISTENING ON PORT ${API_PORT}`));
+
+
+
+
+
 
 
 
