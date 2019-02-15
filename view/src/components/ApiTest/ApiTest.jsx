@@ -6,7 +6,7 @@ import './ApiTest.css';
 class ApiTest extends Component {
     state = {
         prediction: null,
-        fixed_acidity: 1
+        fixed_acidity: '?'
     }
 
     click = fixed_acidity => {
@@ -28,16 +28,18 @@ class ApiTest extends Component {
         return (
         <div id='apiTest' className='apiTest'>
             <input
-                type="text"
                 onChange={e => this.setState({ fixed_acidity: e.target.value })}
-                placeholder="input the fixed_acidity"
-                style={{ width: "200px" }}
+                placeholder="input the fixed_acidity for the wine"
             />
 
-            <button style={{'width': '300px', 'height':'30px', 'zIndex': 10} } onClick={ () => this.click(this.state.fixed_acidity) }>get prediction</button>
+            <button 
+                id='pred-button' 
+                onClick={ () => this.click(this.state.fixed_acidity) }
+            >Prediction Wine Quality</button>
 
             <div id='pred'>
-                Wine Quality with fixed_acidity {this.state.fixed_acidity}: {this.state.prediction? this.state.prediction : ''}
+                Wine Quality with fixed_acidity <span style={{fontWeight: 'bold', color: 'rgb(244, 149, 65)'}}>{this.state.fixed_acidity}</span>:<br/>
+                <div id='FA'>{this.state.prediction? this.state.prediction : 0}</div>
             </div>
 
         </div>);
