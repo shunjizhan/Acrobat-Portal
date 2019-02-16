@@ -25,9 +25,9 @@ class Predict(Resource):
     def get(self):
         params = request.args
         if params:
-            print params['fixed_acidity']
+            print(params['fixed_acidity'])
         else:
-            print 'params is none'
+            print('params is none')
 
         fa = float(params['fixed_acidity'])
         feature_array = [fa] + [0.66, 0, 1.8, 0.075, 13, 40, 0.9978, 3.51, 0.56, 9.4]

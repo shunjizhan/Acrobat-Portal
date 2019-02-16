@@ -2,7 +2,11 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-// this will be our data base's data structure 
+/**
+*	Mongo Data Model
+*	@param {Number} id - id of the message
+*	@param {String} message - content of the message
+*/
 const DataSchema = new Schema(
   {
     id: Number,

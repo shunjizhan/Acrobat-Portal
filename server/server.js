@@ -3,7 +3,8 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const logger = require("morgan");
 const axios = require('axios');
-const Data = require("./data");
+const Data = require("./models/mongo/data");
+const CaseReport = require("./models/mongo/case_report");
 
 const API_PORT = 3001;
 const app = express();
