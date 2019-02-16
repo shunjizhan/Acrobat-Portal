@@ -30,6 +30,7 @@ module.exports = function(app) {
     // this method overwrites existing data in our database
     router.post("/updateData", (req, res) => {
         const { id, update } = req.body;
+
         Data.findOneAndUpdate(id, update, err => {
             if (err) return res.json({ success: false, error: err });
             return res.json({ success: true });
@@ -40,6 +41,7 @@ module.exports = function(app) {
     // this method removes existing data in our database
     router.delete("/deleteData", (req, res) => {
         const { id } = req.body;
+
         Data.findOneAndDelete(id, err => {
             if (err) return res.send(err);
             return res.json({ success: true });
@@ -64,6 +66,19 @@ module.exports = function(app) {
         data.save(err => {
             if (err) return res.json({ success: false, error: err });
             return res.json({ success: true });
+        });
+    });
+
+    /* --------------------------------- Search APIs --------------------------------------- */
+    // this is the method for basic text search on the data message
+    router.post("/searchData", (req, res) => {
+        const {id, searchKey} = req.body;
+        
+        var re = new RegExp(searchKey);
+
+        Data.find( { message:re }, (err, data) => {
+            if (err) return res.send(err);
+            return res.json({ success : true, data: data });
         });
     });
 

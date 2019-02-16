@@ -11,7 +11,9 @@ class DatabaseTest extends Component {
     intervalIsSet: false,
     idToDelete: null,
     idToUpdate: null,
-    objectToUpdate: null
+    objectToUpdate: null,
+    searchMessage: null,
+    searchRes: []
   };
 
   // when component mounts, first thing it does is fetch all existing data in our db
@@ -98,11 +100,30 @@ class DatabaseTest extends Component {
   };
 
 
+  // our text search method that uses backend api
+  // to search from database
+  searchDB = searchQuery => {
+    console.log(searchQuery);
+    if (searchQuery==""){
+      this.setState({ searchRes: []});
+      return;
+    }
+
+    axios.post("http://localhost:3001/api/searchData", {
+      id: 5,
+      searchKey: searchQuery
+    })
+      // .then(res => console.log(res));
+      .then(res => this.setState({searchRes : res.data.data}));
+  };
+
   // here is our UI
   // it is easy to understand their functions when you 
   // see them render into our screen
   render() {
     const { data } = this.state;
+    const { searchRes } = this.state;
+    console.log(searchRes);
     return (
       <div className='AcrobatPortal'>
         <ul>
@@ -158,6 +179,31 @@ class DatabaseTest extends Component {
             UPDATE
           </button>
         </div>
+        <div style={{ padding: "5px" }}>
+          <input
+            type="text"
+            onChange={e => this.setState({ searchMessage: e.target.value })}
+            placeholder="search something from the database"
+            style={{ width: "200px" }}
+          />
+          <button onClick={() => this.searchDB(this.state.searchMessage)}>
+            SEARCH
+          </button>
+          <button onClick={() => this.setState({ searchRes: []})}>
+            CLEAR RESULTS
+          </button>
+        </div>
+        <ul>
+          {searchRes.length <= 0
+            ? "NO SEARCH RESULTS ENTRIES YET"
+            : searchRes.map(dat => (
+                <li style={{ padding: "5px" }} key={searchRes.message}>
+                  <span style={{ color: "gray" }}> id: </span> {dat.id}
+                  <span style={{ color: "gray" }}> | data: </span> {dat.message}
+                </li>
+              ))
+          }
+        </ul>
       </div>
     );
   }
