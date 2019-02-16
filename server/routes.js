@@ -13,6 +13,8 @@ module.exports = function(app) {
 
     // 这样我们call api的时候可以把前后端交互的逻辑移到controller里,比如
     // app.get('/', HomeController.index);
+    // app.get('/getData', DataController.getData);等等
+
     // HomeController我写了，顺稷你看看怎么显示react的界面，或者我们可以以后再说。
     /* ------------------------- Database Routers ------------------------------ */
     // this is our get method
