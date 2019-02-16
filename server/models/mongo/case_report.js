@@ -2,7 +2,7 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-/**
+/***
 *	Mongo Messafe Model
 *	@param {Number} id - id of the Case Report
 *	@param {String} title - title of the Case Report
