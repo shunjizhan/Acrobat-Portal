@@ -3,6 +3,7 @@ $search-bar-width: calc(100% - #{$search-bar-height});  // save space for button
 
 $blue: rgb(65, 160, 244);
 $orange: rgb(244, 149, 65);
+$deep-blue: rgb(18, 120, 209);
 
 #searchBar{
   width: $search-bar-width;
@@ -12,7 +13,7 @@ $orange: rgb(244, 149, 65);
 }
 
 #searchText {
-  font-size: 25px;
+  font-size: 23px;
   width: 100%;
   border: 2px solid $blue;
   padding: 5px 10px;
@@ -21,7 +22,7 @@ $orange: rgb(244, 149, 65);
   outline: none;
   display: inline-block;
 
-  &:focus{ color: $blue; }
+  // &:focus{ color: $blue; }
 }
 
 $button-off: calc(-1 * (#{$search-bar-height} - 10px));
@@ -38,5 +39,5 @@ $button-off: calc(-1 * (#{$search-bar-height} - 10px));
   cursor: pointer;
   font-size: 20px;
 
-  // &:hover { color: $orange; }
+  &:hover { background-color: $deep-blue; }
 }
