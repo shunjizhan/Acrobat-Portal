@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import DatabaseTest from '../DatabaseTest/DatabaseTest';
+import QueryBuilder from '../QueryBuilder/QueryBuilder';
 import SearchBar from '../SearchBar/SearchBar';
 import './QueryPanel.css';
 
@@ -11,6 +12,7 @@ class QueryPanel extends Component {
         return (
         <div id='queryPanel' className='buttomPanel'>
             <SearchBar />
+            <QueryBuilder />
 
 
             <br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
