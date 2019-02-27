@@ -12,30 +12,31 @@ $deep-blue: rgb(18, 120, 209);
   margin:0;
 }
 
+$border-radius: 5px;
 #searchText {
   font-size: 23px;
   width: 100%;
   border: 2px solid $blue;
   padding: 5px 10px;
   height: 100%;
-  border-radius: 5px;
+  border-radius: $border-radius;
   outline: none;
   display: inline-block;
 
   // &:focus{ color: $blue; }
 }
 
-$button-off: calc(-1 * (#{$search-bar-height} - 10px));
+$button-offset: calc(-1 * (#{$search-bar-height} - 10px));
 #searchButton {
   position: absolute;
-  right: $button-off;
+  right: $button-offset;
   width: $search-bar-height;
   height: $search-bar-height;
   border: 1px solid $blue;
   background: $blue;
   text-align: center;
   color: white;
-  border-radius: 5px;
+  border-radius: $border-radius;
   cursor: pointer;
   font-size: 20px;
 
