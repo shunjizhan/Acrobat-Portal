@@ -53,7 +53,7 @@ module.exports = function(app) {
     // this method adds new data in our database
     router.post("/putData", (req, res) => {
         let data = new Data();
-
+        console.log(req.body);
         const { id, message } = req.body;
 
         if ((!id && id !== 0) || !message) {
@@ -74,7 +74,10 @@ module.exports = function(app) {
     // this is the method for basic text search on the data message
     router.post("/searchData", (req, res) => {
         const {id, searchKey} = req.body;
-        
+        console.log(req);
+        console.log(searchKey);
+        console.log('searchData api message');
+
         var re = new RegExp(searchKey);
 
         Data.find( { message:re }, (err, data) => {
@@ -94,6 +97,22 @@ module.exports = function(app) {
                 return res.json(data);
             })
             .catch(error => { console.log(error); });
+    });
+
+    /* --------------------------------- CaseReport APIs ----------------------------------- */
+    router.post("/putCaseReport", (req, res) => {
+        const {txt, ann, date } = req.body;
+        let caseReport = new CaseReport();
+        console.log(req);
+        console.log(ann);
+        console.log('caseReport api messge');
+
+        caseReport.txt = txt;
+        caseReport.ann = ann;
+        caseReport.save(err => {
+            if (err) return res.json({ success: false, error: err });
+            return res.json({ success: true});
+        });
     });
 
     // For Future Use If We Are Having Users

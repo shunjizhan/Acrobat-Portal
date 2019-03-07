@@ -11,10 +11,9 @@ const Schema = mongoose.Schema;
 */
 const CaseReportSchema = new Schema(
   {
-    id				: Number,
-    title			: String,
-    description		: String,
-    date            : { type: Date, default: Date.now }
+    txt	: String,
+    ann	: String,
+    // date : { type: Date, default: Date.now }
   },
   { timestamps: true }
 );
