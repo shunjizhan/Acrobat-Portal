@@ -4,58 +4,76 @@ import './Brat.css';
 import collData from './collData';
 import docData from './docData';
 
+const options = {
+    // assetsPath: "static/",
+    // webFontURLs: [//
+    //     'fonts/Astloch-Bold.ttf',
+    //     'fonts/PT_Sans-Caption-Web-Regular.ttf',
+    //     'fonts/Liberation_Sans-Regular.ttf'
+    // ],
+    // ajax: 'local',
+    // overWriteModals: false,
+    // maxFragmentLength: 30,
+    // showTooltip: true
+}
+
 class Brat extends Component {
-    state = {
-        collData,
-        docData,
-        options: {
-            assetsPath: "static/",
-            webFontURLs: [//
-                'fonts/Astloch-Bold.ttf',
-                'fonts/PT_Sans-Caption-Web-Regular.ttf',
-                'fonts/Liberation_Sans-Regular.ttf'
-            ],
-            ajax: 'local',
-            overWriteModals: false,
-            maxFragmentLength: 30,
-            showTooltip: true
-        }
+    state = {}
+    docData = JSON.parse(JSON.stringify(docData));
+    old_data = JSON.parse(JSON.stringify(docData));
+
+    componentDidMount(){
+        var elem = document.getElementById("brat-editor");
+        window.bratt = new window.BratFrontendEditor(elem, collData, this.docData, options);
     }
-  componentDidMount(){
-    var elem = document.getElementById("brat-editor");
-    const { collData, docData, options } = this.state;
-    window.bratt = new window.BratFrontendEditor(elem, collData, docData, options);
-  }
 
-  handleSubmit = () => {
-    console.log(window.bratt.docData);
-  }
+    handleSubmit = () => {
+        console.log(this.docData);
 
-  handleChange = () => {
-    docData.entities = [];
-    window.bratt.dispatcher.post('requestRenderData', [docData]);
-  }
- 
-  render () {
-    return(
-    <div id='brat'>
-      <div id="brat-editor" />
-      <button 
-        id='submit-report' 
-        style={{width: 200, height: 100}}
-        onClick={this.handleSubmit}
-        >
-        submit case report
-        </button>
-              <button 
-        style={{width: 200, height: 100}}
-        onClick={this.handleChange}
-        >
-        clear case report
-        </button>
-    </div>
-    );
-  }
+        // this should be the same! docData was passed by reference to brat!!
+        // console.log(docData);
+    }
+
+    getCaseReport = id => {
+        this.docData = this.old_data;
+        this.redraw();
+    }
+
+    redraw = () => {
+        window.bratt.dispatcher.post('requestRenderData', [this.docData]);
+    }
+
+    render () {
+        return(
+            <div id='brat'>
+
+                <span 
+                    id='submit-report' 
+                    className='button'
+                    onClick={this.handleSubmit}
+                >
+                    submit case report
+                </span>
+
+                <span 
+                    className='button'
+                    onClick={this.getCaseReport}
+                >
+                    get case report
+                </span>
+
+                <span 
+                    className='button'
+                    onClick={this.redraw}
+                >
+                    redraw
+                </span>
+
+                <div id="brat-editor" />
+
+            </div>
+        );
+    }
 }
 
 export default Brat;

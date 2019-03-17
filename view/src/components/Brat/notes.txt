@@ -1,0 +1,30 @@
+每次user新加了东西以后，所有的overlap都会失踪，但是docdata里面还是有ovarlap的数据。
+
+如果强制刷新： window.bratt.dispatcher.post('requestRenderData', [docData]); 以后， overlap的display又会出来。
+只有在equiv里面的会出现这种问题，如果是手动加进去的，也就是在relation里面的话就不会有问题
+
+解决办法1：可能是源代码忘了刷新overlap，改源代码。
+解决办法2：monitor docdata，一旦有变化（user加了新东西），强制刷新。比如每一秒check一下hash。但是这样可能很费系统资源。
+解决办法3：把所有的overlap变成realtion（这样只有单方向的箭头）
+
+
+
+----------------------------------------
+edit窗口UI问题(包括二级event显示不出来）：
+可以试一下clone下来最原始的版本，然后加很多重复的东西，看看会不会界面太长显示不出来
+另外看看原始版本里面那个关闭edit窗口的'x'有没有显示出来。
+
+假如原始版本的没有问题 => 
+    - 有可能是我们的config太大了哪里出了问题
+    - 也有可能是我们的config漏了什么，原版的还load了其它extra的数据（找到它）
+    - 或者是option没有读取进去的问题
+
+假如原始版本有问题 => 
+    - 可能这个版本的CSS就有问题，要自己改
+    - 可能这个版本不支持二级选择（我们这个brat有没有改动？原始的支持二级选择吗？）
+
+
+
+general idea: 查fork的这个frontend的版本改了什么东西
+    - 在visualizer之类的删掉了什么，可能是导致没有call requestRenderData
+    - 改了什么css，导致窗口UI问题

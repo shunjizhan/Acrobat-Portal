@@ -1,19 +1,23 @@
 $blue: rgb(65, 160, 244);
+$transfer-duration: 0.3s;
 
 .button {
     display: inline-block;
     position: relative;
 
-    border: 2px solid rgba($blue, 0.8);
-    border-radius: 100px;
+    border-radius: 8px;
+    border: 2px solid rgba($blue, 1);
 
     text-align: center;
     padding: 5px 20px;
     font-size: 130%;
 
+    -webkit-transition-duration: $transfer-duration;  /* Safari */
+    transition-duration: $transfer-duration;
+
     &:hover {
         cursor: pointer;
-        background-color: $blue;
+        background-color: rgba($blue, 1);
         color: white;
     }
 
