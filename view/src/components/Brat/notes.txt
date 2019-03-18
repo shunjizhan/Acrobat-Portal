@@ -23,6 +23,8 @@ edit窗口UI问题(包括二级event显示不出来）：
     - 可能这个版本的CSS就有问题，要自己改
     - 可能这个版本不支持二级选择（我们这个brat有没有改动？原始的支持二级选择吗？）
 
+还有可能是它的css没加进去，在brat-front-end-editor里面index.js 54行，css被comment掉了,我们现在是在index.html里面加的min.css,这可能也是为什么读取不到font的原因？
+
 
 
 general idea: 查fork的这个frontend的版本改了什么东西

@@ -4,13 +4,16 @@ $transfer-duration: 0.3s;
 .button {
     display: inline-block;
     position: relative;
+    padding: 10px 30px;
 
     border-radius: 8px;
-    border: 2px solid rgba($blue, 1);
+    border: 2px solid rgba($blue, 0.8);
+    color: $blue;
 
     text-align: center;
-    padding: 5px 20px;
-    font-size: 130%;
+    font-size: 120%;
+    font-weight: lighter;
+    // font-family: Helvetica;
 
     -webkit-transition-duration: $transfer-duration;  /* Safari */
     transition-duration: $transfer-duration;

@@ -20,11 +20,13 @@ const options = {
 class Brat extends Component {
     state = {}
     docData = JSON.parse(JSON.stringify(docData));
+    collData = JSON.parse(JSON.stringify(collData));
+
     old_data = JSON.parse(JSON.stringify(docData));
 
     componentDidMount(){
         var elem = document.getElementById("brat-editor");
-        window.bratt = new window.BratFrontendEditor(elem, collData, this.docData, options);
+        window.brat = new window.BratFrontendEditor(elem, this.collData, this.docData, options);
     }
 
     handleSubmit = () => {
@@ -35,12 +37,14 @@ class Brat extends Component {
     }
 
     getCaseReport = id => {
-        this.docData = this.old_data;
+        // console.log(this);
+        this.docData = JSON.parse(JSON.stringify(this.old_data));
         this.redraw();
     }
 
     redraw = () => {
-        window.bratt.dispatcher.post('requestRenderData', [this.docData]);
+        window.brat.dispatcher.post('requestRenderData', [this.docData]);
+        window.brat.dispatcher.post('current', [this.collData, this.docData, {}]);
     }
 
     render () {
