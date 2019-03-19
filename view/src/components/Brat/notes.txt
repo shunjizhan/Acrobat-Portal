@@ -25,6 +25,8 @@ edit窗口UI问题(包括二级event显示不出来）：
 
 还有可能是它的css没加进去，在brat-front-end-editor里面index.js 54行，css被comment掉了,我们现在是在index.html里面加的min.css,这可能也是为什么读取不到font的原因？
 
+也有可能是我们版本的brat加了css才显示得那么好？
+
 
 
 general idea: 查fork的这个frontend的版本改了什么东西

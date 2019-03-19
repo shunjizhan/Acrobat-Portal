@@ -1,6 +1,6 @@
 const docData = {
     "_id": {
-        "$oid": "5c8eac40a3d7b13637aa783c"
+        "$oid": "5c8eea57ca49b8479b8938d5"
     },
     "messages": [],
     "source_files": [
@@ -22,671 +22,311 @@ const docData = {
         ],
         [
             "T2",
-            "Gender",
+            "Sex",
             [
                 [
                     14,
-                    18
+                    19
                 ]
             ]
         ],
         [
             "T3",
-            "Sign_symptom",
+            "History",
             [
                 [
-                    19,
-                    31
-                ]
-            ]
-        ],
-        [
-            "T4",
-            "Ethnicity",
-            [
-                [
-                    32,
-                    41
-                ]
-            ]
-        ],
-        [
-            "T5",
-            "Therapeutic_procedure",
-            [
-                [
-                    61,
-                    78
+                    25,
+                    49
                 ]
             ]
         ],
         [
             "T7",
-            "Disease_disorder",
+            "Nonbiological_location",
             [
                 [
-                    98,
-                    112
-                ]
-            ]
-        ],
-        [
-            "T6",
-            "Duration",
-            [
-                [
-                    83,
-                    93
+                    136,
+                    151
                 ]
             ]
         ],
         [
             "T8",
-            "Activity",
+            "Detailed_description",
             [
                 [
-                    117,
-                    125
-                ]
-            ]
-        ],
-        [
-            "T9",
-            "Disease_disorder",
-            [
-                [
-                    148,
-                    176
-                ]
-            ]
-        ],
-        [
-            "T10",
-            "Quantitative_concept",
-            [
-                [
-                    178,
-                    192
+                    67,
+                    79
                 ]
             ]
         ],
         [
             "T11",
-            "Sign_symptom",
+            "Biological_structure",
             [
                 [
-                    199,
-                    211
-                ]
-            ]
-        ],
-        [
-            "T12",
-            "Quantitative_concept",
-            [
-                [
-                    260,
-                    286
-                ]
-            ]
-        ],
-        [
-            "T13",
-            "Diagnostic_procedure",
-            [
-                [
-                    307,
-                    317
-                ]
-            ]
-        ],
-        [
-            "T14",
-            "Time",
-            [
-                [
-                    346,
-                    356
-                ]
-            ]
-        ],
-        [
-            "T15",
-            "Sign_symptom",
-            [
-                [
-                    394,
-                    414
-                ]
-            ]
-        ],
-        [
-            "T16",
-            "Quantitative_concept",
-            [
-                [
-                    424,
-                    435
-                ]
-            ]
-        ],
-        [
-            "T17",
-            "Sign_symptom",
-            [
-                [
-                    416,
-                    419
+                    186,
+                    191
                 ]
             ]
         ],
         [
             "T18",
-            "Sign_symptom",
+            "Detailed_description",
             [
                 [
-                    437,
-                    473
+                    290,
+                    295
                 ]
             ]
         ],
         [
             "T19",
-            "Sign_symptom",
+            "Lab_value",
             [
                 [
-                    475,
-                    479
-                ]
-            ]
-        ],
-        [
-            "T20",
-            "Quantitative_concept",
-            [
-                [
-                    484,
-                    487
-                ]
-            ]
-        ],
-        [
-            "T21",
-            "Sign_symptom",
-            [
-                [
-                    493,
-                    512
-                ]
-            ]
-        ],
-        [
-            "T22",
-            "Sign_symptom",
-            [
-                [
-                    514,
-                    518
+                    311,
+                    324
                 ]
             ]
         ],
         [
             "T23",
-            "Quantitative_concept",
+            "Biological_structure",
             [
                 [
-                    522,
-                    535
-                ]
-            ]
-        ],
-        [
-            "T24",
-            "Quantitative_concept",
-            [
-                [
-                    540,
-                    550
+                    422,
+                    438
                 ]
             ]
         ],
         [
             "T25",
-            "Activity",
+            "Detailed_description",
             [
                 [
-                    568,
-                    578
-                ]
-            ]
-        ],
-        [
-            "T26",
-            "Therapeutic_procedure",
-            [
-                [
-                    584,
-                    601
+                    442,
+                    452
                 ]
             ]
         ],
         [
             "T27",
-            "Therapeutic_procedure",
+            "Detailed_description",
             [
                 [
-                    606,
-                    631
+                    475,
+                    484
                 ]
             ]
         ],
         [
             "T28",
-            "Diagnostic_procedure",
+            "Biological_structure",
             [
                 [
-                    238,
-                    240
+                    497,
+                    506
                 ]
             ]
         ],
         [
-            "T29",
-            "Age",
+            "T38",
+            "Biological_structure",
             [
                 [
-                    643,
-                    654
+                    731,
+                    736
                 ]
             ]
         ],
         [
-            "T30",
-            "Gender",
+            "T40",
+            "Biological_structure",
             [
                 [
-                    663,
-                    667
-                ]
-            ]
-        ],
-        [
-            "T36",
-            "Qualitative_concept",
-            [
-                [
-                    748,
-                    759
-                ]
-            ]
-        ],
-        [
-            "T42",
-            "Anatomical_structure",
-            [
-                [
-                    921,
-                    932
-                ]
-            ]
-        ],
-        [
-            "T44",
-            "Anatomical_structure",
-            [
-                [
-                    993,
-                    996
-                ]
-            ]
-        ],
-        [
-            "T46",
-            "Quantitative_concept",
-            [
-                [
-                    1103,
-                    1108
-                ]
-            ]
-        ],
-        [
-            "T47",
-            "Quantitative_concept",
-            [
-                [
-                    1130,
-                    1135
+                    761,
+                    770
                 ]
             ]
         ],
         [
             "T48",
-            "Qualitative_concept",
+            "Severity",
             [
                 [
-                    1083,
-                    1099
+                    942,
+                    946
                 ]
             ]
         ],
         [
-            "T49",
-            "Qualitative_concept",
+            "T52",
+            "Lab_value",
             [
                 [
-                    1141,
-                    1157
+                    1074,
+                    1080
                 ]
             ]
         ],
         [
-            "T53",
-            "Quantitative_concept",
+            "T54",
+            "Biological_structure",
             [
                 [
-                    1310,
-                    1329
+                    1136,
+                    1164
                 ]
             ]
         ],
         [
-            "T58",
-            "Quantitative_concept",
+            "T60",
+            "Lab_value",
             [
                 [
-                    1448,
-                    1468
+                    1176,
+                    1186
                 ]
             ]
         ],
         [
-            "T63",
-            "Anatomical_structure",
+            "T61",
+            "Lab_value",
             [
                 [
-                    1674,
-                    1685
+                    1210,
+                    1217
                 ]
             ]
         ],
         [
             "T66",
-            "Qualitative_concept",
+            "Detailed_description",
             [
                 [
-                    1760,
-                    1772
-                ]
-            ]
-        ],
-        [
-            "T67",
-            "Anatomical_structure",
-            [
-                [
-                    1814,
-                    1824
-                ]
-            ]
-        ],
-        [
-            "T68",
-            "Anatomical_structure",
-            [
-                [
-                    1841,
-                    1856
-                ]
-            ]
-        ],
-        [
-            "T69",
-            "Anatomical_structure",
-            [
-                [
-                    1882,
-                    1904
+                    1357,
+                    1366
                 ]
             ]
         ],
         [
             "T70",
-            "Anatomical_structure",
+            "Lab_value",
             [
                 [
-                    1910,
-                    1929
+                    1501,
+                    1507
+                ]
+            ]
+        ],
+        [
+            "T71",
+            "Biological_structure",
+            [
+                [
+                    1508,
+                    1525
                 ]
             ]
         ],
         [
             "T74",
-            "Age",
+            "Nonbiological_location",
             [
                 [
-                    2030,
-                    2041
+                    1543,
+                    1561
                 ]
             ]
         ],
         [
-            "T82",
-            "Anatomical_structure",
+            "T79",
+            "Detailed_description",
             [
                 [
-                    2258,
-                    2269
+                    1675,
+                    1687
                 ]
             ]
         ],
         [
-            "T84",
-            "Qualitative_concept",
+            "T80",
+            "Area",
             [
                 [
-                    2283,
-                    2289
+                    1663,
+                    1674
+                ]
+            ]
+        ],
+        [
+            "T81",
+            "Biological_structure",
+            [
+                [
+                    1714,
+                    1725
+                ]
+            ]
+        ],
+        [
+            "T83",
+            "Biological_structure",
+            [
+                [
+                    1751,
+                    1759
                 ]
             ]
         ],
         [
             "T86",
-            "Qualitative_concept",
+            "Severity",
             [
                 [
-                    2326,
-                    2338
-                ]
-            ]
-        ],
-        [
-            "T87",
-            "Qualitative_concept",
-            [
-                [
-                    2339,
-                    2346
-                ]
-            ]
-        ],
-        [
-            "T88",
-            "Anatomical_structure",
-            [
-                [
-                    2363,
-                    2398
-                ]
-            ]
-        ],
-        [
-            "T89",
-            "Qualitative_concept",
-            [
-                [
-                    2363,
-                    2376
+                    1822,
+                    1830
                 ]
             ]
         ],
         [
             "T90",
-            "Qualitative_concept",
+            "Detailed_description",
             [
                 [
-                    2377,
-                    2381
+                    1904,
+                    1918
                 ]
             ]
         ],
         [
             "T91",
-            "Anatomical_structure",
+            "Lab_value",
             [
                 [
-                    2382,
-                    2388
+                    1962,
+                    1978
                 ]
             ]
         ],
         [
-            "T92",
-            "Qualitative_concept",
+            "T93",
+            "Biological_structure",
             [
                 [
-                    2377,
-                    2388
+                    1941,
+                    1949
                 ]
             ]
         ],
         [
-            "T97",
-            "Anatomical_structure",
+            "T99",
+            "Detailed_description",
             [
                 [
-                    2529,
-                    2543
-                ]
-            ]
-        ],
-        [
-            "T100",
-            "Anatomical_structure",
-            [
-                [
-                    2593,
-                    2621
-                ]
-            ]
-        ],
-        [
-            "T102",
-            "Quantitative_concept",
-            [
-                [
-                    2662,
-                    2666
-                ]
-            ]
-        ],
-        [
-            "T103",
-            "Quantitative_concept",
-            [
-                [
-                    2681,
-                    2686
-                ]
-            ]
-        ],
-        [
-            "T112",
-            "Anatomical_structure",
-            [
-                [
-                    2962,
-                    2980
-                ]
-            ]
-        ],
-        [
-            "T113",
-            "Qualitative_concept",
-            [
-                [
-                    2962,
-                    2967
-                ]
-            ]
-        ],
-        [
-            "T114",
-            "Anatomical_structure",
-            [
-                [
-                    3002,
-                    3024
-                ]
-            ]
-        ],
-        [
-            "T115",
-            "Anatomical_structure",
-            [
-                [
-                    3044,
-                    3060
-                ]
-            ]
-        ],
-        [
-            "T116",
-            "Anatomical_structure",
-            [
-                [
-                    3074,
-                    3113
-                ]
-            ]
-        ],
-        [
-            "T118",
-            "Anatomical_structure",
-            [
-                [
-                    3214,
-                    3234
-                ]
-            ]
-        ],
-        [
-            "T119",
-            "Qualitative_concept",
-            [
-                [
-                    3214,
-                    3224
-                ]
-            ]
-        ],
-        [
-            "T120",
-            "Qualitative_concept",
-            [
-                [
-                    3225,
-                    3227
-                ]
-            ]
-        ],
-        [
-            "T125",
-            "Sex",
-            [
-                [
-                    42,
-                    49
+                    2090,
+                    2113
                 ]
             ]
         ]
@@ -694,187 +334,55 @@ const docData = {
     "attributes": [
         [
             "A1",
-            "TREND",
-            "E1",
-            "DEC"
+            "POLARITY",
+            "E5",
+            "NEG"
         ],
         [
             "A2",
-            "TREND",
-            "E14",
-            "DEC"
+            "POLARITY",
+            "E6",
+            "NEG"
         ],
         [
             "A3",
             "POLARITY",
-            "E17",
+            "E7",
             "NEG"
         ],
         [
             "A4",
             "POLARITY",
-            "E20",
+            "E8",
             "NEG"
         ],
         [
             "A5",
             "POLARITY",
-            "E22",
-            "MAYBE_POS"
+            "E45",
+            "NEG"
         ],
         [
             "A6",
             "POLARITY",
-            "E24",
+            "E59",
             "NEG"
         ],
         [
             "A7",
             "POLARITY",
-            "E45",
-            "NEG"
-        ],
-        [
-            "A8",
-            "POLARITY",
-            "E48",
-            "NEG"
+            "E22",
+            "UNCERTAIN"
         ]
     ],
     "relations": [
         [
             "R1",
-            "MODIFIER",
-            [
-                [
-                    "Arg1",
-                    "T10"
-                ],
-                [
-                    "Arg2",
-                    "T9"
-                ]
-            ]
-        ],
-        [
-            "R2",
-            "MODIFIER",
-            [
-                [
-                    "Arg1",
-                    "T20"
-                ],
-                [
-                    "Arg2",
-                    "T19"
-                ]
-            ]
-        ],
-        [
-            "R3",
-            "MODIFIER",
-            [
-                [
-                    "Arg1",
-                    "T20"
-                ],
-                [
-                    "Arg2",
-                    "T18"
-                ]
-            ]
-        ],
-        [
-            "R4",
-            "MODIFIER",
-            [
-                [
-                    "Arg1",
-                    "T23"
-                ],
-                [
-                    "Arg2",
-                    "T22"
-                ]
-            ]
-        ],
-        [
-            "R5",
-            "MODIFIER",
-            [
-                [
-                    "Arg1",
-                    "T24"
-                ],
-                [
-                    "Arg2",
-                    "T21"
-                ]
-            ]
-        ],
-        [
-            "R6",
-            "BEFORE",
+            "MODIFY",
             [
                 [
                     "Arg1",
                     "T7"
-                ],
-                [
-                    "Arg2",
-                    "T8"
-                ]
-            ]
-        ],
-        [
-            "R10",
-            "MODIFIER",
-            [
-                [
-                    "Arg1",
-                    "T16"
-                ],
-                [
-                    "Arg2",
-                    "T17"
-                ]
-            ]
-        ],
-        [
-            "R11",
-            "BEFORE",
-            [
-                [
-                    "Arg1",
-                    "T22"
-                ],
-                [
-                    "Arg2",
-                    "T25"
-                ]
-            ]
-        ],
-        [
-            "R7",
-            "MODIFIER",
-            [
-                [
-                    "Arg1",
-                    "T36"
-                ],
-                [
-                    "Arg2",
-                    "E5"
-                ]
-            ]
-        ],
-        [
-            "R12",
-            "AFTER",
-            [
-                [
-                    "Arg1",
-                    "E2"
                 ],
                 [
                     "Arg2",
@@ -883,26 +391,40 @@ const docData = {
             ]
         ],
         [
-            "R13",
-            "MODIFIER",
+            "R2",
+            "MODIFY",
             [
                 [
                     "Arg1",
-                    "T42"
+                    "T8"
                 ],
                 [
                     "Arg2",
-                    "E10"
+                    "E1"
                 ]
             ]
         ],
         [
-            "R14",
-            "MODIFIER",
+            "R3",
+            "MODIFY",
             [
                 [
                     "Arg1",
-                    "T44"
+                    "T11"
+                ],
+                [
+                    "Arg2",
+                    "E5"
+                ]
+            ]
+        ],
+        [
+            "R4",
+            "MODIFY",
+            [
+                [
+                    "Arg1",
+                    "T18"
                 ],
                 [
                     "Arg2",
@@ -911,82 +433,54 @@ const docData = {
             ]
         ],
         [
-            "R15",
-            "MODIFIER",
+            "R5",
+            "MODIFY",
             [
                 [
                     "Arg1",
-                    "T48"
+                    "T19"
                 ],
                 [
                     "Arg2",
-                    "T46"
+                    "E11"
                 ]
             ]
         ],
         [
-            "R16",
-            "DECREASE_FROM",
+            "R7",
+            "MODIFY",
             [
                 [
                     "Arg1",
-                    "E1"
+                    "T23"
                 ],
                 [
                     "Arg2",
-                    "T46"
+                    "E13"
                 ]
             ]
         ],
         [
-            "R17",
-            "DECREASE_TO",
+            "R8",
+            "MODIFY",
             [
                 [
                     "Arg1",
-                    "E1"
+                    "T25"
                 ],
                 [
                     "Arg2",
-                    "T47"
+                    "E14"
                 ]
             ]
         ],
         [
-            "R18",
-            "MODIFIER",
+            "R9",
+            "MODIFY",
             [
                 [
                     "Arg1",
-                    "T49"
-                ],
-                [
-                    "Arg2",
-                    "T47"
-                ]
-            ]
-        ],
-        [
-            "R19",
-            "BEFORE",
-            [
-                [
-                    "Arg1",
-                    "E9"
-                ],
-                [
-                    "Arg2",
-                    "E10"
-                ]
-            ]
-        ],
-        [
-            "R20",
-            "MODIFIER",
-            [
-                [
-                    "Arg1",
-                    "T53"
+                    "T27"
                 ],
                 [
                     "Arg2",
@@ -995,26 +489,26 @@ const docData = {
             ]
         ],
         [
-            "R21",
-            "AFTER",
+            "R10",
+            "MODIFY",
             [
                 [
                     "Arg1",
-                    "E13"
+                    "T28"
                 ],
                 [
                     "Arg2",
-                    "E16"
+                    "E15"
                 ]
             ]
         ],
         [
-            "R23",
-            "MODIFIER",
+            "R14",
+            "SUB_PROCEDURE",
             [
                 [
                     "Arg1",
-                    "T58"
+                    "E21"
                 ],
                 [
                     "Arg2",
@@ -1023,162 +517,120 @@ const docData = {
             ]
         ],
         [
-            "R24",
-            "MODIFIER",
+            "R15",
+            "MODIFY",
             [
                 [
                     "Arg1",
-                    "T63"
+                    "E20"
+                ],
+                [
+                    "Arg2",
+                    "E21"
+                ]
+            ]
+        ],
+        [
+            "R16",
+            "MODIFY",
+            [
+                [
+                    "Arg1",
+                    "T38"
                 ],
                 [
                     "Arg2",
                     "E23"
+                ]
+            ]
+        ],
+        [
+            "R17",
+            "MODIFY",
+            [
+                [
+                    "Arg1",
+                    "T40"
+                ],
+                [
+                    "Arg2",
+                    "E24"
+                ]
+            ]
+        ],
+        [
+            "R20",
+            "MODIFY",
+            [
+                [
+                    "Arg1",
+                    "T48"
+                ],
+                [
+                    "Arg2",
+                    "E29"
+                ]
+            ]
+        ],
+        [
+            "R22",
+            "SUB_PROCEDURE",
+            [
+                [
+                    "Arg1",
+                    "E27"
+                ],
+                [
+                    "Arg2",
+                    "E26"
+                ]
+            ]
+        ],
+        [
+            "R23",
+            "SUB_PROCEDURE",
+            [
+                [
+                    "Arg1",
+                    "E28"
+                ],
+                [
+                    "Arg2",
+                    "E26"
+                ]
+            ]
+        ],
+        [
+            "R24",
+            "SUB_PROCEDURE",
+            [
+                [
+                    "Arg1",
+                    "E30"
+                ],
+                [
+                    "Arg2",
+                    "E26"
                 ]
             ]
         ],
         [
             "R25",
-            "BEFORE",
+            "MODIFY",
             [
                 [
                     "Arg1",
-                    "E22"
+                    "T52"
                 ],
                 [
                     "Arg2",
-                    "E23"
-                ]
-            ]
-        ],
-        [
-            "R26",
-            "MODIFIER",
-            [
-                [
-                    "Arg1",
-                    "T66"
-                ],
-                [
-                    "Arg2",
-                    "E25"
-                ]
-            ]
-        ],
-        [
-            "R28",
-            "MODIFIER",
-            [
-                [
-                    "Arg1",
-                    "T69"
-                ],
-                [
-                    "Arg2",
-                    "T68"
+                    "E31"
                 ]
             ]
         ],
         [
             "R27",
-            "MODIFIER",
-            [
-                [
-                    "Arg1",
-                    "T68"
-                ],
-                [
-                    "Arg2",
-                    "T67"
-                ]
-            ]
-        ],
-        [
-            "R29",
-            "MODIFIER",
-            [
-                [
-                    "Arg1",
-                    "T67"
-                ],
-                [
-                    "Arg2",
-                    "E25"
-                ]
-            ]
-        ],
-        [
-            "R30",
-            "MODIFIER",
-            [
-                [
-                    "Arg1",
-                    "T70"
-                ],
-                [
-                    "Arg2",
-                    "E28"
-                ]
-            ]
-        ],
-        [
-            "R31",
-            "AFTER",
-            [
-                [
-                    "Arg1",
-                    "E29"
-                ],
-                [
-                    "Arg2",
-                    "E30"
-                ]
-            ]
-        ],
-        [
-            "R32",
-            "BEFORE",
-            [
-                [
-                    "Arg1",
-                    "E2"
-                ],
-                [
-                    "Arg2",
-                    "E10"
-                ]
-            ]
-        ],
-        [
-            "R34",
-            "MODIFIER",
-            [
-                [
-                    "Arg1",
-                    "T82"
-                ],
-                [
-                    "Arg2",
-                    "E35"
-                ]
-            ]
-        ],
-        [
-            "R35",
-            "MODIFIER",
-            [
-                [
-                    "Arg1",
-                    "T84"
-                ],
-                [
-                    "Arg2",
-                    "E36"
-                ]
-            ]
-        ],
-        [
-            "R36",
-            "BEFORE",
+            "SUB_PROCEDURE",
             [
                 [
                     "Arg1",
@@ -1186,17 +638,45 @@ const docData = {
                 ],
                 [
                     "Arg2",
-                    "E33"
+                    "E26"
                 ]
             ]
         ],
         [
-            "R38",
-            "BEFORE",
+            "R29",
+            "MODIFY",
             [
                 [
                     "Arg1",
-                    "E34"
+                    "T54"
+                ],
+                [
+                    "Arg2",
+                    "E32"
+                ]
+            ]
+        ],
+        [
+            "R30",
+            "SUB_PROCEDURE",
+            [
+                [
+                    "Arg1",
+                    "E32"
+                ],
+                [
+                    "Arg2",
+                    "E26"
+                ]
+            ]
+        ],
+        [
+            "R31",
+            "MODIFY",
+            [
+                [
+                    "Arg1",
+                    "T60"
                 ],
                 [
                     "Arg2",
@@ -1205,8 +685,148 @@ const docData = {
             ]
         ],
         [
-            "R37",
-            "MODIFIER",
+            "R32",
+            "MODIFY",
+            [
+                [
+                    "Arg1",
+                    "T61"
+                ],
+                [
+                    "Arg2",
+                    "E34"
+                ]
+            ]
+        ],
+        [
+            "R33",
+            "MODIFY",
+            [
+                [
+                    "Arg1",
+                    "T66"
+                ],
+                [
+                    "Arg2",
+                    "E39"
+                ]
+            ]
+        ],
+        [
+            "R34",
+            "MODIFY",
+            [
+                [
+                    "Arg1",
+                    "T71"
+                ],
+                [
+                    "Arg2",
+                    "T70"
+                ]
+            ]
+        ],
+        [
+            "R35",
+            "MODIFY",
+            [
+                [
+                    "Arg1",
+                    "T70"
+                ],
+                [
+                    "Arg2",
+                    "E42"
+                ]
+            ]
+        ],
+        [
+            "R36",
+            "MODIFY",
+            [
+                [
+                    "Arg1",
+                    "T74"
+                ],
+                [
+                    "Arg2",
+                    "E44"
+                ]
+            ]
+        ],
+        [
+            "R38",
+            "MODIFY",
+            [
+                [
+                    "Arg1",
+                    "T79"
+                ],
+                [
+                    "Arg2",
+                    "E47"
+                ]
+            ]
+        ],
+        [
+            "R39",
+            "MODIFY",
+            [
+                [
+                    "Arg1",
+                    "T80"
+                ],
+                [
+                    "Arg2",
+                    "E47"
+                ]
+            ]
+        ],
+        [
+            "R40",
+            "MODIFY",
+            [
+                [
+                    "Arg1",
+                    "T81"
+                ],
+                [
+                    "Arg2",
+                    "E47"
+                ]
+            ]
+        ],
+        [
+            "R41",
+            "MODIFY",
+            [
+                [
+                    "Arg1",
+                    "T83"
+                ],
+                [
+                    "Arg2",
+                    "E48"
+                ]
+            ]
+        ],
+        [
+            "R42",
+            "CAUSE",
+            [
+                [
+                    "Arg1",
+                    "E47"
+                ],
+                [
+                    "Arg2",
+                    "E48"
+                ]
+            ]
+        ],
+        [
+            "R43",
+            "MODIFY",
             [
                 [
                     "Arg1",
@@ -1214,199 +834,17 @@ const docData = {
                 ],
                 [
                     "Arg2",
-                    "E37"
-                ]
-            ]
-        ],
-        [
-            "R39",
-            "MODIFIER",
-            [
-                [
-                    "Arg1",
-                    "T87"
-                ],
-                [
-                    "Arg2",
-                    "E37"
-                ]
-            ]
-        ],
-        [
-            "R40",
-            "MODIFIER",
-            [
-                [
-                    "Arg1",
-                    "T90"
-                ],
-                [
-                    "Arg2",
-                    "T91"
-                ]
-            ]
-        ],
-        [
-            "R41",
-            "MODIFIER",
-            [
-                [
-                    "Arg1",
-                    "T92"
-                ],
-                [
-                    "Arg2",
-                    "T88"
-                ]
-            ]
-        ],
-        [
-            "R42",
-            "MODIFIER",
-            [
-                [
-                    "Arg1",
-                    "T89"
-                ],
-                [
-                    "Arg2",
-                    "T88"
-                ]
-            ]
-        ],
-        [
-            "R43",
-            "MODIFIER",
-            [
-                [
-                    "Arg1",
-                    "T88"
-                ],
-                [
-                    "Arg2",
-                    "E37"
+                    "E50"
                 ]
             ]
         ],
         [
             "R44",
-            "BEFORE",
+            "CAUSE",
             [
                 [
                     "Arg1",
-                    "E36"
-                ],
-                [
-                    "Arg2",
-                    "E37"
-                ]
-            ]
-        ],
-        [
-            "R45",
-            "MODIFIER",
-            [
-                [
-                    "Arg1",
-                    "T100"
-                ],
-                [
-                    "Arg2",
-                    "E43"
-                ]
-            ]
-        ],
-        [
-            "R46",
-            "MODIFIER",
-            [
-                [
-                    "Arg1",
-                    "T97"
-                ],
-                [
-                    "Arg2",
-                    "E41"
-                ]
-            ]
-        ],
-        [
-            "R47",
-            "BEFORE",
-            [
-                [
-                    "Arg1",
-                    "E40"
-                ],
-                [
-                    "Arg2",
-                    "E41"
-                ]
-            ]
-        ],
-        [
-            "R48",
-            "MODIFIER",
-            [
-                [
-                    "Arg1",
-                    "T102"
-                ],
-                [
-                    "Arg2",
-                    "E44"
-                ]
-            ]
-        ],
-        [
-            "R49",
-            "MODIFIER",
-            [
-                [
-                    "Arg1",
-                    "T103"
-                ],
-                [
-                    "Arg2",
-                    "E44"
-                ]
-            ]
-        ],
-        [
-            "R50",
-            "BEFORE",
-            [
-                [
-                    "Arg1",
-                    "E44"
-                ],
-                [
-                    "Arg2",
-                    "E45"
-                ]
-            ]
-        ],
-        [
-            "R51",
-            "BEFORE",
-            [
-                [
-                    "Arg1",
-                    "E45"
-                ],
-                [
-                    "Arg2",
-                    "E46"
-                ]
-            ]
-        ],
-        [
-            "R52",
-            "BEFORE",
-            [
-                [
-                    "Arg1",
-                    "E47"
+                    "E50"
                 ],
                 [
                     "Arg2",
@@ -1415,16 +853,100 @@ const docData = {
             ]
         ],
         [
-            "R55",
-            "BEFORE",
+            "R45",
+            "SUB_PROCEDURE",
             [
                 [
                     "Arg1",
-                    "E51"
+                    "E52"
                 ],
                 [
                     "Arg2",
-                    "E52"
+                    "E51"
+                ]
+            ]
+        ],
+        [
+            "R46",
+            "MODIFY",
+            [
+                [
+                    "Arg1",
+                    "T90"
+                ],
+                [
+                    "Arg2",
+                    "E53"
+                ]
+            ]
+        ],
+        [
+            "R47",
+            "MODIFY",
+            [
+                [
+                    "Arg1",
+                    "T93"
+                ],
+                [
+                    "Arg2",
+                    "E54"
+                ]
+            ]
+        ],
+        [
+            "R48",
+            "MODIFY",
+            [
+                [
+                    "Arg1",
+                    "T91"
+                ],
+                [
+                    "Arg2",
+                    "E54"
+                ]
+            ]
+        ],
+        [
+            "R50",
+            "MODIFY",
+            [
+                [
+                    "Arg1",
+                    "T99"
+                ],
+                [
+                    "Arg2",
+                    "E58"
+                ]
+            ]
+        ],
+        [
+            "R51",
+            "AFTER",
+            [
+                [
+                    "Arg1",
+                    "E4"
+                ],
+                [
+                    "Arg2",
+                    "E1"
+                ]
+            ]
+        ],
+        [
+            "R52",
+            "AFTER",
+            [
+                [
+                    "Arg1",
+                    "E3"
+                ],
+                [
+                    "Arg2",
+                    "E5"
                 ]
             ]
         ],
@@ -1434,315 +956,35 @@ const docData = {
             [
                 [
                     "Arg1",
-                    "E31"
+                    "E8"
                 ],
                 [
                     "Arg2",
-                    "E51"
+                    "E9"
                 ]
             ]
         ],
         [
             "R54",
-            "MODIFIER",
-            [
-                [
-                    "Arg1",
-                    "T113"
-                ],
-                [
-                    "Arg2",
-                    "T112"
-                ]
-            ]
-        ],
-        [
-            "R57",
-            "MODIFIER",
-            [
-                [
-                    "Arg1",
-                    "T114"
-                ],
-                [
-                    "Arg2",
-                    "T112"
-                ]
-            ]
-        ],
-        [
-            "R58",
-            "MODIFIER",
-            [
-                [
-                    "Arg1",
-                    "T116"
-                ],
-                [
-                    "Arg2",
-                    "T112"
-                ]
-            ]
-        ],
-        [
-            "R59",
-            "MODIFIER",
-            [
-                [
-                    "Arg1",
-                    "T119"
-                ],
-                [
-                    "Arg2",
-                    "T118"
-                ]
-            ]
-        ],
-        [
-            "R60",
-            "MODIFIER",
-            [
-                [
-                    "Arg1",
-                    "T120"
-                ],
-                [
-                    "Arg2",
-                    "T118"
-                ]
-            ]
-        ],
-        [
-            "R61",
-            "MODIFIER",
-            [
-                [
-                    "Arg1",
-                    "T118"
-                ],
-                [
-                    "Arg2",
-                    "E53"
-                ]
-            ]
-        ],
-        [
-            "R63",
-            "MODIFIER",
-            [
-                [
-                    "Arg1",
-                    "T115"
-                ],
-                [
-                    "Arg2",
-                    "T112"
-                ]
-            ]
-        ],
-        [
-            "R64",
-            "MODIFIER",
-            [
-                [
-                    "Arg1",
-                    "T91"
-                ],
-                [
-                    "Arg2",
-                    "T88"
-                ]
-            ]
-        ],
-        [
-            "R66",
-            "AFTER",
-            [
-                [
-                    "Arg1",
-                    "E48"
-                ],
-                [
-                    "Arg2",
-                    "E49"
-                ]
-            ]
-        ],
-        [
-            "R67",
-            "MODIFIER",
-            [
-                [
-                    "Arg1",
-                    "T12"
-                ],
-                [
-                    "Arg2",
-                    "T28"
-                ]
-            ]
-        ],
-        [
-            "R8",
             "BEFORE",
             [
                 [
                     "Arg1",
-                    "T28"
+                    "E29"
                 ],
                 [
                     "Arg2",
-                    "E54"
-                ]
-            ]
-        ],
-        [
-            "R68",
-            "AFTER",
-            [
-                [
-                    "Arg1",
-                    "T14"
-                ],
-                [
-                    "Arg2",
-                    "E54"
-                ]
-            ]
-        ],
-        [
-            "R69",
-            "BEFORE",
-            [
-                [
-                    "Arg1",
-                    "T8"
-                ],
-                [
-                    "Arg2",
-                    "T11"
-                ]
-            ]
-        ],
-        [
-            "R9",
-            "BEFORE",
-            [
-                [
-                    "Arg1",
-                    "T13"
-                ],
-                [
-                    "Arg2",
-                    "T15"
-                ]
-            ]
-        ],
-        [
-            "R70",
-            "BEFORE",
-            [
-                [
-                    "Arg1",
-                    "E10"
-                ],
-                [
-                    "Arg2",
-                    "E11"
-                ]
-            ]
-        ],
-        [
-            "R71",
-            "BEFORE",
-            [
-                [
-                    "Arg1",
-                    "E11"
-                ],
-                [
-                    "Arg2",
-                    "E12"
-                ]
-            ]
-        ],
-        [
-            "R72",
-            "BEFORE",
-            [
-                [
-                    "Arg1",
-                    "E12"
-                ],
-                [
-                    "Arg2",
-                    "E1"
-                ]
-            ]
-        ],
-        [
-            "R74",
-            "BEFORE",
-            [
-                [
-                    "Arg1",
-                    "E23"
-                ],
-                [
-                    "Arg2",
-                    "E24"
-                ]
-            ]
-        ],
-        [
-            "R75",
-            "AFTER",
-            [
-                [
-                    "Arg1",
-                    "E14"
-                ],
-                [
-                    "Arg2",
-                    "E55"
-                ]
-            ]
-        ],
-        [
-            "R22",
-            "BEFORE",
-            [
-                [
-                    "Arg1",
-                    "E1"
-                ],
-                [
-                    "Arg2",
-                    "E55"
-                ]
-            ]
-        ],
-        [
-            "R73",
-            "BEFORE",
-            [
-                [
-                    "Arg1",
-                    "E1"
-                ],
-                [
-                    "Arg2",
-                    "E16"
-                ]
-            ]
-        ],
-        [
-            "R76",
-            "BEFORE",
-            [
-                [
-                    "Arg1",
                     "E35"
+                ]
+            ]
+        ],
+        [
+            "R55",
+            "BEFORE",
+            [
+                [
+                    "Arg1",
+                    "E34"
                 ],
                 [
                     "Arg2",
@@ -1751,7 +993,7 @@ const docData = {
             ]
         ],
         [
-            "R77",
+            "R56",
             "BEFORE",
             [
                 [
@@ -1765,7 +1007,91 @@ const docData = {
             ]
         ],
         [
-            "R78",
+            "R57",
+            "IDENTICAL",
+            [
+                [
+                    "Arg1",
+                    "E60"
+                ],
+                [
+                    "Arg2",
+                    "E36"
+                ]
+            ]
+        ],
+        [
+            "R58",
+            "BEFORE",
+            [
+                [
+                    "Arg1",
+                    "E41"
+                ],
+                [
+                    "Arg2",
+                    "E42"
+                ]
+            ]
+        ],
+        [
+            "R59",
+            "BEFORE",
+            [
+                [
+                    "Arg1",
+                    "E42"
+                ],
+                [
+                    "Arg2",
+                    "E43"
+                ]
+            ]
+        ],
+        [
+            "R60",
+            "BEFORE",
+            [
+                [
+                    "Arg1",
+                    "E50"
+                ],
+                [
+                    "Arg2",
+                    "E51"
+                ]
+            ]
+        ],
+        [
+            "R61",
+            "BEFORE",
+            [
+                [
+                    "Arg1",
+                    "E54"
+                ],
+                [
+                    "Arg2",
+                    "E55"
+                ]
+            ]
+        ],
+        [
+            "R62",
+            "BEFORE",
+            [
+                [
+                    "Arg1",
+                    "E55"
+                ],
+                [
+                    "Arg2",
+                    "E56"
+                ]
+            ]
+        ],
+        [
+            "R63",
             "AFTER",
             [
                 [
@@ -1774,41 +1100,13 @@ const docData = {
                 ],
                 [
                     "Arg2",
-                    "E52"
+                    "E57"
                 ]
             ]
         ],
         [
-            "R62",
-            "MODIFIER",
-            [
-                [
-                    "Arg1",
-                    "T112"
-                ],
-                [
-                    "Arg2",
-                    "E56"
-                ]
-            ]
-        ],
-        [
-            "R79",
+            "R64",
             "BEFORE",
-            [
-                [
-                    "Arg1",
-                    "E56"
-                ],
-                [
-                    "Arg2",
-                    "E53"
-                ]
-            ]
-        ],
-        [
-            "R33",
-            "MODIFIER",
             [
                 [
                     "Arg1",
@@ -1816,119 +1114,433 @@ const docData = {
                 ],
                 [
                     "Arg2",
+                    "E58"
+                ]
+            ]
+        ],
+        [
+            "R18",
+            "MODIFY",
+            [
+                [
+                    "Arg1",
+                    "E61"
+                ],
+                [
+                    "Arg2",
                     "E32"
+                ]
+            ]
+        ],
+        [
+            "R19",
+            "MODIFY",
+            [
+                [
+                    "Arg1",
+                    "E62"
+                ],
+                [
+                    "Arg2",
+                    "E31"
+                ]
+            ]
+        ],
+        [
+            "R21",
+            "MODIFY",
+            [
+                [
+                    "Arg1",
+                    "E63"
+                ],
+                [
+                    "Arg2",
+                    "E30"
+                ]
+            ]
+        ],
+        [
+            "R26",
+            "MODIFY",
+            [
+                [
+                    "Arg1",
+                    "E64"
+                ],
+                [
+                    "Arg2",
+                    "E28"
+                ]
+            ]
+        ],
+        [
+            "R28",
+            "MODIFY",
+            [
+                [
+                    "Arg1",
+                    "E65"
+                ],
+                [
+                    "Arg2",
+                    "E27"
+                ]
+            ]
+        ],
+        [
+            "R37",
+            "MODIFY",
+            [
+                [
+                    "Arg1",
+                    "E66"
+                ],
+                [
+                    "Arg2",
+                    "E45"
+                ]
+            ]
+        ],
+        [
+            "R6",
+            "MODIFY",
+            [
+                [
+                    "Arg1",
+                    "E67"
+                ],
+                [
+                    "Arg2",
+                    "E13"
+                ]
+            ]
+        ],
+        [
+            "R11",
+            "MODIFY",
+            [
+                [
+                    "Arg1",
+                    "E68"
+                ],
+                [
+                    "Arg2",
+                    "E18"
+                ]
+            ]
+        ],
+        [
+            "R12",
+            "MODIFY",
+            [
+                [
+                    "Arg1",
+                    "E68"
+                ],
+                [
+                    "Arg2",
+                    "E17"
+                ]
+            ]
+        ],
+        [
+            "R13",
+            "MODIFY",
+            [
+                [
+                    "Arg1",
+                    "E68"
+                ],
+                [
+                    "Arg2",
+                    "E16"
+                ]
+            ]
+        ],
+        [
+            "R49",
+            "MODIFY",
+            [
+                [
+                    "Arg1",
+                    "E69"
+                ],
+                [
+                    "Arg2",
+                    "E55"
                 ]
             ]
         ]
     ],
     "triggers": [
         [
-            "T31",
+            "T4",
             "Sign_symptom",
             [
                 [
-                    1067,
-                    1077
+                    83,
+                    90
                 ]
             ]
         ],
         [
-            "T32",
-            "Activity",
+            "T5",
+            "Therapeutic_procedure",
             [
                 [
-                    668,
-                    677
+                    101,
+                    111
+                ]
+            ]
+        ],
+        [
+            "T6",
+            "Therapeutic_procedure",
+            [
+                [
+                    116,
+                    135
+                ]
+            ]
+        ],
+        [
+            "T9",
+            "Clinical_event",
+            [
+                [
+                    50,
+                    59
+                ]
+            ]
+        ],
+        [
+            "T10",
+            "Sign_symptom",
+            [
+                [
+                    192,
+                    202
+                ]
+            ]
+        ],
+        [
+            "T12",
+            "Sign_symptom",
+            [
+                [
+                    204,
+                    216
+                ]
+            ]
+        ],
+        [
+            "T13",
+            "Sign_symptom",
+            [
+                [
+                    218,
+                    225
+                ]
+            ]
+        ],
+        [
+            "T14",
+            "Disease_disorder",
+            [
+                [
+                    229,
+                    238
+                ]
+            ]
+        ],
+        [
+            "T15",
+            "Sign_symptom",
+            [
+                [
+                    256,
+                    264
+                ]
+            ]
+        ],
+        [
+            "T16",
+            "Sign_symptom",
+            [
+                [
+                    269,
+                    281
+                ]
+            ]
+        ],
+        [
+            "T17",
+            "Sign_symptom",
+            [
+                [
+                    296,
+                    307
+                ]
+            ]
+        ],
+        [
+            "T20",
+            "Diagnostic_procedure",
+            [
+                [
+                    330,
+                    359
+                ]
+            ]
+        ],
+        [
+            "T21",
+            "Diagnostic_procedure",
+            [
+                [
+                    391,
+                    414
+                ]
+            ]
+        ],
+        [
+            "T24",
+            "Sign_symptom",
+            [
+                [
+                    453,
+                    470
+                ]
+            ]
+        ],
+        [
+            "T26",
+            "Sign_symptom",
+            [
+                [
+                    485,
+                    493
+                ]
+            ]
+        ],
+        [
+            "T29",
+            "Diagnostic_procedure",
+            [
+                [
+                    519,
+                    544
+                ]
+            ]
+        ],
+        [
+            "T30",
+            "Diagnostic_procedure",
+            [
+                [
+                    546,
+                    558
+                ]
+            ]
+        ],
+        [
+            "T31",
+            "Diagnostic_procedure",
+            [
+                [
+                    563,
+                    581
                 ]
             ]
         ],
         [
             "T33",
-            "Activity",
+            "Diagnostic_procedure",
             [
                 [
-                    712,
-                    734
+                    620,
+                    637
                 ]
             ]
         ],
         [
             "T34",
-            "Activity",
+            "Sign_symptom",
             [
                 [
-                    741,
-                    759
+                    647,
+                    660
                 ]
             ]
         ],
         [
             "T35",
-            "Activity",
+            "Diagnostic_procedure",
             [
                 [
-                    741,
-                    747
+                    664,
+                    678
+                ]
+            ]
+        ],
+        [
+            "T36",
+            "Disease_disorder",
+            [
+                [
+                    694,
+                    716
                 ]
             ]
         ],
         [
             "T37",
-            "Activity",
+            "Diagnostic_procedure",
             [
                 [
-                    777,
-                    793
-                ]
-            ]
-        ],
-        [
-            "T38",
-            "Disease_disorder",
-            [
-                [
-                    808,
-                    830
+                    737,
+                    747
                 ]
             ]
         ],
         [
             "T39",
-            "Disease_disorder",
+            "Sign_symptom",
             [
                 [
-                    837,
-                    873
-                ]
-            ]
-        ],
-        [
-            "T40",
-            "Disease_disorder",
-            [
-                [
-                    882,
-                    904
+                    771,
+                    790
                 ]
             ]
         ],
         [
             "T41",
+            "Disease_disorder",
+            [
+                [
+                    822,
+                    837
+                ]
+            ]
+        ],
+        [
+            "T42",
             "Diagnostic_procedure",
             [
                 [
-                    906,
-                    941
+                    853,
+                    882
                 ]
             ]
         ],
         [
             "T43",
-            "Sign_symptom",
+            "Diagnostic_procedure",
             [
                 [
-                    951,
-                    996
+                    899,
+                    917
                 ]
             ]
         ],
@@ -1937,458 +1549,418 @@ const docData = {
             "Diagnostic_procedure",
             [
                 [
-                    1004,
-                    1030
+                    926,
+                    937
                 ]
             ]
         ],
         [
-            "T50",
+            "T47",
             "Disease_disorder",
             [
                 [
-                    1163,
-                    1174
+                    947,
+                    968
+                ]
+            ]
+        ],
+        [
+            "T49",
+            "Diagnostic_procedure",
+            [
+                [
+                    977,
+                    1028
                 ]
             ]
         ],
         [
             "T51",
-            "Disease_disorder",
+            "Diagnostic_procedure",
             [
                 [
-                    1246,
-                    1257
-                ]
-            ]
-        ],
-        [
-            "T52",
-            "Sign_symptom",
-            [
-                [
-                    1283,
-                    1299
-                ]
-            ]
-        ],
-        [
-            "T54",
-            "Sign_symptom",
-            [
-                [
-                    1204,
-                    1226
+                    1055,
+                    1072
                 ]
             ]
         ],
         [
             "T55",
-            "Sign_symptom",
+            "Diagnostic_procedure",
             [
                 [
-                    1390,
-                    1407
-                ]
-            ]
-        ],
-        [
-            "T56",
-            "Disease_disorder",
-            [
-                [
-                    1419,
-                    1430
+                    1096,
+                    1128
                 ]
             ]
         ],
         [
             "T57",
-            "Disease_disorder",
+            "Sign_symptom",
             [
                 [
-                    1472,
-                    1480
+                    1187,
+                    1195
+                ]
+            ]
+        ],
+        [
+            "T58",
+            "Therapeutic_procedure",
+            [
+                [
+                    1218,
+                    1237
                 ]
             ]
         ],
         [
             "T59",
-            "Diagnostic_procedure",
+            "Therapeutic_procedure",
             [
                 [
-                    1517,
-                    1541
-                ]
-            ]
-        ],
-        [
-            "T60",
-            "Disease_disorder",
-            [
-                [
-                    1591,
-                    1602
-                ]
-            ]
-        ],
-        [
-            "T61",
-            "Disease_disorder",
-            [
-                [
-                    1618,
-                    1651
+                    1187,
+                    1195
                 ]
             ]
         ],
         [
             "T62",
-            "Diagnostic_procedure",
+            "Therapeutic_procedure",
             [
                 [
-                    1664,
-                    1685
+                    1255,
+                    1264
+                ]
+            ]
+        ],
+        [
+            "T63",
+            "Date",
+            [
+                [
+                    1265,
+                    1282
                 ]
             ]
         ],
         [
             "T64",
-            "Disease_disorder",
+            "Time",
             [
                 [
-                    1702,
-                    1733
+                    1309,
+                    1319
                 ]
             ]
         ],
         [
             "T65",
-            "Sign_symptom",
+            "Disease_disorder",
             [
                 [
-                    1776,
-                    1787
+                    1367,
+                    1382
                 ]
             ]
         ],
         [
-            "T71",
-            "Disease_disorder",
+            "T67",
+            "Diagnostic_procedure",
             [
                 [
-                    1966,
-                    1981
+                    1398,
+                    1414
+                ]
+            ]
+        ],
+        [
+            "T68",
+            "Therapeutic_procedure",
+            [
+                [
+                    1426,
+                    1448
+                ]
+            ]
+        ],
+        [
+            "T69",
+            "Diagnostic_procedure",
+            [
+                [
+                    1450,
+                    1473
                 ]
             ]
         ],
         [
             "T72",
-            "Disease_disorder",
+            "Date",
             [
                 [
-                    2001,
-                    2018
+                    1527,
+                    1535
                 ]
             ]
         ],
         [
             "T73",
-            "Disease_disorder",
+            "Clinical_event",
             [
                 [
-                    1910,
-                    1953
+                    1562,
+                    1571
                 ]
             ]
         ],
         [
             "T75",
-            "Disease_disorder",
-            [
-                [
-                    2054,
-                    2096
-                ]
-            ]
-        ],
-        [
-            "T76",
             "Therapeutic_procedure",
             [
                 [
-                    2111,
-                    2153
+                    1612,
+                    1622
                 ]
             ]
         ],
         [
             "T77",
-            "Activity",
-            [
-                [
-                    2158,
-                    2166
-                ]
-            ]
-        ],
-        [
-            "T79",
-            "Therapeutic_procedure",
-            [
-                [
-                    2200,
-                    2208
-                ]
-            ]
-        ],
-        [
-            "T80",
-            "Sign_symptom",
-            [
-                [
-                    2210,
-                    2229
-                ]
-            ]
-        ],
-        [
-            "T81",
             "Diagnostic_procedure",
             [
                 [
-                    2243,
-                    2250
-                ]
-            ]
-        ],
-        [
-            "T83",
-            "Sign_symptom",
-            [
-                [
-                    2290,
-                    2314
-                ]
-            ]
-        ],
-        [
-            "T85",
-            "Diagnostic_procedure",
-            [
-                [
-                    2326,
-                    2359
-                ]
-            ]
-        ],
-        [
-            "T93",
-            "Sign_symptom",
-            [
-                [
-                    2412,
-                    2433
-                ]
-            ]
-        ],
-        [
-            "T94",
-            "Sign_symptom",
-            [
-                [
-                    2439,
-                    2458
-                ]
-            ]
-        ],
-        [
-            "T95",
-            "Sign_symptom",
-            [
-                [
-                    2475,
-                    2499
-                ]
-            ]
-        ],
-        [
-            "T96",
-            "Therapeutic_procedure",
-            [
-                [
-                    2508,
-                    2523
-                ]
-            ]
-        ],
-        [
-            "T98",
-            "Diagnostic_procedure",
-            [
-                [
-                    2550,
-                    2575
-                ]
-            ]
-        ],
-        [
-            "T99",
-            "Disease_disorder",
-            [
-                [
-                    2583,
-                    2587
-                ]
-            ]
-        ],
-        [
-            "T101",
-            "Therapeutic_procedure",
-            [
-                [
-                    2631,
-                    2653
-                ]
-            ]
-        ],
-        [
-            "T104",
-            "Disease_disorder",
-            [
-                [
-                    2689,
-                    2703
-                ]
-            ]
-        ],
-        [
-            "T105",
-            "Disease_disorder",
-            [
-                [
-                    2738,
-                    2761
-                ]
-            ]
-        ],
-        [
-            "T106",
-            "Therapeutic_procedure",
-            [
-                [
-                    2772,
-                    2795
-                ]
-            ]
-        ],
-        [
-            "T107",
-            "Sign_symptom",
-            [
-                [
-                    2810,
-                    2833
-                ]
-            ]
-        ],
-        [
-            "T108",
-            "Duration",
-            [
-                [
-                    2840,
-                    2846
-                ]
-            ]
-        ],
-        [
-            "T109",
-            "Therapeutic_procedure",
-            [
-                [
-                    2854,
-                    2873
-                ]
-            ]
-        ],
-        [
-            "T110",
-            "Diagnostic_procedure",
-            [
-                [
-                    2901,
-                    2933
-                ]
-            ]
-        ],
-        [
-            "T111",
-            "Therapeutic_procedure",
-            [
-                [
-                    2941,
-                    2950
-                ]
-            ]
-        ],
-        [
-            "T117",
-            "Diagnostic_procedure",
-            [
-                [
-                    3156,
-                    3190
-                ]
-            ]
-        ],
-        [
-            "T121",
-            "Diagnostic_procedure",
-            [
-                [
-                    367,
-                    376
-                ]
-            ]
-        ],
-        [
-            "T122",
-            "Duration",
-            [
-                [
-                    1336,
-                    1360
-                ]
-            ]
-        ],
-        [
-            "T123",
-            "Activity",
-            [
-                [
-                    2891,
-                    2897
+                    1626,
+                    1646
                 ]
             ]
         ],
         [
             "T78",
-            "Date",
+            "Disease_disorder",
             [
                 [
-                    2097,
-                    2110
+                    1688,
+                    1694
                 ]
             ]
         ],
         [
-            "T124",
-            "Duration",
+            "T82",
+            "Sign_symptom",
             [
                 [
-                    2097,
-                    2104
+                    1760,
+                    1768
+                ]
+            ]
+        ],
+        [
+            "T84",
+            "Disease_disorder",
+            [
+                [
+                    1801,
+                    1805
+                ]
+            ]
+        ],
+        [
+            "T85",
+            "Disease_disorder",
+            [
+                [
+                    1831,
+                    1837
+                ]
+            ]
+        ],
+        [
+            "T87",
+            "Therapeutic_procedure",
+            [
+                [
+                    1861,
+                    1882
+                ]
+            ]
+        ],
+        [
+            "T88",
+            "Therapeutic_procedure",
+            [
+                [
+                    1889,
+                    1902
+                ]
+            ]
+        ],
+        [
+            "T89",
+            "Diagnostic_procedure",
+            [
+                [
+                    1919,
+                    1931
+                ]
+            ]
+        ],
+        [
+            "T92",
+            "Sign_symptom",
+            [
+                [
+                    1950,
+                    1958
+                ]
+            ]
+        ],
+        [
+            "T94",
+            "Diagnostic_procedure",
+            [
+                [
+                    1984,
+                    2004
+                ]
+            ]
+        ],
+        [
+            "T96",
+            "Date",
+            [
+                [
+                    2028,
+                    2050
+                ]
+            ]
+        ],
+        [
+            "T97",
+            "Clinical_event",
+            [
+                [
+                    2051,
+                    2060
+                ]
+            ]
+        ],
+        [
+            "T98",
+            "Outcome",
+            [
+                [
+                    2074,
+                    2082
+                ]
+            ]
+        ],
+        [
+            "T100",
+            "Sign_symptom",
+            [
+                [
+                    2133,
+                    2140
+                ]
+            ]
+        ],
+        [
+            "T101",
+            "Coreference",
+            [
+                [
+                    1323,
+                    1333
+                ]
+            ]
+        ],
+        [
+            "T56",
+            "Lab_value",
+            [
+                [
+                    1088,
+                    1095
+                ]
+            ]
+        ],
+        [
+            "T53",
+            "Lab_value",
+            [
+                [
+                    1045,
+                    1054
+                ]
+            ]
+        ],
+        [
+            "T50",
+            "Lab_value",
+            [
+                [
+                    1032,
+                    1043
+                ]
+            ]
+        ],
+        [
+            "T46",
+            "Lab_value",
+            [
+                [
+                    919,
+                    925
+                ]
+            ]
+        ],
+        [
+            "T44",
+            "Lab_value",
+            [
+                [
+                    892,
+                    898
+                ]
+            ]
+        ],
+        [
+            "T76",
+            "Clinical_event",
+            [
+                [
+                    1585,
+                    1591
+                ]
+            ]
+        ],
+        [
+            "T22",
+            "Lab_value",
+            [
+                [
+                    382,
+                    390
+                ]
+            ]
+        ],
+        [
+            "T32",
+            "Lab_value",
+            [
+                [
+                    587,
+                    607
+                ]
+            ]
+        ],
+        [
+            "T95",
+            "Lab_value",
+            [
+                [
+                    2009,
+                    2022
                 ]
             ]
         ]
@@ -2396,287 +1968,347 @@ const docData = {
     "events": [
         [
             "E1",
-            "T31",
+            "T4",
             []
         ],
         [
             "E2",
-            "T32",
+            "T5",
             []
         ],
         [
             "E3",
-            "T33",
+            "T6",
             []
         ],
         [
             "E4",
-            "T34",
+            "T9",
             []
         ],
         [
             "E5",
-            "T35",
+            "T10",
             []
         ],
         [
             "E6",
-            "T37",
+            "T12",
             []
         ],
         [
             "E7",
-            "T38",
+            "T13",
             []
         ],
         [
             "E8",
-            "T39",
+            "T14",
             []
         ],
         [
             "E9",
-            "T40",
+            "T15",
             []
         ],
         [
             "E10",
-            "T41",
+            "T16",
             []
         ],
         [
             "E11",
-            "T43",
+            "T17",
             []
         ],
         [
             "E12",
-            "T45",
+            "T20",
             []
         ],
         [
             "E13",
-            "T50",
+            "T21",
             []
         ],
         [
             "E14",
-            "T51",
+            "T24",
             []
         ],
         [
             "E15",
-            "T52",
+            "T26",
             []
         ],
         [
             "E16",
-            "T54",
+            "T29",
             []
         ],
         [
             "E17",
-            "T55",
+            "T30",
             []
         ],
         [
             "E18",
-            "T56",
+            "T31",
             []
         ],
         [
             "E19",
-            "T57",
+            "T33",
             []
         ],
         [
             "E20",
-            "T59",
+            "T34",
             []
         ],
         [
             "E21",
-            "T60",
+            "T35",
             []
         ],
         [
             "E22",
-            "T61",
+            "T36",
             []
         ],
         [
             "E23",
-            "T62",
+            "T37",
             []
         ],
         [
             "E24",
-            "T64",
+            "T39",
             []
         ],
         [
             "E25",
-            "T65",
+            "T41",
             []
         ],
         [
             "E26",
-            "T71",
+            "T42",
             []
         ],
         [
             "E27",
-            "T72",
+            "T43",
             []
         ],
         [
             "E28",
-            "T73",
+            "T45",
             []
         ],
         [
             "E29",
-            "T75",
+            "T47",
             []
         ],
         [
             "E30",
-            "T76",
+            "T49",
             []
         ],
         [
             "E31",
-            "T77",
-            []
-        ],
-        [
-            "E33",
-            "T79",
-            []
-        ],
-        [
-            "E34",
-            "T80",
-            []
-        ],
-        [
-            "E35",
-            "T81",
-            []
-        ],
-        [
-            "E36",
-            "T83",
-            []
-        ],
-        [
-            "E37",
-            "T85",
-            []
-        ],
-        [
-            "E38",
-            "T93",
-            []
-        ],
-        [
-            "E39",
-            "T94",
-            []
-        ],
-        [
-            "E40",
-            "T95",
-            []
-        ],
-        [
-            "E41",
-            "T96",
-            []
-        ],
-        [
-            "E42",
-            "T98",
-            []
-        ],
-        [
-            "E43",
-            "T99",
-            []
-        ],
-        [
-            "E44",
-            "T101",
-            []
-        ],
-        [
-            "E45",
-            "T104",
-            []
-        ],
-        [
-            "E46",
-            "T105",
-            []
-        ],
-        [
-            "E47",
-            "T106",
-            []
-        ],
-        [
-            "E48",
-            "T107",
-            []
-        ],
-        [
-            "E49",
-            "T108",
-            []
-        ],
-        [
-            "E50",
-            "T109",
-            []
-        ],
-        [
-            "E51",
-            "T110",
-            []
-        ],
-        [
-            "E52",
-            "T111",
-            []
-        ],
-        [
-            "E53",
-            "T117",
-            []
-        ],
-        [
-            "E54",
-            "T121",
-            []
-        ],
-        [
-            "E55",
-            "T122",
-            []
-        ],
-        [
-            "E56",
-            "T123",
+            "T51",
             []
         ],
         [
             "E32",
+            "T55",
+            []
+        ],
+        [
+            "E33",
+            "T57",
+            []
+        ],
+        [
+            "E34",
+            "T58",
+            []
+        ],
+        [
+            "E35",
+            "T59",
+            []
+        ],
+        [
+            "E36",
+            "T62",
+            []
+        ],
+        [
+            "E37",
+            "T63",
+            []
+        ],
+        [
+            "E38",
+            "T64",
+            []
+        ],
+        [
+            "E39",
+            "T65",
+            []
+        ],
+        [
+            "E40",
+            "T67",
+            []
+        ],
+        [
+            "E41",
+            "T68",
+            []
+        ],
+        [
+            "E42",
+            "T69",
+            []
+        ],
+        [
+            "E43",
+            "T72",
+            []
+        ],
+        [
+            "E44",
+            "T73",
+            []
+        ],
+        [
+            "E45",
+            "T75",
+            []
+        ],
+        [
+            "E46",
+            "T77",
+            []
+        ],
+        [
+            "E47",
             "T78",
             []
         ],
         [
+            "E48",
+            "T82",
+            []
+        ],
+        [
+            "E49",
+            "T84",
+            []
+        ],
+        [
+            "E50",
+            "T85",
+            []
+        ],
+        [
+            "E51",
+            "T87",
+            []
+        ],
+        [
+            "E52",
+            "T88",
+            []
+        ],
+        [
+            "E53",
+            "T89",
+            []
+        ],
+        [
+            "E54",
+            "T92",
+            []
+        ],
+        [
+            "E55",
+            "T94",
+            []
+        ],
+        [
+            "E56",
+            "T96",
+            []
+        ],
+        [
             "E57",
-            "T124",
+            "T97",
+            []
+        ],
+        [
+            "E58",
+            "T98",
+            []
+        ],
+        [
+            "E59",
+            "T100",
+            []
+        ],
+        [
+            "E60",
+            "T101",
+            []
+        ],
+        [
+            "E61",
+            "T56",
+            []
+        ],
+        [
+            "E62",
+            "T53",
+            []
+        ],
+        [
+            "E63",
+            "T50",
+            []
+        ],
+        [
+            "E64",
+            "T46",
+            []
+        ],
+        [
+            "E65",
+            "T44",
+            []
+        ],
+        [
+            "E66",
+            "T76",
+            []
+        ],
+        [
+            "E67",
+            "T22",
+            []
+        ],
+        [
+            "E68",
+            "T32",
+            []
+        ],
+        [
+            "E69",
+            "T95",
             []
         ]
     ],
@@ -2684,144 +2316,107 @@ const docData = {
         [
             "*",
             "OVERLAP",
-            "T6",
-            "T5",
-            "T7",
-            "T3"
+            "E1",
+            "E2",
+            "E3"
         ],
         [
             "*",
             "OVERLAP",
-            "T8",
-            "T9"
-        ],
-        [
-            "*",
-            "OVERLAP",
-            "T25",
-            "T26",
-            "T27"
+            "E5",
+            "E6",
+            "E7",
+            "E8"
         ],
         [
             "*",
             "OVERLAP",
             "E9",
-            "E8",
-            "E7",
-            "E6",
-            "E4",
-            "E3",
-            "E5"
-        ],
-        [
-            "*",
-            "OVERLAP",
-            "E21",
-            "E22",
+            "E10",
+            "E11",
+            "E12",
+            "E13",
+            "E14",
+            "E15",
+            "E16",
+            "E17",
             "E18",
             "E19",
             "E20",
-            "E17",
-            "E1"
-        ],
-        [
-            "*",
-            "OVERLAP",
-            "E28",
-            "E26",
-            "E27",
+            "E22",
+            "E23",
+            "E24",
             "E25",
-            "E24"
+            "E26",
+            "E29"
         ],
         [
             "*",
             "OVERLAP",
+            "E35",
             "E33",
-            "E34",
-            "E52"
+            "E34"
         ],
         [
             "*",
             "OVERLAP",
+            "E36",
+            "E37"
+        ],
+        [
+            "*",
+            "OVERLAP",
+            "E38",
+            "E60",
             "E39",
             "E40",
-            "E38"
+            "E41"
         ],
         [
             "*",
             "OVERLAP",
-            "E41",
-            "E42",
             "E43",
-            "E44"
-        ],
-        [
-            "*",
-            "OVERLAP",
+            "E44",
+            "E45",
             "E46",
-            "E47"
-        ],
-        [
-            "*",
-            "OVERLAP",
+            "E47",
             "E48",
+            "E49",
             "E50"
         ],
         [
             "*",
             "OVERLAP",
-            "T11",
-            "T28"
+            "E51",
+            "E53",
+            "E54"
         ],
         [
             "*",
             "OVERLAP",
-            "T13",
-            "T14"
-        ],
-        [
-            "*",
-            "OVERLAP",
-            "T15",
-            "T17",
-            "T18",
-            "T19",
-            "T21",
-            "T22"
-        ],
-        [
-            "*",
-            "OVERLAP",
-            "E14",
-            "E15"
-        ],
-        [
-            "*",
-            "OVERLAP",
-            "E29",
-            "E32",
-            "E31"
+            "E58",
+            "E59"
         ]
     ],
     "comments": [
         [
-            "T28",
+            "E35",
             "AnnotatorNotes",
-            "?"
+            "Intentional, likely through medication (diuretics)"
         ],
         [
-            "E42",
+            "E49",
             "AnnotatorNotes",
-            "apple"
+            "Negative pressure pulmonary edema"
         ]
     ],
-    "text": "A 57-year-old male hypertensive Caucasian patient who was on medical treatment for 1.5 months for non-organic AF was admitted to the ICU because of high-ventricular response AF (170 per minute), and sinus rhythm was maintained during the CV that was performed two times every second day. The results of the apnea test performed in the ICU on the same night after the second CV were as follows: apnea-hypopnea index (AHI) of 71 per hour, minimum peripheral oxygen saturation (SpO2) of 67%, and desaturation period (SpO2 of less than 90%) of 28 minutes. The patient was discharged with medical treatment and nocturnal BiPAP treatment. \nCase 2\nA 33-year-old healthy male presented to the emergency department after falling from a bicycle while riding intoxicated. The patient was wearing a helmet but sustained unilateral lacerations and a zygomaticomaxillary complex fracture with an orbital floor fracture. Examination of extraocular motility revealed a-2 restriction in upgaze in the affected eye, and a continuous cardiac monitor revealed a reproducible decrease in heart rate from a baseline pulse of 65\u201370 to a pulse as low as 42\u201345 with attempted upgaze. The bradycardia would promptly resolve after return to primary gaze, and the degree of bradycardia would also diminish with sustained upgaze to around 50 beats per minute after approximately 20 seconds. The patient did not endorse syncopal symptoms during the bradycardia, but he did have 3 witnessed episodes of vomiting, while in the emergency department. The rest of the eye exam was unremarkable. It was felt initially that the bradycardia was related to inferior rectus muscle entrapment. However, a CT of the head/orbits demonstrated no prolapse of the inferior rectus but instead evidence of a small amount of soft tissue, which likely represented adventitia surrounding the inferior rectus trapped in and below the orbital floor fracture. The orbital floor bones were also non-displaced with only a linear fracture, consistent with a trapdoor fracture. \nCase 3\nA 74-year-old man who had drug-refractory paroxys-mal atrial flutter 2 years after circumferential pulmonary venous isolation was referred to our hospital. During repeated ablation, clinical arrhythmia was induced. Mapping of the left atrium revealed the entire tachycardia cycle length. Capturing fractionated bipolar electrograms at anterolateral left atrial (LA) wall demonstrated concealed entrainment with postpacing interval comparable with tachycardia cycle length. During linear ablation from mitral annulus along fractionated electrograms to the scar near left superior pulmonary vein using an irrigated tip catheter (power, 35 W; temperature, 40 oC), atrial flutter terminated, which was followed by sinus nodal (SN) arrest requiring urgent temporary pacing. There was no recovery of SN function after 3 days, and a permanent pacemaker was implanted. A review of cardiac computed tomography (CT) before abla-tion revealed a small blood vessel originating from the left circumflex artery, running along the anterior LA wall to reach the cavoatrial junction of the right atrium, which was not seen in postablation CT. A 3-dimensional reconstruction image showed that this was a left-sided SN artery. \nCase 4\nA 58-year-old patient with a 3-year history of paroxysmal atrial fibrillation underwent circumferential pulmonary vein isolation (PVI) in 2012. After 3 months, he presented with a symptomatic LAMRT with a cycle length of 385 ms (. Fig. 1). The patient was on amiodarone (200 mg daily). A PVI-redo was performed using a novel circular mapping and abla-tion catheter (nMarq, Biosense Webster, Diamond Bar, Calif., USA). This is a ten-electrode steerable lasso-shaped cathe-ter that allows irrigated unipolar and bi-polar radiofrequency (RF) ablation (cool flow of 60 ml/min). Each electrode can be switched on and off separately. For PVI, an antral ablation (outside the PV) was performed. After single transseptal puncture , a CARTO 3 map of the left atrium was acquired using the nMarq catheter. The activation map revealed an LAMRT with its exit to the left atrium (LA) at the roof of the left superior pulmonary vein (LSPV) and its entrance at the bottom of the left inferior pulmonary vein (LIPV;. Fig. 2) By placing the nMarq catheter at the ostium of the LSPV, the activation sequence could be nicely depicted. Pacing from the roof of the LSPV showed perfect entrainment (PPI  8 ms) and a similar p-wave morphology compared to the tachy-cardia. Ablation at this site terminated the LAMRT. The exit to the LA was blocked. Conduction into the left pulmonary veins was still present because of the gap at the bottom of the LIPV (. Fig. 3). After ab-lation at this site, the lateral pulmonary veins were isolated. The septal ablation line showed gaps in the anteriorinferior part, which were successfully closed. At the end of the procedure there was no in-ducible tachycardia. The septal and lateral PVs were isolated. The patient was free of any tachycardia for 6 months. Conclusion The reentrant circuit of this LAMRT could be nicely depicted using the nMarq catheter. Successful ablation at the exit and entrance site could be performed without moving the catheter.\nCase 5\nA 39-year-old obese woman presented with influenza A (H1N1)-related acute respiratory distress syndrome (ARDS). At day 2, refractory hypoxemia ensued and veno-venous extracorporeal membrane oxygenation (ECMO) was initiated. At day 15, venous catheter-related infection was suspected and a left subclavian venous catheter was inserted using the Seldinger technique, with blood that was freely aspirated before and after insertion of the catheter. However, acute circulatory shock was observed shortly afterwards. The transthoracic echocardiogram revealed pericardial effusion with collapsed right chambers, suggesting cardiac tamponade. The chest X-ray (Fig. 1) showed a malposi-tioned catheter in the left lung. Cardiac arrest ensued and emergent sternotomy was performed under ECMO-assisted cardiopulmonary resuscitation after femoral artery cannu-lation (venous-venous-arterial ECMO). Pulmonary artery perforation (Fig. 2) and hemopericardium were then surgically repaired after catheter withdrawal. Her hospital course was further complicated by severe ARDS secondary to Enterococcus faecalis bacteremia with redo veno-venous ECMO. The patient made a full recovery and was discharged home 2.5 months after hospital admission with no neuro-logic or cardiopulmonary sequelae. Fig. 1 Chest X-ray showing the malpositioned left subclavian central venous catheter Intensive .\nCase 6\nA 54-year-old woman presented with giant struma, hyperthyroidism of unknown duration, palpitations and dyspnoea. The ECG showed tachycardia atrial fibrillation. Echocardiography revealed dilatation of the left ventricle, highly reduced systolic function and diffuse hypokinesia. Serum thyroid stimulating hormone (TSH) levels were less than 0.03 lU/ml (physiological range 0.554.78 lU/ ml), free triiodothyronine (fT3) was 7.32 pg/ml (2.304.20 pg/ml) and free thyroxine (fT4) amounted to Fig. 1 Turbo field-echo (TFE) inversion recovery (IR) sequences in vertical (a) and horizontal (b) long axis 10 min after intravenous gadolinium-based contrast agent administration: the healthy basal and midventricular myocardium shows no prolonged gadolinium retention and is depicted in black (arrowheads), whereas the transmural scar in the apical segments retains the gadolinium and has a bright appearance (arrows). \nCase 7\nIn the last decades, number of drugs were withdrawn due to cases of TdP, leading to intensify assessment of drug QT interval. In our case, hydroxyzine was identified as the only drug able to induce QTc interval prolongation in the patients active medication. Moreover, a hydroxyzine overdose was detected probably due to high posology, bile ducts obstruction, and liver impairment (rise in GPT). Cetirizine is the hydroxyzines major active metabolite; unfortunately, its blood level dosage was not performed. We suppose that combination of hydroxyzine overdose and transient renal failure could have lead to cetirizine accumulation. However, cetirizine seems to be safe regarding ventricular repolarization, even at supratherapeutic dose. Theres only one published clinical case of hydroxyzine-induced QT prolongation. This case describes recurrent syncope during hydroxyzine treatment at usual posology in a 34-year-old woman presenting a hERG mutation. hERG gene codes for the subunit of a potassium channel (I Kr ) implicated in the ventricular repolarization. Experimentally, it was shown that hydroxyzine could be proarrhythmic by blocking hERG channels and therefore prolonging action potential duration, thus inducing TdP. In the French pharmacovigilance database, we found 24 cases of QT prolongation mentioning hydroxyzine with a suspected accountability assumed in 7 cases. We publish here the first clinical case of hydroxyzineassociated QT prolongation with drug dosage data. The association of hydroxyzine, especially at high posology, and others already well-known TdP risks factors (including hypokalemia and bradycardia) could induce QT prolongation and lifethreatening TdP. The present work underlines the recent addition of hydroxyzine to the list of drugs with conditional risk of TdP and drugs to be avoided by patients with congenital long QT syndrome. It also reminds that recommended hydroxyzines posology must be respected, the risk of QT prolongation and syncope increases dramatically in case of an overdose. Finally, considering the large use of the molecule, the recurrence of hydroxyzine-induced QT prolongation is probably underestimated. ",
+    "text": "A 63-year-old woman with no known cardiac history presented with a sudden onset of dyspnea requiring intubation and ventilatory support out of hospital.\nShe denied preceding symptoms of chest discomfort, palpitations, syncope or infection.\nThe patient was afebrile and normotensive, with a sinus tachycardia of 140 beats/min.\nThe cardiorespiratory examination was remarkable for an elevated jugular venous pressure at the angle of the jaw, a left-sided third heart sound and bibasilar crackles in both lung fields.\nThe complete blood cell count, electrolytes and cardiac biomarkers were within normal limits.\nAn initial electrocardiogram revealed ST depression in leads V2 to V6, suggestive of anterolateral ischemia (Figure 1).\nA chest radiograph demonstrated pulmonary vascular congestion consistent with a diagnosis of pulmonary edema (Figure 2).\nAn echocardiographic examination revealed normal cardiac dimensions, normal wall motion and mild diastolic dysfunction with an early diastolic to late diastolic transmitral ratio of less than 1, prolonged deceleration time (250 ms) and a reduced early diastolic annular velocity of the lateral mitral valve annulus.\nFollowing aggressive diuresis and requiring minimal ventilatory support, the patient was extubated one day following her initial presentation.\nWithin 1 h of extubation, the patient developed recurrent pulmonary edema clinically and radiographically, requiring mechanical ventilation.\nCardiac catheterization was performed and revealed normal coronary arteries.\nOn day 4 of the coronary care unit admission, the patient failed a repeat attempt at extubation.\nA computed tomographic scan revealed a 4 cm × 9 cm multinodular goiter extending into the mediastinum and suspected associated tracheal stenosis (Figure 3).\nWith a diagnosis of NPPE secondary to an enlarged goiter, the patient underwent surgical intervention for a thyroidectomy.\nIntraoperative bronchoscopy revealed tracheal stenosis of greater than 50%.\nThe postoperative course was uncomplicated, and three months following discharge, the patient returned to her previous activity level without subjective dyspnea.",
     "action": "getDocument",
     "createdAt": {
-        "$date": "2019-03-17T20:21:20.380Z"
+        "$date": "2019-03-18T00:46:15.224Z"
     },
     "updatedAt": {
-        "$date": "2019-03-17T20:21:20.380Z"
+        "$date": "2019-03-18T00:46:15.224Z"
     },
     "__v": 0
 }; export default docData;

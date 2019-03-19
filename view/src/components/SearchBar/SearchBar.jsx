@@ -15,7 +15,7 @@ class SearchBar extends Component {
     }
 
     handleSearch = () => {
-        console.log(this.state.query);
+        this.props.handleSearch(this.state.query);
     }
 
     render() {

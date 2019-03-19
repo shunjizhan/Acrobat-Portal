@@ -16,7 +16,7 @@ $border-radius: 5px;
 #searchText {
   font-size: 23px;
   width: 100%;
-  border: 2px solid $blue;
+  border: 2px solid rgba($blue, 0.8);
   padding: 5px 10px;
   height: 100%;
   border-radius: $border-radius;
@@ -32,7 +32,7 @@ $button-offset: calc(-1 * (#{$search-bar-height} - 10px));
   right: $button-offset;
   width: $search-bar-height;
   height: $search-bar-height;
-  border: 1px solid $blue;
+  border: 1px solid rgba($blue, 0.8);
   background: $blue;
   text-align: center;
   color: white;

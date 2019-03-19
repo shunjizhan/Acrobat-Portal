@@ -6,21 +6,20 @@ import './QueryPanel.css';
 
 
 class QueryPanel extends Component {
-    state = {}
+    state = {
+        query: null
+    }
+
+    handleSearch = query => {
+        this.setState({ query })
+    }
+
 
     render() {
         return (
         <div id='queryPanel' className='buttomPanel'>
-            <SearchBar />
-            <QueryBuilder />
-
-
-            <br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
-            <br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
-            <br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
-            <br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
-            <span style={{fontSize: '150%', 'color': '#f4427a'}}>This is the main query panel, now we temporarily use this space for backend test.<br /> If you can see the messeges from database, then the backend is running successfully!</span>
-            {/*<DatabaseTest />*/}
+            <SearchBar handleSearch={this.handleSearch} />
+            <QueryBuilder query={this.state.query} />
         </div>);
     }
 }

@@ -4,24 +4,25 @@ $transfer-duration: 0.3s;
 .button {
     display: inline-block;
     position: relative;
-    padding: 10px 30px;
+    padding: 7px 18px;
 
-    border-radius: 8px;
-    border: 2px solid rgba($blue, 0.8);
-    color: $blue;
+    border-radius: 15px;
+    border: 1px solid rgba($blue, 0.8);
+    background-color: rgba($blue, 1);
+    color: white;
 
     text-align: center;
-    font-size: 120%;
+    font-size: 110%;
     font-weight: lighter;
-    // font-family: Helvetica;
+    font-family: Helvetica;
 
     -webkit-transition-duration: $transfer-duration;  /* Safari */
     transition-duration: $transfer-duration;
 
     &:hover {
         cursor: pointer;
-        background-color: rgba($blue, 1);
-        color: white;
+        background-color: white;
+        color: $blue;
     }
 
     svg {
