@@ -11,7 +11,7 @@ class Button extends Component {
         return (
             <span className='button' id={this.props.id} onClick={click}>
                 <FontAwesomeIcon icon={icon} />
-                <span class='button-text'>{text}</span>
+                <span className='button-text'>{text}</span>
             </span>
         );
     }

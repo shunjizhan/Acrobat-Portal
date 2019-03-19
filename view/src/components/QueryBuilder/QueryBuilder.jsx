@@ -7,7 +7,10 @@ class QueryBuilder extends Component {
     render() {
         return (
             <div id='queryBuilder' >
+                <hr />
+                This is the query builder:
                 {this.props.query && `you searched ${this.props.query}`}
+                <hr />
             </div>
         );
     }

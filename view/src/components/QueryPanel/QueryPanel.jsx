@@ -1,13 +1,15 @@
 import React, { Component } from 'react';
 import DatabaseTest from '../DatabaseTest/DatabaseTest';
 import QueryBuilder from '../QueryBuilder/QueryBuilder';
+import SearchResults from '../SearchResults/SearchResults';
 import SearchBar from '../SearchBar/SearchBar';
 import './QueryPanel.css';
 
 
 class QueryPanel extends Component {
     state = {
-        query: null
+        query: null,
+        results: [{id: 1, text: '1111'}, {id: 2, text: '22222'}]
     }
 
     handleSearch = query => {
@@ -16,10 +18,13 @@ class QueryPanel extends Component {
 
 
     render() {
+        const { query, results } = this.state;
+
         return (
         <div id='queryPanel' className='buttomPanel'>
             <SearchBar handleSearch={this.handleSearch} />
-            <QueryBuilder query={this.state.query} />
+            <QueryBuilder query={query} />
+            <SearchResults results={results} />
         </div>);
     }
 }
