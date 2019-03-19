@@ -4,6 +4,12 @@ import './Result.css';
 
 
 class Result extends Component {
+    handleClick = () => {
+        const { getReportDetails } = this.props;
+        const id = this.props.info.id;
+        getReportDetails(id);
+    }
+
     render() {
         const { info } = this.props;
         const { id, text } = info;
@@ -12,6 +18,7 @@ class Result extends Component {
         <div className='result'>
             <div>id: {id}</div>
             <div>{text}</div>
+            <button onClick={this.handleClick}>see details =></button>
             <br />
         </div>);
     }
@@ -19,10 +26,11 @@ class Result extends Component {
 
 Result.propTypes = {
     info: PropTypes.object,
+    getReportDetails: PropTypes.func,
 };
 
 Result.defaultProps = {
-    info: {}    
+    info: {},    
 }
 
 export default Result;
