@@ -21,7 +21,6 @@ class Brat extends Component {
     state = {}
     docData = JSON.parse(JSON.stringify(docData));
     collData = JSON.parse(JSON.stringify(collData));
-
     old_data = JSON.parse(JSON.stringify(docData));
 
     componentDidMount(){

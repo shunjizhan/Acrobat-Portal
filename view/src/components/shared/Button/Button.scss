@@ -4,7 +4,7 @@ $transfer-duration: 0.3s;
 .button {
     display: inline-block;
     position: relative;
-    padding: 7px 18px;
+    padding: 7px 23px;
 
     border-radius: 15px;
     border: 1px solid rgba($blue, 0.8);
@@ -25,8 +25,13 @@ $transfer-duration: 0.3s;
         color: $blue;
     }
 
-    svg {
-        padding-right: 5px;
-        // font-size: 100%;
+    .button-text {
+        padding-left: 8px
     }
+
+    svg {
+        // padding-right: 3px;
+        font-size: 120%;
+    }
+
 }
