@@ -1,14 +1,12 @@
 import React, { Component } from "react";
+import axios from "axios";
 
 class AddCaseReport extends Component {
   constructor() {
     super();
 
     this.state = {
-      caseReportTitle: "",
-      caseReportID: "",
-      description: "",
-      date: "",
+      caseReport_txt: "",
     };
 
     this.onChange = this.onChange.bind(this);
@@ -21,14 +19,21 @@ class AddCaseReport extends Component {
 
   onSubmit(e) {
     e.preventDefault();
-    const newCaseReport = {
-      caseReportTitle: this.state.caseReportTitle,
-      caseReportID: this.state.caseReportID,
-      description: this.state.description,
-      date: this.state.date,
-    };
+    // const newCaseReport = {
+    //   caseReportTitle: this.state.caseReport_txt,
+    //   caseReportID: this.state.caseReport_ann,
+    //   description: this.state.description,
+    //   date: this.state.date,
+    // };
 
-    console.log(newCaseReport);
+    axios.post("http://localhost:3001/api/putCaseReport", {
+      txt: this.state.caseReport_txt,
+      ann: this.state.caseReport_ann
+      // date: this.state.date
+    }).then(res => {
+      console.log(res);
+    });
+    // console.log(newCaseReport);
   }
 
   render() {
@@ -42,31 +47,26 @@ class AddCaseReport extends Component {
                 <hr />
                 <form onSubmit={this.onSubmit}>
                   <div >
-                    <input
+                    <textarea
                       type="text"
-                      placeholder="Case Report Title"
-                      name="caseReportTitle"
-                      value={this.state.caseReportTitle}
+                      placeholder="Case Report txt"
+                      name="caseReport_txt"
+                      value={this.state.caseReport_txt}
                       onChange={this.onChange}
                     />
                   </div>
-                  <div >
-                    <input
-                      type="text"
-                      placeholder="Unique Case Report ID"
-                      name="caseReportID"
-                      value={this.state.caseReportID}
-                      onChange={this.onChange}
-                    />
-                  </div>
+                  
                   <div >
                     <textarea
-                      placeholder="Case Report Description"
-                      name="description"
-                      value={this.state.description}
+                      type="text"
+                      placeholder="Case Report ann"
+                      name="caseReport_ann"
+                      value={this.state.caseReport_ann}
                       onChange={this.onChange}
                     />
                   </div>
+                  
+                  
                   <h6>Date</h6>
                   <div >
                     <input

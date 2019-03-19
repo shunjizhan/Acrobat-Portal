@@ -15,12 +15,14 @@ class SearchResults extends Component {
             <hr />
 
             This is the search results: <br /><br />
-            <ul>
             {
                 results.length <= 0 ? ''
-                : results.map(res => <Result info={res} />)
+                : results.map(
+                    res => <Result 
+                                info={res} 
+                                getReportDetails={this.props.getReportDetails}
+                            />)
             }
-            </ul>
 
             <hr />
         </div>);

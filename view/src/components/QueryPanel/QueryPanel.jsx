@@ -29,6 +29,13 @@ class QueryPanel extends Component {
         }));
     }
 
+    getReportDetails = id => {
+        console.log('id', id);
+        fetch("http://localhost:3001/api/getCaseReport")
+            .then(data => data.json())
+            .then(res => console.log(res));
+    }
+
 
     render() {
         const { query, results } = this.state;
@@ -37,7 +44,10 @@ class QueryPanel extends Component {
         <div id='queryPanel' className='buttomPanel'>
             <SearchBar handleSearch={this.handleSearch} />
             <QueryBuilder query={query} />
-            <SearchResults results={results} />
+            <SearchResults 
+                results={results} 
+                getReportDetails={this.getReportDetails}
+            />
         </div>);
     }
 }

@@ -55,7 +55,7 @@ module.exports = function(app) {
     // this method adds new data in our database
     router.post("/putData", (req, res) => {
         let data = new Data();
-
+        // console.log(req.body);
         const { id, message } = req.body;
 
         if ((!id && id !== 0) || !message) {
@@ -76,7 +76,10 @@ module.exports = function(app) {
     // this is the method for basic text search on the data message
     router.post("/searchData", (req, res) => {
         const {id, searchKey} = req.body;
-        
+        // console.log(req);
+        // console.log(searchKey);
+        // console.log('searchData api message');
+
         var re = new RegExp(searchKey);
 
         Data.find( { message:re }, (err, data) => {
@@ -100,7 +103,7 @@ module.exports = function(app) {
     /* ------------------------- Machine Learning API Routers ------------------------------ */
     router.post("/getPrediction", (req, res) => {
         const params = req.body.data;
-        console.log(params);
+        // console.log(params);
         axios.get('http://127.0.0.1:5000/', { params })
             .then(response => {
                 data = response.data
@@ -108,6 +111,105 @@ module.exports = function(app) {
                 return res.json(data);
             })
             .catch(error => { console.log(error); });
+    });
+
+    /* --------------------------------- CaseReport APIs ----------------------------------- */
+    // getCaseReport
+    // this get API fetches all case reports stored in the mongo db
+    router.get("/getCaseReport", (req, res) => {
+        CaseReport.find((err, data) => {
+            if (err) return res.json({ success: false, error: err });
+            return res.json({ success: true, data: data });
+        });
+    });
+
+    // putCaseReport
+    router.post("/putCaseReport", (req, res) => {
+        const {txt, ann} = req.body;
+        let caseReport = new CaseReport();
+
+        console.log('caseReport api messge');
+
+        caseReport.text = txt;
+        caseReport.entities = [];
+        caseReport.attributes = [];
+        caseReport.relations = [];
+        caseReport.triggers = [];
+        caseReport.events = [];
+        caseReport.comments = [];
+        caseReport.equivs = [];
+        caseReport.action = "getDocument";
+        caseReport.source_files = ["ann", "txt"];
+
+        if (typeof req.body.ann == 'undefined') {
+            return res.json({success: false, error: "ann input is not defined"});
+        }
+
+        let lines = ann.split(/\r?\n/);
+        var i;
+        for (i = 0; i<lines.length; i++) {
+            let line = lines[i];
+            let infos = line.split('\t');
+            var type = infos[0];
+
+            // entity or trigger-event
+            if (type.charAt(0) == 'T') {            
+                // if not followed by event, then this is entity
+                if (i==lines.length-1 || lines[i+1].charAt(0)!= 'E') {
+                    // add entity to caseReport.entities
+                    let entityID = infos[0];
+                    let entityContent = infos[1].split(' ');
+                    caseReport.entities.push([entityID, entityContent[0], [[parseInt(entityContent[1]), parseInt(entityContent[2])]]]);
+                }
+                // else this is trigger for event
+                else {
+                    // add trigger to caseReport.entities
+                    let triggerID = infos[0];
+                    let triggerContent = infos[1].split(' ');
+                    caseReport.triggers.push([triggerID, triggerContent[0], [[parseInt(triggerContent[1]), parseInt(triggerContent[2])]]]);
+                }
+            } 
+            // relation
+            else if (type.charAt(0) == 'R') {     
+                let relationID = infos[0];
+                let relationContent = infos[1].split(' ');
+                caseReport.relations.push([relationID, relationContent[0], [["Arg1",relationContent[1].split(':')[1]], ["Arg2", relationContent[2].split(':')[1]]]]);
+            } 
+            // event
+            else if (type.charAt(0) == 'E') {     
+                // add to caseReports.events
+                let eventID = infos[0];
+                caseReport.events.push([eventID, infos[1].split(':')[1].trim(), []]);
+
+            } 
+            // attribute
+            else if (type.charAt(0) == 'A') {     
+                let attributeID = infos[0];
+                let attirbuteContent = infos[1].split(' ');
+                caseReport.attributes.push([attributeID, attirbuteContent[0], attirbuteContent[1], attirbuteContent[2]]);
+            }
+            // comment
+            else if (type.charAt(0) == '#') {
+                let commentContent = infos[1].split(' ');
+                caseReport.comments.push([commentContent[1], commentContent[0], infos[2]]);
+            }
+            // overlap
+            else if (type.charAt(0) == '*') {
+                let overlapContent = infos[1].split(' ');
+                let overlapData = [];
+                overlapData.push('*');
+                var j;
+                for (j =0; j<overlapContent.length; j++) {
+                    overlapData.push(overlapContent[j]);
+                }
+                caseReport.equivs.push(overlapData);
+            }
+        }
+
+        caseReport.save(err => {
+            if (err) return res.json({ success: false, error: err });
+            return res.json({ success: true});
+        });
     });
 
     // For Future Use If We Are Having Users
