@@ -3,37 +3,29 @@ import DatabaseTest from '../DatabaseTest/DatabaseTest';
 import QueryBuilder from '../QueryBuilder/QueryBuilder';
 import SearchResults from '../SearchResults/SearchResults';
 import SearchBar from '../SearchBar/SearchBar';
+import Brat from '../Brat/Brat';
 import './QueryPanel.css';
-import axios from "axios";
+
+
+import docData from '../Brat/docData';
 
 
 class QueryPanel extends Component {
     state = {
         query: null,
-        results: [{id: 1, text: '1111'}, {id: 2, text: '22222'}]
+        results: [{id: 1, text: '1111'}, {id: 2, text: '22222'}],
+        docData,
     }
 
     handleSearch = query => {
-        console.log(query);
-        if (query==""){
-          this.setState({ results: []});
-          return;
-        }
-
-        axios.post("http://localhost:3001/api/searchDataES", {
-          searchKey: query
-        })
-          .then(res => this.setState({results : res.data.data.map(info => {
-                return {id: info._id, text: info._source.content}
-            })
-        }));
+        this.setState({ query })
     }
 
     getReportDetails = id => {
         console.log('id', id);
         fetch("http://localhost:3001/api/getCaseReport")
             .then(data => data.json())
-            .then(res => console.log(res));
+            .then(res => this.setState({docData: res}));
     }
 
 
@@ -48,6 +40,7 @@ class QueryPanel extends Component {
                 results={results} 
                 getReportDetails={this.getReportDetails}
             />
+            <Brat docData={this.state.docData}/>
         </div>);
     }
 }
