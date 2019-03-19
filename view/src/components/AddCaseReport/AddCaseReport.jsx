@@ -7,8 +7,6 @@ class AddCaseReport extends Component {
 
     this.state = {
       caseReport_txt: "",
-      caseReport_ann: "",
-      date: "",
     };
 
     this.onChange = this.onChange.bind(this);
@@ -30,8 +28,8 @@ class AddCaseReport extends Component {
 
     axios.post("http://localhost:3001/api/putCaseReport", {
       txt: this.state.caseReport_txt,
-      ann: this.state.caseReport_ann,
-      date: this.state.date
+      ann: this.state.caseReport_ann
+      // date: this.state.date
     }).then(res => {
       console.log(res);
     });
@@ -57,6 +55,7 @@ class AddCaseReport extends Component {
                       onChange={this.onChange}
                     />
                   </div>
+                  
                   <div >
                     <textarea
                       type="text"

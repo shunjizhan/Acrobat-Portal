@@ -11,12 +11,28 @@ const Schema = mongoose.Schema;
 */
 const CaseReportSchema = new Schema(
   {
-    txt	: String,
-    ann	: String,
+    messages	: [],
+    source_files	: [],
+    modifications 	: [],
+    normalizations 	: [],
+    // ctime 			: 1351154734.5055847,
+    text 			: String,
+    entities 		: [],
+    attributes 		: [],
     // date : { type: Date, default: Date.now }
+    relations 		: [],
+    triggers 		: [],
+    events 			: [],
+    equivs			: [],
+    comments 		: [],
+    // sentence_offsets 	: [],
+    // token_offsets 	: [],
+    action 			: String
   },
   { timestamps: true }
 );
+
+
 
 // export the new Schema so we could modify it using Node.js
 module.exports = mongoose.model("CaseReport", CaseReportSchema);
