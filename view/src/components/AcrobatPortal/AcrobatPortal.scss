@@ -1,10 +1,22 @@
 $blue: rgb(65, 160, 244);
 $orange: rgb(244, 149, 65);
+$grey: #808080;
 
 
+
+$titlePanel-height: 80px;
+#titlePanel {
+    position: relative;
+    width: 100%;
+    height: $titlePanel-height;
+    // border: 1px solid green;
+}
+
+
+$portal-height: calc(100% - #{$titlePanel-height});
 #acrobatPortal {
     position: relative;
-    // width: 100%;
+    width: 100%;
     // height: 100%;
     // border: 5px solid red;
 }
@@ -19,32 +31,27 @@ $buttonPanel-height: 50px;
     // border: 1px solid green;
 }
 
-$titlePanel-height: 100px;
-#titlePanel {
-    position: relative;
-    width: 100%;
-    height: $titlePanel-height;
-    // border: 1px solid green;
-}
+
 
 .buttomPanel {
     font-size: 80%;
     display: inline-block;
     position: absolute;
     padding: 20px 30px;
-    border: 2px solid rgba($blue, 0.5);
-    border-radius: 10px;
-    box-shadow: 5px 5px 7px rgba($blue, 0.4);
+    margin-top: 10px;
+    border: 1px solid rgba($grey, 0.5);
+    border-radius: 5px;
+    box-shadow: 5px 5px 7px rgba($grey, 0.4);
 
     &:hover {
-        border: 2px solid rgba($blue, 0.8);
-        box-shadow: 5px 5px 7px rgba($blue, 0.6);
+        border: 1px solid rgba($grey, 0.7);
+        box-shadow: 5px 5px 7px rgba($grey, 0.6);
     }
 }
 
 $historyPanel-width: 30%;
 $queryPanel-width: calc(100% - #{$historyPanel-width} - 20px);
-$buttom-panel-height: calc(100vh - #{$buttonPanel-height} - #{$titlePanel-height} - 20px);
+$buttom-panel-height: calc(100vh - #{$buttonPanel-height} - #{$titlePanel-height} - 50px);
 #historyPanel {
     width: $historyPanel-width;
     height: $buttom-panel-height;

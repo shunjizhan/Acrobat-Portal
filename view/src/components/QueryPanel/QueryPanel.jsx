@@ -1,14 +1,53 @@
 import React, { Component } from 'react';
 import DatabaseTest from '../DatabaseTest/DatabaseTest';
+import QueryBuilder from '../QueryBuilder/QueryBuilder';
+import SearchResults from '../SearchResults/SearchResults';
+import SearchBar from '../SearchBar/SearchBar';
 import './QueryPanel.css';
+import axios from "axios";
 
 
 class QueryPanel extends Component {
+    state = {
+        query: null,
+        results: [{id: 1, text: '1111'}, {id: 2, text: '22222'}]
+    }
+
+    handleSearch = query => {
+        console.log(query);
+        if (query==""){
+          this.setState({ results: []});
+          return;
+        }
+
+        axios.post("http://localhost:3001/api/searchDataES", {
+          searchKey: query
+        })
+          .then(res => this.setState({results : res.data.data.map(info => {
+                return {id: info._id, text: info._source.content}
+            })
+        }));
+    }
+
+    getReportDetails = id => {
+        console.log('id', id);
+        fetch("http://localhost:3001/api/getCaseReport")
+            .then(data => data.json())
+            .then(res => console.log(res));
+    }
+
+
     render() {
+        const { query, results } = this.state;
+
         return (
         <div id='queryPanel' className='buttomPanel'>
-            <span style={{fontSize: '150%', 'color': '#f4427a'}}>This is the main query panel, now we temporarily use this space for backend test.<br /> If you can see the messeges from database, then the backend is running successfully!</span>
-            <DatabaseTest />
+            <SearchBar handleSearch={this.handleSearch} />
+            <QueryBuilder query={query} />
+            <SearchResults 
+                results={results} 
+                getReportDetails={this.getReportDetails}
+            />
         </div>);
     }
 }

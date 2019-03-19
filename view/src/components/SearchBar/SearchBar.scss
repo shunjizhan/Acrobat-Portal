@@ -1,0 +1,44 @@
+$search-bar-height: 50px;   // same as button width and height
+$search-bar-width: calc(100% - #{$search-bar-height});  // save space for button
+
+$blue: rgb(65, 160, 244);
+$orange: rgb(244, 149, 65);
+$deep-blue: rgb(18, 120, 209);
+
+#searchBar{
+  width: $search-bar-width;
+  height: $search-bar-height;
+  position: relative;
+  margin:0;
+}
+
+$border-radius: 5px;
+#searchText {
+  font-size: 23px;
+  width: 100%;
+  border: 2px solid rgba($blue, 0.8);
+  padding: 5px 10px;
+  height: 100%;
+  border-radius: $border-radius;
+  outline: none;
+  display: inline-block;
+
+  // &:focus{ color: $blue; }
+}
+
+$button-offset: calc(-1 * (#{$search-bar-height} - 10px));
+#searchButton {
+  position: absolute;
+  right: $button-offset;
+  width: $search-bar-height;
+  height: $search-bar-height;
+  border: 1px solid rgba($blue, 0.8);
+  background: $blue;
+  text-align: center;
+  color: white;
+  border-radius: $border-radius;
+  cursor: pointer;
+  font-size: 20px;
+
+  &:hover { background-color: $deep-blue; }
+}

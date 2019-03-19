@@ -6,13 +6,13 @@ $orange: rgb(244, 149, 65);
     // border: 1px solid green;
     padding: 10px;
 
-    $title-width: 20%;
+    $title-width: 15%;
     &#title { 
         width: $title-width;
         color: $blue;
         font-size: 58px;
 
-        #A { color: $orange; }
+        #E { color: $orange; }
 
         &:hover { cursor: pointer; }
     }

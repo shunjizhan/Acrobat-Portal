@@ -9,9 +9,9 @@ class TitlePanel extends Component {
         return (
         <div id='titlePanel'>
             <Link to="/">
-                <div className='titleSection' id='title'><span id='A'>A</span>CROBAT</div>
+                <div className='titleSection' id='title'>CREAT<span id='E'>e</span></div>
             </Link>
-            <div className='titleSection' id='description'>All Case Reports with Open Biomedical Annotation Terms</div>
+            <div className='titleSection' id='description'>Clinical Report Extraction & Annotation Technology</div>
             <div className='titleSection' id='account'>
                 <FontAwesomeIcon icon={['fal', 'user-secret']} />
                 <span id='accountText'>Account</span>

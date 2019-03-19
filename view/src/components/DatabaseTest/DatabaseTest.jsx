@@ -44,7 +44,7 @@ class DatabaseTest extends Component {
   // our first get method that uses our backend api to 
   // fetch data from our data base
   getDataFromDb = () => {
-    fetch("http://localhost:3001/api/getData")
+    fetch("http://localhost:3001/api/getCaseReport")
       .then(data => data.json())
       .then(res => this.setState({ data: res.data }));
   };
@@ -131,7 +131,7 @@ class DatabaseTest extends Component {
             ? "NO DB ENTRIES YET"
             : data.map(dat => (
                 <li style={{ padding: "5px" }} key={data.message}>
-                  <span style={{ color: "gray" }}> id: </span> {dat.id}
+                  <span style={{ color: "gray" }}> id: </span> {dat.text}
                   <span style={{ color: "gray" }}> | data: </span> {dat.message}
                 </li>
               ))}
