@@ -2,6 +2,7 @@ const express = require('express');
 const axios = require('axios');
 const Data = require("./models/mongo/data");
 const CaseReport = require("./models/mongo/case_report");
+var searchModule = require('./search.js');
 
 //在这里我们可以建立controller，然后在controller里做api要做的事情
 // var HomeController = require('./controllers/home_controller.js');
@@ -23,6 +24,7 @@ module.exports = function(app) {
     router.get("/getData", (req, res) => {
         Data.find((err, data) => {
             if (err) return res.json({ success: false, error: err });
+
             return res.json({ success: true, data: data });
         });
     });
@@ -83,6 +85,18 @@ module.exports = function(app) {
         });
     });
 
+    router.post('/searchDataES',(req, res) => {
+        // console.log(req.body);
+        const {searchKey} = req.body;
+        // var req_body = new RegExp(searchKey);
+        searchModule.search(searchKey, function(data) {
+            console.log(data,'server')
+            for (i = 0; i < data.length; i++) { 
+              data[i]._source.content = data[i]._source.content.substring(0,350)+'...';
+            }
+            return res.json({ success : true, data: data });
+        });
+    });
     /* ------------------------- Machine Learning API Routers ------------------------------ */
     router.post("/getPrediction", (req, res) => {
         const params = req.body.data;
