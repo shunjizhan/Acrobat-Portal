@@ -41,10 +41,17 @@ class QueryPanel extends Component {
     }
 
     getReportDetails = id => {
-        console.log('id', id);
-        fetch("http://localhost:3001/api/getCaseReport")
-            .then(data => data.json())
-            .then(res => this.setState({docData: res}));
+        console.log('get report:', id);
+        axios.post("http://localhost:3001/api/getCaseReportById", { id })
+            .then(res => {
+                const data = res.data.data[0];
+                console.log('data', data);
+                this.setState({docData: data})
+            });
+
+        // fetch("http://localhost:3001/api/getCaseReport")
+        //     .then(data => data.json())
+        //     .then(res => );
     }
 
 
