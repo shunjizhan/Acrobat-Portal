@@ -1,0 +1,25 @@
+$blue: rgb(65, 160, 244);
+$orange: rgb(244, 149, 65);
+$transfer-duration: 0s;
+
+.result {
+    -webkit-transition-duration: $transfer-duration;  /* Safari */
+    transition-duration: $transfer-duration;
+
+    padding: 15px 20px;
+    font-size: 130%;
+    border-radius: 10px;
+
+    &:hover {
+        cursor: pointer;
+        background-color: rgba(#FFCA3A, 0.2);
+
+        svg { color: #FFCA3A; }
+    }
+
+
+    .search-result-text {
+        padding-left: 20px;
+    }
+
+}

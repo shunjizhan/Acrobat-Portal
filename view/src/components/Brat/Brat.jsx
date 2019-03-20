@@ -35,11 +35,11 @@ class Brat extends Component {
         // console.log(docData);
     }
 
-    getCaseReport = id => {
-        // console.log(this);
-        this.props.docData = JSON.parse(JSON.stringify(this.old_data));
-        this.redraw();
-    }
+    // getCaseReport = id => {
+    //     // console.log(this);
+    //     this.props.docData = JSON.parse(JSON.stringify(this.old_data));
+    //     this.redraw();
+    // }
 
     redraw = () => {
         if (window.brat != null) {
@@ -49,9 +49,15 @@ class Brat extends Component {
     }
 
     render () {
+
         this.redraw()
+
+        const id = this.props.docData._id.$oid;
         return(
             <div id='brat'>
+                <span id='brat-intro'>
+                    Details about case report <span id='report-id'>{ id }</span>
+                </span>
 
                 <span 
                     id='submit-report' 
@@ -60,13 +66,13 @@ class Brat extends Component {
                 >
                     submit case report
                 </span>
-
+{/*
                 <span 
                     className='button'
                     onClick={this.getCaseReport}
                 >
                     get case report
-                </span>
+                </span>*/}
 
                 <span 
                     className='button'
@@ -83,7 +89,8 @@ class Brat extends Component {
 }
 
 Brat.defaultProps = {
-    docData: docData
+    docData: docData,
+    id: '0'
 }
 
 export default Brat;

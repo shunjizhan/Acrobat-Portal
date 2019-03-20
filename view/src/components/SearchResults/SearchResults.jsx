@@ -8,20 +8,22 @@ class SearchResults extends Component {
     state = {}
 
     render() {
-        const { results } = this.props;
+        const { results, query } = this.props;
 
         return (
         <div id='searchResults'>
-            <hr />
 
-            This is the search results: <br /><br />
             {
-                results.length <= 0 ? ''
-                : results.map(
-                    res => <Result 
-                                info={res} 
-                                getReportDetails={this.props.getReportDetails}
-                            />)
+                query.length <= 0? '':
+                <span id='search-result-title'>Search Results for <span id='query'>{query}</span></span>
+            }
+
+            {
+                results.length <= 0 ? '': results.map(res => 
+                    <Result 
+                        info={res} 
+                        getReportDetails={this.props.getReportDetails}
+                    />)
             }
 
             <hr />
@@ -30,7 +32,9 @@ class SearchResults extends Component {
 }
 
 SearchResults.propTypes = {
-    results: PropTypes.arrayOf(PropTypes.object)
+    results: PropTypes.arrayOf(PropTypes.object),
+    query: PropTypes.string,
+    getReportDetails: PropTypes.func,
 };
 
 SearchResults.defaultProps = {
