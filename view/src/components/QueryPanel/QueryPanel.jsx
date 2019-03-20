@@ -5,7 +5,7 @@ import SearchResults from '../SearchResults/SearchResults';
 import SearchBar from '../SearchBar/SearchBar';
 import Brat from '../Brat/Brat';
 import './QueryPanel.css';
-
+import axios from 'axios'
 
 import docData from '../Brat/docData';
 
@@ -18,7 +18,19 @@ class QueryPanel extends Component {
     }
 
     handleSearch = query => {
-        this.setState({ query })
+        console.log(query);
+        if (query==""){
+          this.setState({ results: []});
+          return;
+        }
+
+        axios.post("http://localhost:3001/api/searchDataES", {
+          searchKey: query
+        })
+          .then(res => this.setState({results : res.data.data.map(info => {
+                return {id: info._source.id, text: info._source.content}
+            })
+        }));
     }
 
     getReportDetails = id => {

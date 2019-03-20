@@ -17,7 +17,6 @@ module.exports = function(app) {
     // app.get('/', HomeController.index);
     // app.get('/getData', DataController.getData);等等
 
-    // HomeController我写了，顺稷你看看怎么显示react的界面，或者我们可以以后再说。
     /* ------------------------- Database Routers ------------------------------ */
     // this is our get method
     // this method fetches all available data in our database
