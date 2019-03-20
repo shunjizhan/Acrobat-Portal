@@ -1,7 +1,7 @@
 {
 "version": 3,
-"mappings": "",
-"sources": [],
+"mappings": "AAKI,mCAAqB,CACjB,SAAS,CAAE,IAAI,CAGnB,qBAAO,CACH,SAAS,CAAE,IAAI,CACf,KAAK,CAAE,OAAO",
+"sources": ["SearchResults.scss"],
 "names": [],
 "file": "SearchResults.css"
 }

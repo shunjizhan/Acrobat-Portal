@@ -8,8 +8,8 @@ class QueryBuilder extends Component {
         return (
             <div id='queryBuilder' >
                 <hr />
-                This is the query builder:
-                {this.props.query && `you searched ${this.props.query}`}
+                This is the query builder, I am a 半成品, you are searching:
+                <span id='qbText'>{ this.props.text? this.props.text : 'nothing' }</span>
                 <hr />
             </div>
         );

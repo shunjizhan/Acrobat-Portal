@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import './Result.css';
 
 
@@ -11,15 +12,14 @@ class Result extends Component {
     }
 
     render() {
-        const { info } = this.props;
-        const { id, text } = info;
+        const text = this.props.info.text;
 
         return (
-        <div className='result'>
-            <div>id: {id}</div>
-            <div>{text}</div>
-            <button onClick={this.handleClick}>see details =></button>
-            <br />
+        <div className='result' onClick={this.handleClick}>
+            <div>
+                <FontAwesomeIcon icon={['fab', 'bitcoin']} />
+                <span className='search-result-text'>{text}</span>
+            </div>    
         </div>);
     }
 }

@@ -2,7 +2,9 @@ const express = require('express');
 const axios = require('axios');
 const Data = require("./models/mongo/data");
 const CaseReport = require("./models/mongo/case_report");
-var searchModule = require('./search.js');
+const searchModule = require('./search.js');
+const mongo = require('mongodb');
+
 
 //在这里我们可以建立controller，然后在controller里做api要做的事情
 // var HomeController = require('./controllers/home_controller.js');
@@ -17,7 +19,6 @@ module.exports = function(app) {
     // app.get('/', HomeController.index);
     // app.get('/getData', DataController.getData);等等
 
-    // HomeController我写了，顺稷你看看怎么显示react的界面，或者我们可以以后再说。
     /* ------------------------- Database Routers ------------------------------ */
     // this is our get method
     // this method fetches all available data in our database
@@ -120,6 +121,24 @@ module.exports = function(app) {
         CaseReport.find((err, data) => {
             if (err) return res.json({ success: false, error: err });
             return res.json({ success: true, data: data });
+        });
+    });
+
+
+    // getCaseReportById
+    // this get API fetches a case report stored in the mongo db that has the given id
+    router.post("/getCaseReportById", (req, res) => {
+        const { id } = req.body;
+        console.log(id);
+        // console.log("get case report by id API")
+        // console.log(id);
+        // console.log(searchKey);
+
+        var oid = new mongo.ObjectID(id)
+        CaseReport.find( {_id : oid}, (err, caseReport) => {
+            if (err) return res.send(err);
+            // console.log("success");
+            return res.json({ success: true, data: caseReport});
         });
     });
 

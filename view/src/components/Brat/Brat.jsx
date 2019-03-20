@@ -25,30 +25,39 @@ class Brat extends Component {
 
     componentDidMount(){
         var elem = document.getElementById("brat-editor");
-        window.brat = new window.BratFrontendEditor(elem, this.collData, this.docData, options);
+        window.brat = new window.BratFrontendEditor(elem, this.collData, this.props.docData, options);
     }
 
     handleSubmit = () => {
-        console.log(this.docData);
+        console.log(this.props.docData);
 
         // this should be the same! docData was passed by reference to brat!!
         // console.log(docData);
     }
 
-    getCaseReport = id => {
-        // console.log(this);
-        this.docData = JSON.parse(JSON.stringify(this.old_data));
-        this.redraw();
-    }
+    // getCaseReport = id => {
+    //     // console.log(this);
+    //     this.props.docData = JSON.parse(JSON.stringify(this.old_data));
+    //     this.redraw();
+    // }
 
     redraw = () => {
-        window.brat.dispatcher.post('requestRenderData', [this.docData]);
-        window.brat.dispatcher.post('current', [this.collData, this.docData, {}]);
+        if (window.brat != null) {
+            window.brat.dispatcher.post('requestRenderData', [this.props.docData]);
+            window.brat.dispatcher.post('current', [this.collData, this.props.docData, {}]);
+        }
     }
 
     render () {
+
+        this.redraw()
+
+        const id = this.props.docData._id.$oid;
         return(
             <div id='brat'>
+                <span id='brat-intro'>
+                    Details about case report <span id='report-id'>{ id }</span>
+                </span>
 
                 <span 
                     id='submit-report' 
@@ -57,13 +66,13 @@ class Brat extends Component {
                 >
                     submit case report
                 </span>
-
+{/*
                 <span 
                     className='button'
                     onClick={this.getCaseReport}
                 >
                     get case report
-                </span>
+                </span>*/}
 
                 <span 
                     className='button'
@@ -77,6 +86,11 @@ class Brat extends Component {
             </div>
         );
     }
+}
+
+Brat.defaultProps = {
+    docData: docData,
+    id: '0'
 }
 
 export default Brat;

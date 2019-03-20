@@ -1,7 +1,7 @@
 {
 "version": 3,
-"mappings": "",
-"sources": [],
+"mappings": "AAAA,KAAM,CACF,UAAU,CAAE,IAAI,CAEhB,iBAAY,CACR,SAAS,CAAE,IAAI,CACf,aAAa,CAAE,IAAI,CAEnB,4BAAW,CAAE,KAAK,CAAE,OAAO",
+"sources": ["Brat.scss"],
 "names": [],
 "file": "Brat.css"
 }

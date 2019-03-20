@@ -3,19 +3,26 @@ import DatabaseTest from '../DatabaseTest/DatabaseTest';
 import QueryBuilder from '../QueryBuilder/QueryBuilder';
 import SearchResults from '../SearchResults/SearchResults';
 import SearchBar from '../SearchBar/SearchBar';
+import Brat from '../Brat/Brat';
 import './QueryPanel.css';
-import axios from "axios";
+import axios from 'axios'
+
+import docData from '../Brat/docData';
 
 
 class QueryPanel extends Component {
     state = {
-        query: null,
-        results: [{id: 1, text: '1111'}, {id: 2, text: '22222'}]
+        query: '',          // real search query
+        text: '',           // text when user is typing
+        results: [{id: 0, text: 'go search something!'}],
+        docData,
     }
 
     handleSearch = query => {
-        console.log(query);
-        if (query==""){
+        console.log('searched:', query);
+        this.setState({ query });
+
+        if (query === ''){
           this.setState({ results: []});
           return;
         }
@@ -24,29 +31,47 @@ class QueryPanel extends Component {
           searchKey: query
         })
           .then(res => this.setState({results : res.data.data.map(info => {
-                return {id: info._id, text: info._source.content}
+                return {id: info._source.id, text: info._source.content}
             })
         }));
     }
 
+    handleTyping = text => {
+        this.setState({ text });
+    }
+
     getReportDetails = id => {
-        console.log('id', id);
-        fetch("http://localhost:3001/api/getCaseReport")
-            .then(data => data.json())
-            .then(res => console.log(res));
+        console.log('get report:', id);
+        axios.post("http://localhost:3001/api/getCaseReportById", { id })
+            .then(res => {
+                const data = res.data.data[0];
+                console.log('data', data);
+                this.setState({docData: data})
+            });
+
+        // fetch("http://localhost:3001/api/getCaseReport")
+        //     .then(data => data.json())
+        //     .then(res => );
     }
 
 
     render() {
-        const { query, results } = this.state;
+        const { query, text, results } = this.state;
 
         return (
         <div id='queryPanel' className='buttomPanel'>
-            <SearchBar handleSearch={this.handleSearch} />
-            <QueryBuilder query={query} />
+            <SearchBar 
+                handleSearch={this.handleSearch} 
+                handleTyping={this.handleTyping} 
+            />
+            <QueryBuilder text={text} />
             <SearchResults 
+                query={query}
                 results={results} 
                 getReportDetails={this.getReportDetails}
+            />
+            <Brat 
+                docData={this.state.docData}
             />
         </div>);
     }

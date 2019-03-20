@@ -44,7 +44,7 @@ class DatabaseTest extends Component {
   // our first get method that uses our backend api to 
   // fetch data from our data base
   getDataFromDb = () => {
-    fetch("http://localhost:3001/api/getCaseReport")
+    fetch("http://localhost:3001/api/getData")
       .then(data => data.json())
       .then(res => this.setState({ data: res.data }));
   };
@@ -116,6 +116,20 @@ class DatabaseTest extends Component {
       // .then(res => console.log(res));
       .then(res => this.setState({searchRes : res.data.data}));
   };
+
+  // searchDBID = searchQuery => {
+  //   // console.log(searchQuery);
+  //   if (searchQuery==""){
+  //     this.setState({ searchRes: []});
+  //     return;
+  //   }
+
+  //   axios.post("http://localhost:3001/api/getCaseReportById", {
+  //     id: "5c8eea55ca49b8479b8938cd"
+  //   })
+  //     // .then(res => console.log(res));
+  //     .then(res => this.setState({searchRes : res.data.data}));
+  // }
 
   // here is our UI
   // it is easy to understand their functions when you 

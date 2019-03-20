@@ -8,23 +8,30 @@ class SearchBar extends Component {
         query: ''
     }
 
-    handleInputChange = e => {
-        this.setState({
-            query: e.target.value
-        })
+    handleTyping = e => {
+        const query = e.target.value;
+        this.setState({query});
+        this.props.handleTyping(query);
     }
 
     handleSearch = () => {
+        const { searchBar } = this.refs;
+        console.log('searchBar', searchBar);
         this.props.handleSearch(this.state.query);
+        searchBar.value = '';
+        this.props.handleTyping('');        // tell query builder to reset
     }
+
 
     render() {
         return (
         <div id='searchBar'>
             <input 
-                type="text" id="searchText" 
+                ref="searchBar"
+                type="text" 
+                id="searchText" 
                 placeholder="search in over 1000000+ medical case reports..." 
-                onChange={ this.handleInputChange }
+                onChange={ this.handleTyping }
             />
             <button 
                 type="submit" 
