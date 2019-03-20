@@ -94,7 +94,7 @@ module.exports = function(app) {
         const {searchKey} = req.body;
         // var req_body = new RegExp(searchKey);
         searchModule.search(searchKey, function(data) {
-            console.log(data,'server')
+            // console.log(data,'server')
             for (i = 0; i < data.length; i++) { 
               data[i]._source.content = data[i]._source.content.substring(0,350)+'...';
             }
@@ -108,7 +108,7 @@ module.exports = function(app) {
         axios.get('http://127.0.0.1:5000/', { params })
             .then(response => {
                 data = response.data
-                console.log(data);
+                // console.log(data);
                 return res.json(data);
             })
             .catch(error => { console.log(error); });
@@ -129,7 +129,7 @@ module.exports = function(app) {
     // this get API fetches a case report stored in the mongo db that has the given id
     router.post("/getCaseReportById", (req, res) => {
         const { id } = req.body;
-        console.log(id);
+        // console.log(id);
         // console.log("get case report by id API")
         // console.log(id);
         // console.log(searchKey);
