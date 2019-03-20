@@ -24,7 +24,7 @@ class QueryPanel extends Component {
           searchKey: query
         })
           .then(res => this.setState({results : res.data.data.map(info => {
-                return {id: info._id, text: info._source.content}
+                return {id: info._source.id, text: info._source.content}
             })
         }));
     }
