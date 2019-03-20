@@ -49,18 +49,18 @@ $buttonPanel-height: 50px;
     }
 }
 
-$historyPanel-width: 30%;
+$historyPanel-width: 22%;
 $queryPanel-width: calc(100% - #{$historyPanel-width} - 20px);
-$buttom-panel-height: calc(100vh - #{$buttonPanel-height} - #{$titlePanel-height} - 50px);
+$buttom-panel-min-height: calc(100vh - #{$buttonPanel-height} - #{$titlePanel-height} - 50px);
 #historyPanel {
     width: $historyPanel-width;
-    height: $buttom-panel-height;
+    min-height: $buttom-panel-min-height;
 }
 
 #queryPanel {
     left: calc(#{$historyPanel-width} + 10px);
     width: $queryPanel-width;
-    height: $buttom-panel-height;
+    min-height: $buttom-panel-min-height;
 }
 
 
