@@ -2,6 +2,7 @@ const express = require('express');
 const axios = require('axios');
 const Data = require("./models/mongo/data");
 const CaseReport = require("./models/mongo/case_report");
+const mongo = require('mongodb');
 
 //在这里我们可以建立controller，然后在controller里做api要做的事情
 // var HomeController = require('./controllers/home_controller.js');
@@ -106,6 +107,22 @@ module.exports = function(app) {
         CaseReport.find((err, data) => {
             if (err) return res.json({ success: false, error: err });
             return res.json({ success: true, data: data });
+        });
+    });
+
+    // getCaseReportById
+    // this get API fetches a case report stored in the mongo db that has the given id
+    router.post("/getCaseReportById", (req, res) => {
+        const { id } = req.body;
+        // console.log("get case report by id API")
+        // console.log(id);
+        // console.log(searchKey);
+
+        var oid = new mongo.ObjectID(id)
+        CaseReport.find( {_id : oid}, (err, caseReport) => {
+            if (err) return res.send(err);
+            // console.log("success");
+            return res.json({ success: true, data: caseReport});
         });
     });
 
