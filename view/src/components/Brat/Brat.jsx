@@ -25,11 +25,11 @@ class Brat extends Component {
 
     componentDidMount(){
         var elem = document.getElementById("brat-editor");
-        window.brat = new window.BratFrontendEditor(elem, this.collData, this.docData, options);
+        window.brat = new window.BratFrontendEditor(elem, this.collData, this.props.docData, options);
     }
 
     handleSubmit = () => {
-        console.log(this.docData);
+        console.log(this.props.docData);
 
         // this should be the same! docData was passed by reference to brat!!
         // console.log(docData);
@@ -37,16 +37,19 @@ class Brat extends Component {
 
     getCaseReport = id => {
         // console.log(this);
-        this.docData = JSON.parse(JSON.stringify(this.old_data));
+        this.props.docData = JSON.parse(JSON.stringify(this.old_data));
         this.redraw();
     }
 
     redraw = () => {
-        window.brat.dispatcher.post('requestRenderData', [this.docData]);
-        window.brat.dispatcher.post('current', [this.collData, this.docData, {}]);
+        if (window.brat != null) {
+            window.brat.dispatcher.post('requestRenderData', [this.props.docData]);
+            window.brat.dispatcher.post('current', [this.collData, this.props.docData, {}]);
+        }
     }
 
     render () {
+        this.redraw()
         return(
             <div id='brat'>
 
@@ -77,6 +80,10 @@ class Brat extends Component {
             </div>
         );
     }
+}
+
+Brat.defaultProps = {
+    docData: docData
 }
 
 export default Brat;
