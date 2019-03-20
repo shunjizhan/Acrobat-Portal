@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import './Brat.css';
 
 import collData from './collData';
-import docData from './docData';
 
 const options = {
     // assetsPath: "static/",
@@ -19,9 +19,7 @@ const options = {
 
 class Brat extends Component {
     state = {}
-    docData = JSON.parse(JSON.stringify(docData));
-    collData = JSON.parse(JSON.stringify(collData));
-    old_data = JSON.parse(JSON.stringify(docData));
+    collData = collData;
 
     componentDidMount(){
         var elem = document.getElementById("brat-editor");
@@ -31,15 +29,9 @@ class Brat extends Component {
     handleSubmit = () => {
         console.log(this.props.docData);
 
-        // this should be the same! docData was passed by reference to brat!!
+        // this should be the same? docData was passed by reference to brat!!
         // console.log(docData);
     }
-
-    // getCaseReport = id => {
-    //     // console.log(this);
-    //     this.props.docData = JSON.parse(JSON.stringify(this.old_data));
-    //     this.redraw();
-    // }
 
     redraw = () => {
         if (window.brat != null) {
@@ -52,11 +44,11 @@ class Brat extends Component {
 
         this.redraw()
 
-        const id = this.props.docData._id.$oid;
+        const _id = this.props.docData._id;
         return(
             <div id='brat'>
                 <span id='brat-intro'>
-                    Details about case report <span id='report-id'>{ id }</span>
+                    Details about case report <span id='report-id'>{ _id }</span>
                 </span>
 
                 <span 
@@ -66,13 +58,6 @@ class Brat extends Component {
                 >
                     submit case report
                 </span>
-{/*
-                <span 
-                    className='button'
-                    onClick={this.getCaseReport}
-                >
-                    get case report
-                </span>*/}
 
                 <span 
                     className='button'
@@ -88,9 +73,8 @@ class Brat extends Component {
     }
 }
 
-Brat.defaultProps = {
-    docData: docData,
-    id: '0'
-}
+Brat.propTypes = {
+    docData: PropTypes.object.isRequired
+};
 
 export default Brat;

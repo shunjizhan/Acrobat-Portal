@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import DatabaseTest from '../DatabaseTest/DatabaseTest';
 import QueryBuilder from '../QueryBuilder/QueryBuilder';
 import SearchResults from '../SearchResults/SearchResults';
 import SearchBar from '../SearchBar/SearchBar';
@@ -7,19 +6,37 @@ import Brat from '../Brat/Brat';
 import './QueryPanel.css';
 import axios from 'axios'
 
-import docData from '../Brat/docData';
+
+const defaultDocData = {
+    "_id": "1234567890abcdefg",
+    "messages": [],
+    "source_files": [
+        "ann",
+        "txt"
+    ],
+    "modifications": [],
+    "normalizations": [],
+    "entities": [
+        ["T1", "Age", [[36, 38]]],
+    ],
+    "attributes": [],
+    "triggers": [],
+    "events": [],
+    "comments": [],
+    "text": "This is a sample case report who is 21 years old"
+}; 
+
 
 
 class QueryPanel extends Component {
     state = {
         query: '',          // real search query
         text: '',           // text when user is typing
-        results: [{id: 0, text: 'go search something!'}],
-        docData,
+        results: [{id: '0', text: 'go search something!'}],
+        docData: defaultDocData
     }
 
     handleSearch = query => {
-        console.log('searched:', query);
         this.setState({ query });
 
         if (query === ''){
@@ -36,22 +53,15 @@ class QueryPanel extends Component {
         }));
     }
 
-    handleTyping = text => {
-        this.setState({ text });
-    }
+    handleTyping = text => this.setState({ text });
 
     getReportDetails = id => {
-        console.log('get report:', id);
         axios.post("http://localhost:3001/api/getCaseReportById", { id })
             .then(res => {
                 const data = res.data.data[0];
-                console.log('data', data);
                 this.setState({docData: data})
-            });
-
-        // fetch("http://localhost:3001/api/getCaseReport")
-        //     .then(data => data.json())
-        //     .then(res => );
+            })
+            .catch(err => console.log(err));
     }
 
 
@@ -64,7 +74,7 @@ class QueryPanel extends Component {
                 handleSearch={this.handleSearch} 
                 handleTyping={this.handleTyping} 
             />
-            <QueryBuilder text={text} />
+            { text && <QueryBuilder text={text} /> }
             <SearchResults 
                 query={query}
                 results={results} 

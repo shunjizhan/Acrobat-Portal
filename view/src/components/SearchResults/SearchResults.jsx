@@ -12,18 +12,23 @@ class SearchResults extends Component {
 
         return (
         <div id='searchResults'>
-
             {
                 query.length <= 0? '':
-                <span id='search-result-title'>Search Results for <span id='query'>{query}</span></span>
+                <span id='search-result-title'>
+                    Search Results for <span id='query'>{query}</span>
+                </span>
             }
 
             {
-                results.length <= 0 ? '': results.map(res => 
-                    <Result 
-                        info={res} 
+                results.length <= 0 ? '': results.map(res => {
+                    const { text, id } = res;
+                    return <Result 
+                        text={text}
+                        id={id}
+                        key={id}
                         getReportDetails={this.props.getReportDetails}
-                    />)
+                    />
+                })
             }
 
             <hr />

@@ -16,7 +16,6 @@ class SearchBar extends Component {
 
     handleSearch = () => {
         const { searchBar } = this.refs;
-        console.log('searchBar', searchBar);
         this.props.handleSearch(this.state.query);
         searchBar.value = '';
         this.props.handleTyping('');        // tell query builder to reset
