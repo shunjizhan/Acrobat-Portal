@@ -1,0 +1,21 @@
+
+
+/* --------------- Colors --------------- */
+$blue: rgb(1, 136, 203);
+// $orange: rgb(255, 102, 0);
+
+// $blue: rgb(65, 160, 244);
+$orange: rgb(244, 149, 65);
+
+$deep-blue: rgb(18, 120, 209);
+$grey: #808080;
+
+
+
+/* --------------- Lengths --------------- */
+$top-bar-height: 80px;
+
+$search-bar-height: 45px;   // same as button width and height
+$search-bar-width: calc(100% - #{$search-bar-height});  // save space for button
+$search-bar-padding-top: 15px;
+$button-offset: calc(-1 * (#{$search-bar-height} - 2px));

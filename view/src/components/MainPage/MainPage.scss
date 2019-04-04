@@ -1,7 +1,4 @@
-$blue: rgb(65, 160, 244);
-$orange: rgb(244, 149, 65);
-$grey: #808080;
-
+@import "../variables";
 
 
 $titlePanel-height: 80px;
@@ -14,7 +11,7 @@ $titlePanel-height: 80px;
 
 
 $portal-height: calc(100% - #{$titlePanel-height});
-#acrobatPortal {
+#mainpage {
     position: relative;
     width: 100%;
     // height: 100%;

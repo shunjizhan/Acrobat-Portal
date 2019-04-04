@@ -4,18 +4,18 @@ import ButtonPanel from '../ButtonPanel/ButtonPanel'
 import HistoryPanel from '../HistoryPanel/HistoryPanel'
 import QueryPanel from '../QueryPanel/QueryPanel'
 import { buildFontAwesomeLib } from '../../utils';
-import './AcrobatPortal.css';
+import './MainPage.css';
 
 // build up fontawesome library in root component so everything
 // children component can use fontAwesome
 buildFontAwesomeLib();
 
-class AcrobatPortal extends Component {
+class MainPage extends Component {
     state = {};
 
     render() {
         return (
-            <div id='acrobatPortal'>
+            <div id='mainPage'>
                 <ButtonPanel />
                 <HistoryPanel />
                 <QueryPanel />  
@@ -24,4 +24,4 @@ class AcrobatPortal extends Component {
     }
 }
 
-export default AcrobatPortal;
+export default MainPage;
