@@ -7,17 +7,16 @@
     width: 100%;
     background-color: rgba($blue, 0.15);
     text-align: center;
+    border-bottom: 1px solid grey;
 
     a { 
         display: inline-block;
         text-decoration: none; 
     }
 
-    #search-bar-container {
+    #search-bar-container, #query-builder-container {
         position: relative;
         width: 50%;
-        // height: $search-bar-height;
-        // top: $search-bar-padding-top;
         margin: auto;
     }
 

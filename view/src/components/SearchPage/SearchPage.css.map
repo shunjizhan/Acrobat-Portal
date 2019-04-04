@@ -1,7 +1,7 @@
 {
 "version": 3,
-"mappings": "",
-"sources": [],
+"mappings": "AAAA,wBAAyB,CACrB,QAAQ,CAAE,QAAQ,CAClB,KAAK,CAAE,GAAG,CACV,MAAM,CAAE,IAAI,CAGhB,kBAAmB,CACf,QAAQ,CAAE,QAAQ",
+"sources": ["SearchPage.scss"],
 "names": [],
 "file": "SearchPage.css"
 }

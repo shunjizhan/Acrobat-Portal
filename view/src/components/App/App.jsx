@@ -18,8 +18,8 @@ class App extends Component {
                 {/*<TitlePanel />*/}
                 <Route exact path="/" component={MainPage}/>    
                 <Route exact path="/search" component={SearchPage}/>    
-                <Route exact path="/brat" component={Brat}/>    
-                <Route exact path="/addCaseReport" component={AddCaseReport}/> 
+{/*                <Route exact path="/brat" component={Brat}/>    
+                <Route exact path="/addCaseReport" component={AddCaseReport}/> */}
             </div>
           </Router>
         );
