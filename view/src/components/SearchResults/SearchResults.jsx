@@ -31,7 +31,6 @@ class SearchResults extends Component {
                 })
             }
 
-            <hr />
         </div>);
     }
 }

@@ -1,2 +1,2 @@
-.result{-webkit-transition-duration:0s;transition-duration:0s;padding:15px 20px;font-size:110%;border-radius:10px}.result:hover{cursor:pointer;background-color:rgba(255,202,58,0.2)}.result:hover svg{color:#FFCA3A}.result .search-result-text{padding-left:20px}
+.result{-webkit-transition-duration:0s;transition-duration:0s;padding:20px 20px;font-size:110%;border-bottom:1px solid rgba(128,128,128,0.3);border-collapse:collapse}.result:hover{cursor:pointer;background-color:rgba(255,202,58,0.2)}.result:hover svg{color:#FFCA3A}.result .search-result-text{padding-left:20px}
 /*# sourceMappingURL=Result.css.map */

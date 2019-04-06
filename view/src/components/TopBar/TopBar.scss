@@ -7,7 +7,8 @@
     width: 100%;
     background-color: rgba($blue, 0.15);
     text-align: center;
-    border-bottom: 1px solid grey;
+    border-bottom: 1px solid rgba(grey, 0.3);
+    // border-collapse: collapse;
 
     a { 
         display: inline-block;

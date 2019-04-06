@@ -6,9 +6,11 @@ $transfer-duration: 0s;
     -webkit-transition-duration: $transfer-duration;  /* Safari */
     transition-duration: $transfer-duration;
 
-    padding: 15px 20px;
+    padding: 20px 20px;
     font-size: 110%;
-    border-radius: 10px;
+    // border-radius: 10px;
+    border-bottom: 1px solid rgba(grey, 0.3);
+    border-collapse: collapse;
 
     &:hover {
         cursor: pointer;

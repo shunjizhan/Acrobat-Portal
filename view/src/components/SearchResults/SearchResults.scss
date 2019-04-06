@@ -1,6 +1,8 @@
 @import "../variables";
 
 #searchResults {
+    border: 1px solid rgba(grey, 0.3);
+    // border-collapse: collapse;
 
     #search-result-title {
         font-size: 150%;
@@ -10,7 +12,6 @@
         font-size: 160%;
         color: #8AC926;
     }
-
 
 
 }

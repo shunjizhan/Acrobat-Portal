@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import TitlePanel from '../TitlePanel/TitlePanel'
 import AddCaseReport from "../AddCaseReport/AddCaseReport";
 import MainPage from "../MainPage/MainPage";
@@ -16,10 +16,13 @@ class App extends Component {
           <Router>
             <div id='app'>
                 {/*<TitlePanel />*/}
-                <Route exact path="/" component={MainPage}/>    
-                <Route exact path="/search" component={SearchPage}/>    
-{/*                <Route exact path="/brat" component={Brat}/>    
-                <Route exact path="/addCaseReport" component={AddCaseReport}/> */}
+                <Switch>
+                    <Route exact path="/" component={MainPage}/>    
+                    <Route exact path="/search" component={SearchPage}/>    
+                    {/*<Route exact path="/brat" component={Brat}/>    */}
+                    {/*<Route exact path="/addCaseReport" component={AddCaseReport}/>*/}
+                    <Route component={() => (<h1>404!!!</h1>)} />
+                </Switch>
             </div>
           </Router>
         );

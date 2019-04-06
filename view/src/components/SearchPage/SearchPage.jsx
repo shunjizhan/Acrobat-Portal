@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import TopBar from "../TopBar/TopBar";
 import SearchResults from '../SearchResults/SearchResults';
+import Brat from '../Brat/Brat';
 import axios from 'axios'
 import './SearchPage.css';
 
@@ -39,22 +40,26 @@ class SearchPage extends Component {
         this.setState({ query });
 
         if (query === ''){
-          this.setState({ results: []});
-          return;
+            this.setState({ results: []});
+            return;
         }
 
-        axios.post("http://localhost:3001/api/searchDataES", {
-          searchKey: query
-        })
-          .then(res => this.setState({results : res.data.data.map(info => {
-                return {id: info._source.id, text: info._source.content}
-            })
-        }));
+        axios.post("http://localhost:3001/api/searchDataES", { searchKey: query })
+            .then(res => { 
+                const results = res.data.data.map(info => {
+                    return {
+                        id: info._source.id, 
+                        text: info._source.content
+                    }
+                })
+                this.setState({ results }) 
+            });
     }
 
     getReportDetails = id => {
         axios.post("http://localhost:3001/api/getCaseReportById", { id })
             .then(res => {
+                console.log(res);
                 const data = res.data.data[0];
                 this.setState({docData: data})
             })
@@ -81,6 +86,10 @@ class SearchPage extends Component {
                         getReportDetails={this.getReportDetails}
                     />      
                 </div>    
+
+                <Brat 
+                    docData={this.state.docData}
+                />
 
     
             </div>
