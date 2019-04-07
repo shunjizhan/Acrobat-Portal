@@ -7,7 +7,7 @@ import './Result.css';
 class Result extends Component {
     handleClick = () => {
         const { getReportDetails, id } = this.props;
-        getReportDetails(id);
+        // getReportDetails(id);
     }
 
     render() {
@@ -26,7 +26,6 @@ class Result extends Component {
 Result.propTypes = {
     text: PropTypes.string,
     id: PropTypes.string,
-    getReportDetails: PropTypes.func,
 };
 
 Result.defaultProps = {

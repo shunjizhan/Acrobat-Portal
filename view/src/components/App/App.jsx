@@ -4,7 +4,7 @@ import TitlePanel from '../TitlePanel/TitlePanel'
 import AddCaseReport from "../AddCaseReport/AddCaseReport";
 import MainPage from "../MainPage/MainPage";
 import SearchPage from "../SearchPage/SearchPage";
-import Brat from "../Brat/Brat";
+import DisplayPage from "../DisplayPage/DisplayPage";
 import './App.css';
 
 
@@ -19,7 +19,7 @@ class App extends Component {
                 <Switch>
                     <Route exact path="/" component={MainPage}/>    
                     <Route exact path="/search" component={SearchPage}/>    
-                    {/*<Route exact path="/brat" component={Brat}/>    */}
+                    <Route path="/search/:id" component={DisplayPage}/>    
                     {/*<Route exact path="/addCaseReport" component={AddCaseReport}/>*/}
                     <Route component={() => (<h1>404!!!</h1>)} />
                 </Switch>

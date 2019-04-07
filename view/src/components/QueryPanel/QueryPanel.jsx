@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 import SearchBar from '../SearchBar/SearchBar';
-import Brat from '../Brat/Brat';
+
 import './QueryPanel.css';
 
 
@@ -27,9 +27,7 @@ class QueryPanel extends Component {
 
             
 
-            <Brat 
-                docData={this.state.docData}
-            />
+
         </div>);
     }
 }

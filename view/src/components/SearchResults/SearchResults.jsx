@@ -26,7 +26,6 @@ class SearchResults extends Component {
                         text={text}
                         id={id}
                         key={id}
-                        getReportDetails={this.props.getReportDetails}
                     />
                 })
             }
@@ -38,7 +37,6 @@ class SearchResults extends Component {
 SearchResults.propTypes = {
     results: PropTypes.arrayOf(PropTypes.object),
     query: PropTypes.string,
-    getReportDetails: PropTypes.func,
 };
 
 SearchResults.defaultProps = {

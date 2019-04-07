@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import axios from 'axios'
 import './Brat.css';
 
 import collData from './collData';
+import defaultDocData from './defaultDocData';
 
 const options = {
     // assetsPath: "static/",
@@ -18,16 +20,18 @@ const options = {
 }
 
 class Brat extends Component {
-    state = {}
+    state = {
+        docData: this.props.docData
+    }
     collData = collData;
 
     componentDidMount(){
         var elem = document.getElementById("brat-editor");
-        window.brat = new window.BratFrontendEditor(elem, this.collData, this.props.docData, options);
+        window.brat = new window.BratFrontendEditor(elem, this.collData, this.state.docData, options);
     }
 
     handleSubmit = () => {
-        console.log(this.props.docData);
+        console.log(this.state.docData);
 
         // this should be the same? docData was passed by reference to brat!!
         // console.log(docData);
@@ -35,20 +39,17 @@ class Brat extends Component {
 
     redraw = () => {
         if (window.brat != null) {
-            window.brat.dispatcher.post('requestRenderData', [this.props.docData]);
-            window.brat.dispatcher.post('current', [this.collData, this.props.docData, {}]);
+            window.brat.dispatcher.post('requestRenderData', [this.state.docData]);
+            window.brat.dispatcher.post('current', [this.collData, this.state.docData, {}]);
         }
     }
 
+
     render () {
-
-        this.redraw()
-
-        const _id = this.props.docData._id;
         return(
             <div id='brat'>
                 <span id='brat-intro'>
-                    Details about case report <span id='report-id'>{ _id }</span>
+                    Details about case report <span id='report-id'>{ this.props.id }</span>
                 </span>
 
                 <span 

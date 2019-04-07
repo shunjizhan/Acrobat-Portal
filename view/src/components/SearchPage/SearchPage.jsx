@@ -1,29 +1,9 @@
 import React, { Component } from 'react';
 import TopBar from "../TopBar/TopBar";
 import SearchResults from '../SearchResults/SearchResults';
-import Brat from '../Brat/Brat';
 import axios from 'axios'
 import './SearchPage.css';
 
-
-const defaultDocData = {
-    "_id": "1234567890abcdefg",
-    "messages": [],
-    "source_files": [
-        "ann",
-        "txt"
-    ],
-    "modifications": [],
-    "normalizations": [],
-    "entities": [
-        ["T1", "Age", [[36, 38]]],
-    ],
-    "attributes": [],
-    "triggers": [],
-    "events": [],
-    "comments": [],
-    "text": "This is a sample case report who is 21 years old"
-}; 
 
 
 class SearchPage extends Component {
@@ -31,7 +11,6 @@ class SearchPage extends Component {
         query: '',          // real search query
         text: '',           // text when user is typing
         results: [{id: '0', text: 'go search something!'}],
-        docData: defaultDocData
     }
 
     handleTyping = text => this.setState({ text });
@@ -56,15 +35,6 @@ class SearchPage extends Component {
             });
     }
 
-    getReportDetails = id => {
-        axios.post("http://localhost:3001/api/getCaseReportById", { id })
-            .then(res => {
-                console.log(res);
-                const data = res.data.data[0];
-                this.setState({docData: data})
-            })
-            .catch(err => console.log(err));
-    }
 
     render() {
         const { text, query, results } = this.state;
@@ -83,14 +53,8 @@ class SearchPage extends Component {
                     <SearchResults 
                         query={query}
                         results={results} 
-                        getReportDetails={this.getReportDetails}
                     />      
                 </div>    
-
-                <Brat 
-                    docData={this.state.docData}
-                />
-
     
             </div>
         );
