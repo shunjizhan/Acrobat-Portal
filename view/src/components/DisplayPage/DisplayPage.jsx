@@ -23,13 +23,14 @@ class DisplayPage extends Component {
 
 
     render () {
+        const { id } = this.props.match.params;
         const { docData } = this.state;
         console.log(docData);
 
         return(
             <div id='display-page'>
             { docData && <Brat docData={docData}/> }
-            { !docData && 'loading case report data...' }
+            { !docData && `loading data for case report ${id} ......` }
             </div>
         );
     }

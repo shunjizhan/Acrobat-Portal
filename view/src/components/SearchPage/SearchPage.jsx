@@ -10,7 +10,7 @@ class SearchPage extends Component {
     state = {
         query: '',          // real search query
         text: '',           // text when user is typing
-        results: [{id: '0', text: 'go search something!'}],
+        results: [],
     }
 
     handleTyping = text => this.setState({ text });

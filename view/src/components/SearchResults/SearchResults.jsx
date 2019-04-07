@@ -12,12 +12,12 @@ class SearchResults extends Component {
 
         return (
         <div id='searchResults'>
-            {
+{/*            {
                 query.length <= 0? '':
                 <span id='search-result-title'>
                     Search Results for <span id='query'>{query}</span>
                 </span>
-            }
+            }*/}
 
             {
                 results.length <= 0 ? '': results.map(res => {

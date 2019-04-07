@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import axios from 'axios'
 import './Brat.css';
 
 import collData from './collData';
-import defaultDocData from './defaultDocData';
+// import defaultDocData from './defaultDocData';
 
 const options = {
     // assetsPath: "static/",

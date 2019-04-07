@@ -1,23 +1,21 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import './Result.css';
 
 
 class Result extends Component {
-    handleClick = () => {
-        const { getReportDetails, id } = this.props;
-        // getReportDetails(id);
-    }
-
     render() {
-        const { text } = this.props;
+        const { text, id } = this.props;
 
         return (
         <div className='result' onClick={this.handleClick}>
             <div>
                 <FontAwesomeIcon icon={['fab', 'bitcoin']} />
-                <span className='search-result-text'>{text}</span>
+                <span className='search-result-text'>
+                    <Link to={`search/${id}`}>{text}</Link>
+                </span>
             </div>    
         </div>);
     }
