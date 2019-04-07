@@ -14,7 +14,6 @@ class DisplayPage extends Component {
 
         axios.post("http://localhost:3001/api/getCaseReportById", { id })
             .then(res => {
-                console.log(res);
                 const data = res.data.data[0];
                 this.setState({docData: data})
             })
@@ -30,7 +29,7 @@ class DisplayPage extends Component {
         return(
             <div id='display-page'>
             { docData && <Brat docData={docData}/> }
-            { !docData && `loading data for case report ${id} ......` }
+            { !docData && `loading annotation data for case report ${id} ......` }
             </div>
         );
     }
