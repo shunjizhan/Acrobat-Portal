@@ -12,6 +12,55 @@ module.exports.search = function(searchData, callback) {
     index: 'casereport',
     type: '_doc',
     body: {
+      "query": {
+        "bool": {
+          "should":[
+            {
+              "span_near" : {
+                  "clauses" : [
+                      { "span_term" : { "content" : "immunohistochemical" } },
+                      { "span_term" : { "content" : "cytokeratins" } }
+                  ],
+                  // "collect_payloads": false,
+                  "slop" : 120,
+                  "in_order" : true
+              }
+            }
+            // ,{
+            //   "match": {
+            //     "content": {
+            //       "query": "immunohistochemical cytokeratins",
+            //       "analyzer": "standard",
+            //       "minimum_should_match": "99%"
+            //     }
+            //   }
+            // }
+          ]
+        }  
+      }
+      // "query": {
+      //   "match_phrase" : {
+      //       "content" : {
+      //         "query" : searchData,
+      //         "slop" : 20
+      //       }
+      //   }
+      // }
+    }
+  }).then(function (resp) {
+    callback(resp.hits.hits);
+  }, function (err) {
+      callback(err.message)
+      console.log(err.message);
+  });
+}
+
+module.exports.search2 = function(searchData, callback) {
+  console.log(searchData, 'elasticsearch')
+  client.search({
+    index: 'casereport',
+    type: '_doc',
+    body: {
       query: {
         bool: {
           should: {
@@ -59,7 +108,7 @@ module.exports.create = function(indexName, callback) {
                       "type":         "standard",
                       "tokenizer":    "standard",
                       "filter":       [ "asciifolding", "lowercase", "snowball", "stop"],
-                      "max_token_length": 5,
+                      "max_token_length": 128,
                       "stopwords": "_english_"
                 }
               }

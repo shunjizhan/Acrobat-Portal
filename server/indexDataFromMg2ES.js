@@ -39,7 +39,7 @@ CaseReport.find((err, data) => {
                       "type":         "standard",
                       "tokenizer":    "standard",
                       "filter":       [ "asciifolding", "lowercase", "snowball", "stop"],
-                      "max_token_length": 5,
+                      "max_token_length": 125,
                       "stopwords": "_english_"
                 }
               }
