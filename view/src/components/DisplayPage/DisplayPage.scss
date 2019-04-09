@@ -1,0 +1,20 @@
+@import "../variables";
+
+.display-page {
+    position: relative;
+
+    .brat-container, {
+        position: relative;
+        width: 80%;
+        margin: auto;
+    }
+
+    .loading-container {
+        overflow: show;
+        position: relative;
+        top: 100px;
+        left: 30%;
+        font-size: 150px;
+        color: $orange;
+    }
+}

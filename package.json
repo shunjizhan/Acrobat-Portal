@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "concurrently \"cd server/ && node server.js\" \"cd view/ && npm start\" \"cd ML-API/ && python api-server.py\""
+    "start": "concurrently \"cd server/ && node server.js\" \"cd view/ && npm start\""
   },
   "repository": {
     "type": "git",
@@ -14,7 +14,6 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "concurrently": "^4.1.0",
-    "cors": "^2.8.5"
+    "concurrently": "^4.1.0"
   }
 }

@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import TitlePanel from '../TitlePanel/TitlePanel'
 import AddCaseReport from "../AddCaseReport/AddCaseReport";
-import AcrobatPortal from "../AcrobatPortal/AcrobatPortal";
-import Brat from "../Brat/Brat";
+import MainPage from "../MainPage/MainPage";
+import SearchPage from "../SearchPage/SearchPage";
+import DisplayPage from "../DisplayPage/DisplayPage";
+
 import './App.css';
 
 
@@ -14,10 +16,14 @@ class App extends Component {
         return (
           <Router>
             <div id='app'>
-                <TitlePanel />
-                <Route exact path="/" component={AcrobatPortal}/>    
-                <Route exact path="/brat" component={Brat}/>    
-                <Route exact path="/addCaseReport" component={AddCaseReport}/>              
+                {/*<TitlePanel />*/}
+                <Switch>
+                    <Route exact path="/" component={MainPage}/>    
+                    <Route exact path="/search" component={SearchPage}/>    
+                    <Route path="/search/:id" component={DisplayPage}/>    
+                    {/*<Route exact path="/addCaseReport" component={AddCaseReport}/>*/}
+                    <Route component={() => (<h1>404!!!</h1>)} />
+                </Switch>
             </div>
           </Router>
         );

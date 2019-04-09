@@ -1,17 +1,18 @@
-$blue: rgb(65, 160, 244);
-$orange: rgb(244, 149, 65);
+@import "../variables";
 
 #searchResults {
+    border: 1px solid rgba(grey, 0.3);
+    // font-size: 100%;
+    // border-collapse: collapse;
 
     #search-result-title {
-        font-size: 180%;
+        font-size: 150%;
     }
 
     #query {
-        font-size: 150%;
+        font-size: 160%;
         color: #8AC926;
     }
-
 
 
 }

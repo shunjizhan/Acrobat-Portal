@@ -1,0 +1,32 @@
+@import "../variables";
+
+
+#topBar {
+    position: relative;
+    padding: 20px 0 30px 0;
+    width: 100%;
+    // background-color: rgba($blue, 0.15);
+    text-align: center;
+    // border-bottom: 1px solid rgba(grey, 0.3);
+
+    a { 
+        display: inline-block;
+        text-decoration: none; 
+    }
+
+    #search-bar-container, #query-builder-container {
+        position: relative;
+        width: 50%;
+        margin: auto;
+    }
+
+    $title-width: 15%;
+    #title { 
+        color: $blue;
+        font-size: 58px;
+
+        #E { color: $orange; }
+
+        &:hover { cursor: pointer; }
+    }
+}

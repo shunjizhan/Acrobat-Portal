@@ -6,9 +6,10 @@ $transfer-duration: 0s;
     -webkit-transition-duration: $transfer-duration;  /* Safari */
     transition-duration: $transfer-duration;
 
-    padding: 15px 20px;
-    font-size: 130%;
-    border-radius: 10px;
+    padding: 20px 20px;
+    font-size: 110%;
+    border-bottom: 1px solid rgba(grey, 0.3);
+    border-collapse: collapse;
 
     &:hover {
         cursor: pointer;
@@ -17,9 +18,13 @@ $transfer-duration: 0s;
         svg { color: #FFCA3A; }
     }
 
-
     .search-result-text {
         padding-left: 20px;
+    }
+
+    a { 
+        text-decoration: none; 
+        color: black;
     }
 
 }
