@@ -57,7 +57,7 @@ class Brat extends Component {
 
                 <div className='report-plain-text'>{ text }</div>
 
-                <span 
+{/*                <span 
                     className='button submit-report'
                     onClick={this.handleSubmit}
                 >
@@ -69,7 +69,7 @@ class Brat extends Component {
                     onClick={this.redraw}
                 >
                     redraw
-                </span>
+                </span>*/}
 
                 <div id="brat-editor" />
 

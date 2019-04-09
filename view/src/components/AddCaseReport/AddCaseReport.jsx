@@ -1,7 +1,89 @@
 import React, { Component } from "react";
 import axios from "axios";
+// import ReactDOM from 'react-dom';
+
+// import cytoscape from 'cytoscape';
+// import CytoscapeComponent from 'react-cytoscapejs';
+
+// var cy = cytoscape({
+//     style: [
+//       {
+//         selector: 'node',
+//         style: {
+//           'width': 100,
+//           'height': 100,
+//           'label': 'data(id)',
+//           'shadow-blur': 20,
+//           'shadow-color': 'black',
+//           'shadow-offset-x': 25,
+//           'shadow-offset-y': 35,
+//           'shadow-opacity': 0.6,
+//           'text-halign': 'center',
+//           'text-valign': 'center',
+//           'shape': 'rectangle',
+//           'text-valign': 'center',
+//           'text-halign': 'center',
+//           'font-size': 40,
+//           'color': 'white',
+//           'text-wrap': 'wrap'
+//         }
+//       },
+//       {
+//         selector: 'node.a',
+//         style: {
+//           'background-color': 'red',
+//           'shape': 'diamond'
+//         }
+//       },
+//       {
+//         selector: 'node.b',
+//         style: {
+//           'background-color': 'green',
+//           'shape': 'rectangle'
+//         }
+//       }
+//     ],
+//     elements: [
+//       {
+//         data: {
+//           id: 'a'
+//         },
+//         classes: 'a'
+//       },
+//       {
+//         data: {
+//           id: 'b' 
+//         },
+//         classes: 'b'
+//       },
+//       {
+//         data: {
+//           id: 'ab', 
+//           source: 'a',
+//           target: 'b'
+//         }
+//       }
+//     ]
+//   });
+
+// base6412 = cy.png({
+//   full: true,
+//   scale:0.5
+// });
+// cy.on('render pan zoom', function() {
+//     base64 = cy.png({
+//       full: true,
+//       scale: 0.5 //if i use here core.zoom() than there is no bug with shadows on bird view
+//     });
+//     console.log('in function');
+//   });
+
+// console.log( cy.json() );
+// var cyJSON = cy.json();
+// var jpg64 = cy.png();
 
 class AddCaseReport extends Component {
+
   constructor() {
     super();
 
@@ -11,6 +93,9 @@ class AddCaseReport extends Component {
 
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
+
+    // this.cy = cytoscape();
+    // this.cyJSON = cy.jpg();
   }
 
   onChange(e) {
@@ -35,6 +120,7 @@ class AddCaseReport extends Component {
     });
     // console.log(newCaseReport);
   }
+
 
   render() {
     return (
@@ -80,6 +166,8 @@ class AddCaseReport extends Component {
                     type="submit"
                   />
                 </form>
+              </div>
+              <div id= 'cy'>
               </div>
             </div>
           </div>

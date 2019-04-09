@@ -1,5 +1,7 @@
 @import "../variables";
 
+
+$display-section-border: 2px solid rgba($blue, 0.8);;
 .brat {
     position: relative;
     width: 100%;
@@ -8,7 +10,7 @@
     .brat-intro {
         font-size: 200%;
         padding-right: 30px;
-        border-bottom: 2px solid rgba($blue, 0.8);
+        border-bottom: $display-section-border;
         padding: 10px 0;
 
         svg {
@@ -23,8 +25,12 @@
 
     .report-plain-text {
         padding: 20px 0;
-        border-bottom: 2px solid rgba($blue, 0.8);
         margin-bottom: 20px;
+        border-bottom: $display-section-border
+    }
+
+    #brat-editor {
+        // border-bottom: $display-section-border
     }
 
 }

@@ -27,7 +27,7 @@ class DisplayPage extends Component {
 
     render () {
         const { id } = this.props.match.params;
-        const { docData, graphData } = this.state;
+        const { docData } = this.state;
         console.log(docData);
 
         return(
@@ -39,7 +39,7 @@ class DisplayPage extends Component {
                 }
                 { docData && 
                     <div className='graph-container'>
-                        <Graph graphData={graphData}/> 
+                        <Graph graphData={docData}/> 
                     </div>
                 }
 

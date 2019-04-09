@@ -5,6 +5,7 @@ import AddCaseReport from "../AddCaseReport/AddCaseReport";
 import MainPage from "../MainPage/MainPage";
 import SearchPage from "../SearchPage/SearchPage";
 import DisplayPage from "../DisplayPage/DisplayPage";
+
 import './App.css';
 
 
