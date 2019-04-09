@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import './Brat.css';
 
 import collData from './collData';
@@ -50,6 +51,7 @@ class Brat extends Component {
         return(
             <div className='brat'>
                 <div className='brat-intro'>
+                    <FontAwesomeIcon icon={['fal', 'file-alt']}/>
                     Details about case report <span className='report-id'>{ _id }</span>
                 </div>
 

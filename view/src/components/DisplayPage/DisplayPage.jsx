@@ -16,21 +16,12 @@ class DisplayPage extends Component {
     componentDidMount(){
         const { id } = this.props.match.params;
 
-        // load annotation data
         axios.post("http://localhost:3001/api/getCaseReportById", { id })
             .then(res => {
                 const data = res.data.data[0];
                 this.setState({docData: data})
             })
             .catch(err => console.log(err));
-
-        // load graph data
-        // axios.post("http://localhost:3001/api/getGraphDataById", { id })
-        //     .then(res => {
-        //         const data = res.data.data[0];
-        //         this.setState({graphData: data})
-        //     })
-        //     .catch(err => console.log(err));
     }
 
 

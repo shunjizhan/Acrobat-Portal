@@ -11,7 +11,14 @@
         border-bottom: 2px solid rgba($blue, 0.8);
         padding: 10px 0;
 
-        .report-id { color: #DE639A; }
+        svg {
+            margin-right: 15px;
+            font-size: 90%;
+            // color: $blue;
+        }
+
+        // .report-id { color: #DE639A; }
+        .report-id { color: $orange; }
     }
 
     .report-plain-text {

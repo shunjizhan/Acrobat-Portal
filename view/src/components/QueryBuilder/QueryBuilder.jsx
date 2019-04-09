@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import QueryItem from '../QueryItem/QueryItem';
-// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import './QueryBuilder.css';
 
 
