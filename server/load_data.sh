@@ -15,7 +15,7 @@ do
 	annFile=$entry
 	txtData=$(cat $txtFile)
 	annData=$(cat $annFile)
-	curl -X POST --data "txt=${txtData}&ann=${annData}" http://localhost:3001/api/putCaseReport/
+	curl -X POST --data "txt=${txtData}&ann=${annData}" http://localhost:3001/api/putCaseReport2/
 
 done
 echo "Finished loading data"

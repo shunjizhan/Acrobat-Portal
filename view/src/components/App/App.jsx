@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import TitlePanel from '../TitlePanel/TitlePanel'
 import AddCaseReport from "../AddCaseReport/AddCaseReport";
+import VisualizeCaseReport from "../VisualizeCaseReport/VisualizeCaseReport";
 import AcrobatPortal from "../AcrobatPortal/AcrobatPortal";
 import Brat from "../Brat/Brat";
 import './App.css';
@@ -17,7 +18,8 @@ class App extends Component {
                 <TitlePanel />
                 <Route exact path="/" component={AcrobatPortal}/>    
                 <Route exact path="/brat" component={Brat}/>    
-                <Route exact path="/addCaseReport" component={AddCaseReport}/>              
+                <Route exact path="/addCaseReport" component={AddCaseReport}/>   
+                <Route exact path="/visualizeCaseReport" component={VisualizeCaseReport}/>           
             </div>
           </Router>
         );
