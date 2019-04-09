@@ -82,7 +82,7 @@ class Graph extends Component {
       }
 
       if (!nodeSet.has(targetID)) {
-        nodeText = graphData.text.substring(nID2index.get(sourcID)[0], nID2index.get(sourcID)[1]);
+        nodeText = graphData.text.substring(nID2index.get(targetID)[0], nID2index.get(targetID)[1]);
         nodeText = nodeText.length>15 ? nodeText.substring(0,15) : nodeText;
         elements.push( {
           data: {
