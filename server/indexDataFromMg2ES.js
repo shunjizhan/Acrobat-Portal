@@ -36,12 +36,42 @@ CaseReport.find((err, data) => {
             "analysis": {
               "analyzer": {
                   "my_analyzer": {
-                      "type":         "standard",
-                      "tokenizer":    "standard",
-                      "filter":       [ "asciifolding", "lowercase", "snowball", "stop"],
-                      "max_token_length": 125,
-                      "stopwords": "_english_"
+                      "type":         "custom",
+                      "tokenizer":    "my_tokenizer",
+                      "filter":       ["asciifolding", "lowercase", "snowball", "stop", "stemmer"],
+                      "stopwords":    "_english_"
                 }
+              },
+              "filter": {
+                "ngrams_filter": {
+                    "type": "ngram",
+                    "min_gram": 3,
+                    "max_gram": 8
+                },
+              },
+              "tokenizer": {
+                "my_tokenizer": {
+                  "type": "ngram",
+                  "min_gram": 2,
+                  "max_gram": 25,
+                  "token_chars": [
+                    "letter",
+                    "digit"
+                  ]
+                }
+              }
+            }
+          },
+          "mappings" : {
+            "_doc": {
+              "properties": {
+                  "id": {
+                      "type": "text"
+                  },
+                  "content": {
+                      "type": "text",
+                      "analyzer": "my_analyzer"
+                  }
               }
             }
           }
@@ -50,28 +80,26 @@ CaseReport.find((err, data) => {
       console.log(err);
     });
     console.log("create index");
-    client.indices.putMapping({
-       "index": "casereport",
-       "type": "_doc",
-       "body": {
-          "_doc": {
-              "properties": {
-                  "id": {
-                      "type": "text"
-                  },
-                  "content": {
-                      "type": "text",
-                      'analyzer': 'my_analyzer',
-                      'search_analyzer': "simple"
-                  }
-              }
-          }
-       }
-    }, function (err, response) {
-      console.log(err);
-       // from this point on, if you don't get any error, you may call bulk.
-    });
-    console.log("put mappings");
+    // client.indices.putMapping({
+    //    "index": "casereport",
+    //    "type": "_doc",
+    //    "body": {
+    //       "_doc": {
+    //           "properties": {
+    //               "id": {
+    //                   "type": "text"
+    //               },
+    //               "content": {
+    //                   "type": "text"
+    //               }
+    //           }
+    //       }
+    //    }
+    // }, function (err, response) {
+    //   console.log(err);
+    //    // from this point on, if you don't get any error, you may call bulk.
+    // });
+    // console.log("put mappings");
 
     client.bulk({
         body: body

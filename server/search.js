@@ -8,51 +8,87 @@ var client = new elasticsearch.Client( {
 
 module.exports.search = function(searchData, callback) {
   console.log(searchData, 'elasticsearch')
-  client.search({
-    index: 'casereport',
-    type: '_doc',
-    body: {
-      "query": {
-        "bool": {
-          "should":[
-            {
-              "span_near" : {
-                  "clauses" : [
-                      { "span_term" : { "content" : "immunohistochemical" } },
-                      { "span_term" : { "content" : "cytokeratins" } }
-                  ],
-                  // "collect_payloads": false,
-                  "slop" : 120,
-                  "in_order" : true
+  var array = searchData.split(" ");
+  var clauses = [];
+  for (var i = 0; i <= array.length - 1; i++) {
+    var ob = {
+              "span_multi": {
+                "match": {
+                  "fuzzy": {
+                    "content": {
+                      "fuzziness": 1,
+                      "value": array[i]
+                    }
+                  }
+                }
               }
             }
-            // ,{
-            //   "match": {
-            //     "content": {
-            //       "query": "immunohistochemical cytokeratins",
-            //       "analyzer": "standard",
-            //       "minimum_should_match": "99%"
-            //     }
-            //   }
-            // }
-          ]
-        }  
+    clauses.push(ob);
+    console.log(array[i],'loop里');
+  }
+  console.log(clauses);
+  if(clauses.length == 1){
+      client.search({
+      index: 'casereport',
+      type: '_doc',
+      body: {
+        query: {
+          bool: {
+            should: 
+            {
+              match: {
+                "content": {
+                  "query": searchData,
+                  "fuzziness": 1,
+                  "prefix_length": 1
+                }
+              }
+            }
+          }
+        }
       }
-      // "query": {
-      //   "match_phrase" : {
-      //       "content" : {
-      //         "query" : searchData,
-      //         "slop" : 20
-      //       }
-      //   }
-      // }
-    }
-  }).then(function (resp) {
-    callback(resp.hits.hits);
-  }, function (err) {
-      callback(err.message)
-      console.log(err.message);
-  });
+    }).then(function (resp) {
+      callback(resp.hits.hits);
+    }, function (err) {
+        callback(err.message)
+        console.log(err.message);
+    });
+  }else{
+    console.log("多个单词")
+    client.search({
+      index: 'casereport',
+      type: '_doc',
+      body: {
+        "query": {
+          "bool": {
+            "should":[
+              {
+                "span_near" : {
+                    "clauses" : clauses,
+                    "slop" : 120,
+                    "in_order" : true
+                }
+              }
+              // ,{
+              //   "match": {
+              //     "content": {
+              //       "query": "immunohistochemical cytokeratins",
+              //       "analyzer": "standard",
+              //       "minimum_should_match": "99%"
+              //     }
+              //   }
+              // }
+            ]
+          }  
+        }
+      }
+    }).then(function (resp) {
+      callback(resp.hits.hits);
+    }, function (err) {
+        callback(err.message)
+        console.log(err.message);
+    });
+  }
 }
 
 module.exports.search2 = function(searchData, callback) {
