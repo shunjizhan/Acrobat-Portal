@@ -1,7 +1,7 @@
 @import "../variables";
 
 
-$display-section-border: 2px solid rgba($blue, 0.8);;
+$display-section-border: 2px solid rgba($blue, 0.8);
 .brat {
     position: relative;
     width: 100%;
@@ -30,7 +30,7 @@ $display-section-border: 2px solid rgba($blue, 0.8);;
     }
 
     #brat-editor {
-        // border-bottom: $display-section-border
+        border-bottom: 2px solid rgba(grey, 0.8);
     }
 
 }
