@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import axios from 'axios'
 import Brat from '../Brat/Brat'
 import Graph from '../Graph/Graph'
+import { PacmanLoader } from 'react-spinners';
 import './DisplayPage.css';
 
 
@@ -51,7 +52,16 @@ class DisplayPage extends Component {
                     </div>
                 }
 
-                { !docData && `loading data for case report ${id} ......` }
+                { !docData && 
+                    <div className='loading-container'>
+                        {`Loading ......`} 
+                        <PacmanLoader 
+                            sizeUnit={"px"}
+                            size={150}
+                            color={'rgb(1, 136, 203)'}
+                        />
+                    </div>  
+                }
             </div>
         );
     }
