@@ -94,7 +94,7 @@ module.exports = function(app) {
         // console.log(req.body);
         const {searchKey} = req.body;
         // var req_body = new RegExp(searchKey);
-        searchModule.search(searchKey, function(data) {
+        searchModule.search2(searchKey, function(data) {
             // console.log(data,'server')
             for (i = 0; i < data.length; i++) { 
               data[i]._source.content = data[i]._source.content.substring(0,350)+'...';

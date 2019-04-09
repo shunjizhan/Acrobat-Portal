@@ -94,25 +94,30 @@ module.exports.search = function(searchData, callback) {
 module.exports.search2 = function(searchData, callback) {
   console.log(searchData, 'elasticsearch')
   client.search({
-    index: 'casereport',
-    type: '_doc',
-    body: {
-      query: {
-        bool: {
-          should: {
-            match: {
-              "content": searchData
+      index: 'casereport',
+      type: '_doc',
+      body: {
+        query: {
+          bool: {
+            should: 
+            {
+              match: {
+                "content": {
+                  "query": searchData,
+                  "fuzziness": 1,
+                  "prefix_length": 1
+                }
+              }
             }
           }
         }
       }
-    }
-  }).then(function (resp) {
-    callback(resp.hits.hits);
-  }, function (err) {
-      callback(err.message)
-      console.log(err.message);
-  });
+    }).then(function (resp) {
+      callback(resp.hits.hits);
+    }, function (err) {
+        callback(err.message)
+        console.log(err.message);
+    });
 }
 
 module.exports.delete = function(searchData, callback) {
