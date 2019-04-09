@@ -45,15 +45,18 @@ class Brat extends Component {
 
 
     render () {
+        const { text, _id } = this.props.docData;
+
         return(
-            <div id='brat'>
-                <span id='brat-intro'>
-                    Details about case report <span id='report-id'>{ this.props.id }</span>
-                </span>
+            <div className='brat'>
+                <div className='brat-intro'>
+                    Details about case report <span className='report-id'>{ _id }</span>
+                </div>
+
+                <div className='report-plain-text'>{ text }</div>
 
                 <span 
-                    id='submit-report' 
-                    className='button'
+                    className='button submit-report'
                     onClick={this.handleSubmit}
                 >
                     submit case report

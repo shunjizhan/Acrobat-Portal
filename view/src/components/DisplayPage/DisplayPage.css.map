@@ -1,7 +1,7 @@
 {
 "version": 3,
-"mappings": "",
-"sources": [],
+"mappings": "AAAA,aAAc,CACV,QAAQ,CAAE,QAAQ,CAElB,4DAAkC,CAC9B,QAAQ,CAAE,QAAQ,CAClB,KAAK,CAAE,GAAG,CACV,MAAM,CAAE,IAAI",
+"sources": ["DisplayPage.scss"],
 "names": [],
 "file": "DisplayPage.css"
 }

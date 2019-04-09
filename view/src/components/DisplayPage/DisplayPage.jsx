@@ -5,6 +5,7 @@ import Brat from '../Brat/Brat'
 import Graph from '../Graph/Graph'
 import './DisplayPage.css';
 
+
 class DisplayPage extends Component {
     state = {
         docData: null,
@@ -38,14 +39,19 @@ class DisplayPage extends Component {
         console.log(docData);
 
         return(
-            <div id='display-page'>
-                { docData && <Brat docData={docData}/> }
-                { !docData && `loading annotation data for case report ${id} ......` }
-                <br />
+            <div className='display-page'>
+                { docData && 
+                    <div className='brat-container'>
+                        <Brat docData={docData}/>
+                    </div> 
+                }
+                { docData && 
+                    <div className='graph-container'>
+                        <Graph graphData={graphData}/> 
+                    </div>
+                }
 
-                { docData && <Graph graphData={graphData}/> }
-                { !docData && `loading graph data for case report ${id} ......` }
-                <br />
+                { !docData && `loading data for case report ${id} ......` }
             </div>
         );
     }
