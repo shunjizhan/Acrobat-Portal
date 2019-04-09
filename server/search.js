@@ -1,11 +1,11 @@
-var elasticsearch=require('elasticsearch');
+var client = require('./EsClient.js');
+var order_slop = 120;
 
-var client = new elasticsearch.Client( {
-  hosts: [
-    'https://search-acrobate-6oayszlzcxx2isu4cxe2sea3qy.us-east-2.es.amazonaws.com'
-  ]
-});
-
+/**
+ * Module function for intelligent search.
+ * @function
+ * @alias success
+ */
 module.exports.search = function(searchData, callback) {
   console.log(searchData, 'elasticsearch')
   var array = searchData.split(" ");
@@ -24,7 +24,6 @@ module.exports.search = function(searchData, callback) {
               }
             }
     clauses.push(ob);
-    console.log(array[i],'loop里');
   }
   console.log(clauses);
   if(clauses.length == 1){
@@ -65,19 +64,11 @@ module.exports.search = function(searchData, callback) {
               {
                 "span_near" : {
                     "clauses" : clauses,
-                    "slop" : 120,
+                    "slop" : order_slop,
                     "in_order" : true
                 }
               }
-              // ,{
-              //   "match": {
-              //     "content": {
-              //       "query": "immunohistochemical cytokeratins",
-              //       "analyzer": "standard",
-              //       "minimum_should_match": "99%"
-              //     }
-              //   }
-              // }
+              // "query": "immunohistochemical cytokeratins"
             ]
           }  
         }
@@ -91,7 +82,12 @@ module.exports.search = function(searchData, callback) {
   }
 }
 
-module.exports.search2 = function(searchData, callback) {
+/**
+ * Module function for simple multi-keyword search.
+ * @function
+ * @alias success
+ */
+module.exports.search_simple = function(searchData, callback) {
   console.log(searchData, 'elasticsearch')
   client.search({
     index: 'casereport',
@@ -115,6 +111,11 @@ module.exports.search2 = function(searchData, callback) {
   });
 }
 
+/**
+ * Module function for delete index in ElasticSearch.
+ * @function
+ * @alias success
+ */
 module.exports.delete = function(searchData, callback) {
   client.indices.delete({
       index: '_all'
@@ -133,6 +134,11 @@ module.exports.delete = function(searchData, callback) {
   });
 }
 
+/**
+ * Module function for create index in ElasticSearch.
+ * @function
+ * @alias success
+ */
 module.exports.create = function(indexName, callback) {
   client.indices.create({
         "index": indexName,
@@ -141,12 +147,42 @@ module.exports.create = function(indexName, callback) {
             "analysis": {
               "analyzer": {
                   "my_analyzer": {
-                      "type":         "standard",
-                      "tokenizer":    "standard",
-                      "filter":       [ "asciifolding", "lowercase", "snowball", "stop"],
-                      "max_token_length": 128,
-                      "stopwords": "_english_"
+                      "type":         "custom",
+                      "tokenizer":    "my_tokenizer",
+                      "filter":       ["asciifolding", "lowercase", "snowball", "stop", "stemmer"],
+                      "stopwords":    "_english_"
                 }
+              },
+              "filter": {
+                "ngrams_filter": {
+                    "type": "ngram",
+                    "min_gram": 3,
+                    "max_gram": 8
+                },
+              },
+              "tokenizer": {
+                "my_tokenizer": {
+                  "type": "ngram",
+                  "min_gram": 2,
+                  "max_gram": 25,
+                  "token_chars": [
+                    "letter",
+                    "digit"
+                  ]
+                }
+              }
+            }
+          },
+          "mappings" : {
+            "_doc": {
+              "properties": {
+                  "id": {
+                      "type": "text"
+                  },
+                  "content": {
+                      "type": "text",
+                      "analyzer": "my_analyzer"
+                  }
               }
             }
           }
