@@ -1,8 +1,4 @@
 import React, { Component } from 'react';
-// import DatabaseTest from '../DatabaseTest/DatabaseTest'
-import ButtonPanel from '../ButtonPanel/ButtonPanel'
-import HistoryPanel from '../HistoryPanel/HistoryPanel'
-import QueryPanel from '../QueryPanel/QueryPanel'
 import { buildFontAwesomeLib } from '../../utils';
 import './MainPage.css';
 
@@ -16,9 +12,7 @@ class MainPage extends Component {
     render() {
         return (
             <div id='mainPage'>
-                <ButtonPanel />
-                <HistoryPanel />
-                <QueryPanel />  
+                This is the main page
             </div>
         );
     }

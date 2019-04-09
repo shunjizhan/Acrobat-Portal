@@ -1,7 +1,0 @@
-{
-"version": 3,
-"mappings": "AAAA,cAAe,CACX,SAAS,CAAE,IAAI,CACf,KAAK,CAAE,OAAO",
-"sources": ["HistoryPanel.scss"],
-"names": [],
-"file": "HistoryPanel.css"
-}
