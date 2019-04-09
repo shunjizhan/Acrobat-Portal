@@ -1,6 +1,6 @@
 {
 "version": 3,
-"mappings": "AAAA,aAAc,CAEV,QAAQ,CAAE,QAAQ,CAClB,KAAK,CAAE,IAAI,CACX,SAAS,CAAE,IAAI,CACf,UAAU,CAAE,IAAI",
+"mappings": "AAAA,aAAc,CAEV,QAAQ,CAAE,QAAQ,CAClB,KAAK,CAAE,IAAI,CACX,SAAS,CAAE,IAAI,CACf,UAAU,CAAE,IAAI,CAChB,UAAU,CAAE,IAAI",
 "sources": ["QueryBuilder.scss"],
 "names": [],
 "file": "QueryBuilder.css"

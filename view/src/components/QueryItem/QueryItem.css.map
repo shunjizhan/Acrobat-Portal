@@ -1,6 +1,6 @@
 {
 "version": 3,
-"mappings": "AAGI,sBAAW,CACP,MAAM,CAAE,cAAc,CACtB,aAAa,CAAE,GAAG,CAClB,OAAO,CAAE,GAAG,CAGZ,OAAO,CAAE,YAAY,CACrB,MAAM,CAAE,aAAa",
+"mappings": "AAAA,WAAY,CACR,QAAQ,CAAE,QAAQ,CAElB,sBAAW,CACP,MAAM,CAAE,cAAc,CACtB,aAAa,CAAE,GAAG,CAClB,OAAO,CAAE,QAAQ,CACjB,OAAO,CAAE,YAAY,CACrB,MAAM,CAAE,cAAc",
 "sources": ["QueryItem.scss"],
 "names": [],
 "file": "QueryItem.css"

@@ -1,2 +1,2 @@
-.query-item .item-word{border:1px solid grey;border-radius:3px;padding:3px;display:inline-block;margin:3px 5px 3px 0}
+.query-item{position:relative}.query-item .item-word{border:1px solid grey;border-radius:3px;padding:5px 10px;display:inline-block;margin:3px 10px 3px 0}
 /*# sourceMappingURL=QueryItem.css.map */

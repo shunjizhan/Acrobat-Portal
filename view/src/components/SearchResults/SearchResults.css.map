@@ -1,6 +1,6 @@
 {
 "version": 3,
-"mappings": "AAEA,cAAe,CACX,MAAM,CAAE,+BAAyB,CAGjC,mCAAqB,CACjB,SAAS,CAAE,IAAI,CAGnB,qBAAO,CACH,SAAS,CAAE,IAAI,CACf,KAAK,CAAE,OAAO",
+"mappings": "AAEA,cAAe,CACX,MAAM,CAAE,+BAAyB,CAIjC,mCAAqB,CACjB,SAAS,CAAE,IAAI,CAGnB,qBAAO,CACH,SAAS,CAAE,IAAI,CACf,KAAK,CAAE,OAAO",
 "sources": ["SearchResults.scss"],
 "names": [],
 "file": "SearchResults.css"

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import TypeSelect from '../TypeSelect/TypeSelect';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import './QueryItem.css';
 
@@ -14,6 +15,10 @@ class QueryItem extends Component {
                     { word } 
                 </div>
                 <FontAwesomeIcon icon={['fas', 'arrow-alt-right']} />
+                <TypeSelect 
+                    typeName='my type'
+                    dropDownData={['aaa', 'bbb', 'ccc']}
+                />
             </div>
         );
     }

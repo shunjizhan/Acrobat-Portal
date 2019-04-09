@@ -1,0 +1,41 @@
+@import "../variables";
+
+
+$border-style: 1px solid grey;;
+.type-select {
+    border: $border-style;
+    border-radius: 3px;
+    padding: 5px 10px;
+    display: inline-block;
+    margin: 3px 10px 3px 10px;
+
+    svg {
+        color: $red;
+        &:hover { 
+            cursor: pointer; 
+            color: $deep-red;
+        }
+    }
+
+    .drop-down-container {
+        display: inline-block;
+        margin: 0 10px;
+
+        .dropdown button {
+            border: $border-style;;
+            background-color: transparent;
+            color: black;
+            padding: 0px 10px;;
+
+            &:active { 
+                color: black; 
+                background-color: transparent;
+            }
+        }
+
+        .dropdown-item {
+            &:hover { background-color: rgba($blue, 0.1) }
+            &:active { background-color: rgba($blue, 0.6) }
+        }
+    }
+}
