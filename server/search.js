@@ -11,18 +11,19 @@ module.exports.search = function(searchData, callback) {
   var array = searchData.split(" ");
   var clauses = [];
   for (var i = 0; i <= array.length - 1; i++) {
-    var ob = {
-              "span_multi": {
-                "match": {
-                  "fuzzy": {
-                    "content": {
-                      "fuzziness": 1,
-                      "value": array[i]
-                    }
-                  }
-                }
-              }
+    var ob = 
+    {
+      "span_multi": {
+        "match": {
+          "fuzzy": {
+            "content": {
+              "fuzziness": 1,
+              "value": array[i]
             }
+          }
+        }
+      }
+    }
     clauses.push(ob);
   }
   console.log(clauses);
