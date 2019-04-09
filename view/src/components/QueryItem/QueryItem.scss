@@ -4,7 +4,7 @@
     position: relative;
 
     .item-word {
-        border: 1px solid grey;
+        border: $query-item-border-style;
         border-radius: 3px;
         padding: 5px 10px;
         display: inline-block;

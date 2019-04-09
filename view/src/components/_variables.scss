@@ -22,3 +22,8 @@ $search-bar-height: 45px;   // same as button width and height
 $search-bar-width: calc(100% - #{$search-bar-height});  // save space for button
 $search-bar-padding-top: 15px;
 $button-offset: calc(-1 * (#{$search-bar-height} - 2px));
+
+
+
+/* --------------- Query Panel --------------- */
+$query-item-border-style: 1px solid rgba(grey, 0.7);

@@ -49,12 +49,14 @@ class SearchPage extends Component {
                     /> 
                 </div>
 
-                <div id='search-result-container'>
-                    <SearchResults 
-                        query={query}
-                        results={results} 
-                    />      
-                </div>    
+                { query &&
+                    <div id='search-result-container'>
+                        <SearchResults 
+                            query={query}
+                            results={results} 
+                        />      
+                    </div>  
+                }  
     
             </div>
         );

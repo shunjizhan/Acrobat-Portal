@@ -1,13 +1,13 @@
 @import "../variables";
 
 
-$border-style: 1px solid grey;;
 .type-select {
-    border: $border-style;
+    border: $query-item-border-style;
     border-radius: 3px;
     padding: 5px 10px;
     display: inline-block;
     margin: 3px 10px 3px 10px;
+    // background-color: rgba($blue, 0.2);
 
     svg {
         color: $red;
@@ -22,8 +22,8 @@ $border-style: 1px solid grey;;
         margin: 0 10px;
 
         .dropdown button {
-            border: $border-style;;
-            background-color: transparent;
+            border: $query-item-border-style;
+            background-color: white;
             color: black;
             padding: 0px 10px;;
 
