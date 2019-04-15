@@ -16,9 +16,12 @@
 
     #search-bar-container, #query-builder-container {
         position: relative;
-        width: 50%;
+        width: $search-page-content-width;
         margin: auto;
     }
+
+    #search-bar-container { height: $search-bar-height; }
+
 
     $title-width: 15%;
     #title { 

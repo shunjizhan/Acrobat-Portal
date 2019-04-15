@@ -1,6 +1,8 @@
+@import "../variables";
+
 #search-result-container {
     position: relative;
-    width: 50%;
+    width: $search-page-content-width;
     margin: auto;
 }
 

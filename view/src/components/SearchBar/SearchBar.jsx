@@ -19,23 +19,37 @@ class SearchBar extends Component {
         this.props.handleSearch(this.state.query);
     }
 
+    switchMode = () => {
+
+    }
+
 
     render() {
         return (
-        <div id='searchBar'>
-            <input 
-                ref="searchBar"
-                type="text" 
-                id="searchText" 
-                placeholder="search in over 1000000+ medical case reports..." 
-                onChange={ this.handleTyping }
-            />
+        <div id='search-section'>
+            <div id='searchBar'>
+                <input 
+                    ref="searchBar"
+                    type="text" 
+                    id="searchText" 
+                    placeholder="search in over 1000000+ medical case reports..." 
+                    onChange={ this.handleTyping }
+                />
+                <button 
+                    type="submit" 
+                    id="searchButton"
+                    onClick={ this.handleSearch }
+                >
+                    <FontAwesomeIcon icon={['fas', 'search']} />
+                </button>
+            </div>
+
             <button 
                 type="submit" 
-                id="searchButton"
-                onClick={ this.handleSearch }
+                id="advance-search-button"
+                onClick={ this.switchMode }
             >
-                <FontAwesomeIcon icon={['fas', 'search']} />
+                Advance
             </button>
         </div>);
     }

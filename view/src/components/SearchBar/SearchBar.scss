@@ -1,42 +1,65 @@
 @import "../variables";
 
 
-#searchBar{
-    width: $search-bar-width;
-    height: $search-bar-height;
+$border-radius: 5px;
+.button-style
+{
+    border: 1px solid rgba($blue, 0.8);
+    color: white;
+    background: rgba($blue, 1);
+    cursor: pointer;
+    
+    &:hover { background-color: $deep-blue; }
+}
+
+
+#search-section {
     position: relative;
-    // display: inline-block;
-    margin:0;
+    width: 100%;
+    height: 100%;
+    // border: 1px solid red;
 
-    $border-radius: 5px;
-    #searchText {
-        font-size: 23px;
-        width: 100%;
-        border: 2px solid rgba($blue, 0.8);
-        padding: 5px 10px;
+    #searchBar{
+        width: $search-bar-width;
         height: 100%;
-        border-radius: $border-radius 0 0 $border-radius;
-        outline: none;
         display: inline-block;
+        float: left;
+        position: relative;
+        width: 80%;
+        margin:0;
 
-        // &:focus{ color: $orange; }
+        #searchText {
+            font-size: 23px;
+            width: 100%;
+            border: 2px solid rgba($blue, 0.8);
+            padding: 5px 10px;
+            height: 100%;
+            border-radius: $border-radius 0 0 $border-radius;
+            outline: none;
+            display: inline-block;
+
+            // &:focus{ color: $orange; }
+        }
+
+        #searchButton {
+            position: absolute;
+            right: $button-offset;
+            width: $search-bar-height;
+            height: 100%;
+            border-radius: 0 $border-radius $border-radius 0;
+            font-size: 20px;
+            @extend .button-style;
+        }
     }
 
-    #searchButton {
-        position: absolute;
-        right: $button-offset;
-        width: $search-bar-height;
-        height: $search-bar-height;
-        border: 1px solid rgba($blue, 0.8);
-        background: $orange;
-        text-align: center;
-        color: white;
-        background: rgba($blue, 1);
-        border-radius: 0 $border-radius $border-radius 0;
-        cursor: pointer;
-        font-size: 20px;
-
-        &:hover { background-color: $deep-blue; }
+    #advance-search-button {
+        // position: absolute;
+        float: right;
+        height: 100%;
+        width: 10%;
+        border-radius: $border-radius;
+        // font-size: 0px;
+        @extend .button-style;
     }
 }
 
