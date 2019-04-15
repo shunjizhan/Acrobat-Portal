@@ -1,4 +1,4 @@
-var client = require('./EsClient.js');
+var client = require('./../config/EsClient.js');
 var order_slop = 120;
 
 module.exports.search = function(searchData, callback) {
