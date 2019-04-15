@@ -16,8 +16,8 @@ class QueryItem extends Component {
                 </div>
                 <FontAwesomeIcon icon={['fas', 'arrow-alt-right']} />
                 <TypeSelect 
-                    typeName='my type'
-                    dropDownData={['aaa', 'bbb', 'ccc']}
+                    typeName='Entity_Type'
+                    dropDownData={['norm_1', 'norm_2', 'norm_3']}
                 />
             </div>
         );

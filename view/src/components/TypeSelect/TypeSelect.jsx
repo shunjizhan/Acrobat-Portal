@@ -5,6 +5,7 @@ import { DropdownButton, Dropdown } from 'react-bootstrap';
 import './TypeSelect.css';
 
 
+/* ----- drop down menu for each token ----- */
 class DropDown extends Component {
     state = {
         current: this.props.dropDownData[0]
@@ -31,6 +32,10 @@ class DropDown extends Component {
 }
 
 
+/* ----- 
+    component that display entity type and 
+    normalization suggestions drop down select 
+                                            ----- */
 class TypeSelect extends Component {
     state = {
         current: this.props.dropDownData[0]
@@ -45,7 +50,7 @@ class TypeSelect extends Component {
 
         return (
             <div className='type-select' >
-                typeName
+                { typeName }
                 <span className='drop-down-container'>
                     <DropDown 
                         handleSelect={this.handleSelect}
