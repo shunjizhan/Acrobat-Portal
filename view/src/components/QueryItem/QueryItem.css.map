@@ -1,7 +1,7 @@
 {
 "version": 3,
 "mappings": "AAgCA,wBACA,CACI,MAAM,CAAE,6BAA0B,CAClC,KAAK,CAAE,KAAK,CACZ,UAAU,CAAE,OAAc,CAC1B,MAAM,CAAE,OAAO,CAEf,8BAAQ,CAAE,gBAAgB,CA9BlB,OAAiB,CCP7B,WAAY,CACR,QAAQ,CAAE,QAAQ,CAElB,sBAAW,CACP,MAAM,CDsBY,+BAAyB,CCrB3C,aAAa,CAAE,GAAG,CAClB,OAAO,CAAE,QAAQ,CACjB,OAAO,CAAE,YAAY,CACrB,MAAM,CAAE,cAAc,CAG1B,eAAQ,CAAE,KAAK,CDVZ,OAAgB",
-"sources": ["../_variables.scss","QueryItem.scss"],
+"sources": ["../_shared.scss","QueryItem.scss"],
 "names": [],
 "file": "QueryItem.css"
 }
