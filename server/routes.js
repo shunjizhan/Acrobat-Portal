@@ -146,11 +146,12 @@ module.exports = function(app) {
 
     // putCaseReport
     router.post("/putCaseReport", (req, res) => {
-        const {txt, ann} = req.body;
+        const {pmid, txt, ann} = req.body;
         let caseReport = new CaseReport();
 
         console.log('caseReport api messge');
-
+        // console.log(pmid);
+        caseReport.pmID = parseInt(pmid);
         caseReport.text = txt;
         caseReport.entities = [];
         caseReport.attributes = [];
