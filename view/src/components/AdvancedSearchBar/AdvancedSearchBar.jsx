@@ -1,38 +1,102 @@
 import React, { Component } from 'react';
+import { DropdownButton, Dropdown } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import './AdvancedSearchBar.css';
 
 
+class DropDown extends Component {
+    state = {
+        current: this.props.dropDownData[0]
+    }
+
+    render() {
+        const { current, handleSelect, dropDownData } = this.props;
+        return (
+            <DropdownButton id="dropdown-basic-button" title={current} >
+            {
+                dropDownData.map(key => (
+                    <Dropdown.Item
+                        eventKey={key} 
+                        onSelect={handleSelect}
+                        key={key}
+                    >
+                    {key}
+                    </Dropdown.Item>
+                ))
+            }
+            </DropdownButton>
+        )
+    }
+}
+
+
+
 class AdvancedSearchBar extends Component {
     state = {
-        query: ''
+        query1: '',
+        query2: '',
+        relation: 'Before'
     }
 
-    handleTyping = e => {
-        const query = e.target.value;
-        this.setState({query});
-        this.props.handleTyping(query);
+    _handleTyping = (query, which) => {
+        // 这里直接用this.state不知道会不会有什么问题
+        // 如果有问题就deep clone this.state
+        const newState = this.state;
+        if (which === 1) {
+            newState.query1 = query;
+        } else {
+            newState.query2 = query;
+        }
+        
+        this.props.handleTyping(newState);
+        this.setState(newState)
     }
+
+    handleTyping_1 = e => this._handleTyping(e.target.value, 1);
+    handleTyping_2 = e => this._handleTyping(e.target.value, 2);
+
 
     handleSearch = () => {
-        this.props.handleSearch(this.state.query);
+        // 这里直接用this.state不知道会不会有什么问题
+        // 如果有问题就deep clone this.state
+        this.props.handleSearch(this.state);
     }
 
     handleModeSwitch = () => {
         this.props.handleModeSwitch()
     }
 
+    handleSelect = key => {
+        this.setState({ relation: key })
+    }
+
 
     render() {
+        const { relation } = this.state;
         return (
         <div id='search-section'>
             <div id='advanced-search-bar'>
                 <input 
-                    ref="AdvancedSearchBar"
+                    ref="AdvancedSearchBar_1"
                     type="text" 
-                    id="searchText" 
-                    placeholder="search in over 1000000+ medical case reports..." 
-                    onChange={ this.handleTyping }
+                    className="searchText" 
+                    placeholder="relation 1" 
+                    onChange={ this.handleTyping_1 }
+                />
+                <div className='drop-down-container'>
+                    <DropDown 
+                        handleSelect={ this.handleSelect }
+                        dropDownData={ ['Before', 'After', 'Overlap'] }
+                        current={ relation }
+                    />
+                </div>
+                <input 
+                    ref="AdvancedSearchBar_2"
+                    type="text" 
+                    className="searchText" 
+                    id="searchText_2" 
+                    placeholder="relation 2" 
+                    onChange={ this.handleTyping_2 }
                 />
                 <button 
                     type="submit" 

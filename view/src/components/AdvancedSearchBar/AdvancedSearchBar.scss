@@ -16,17 +16,21 @@
         width: 80%;
         margin:0;
 
-        #searchText {
+        .searchText {
             font-size: 23px;
-            width: 100%;
+            width: 40%;
             border: 2px solid rgba($blue, 0.8);
             padding: 5px 10px;
             height: 100%;
-            border-radius: $border-radius 0 0 $border-radius;
+            border-radius: $border-radius;
             outline: none;
             display: inline-block;
 
             // &:focus{ color: $orange; }
+        }
+
+        #searchText_2 {
+            border-radius: $border-radius 0 0 $border-radius;
         }
 
         #searchButton {
@@ -37,6 +41,32 @@
             border-radius: 0 $border-radius $border-radius 0;
             font-size: 20px;
             @extend .search-bar-button-style;
+        }
+
+        .drop-down-container {
+            // position: relative;
+            display: inline-block;
+            width: 20%;
+            height: 100%;
+            // margin: 0 5%;
+
+            .dropdown button {
+                height: 100%;
+                border: $query-item-border-style;
+                background-color: white;
+                color: black;
+                padding: 5px 20px;;
+
+                &:active { 
+                    color: black; 
+                    background-color: transparent;
+                }
+            }
+
+            .dropdown-item {
+                &:hover { background-color: rgba($blue, 0.1) }
+                &:active { background-color: rgba($blue, 0.6) }
+            }
         }
     }
 

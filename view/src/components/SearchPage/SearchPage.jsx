@@ -14,6 +14,7 @@ class SearchPage extends Component {
     }
 
     handleTyping = text => this.setState({ text });
+    handleAdvancedTyping = text => console.log('advanced typing: ', text);;
 
     handleSearch = query => {
         this.setState({ query });
@@ -35,6 +36,10 @@ class SearchPage extends Component {
             });
     }
 
+    handleAdvancedSearch = query => {
+        console.log('advanced search: ', query);
+    }   
+
 
     render() {
         const { text, query, results } = this.state;
@@ -44,8 +49,10 @@ class SearchPage extends Component {
                 <div id='top-bar-container'>
                     <TopBar 
                         text={text}
-                        handleSearch={this.handleSearch} 
-                        handleTyping={this.handleTyping} 
+                        handleSearch={ this.handleSearch } 
+                        handleTyping={ this.handleTyping } 
+                        handleAdvancedSearch={ this.handleAdvancedSearch } 
+                        handleAdvancedTyping={ this.handleAdvancedTyping } 
                     /> 
                 </div>
 

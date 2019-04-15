@@ -8,7 +8,7 @@ import './TopBar.css';
 
 class TopBar extends Component {
     state = {
-        mode: 'basic'
+        mode: 'advanced'
     };
 
     switchSearchMode = () => {
@@ -18,7 +18,11 @@ class TopBar extends Component {
     }
 
     render() {
-        const { text, handleSearch, handleTyping } = this.props;
+        const { 
+            text, 
+            handleSearch, handleAdvancedSearch, 
+            handleTyping, handleAdvancedTyping
+        } = this.props;
         const { mode } = this.state;
         return (
             <div id='topBar'>  
@@ -38,8 +42,8 @@ class TopBar extends Component {
                     {
                         mode === 'advanced' &&
                         <AdvancedSearchBar 
-                            handleSearch={ handleSearch } 
-                            handleTyping={ handleTyping } 
+                            handleSearch={ handleAdvancedSearch } 
+                            handleTyping={ handleAdvancedTyping } 
                             handleModeSwitch={ this.switchSearchMode } 
                         />
                     }

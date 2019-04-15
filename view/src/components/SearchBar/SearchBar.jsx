@@ -48,7 +48,7 @@ class SearchBar extends Component {
                 id="advance-search-button"
                 onClick={ this.handleModeSwitch }
             >
-                Advance
+                Advanced
             </button>
         </div>);
     }

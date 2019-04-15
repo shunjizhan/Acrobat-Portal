@@ -42,7 +42,8 @@ class TypeSelect extends Component {
     }
 
     handleSelect = key => {
-        this.setState({ current: key })
+        this.setState({ current: key });
+        this.props.handleSelect();
     }
 
     render() {
