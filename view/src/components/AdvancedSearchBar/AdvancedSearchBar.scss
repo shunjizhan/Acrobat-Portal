@@ -7,7 +7,7 @@
     height: 100%;
     // border: 1px solid red;
 
-    #searchBar{
+    #advanced-search-bar{
         width: $search-bar-width;
         height: 100%;
         display: inline-block;
@@ -40,7 +40,7 @@
         }
     }
 
-    #advance-search-button {
+    #basic-search-button {
         // position: absolute;
         float: right;
         height: 100%;

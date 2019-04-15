@@ -1,7 +1,7 @@
 {
 "version": 3,
-"mappings": "AAEA,cAAe,CACX,MAAM,CAAE,+BAAyB,CAIjC,mCAAqB,CACjB,SAAS,CAAE,IAAI,CAGnB,qBAAO,CACH,SAAS,CAAE,IAAI,CACf,KAAK,CAAE,OAAO",
-"sources": ["SearchResults.scss"],
+"mappings": "AAgCA,wBACA,CACI,MAAM,CAAE,6BAA0B,CAClC,KAAK,CAAE,KAAK,CACZ,UAAU,CAAE,OAAc,CAC1B,MAAM,CAAE,OAAO,CAEf,8BAAQ,CAAE,gBAAgB,CA9BlB,OAAiB,CCP7B,cAAe,CACX,MAAM,CAAE,+BAAyB,CAIjC,mCAAqB,CACjB,SAAS,CAAE,IAAI,CAGnB,qBAAO,CACH,SAAS,CAAE,IAAI,CACf,KAAK,CAAE,OAAO",
+"sources": ["../_variables.scss","SearchResults.scss"],
 "names": [],
 "file": "SearchResults.css"
 }

@@ -28,3 +28,14 @@ $button-offset: calc(-1 * (#{$search-bar-height} - 2px));
 /* --------------- Query Panel --------------- */
 $query-item-border-style: 1px solid rgba(grey, 0.7);
 $search-page-content-width: 60%;
+
+$border-radius: 5px;
+.search-bar-button-style
+{
+    border: 1px solid rgba($blue, 0.8);
+    color: white;
+    background: rgba($blue, 1);
+    cursor: pointer;
+    
+    &:hover { background-color: $deep-blue; }
+}

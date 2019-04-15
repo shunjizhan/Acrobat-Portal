@@ -1,15 +1,25 @@
 import React, { Component } from 'react';
 import SearchBar from "../SearchBar/SearchBar";
+import AdvancedSearchBar from "../AdvancedSearchBar/AdvancedSearchBar";
 import QueryBuilder from '../QueryBuilder/QueryBuilder';
 import { Link } from "react-router-dom";
 import './TopBar.css';
 
 
-class SearchPage extends Component {
-    state = {};
+class TopBar extends Component {
+    state = {
+        mode: 'basic'
+    };
+
+    switchSearchMode = () => {
+        const mode = this.state.mode === 'basic'? 'advanced' : 'basic';
+        this.setState({ mode });
+        console.log(this.state);
+    }
 
     render() {
         const { text, handleSearch, handleTyping } = this.props;
+        const { mode } = this.state;
         return (
             <div id='topBar'>  
                 <Link to="/" id='title'>
@@ -17,10 +27,22 @@ class SearchPage extends Component {
                 </Link>
 
                 <div id='search-bar-container'>
-                    <SearchBar 
-                        handleSearch={handleSearch} 
-                        handleTyping={handleTyping} 
-                    />
+                    {
+                        mode === 'basic' &&
+                        <SearchBar 
+                            handleSearch={ handleSearch } 
+                            handleTyping={ handleTyping } 
+                            handleModeSwitch={ this.switchSearchMode } 
+                        />
+                    }
+                    {
+                        mode === 'advanced' &&
+                        <AdvancedSearchBar 
+                            handleSearch={ handleSearch } 
+                            handleTyping={ handleTyping } 
+                            handleModeSwitch={ this.switchSearchMode } 
+                        />
+                    }
                 </div>  
 
                 <div id='query-builder-container'>
@@ -31,4 +53,4 @@ class SearchPage extends Component {
     }
 }
 
-export default SearchPage;
+export default TopBar;

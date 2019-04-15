@@ -1,2 +1,2 @@
-#searchResults{border:1px solid rgba(128,128,128,0.3)}#searchResults #search-result-title{font-size:150%}#searchResults #query{font-size:160%;color:#8AC926}
+.search-bar-button-style{border:1px solid rgba(1,136,203,0.8);color:white;background:#0188cb;cursor:pointer}.search-bar-button-style:hover{background-color:#1278d1}#searchResults{border:1px solid rgba(128,128,128,0.3)}#searchResults #search-result-title{font-size:150%}#searchResults #query{font-size:160%;color:#8AC926}
 /*# sourceMappingURL=SearchResults.css.map */

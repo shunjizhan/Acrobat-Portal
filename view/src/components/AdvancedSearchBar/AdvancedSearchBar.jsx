@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import './SearchBar.css';
+import './AdvancedSearchBar.css';
 
 
-class SearchBar extends Component {
+class AdvancedSearchBar extends Component {
     state = {
         query: ''
     }
@@ -26,9 +26,9 @@ class SearchBar extends Component {
     render() {
         return (
         <div id='search-section'>
-            <div id='searchBar'>
+            <div id='advanced-search-bar'>
                 <input 
-                    ref="searchBar"
+                    ref="AdvancedSearchBar"
                     type="text" 
                     id="searchText" 
                     placeholder="search in over 1000000+ medical case reports..." 
@@ -45,13 +45,13 @@ class SearchBar extends Component {
 
             <button 
                 type="submit" 
-                id="advance-search-button"
+                id="basic-search-button"
                 onClick={ this.handleModeSwitch }
             >
-                Advance
+                Basic
             </button>
         </div>);
     }
 }
 
-export default SearchBar;
+export default AdvancedSearchBar;

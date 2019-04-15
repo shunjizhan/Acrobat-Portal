@@ -1,2 +1,2 @@
-#search-result-container{position:relative;width:60%;margin:auto}#top-bar-container{position:relative}
+.search-bar-button-style{border:1px solid rgba(1,136,203,0.8);color:white;background:#0188cb;cursor:pointer}.search-bar-button-style:hover{background-color:#1278d1}#search-result-container{position:relative;width:60%;margin:auto}#top-bar-container{position:relative}
 /*# sourceMappingURL=SearchPage.css.map */
