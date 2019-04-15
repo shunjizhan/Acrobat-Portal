@@ -9,9 +9,13 @@
     text-align: center;
     // border-bottom: 1px solid rgba(grey, 0.3);
 
-    a { 
-        display: inline-block;
-        text-decoration: none; 
+    #title {
+        margin-right: 10%;
+        
+         a { 
+            display: inline-block;
+            text-decoration: none; 
+        }
     }
 
     #search-bar-container, #query-builder-container {
