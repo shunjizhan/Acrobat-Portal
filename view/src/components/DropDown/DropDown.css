@@ -1,0 +1,59 @@
+/*
+Error: File to import not found or unreadable: ../shared.
+       Load path: /Users/shunji/Acrobat-Portal/view
+        on line 1 of view/src/components/DropDown/DropDown.scss
+
+1: @import "../shared";
+2: 
+3: 
+4: .dropdown button {
+5:     height: 100%;
+6:     border: $query-item-border-style;
+
+Backtrace:
+view/src/components/DropDown/DropDown.scss:1
+/Users/shunji/.rvm/gems/ruby-2.4.1/gems/sass-3.5.2/lib/sass/tree/import_node.rb:67:in `rescue in import'
+/Users/shunji/.rvm/gems/ruby-2.4.1/gems/sass-3.5.2/lib/sass/tree/import_node.rb:45:in `import'
+/Users/shunji/.rvm/gems/ruby-2.4.1/gems/sass-3.5.2/lib/sass/tree/import_node.rb:28:in `imported_file'
+/Users/shunji/.rvm/gems/ruby-2.4.1/gems/sass-3.5.2/lib/sass/tree/import_node.rb:37:in `css_import?'
+/Users/shunji/.rvm/gems/ruby-2.4.1/gems/sass-3.5.2/lib/sass/tree/visitors/perform.rb:314:in `visit_import'
+/Users/shunji/.rvm/gems/ruby-2.4.1/gems/sass-3.5.2/lib/sass/tree/visitors/base.rb:36:in `visit'
+/Users/shunji/.rvm/gems/ruby-2.4.1/gems/sass-3.5.2/lib/sass/tree/visitors/perform.rb:162:in `block in visit'
+/Users/shunji/.rvm/gems/ruby-2.4.1/gems/sass-3.5.2/lib/sass/stack.rb:79:in `block in with_base'
+/Users/shunji/.rvm/gems/ruby-2.4.1/gems/sass-3.5.2/lib/sass/stack.rb:135:in `with_frame'
+/Users/shunji/.rvm/gems/ruby-2.4.1/gems/sass-3.5.2/lib/sass/stack.rb:79:in `with_base'
+/Users/shunji/.rvm/gems/ruby-2.4.1/gems/sass-3.5.2/lib/sass/tree/visitors/perform.rb:162:in `visit'
+/Users/shunji/.rvm/gems/ruby-2.4.1/gems/sass-3.5.2/lib/sass/tree/visitors/base.rb:52:in `block in visit_children'
+/Users/shunji/.rvm/gems/ruby-2.4.1/gems/sass-3.5.2/lib/sass/tree/visitors/base.rb:52:in `map'
+/Users/shunji/.rvm/gems/ruby-2.4.1/gems/sass-3.5.2/lib/sass/tree/visitors/base.rb:52:in `visit_children'
+/Users/shunji/.rvm/gems/ruby-2.4.1/gems/sass-3.5.2/lib/sass/tree/visitors/perform.rb:171:in `block in visit_children'
+/Users/shunji/.rvm/gems/ruby-2.4.1/gems/sass-3.5.2/lib/sass/tree/visitors/perform.rb:183:in `with_environment'
+/Users/shunji/.rvm/gems/ruby-2.4.1/gems/sass-3.5.2/lib/sass/tree/visitors/perform.rb:170:in `visit_children'
+/Users/shunji/.rvm/gems/ruby-2.4.1/gems/sass-3.5.2/lib/sass/tree/visitors/base.rb:36:in `block in visit'
+/Users/shunji/.rvm/gems/ruby-2.4.1/gems/sass-3.5.2/lib/sass/tree/visitors/perform.rb:190:in `visit_root'
+/Users/shunji/.rvm/gems/ruby-2.4.1/gems/sass-3.5.2/lib/sass/tree/visitors/base.rb:36:in `visit'
+/Users/shunji/.rvm/gems/ruby-2.4.1/gems/sass-3.5.2/lib/sass/tree/visitors/perform.rb:161:in `visit'
+/Users/shunji/.rvm/gems/ruby-2.4.1/gems/sass-3.5.2/lib/sass/tree/visitors/perform.rb:10:in `visit'
+/Users/shunji/.rvm/gems/ruby-2.4.1/gems/sass-3.5.2/lib/sass/tree/root_node.rb:36:in `css_tree'
+/Users/shunji/.rvm/gems/ruby-2.4.1/gems/sass-3.5.2/lib/sass/tree/root_node.rb:29:in `render_with_sourcemap'
+/Users/shunji/.rvm/gems/ruby-2.4.1/gems/sass-3.5.2/lib/sass/engine.rb:389:in `_render_with_sourcemap'
+/Users/shunji/.rvm/gems/ruby-2.4.1/gems/sass-3.5.2/lib/sass/engine.rb:307:in `render_with_sourcemap'
+/Users/shunji/.rvm/gems/ruby-2.4.1/gems/sass-3.5.2/lib/sass/plugin/compiler.rb:462:in `update_stylesheet'
+/Users/shunji/.rvm/gems/ruby-2.4.1/gems/sass-3.5.2/lib/sass/plugin/compiler.rb:215:in `block in update_stylesheets'
+/Users/shunji/.rvm/gems/ruby-2.4.1/gems/sass-3.5.2/lib/sass/plugin/compiler.rb:209:in `each'
+/Users/shunji/.rvm/gems/ruby-2.4.1/gems/sass-3.5.2/lib/sass/plugin/compiler.rb:209:in `update_stylesheets'
+/Users/shunji/.rvm/gems/ruby-2.4.1/gems/sass-3.5.2/lib/sass/plugin/compiler.rb:443:in `on_file_changed'
+/Users/shunji/.rvm/gems/ruby-2.4.1/gems/sass-3.5.2/lib/sass/plugin/compiler.rb:320:in `block in watch'
+/Users/shunji/.rvm/gems/ruby-2.4.1/gems/sass-listen-4.0.0/lib/sass-listen/event/config.rb:23:in `call'
+/Users/shunji/.rvm/gems/ruby-2.4.1/gems/sass-listen-4.0.0/lib/sass-listen/event/processor.rb:115:in `_process_changes'
+/Users/shunji/.rvm/gems/ruby-2.4.1/gems/sass-listen-4.0.0/lib/sass-listen/event/processor.rb:19:in `block in loop_for'
+/Users/shunji/.rvm/gems/ruby-2.4.1/gems/sass-listen-4.0.0/lib/sass-listen/event/processor.rb:15:in `loop'
+/Users/shunji/.rvm/gems/ruby-2.4.1/gems/sass-listen-4.0.0/lib/sass-listen/event/processor.rb:15:in `loop_for'
+/Users/shunji/.rvm/gems/ruby-2.4.1/gems/sass-listen-4.0.0/lib/sass-listen/event/loop.rb:84:in `_wait_for_changes'
+/Users/shunji/.rvm/gems/ruby-2.4.1/gems/sass-listen-4.0.0/lib/sass-listen/event/loop.rb:42:in `block in setup'
+/Users/shunji/.rvm/gems/ruby-2.4.1/gems/sass-listen-4.0.0/lib/sass-listen/internals/thread_pool.rb:6:in `block in add'
+*/
+body:before {
+  white-space: pre;
+  font-family: monospace;
+  content: "Error: File to import not found or unreadable: ../shared.\A        Load path: /Users/shunji/Acrobat-Portal/view\A         on line 1 of view/src/components/DropDown/DropDown.scss\A \A 1: @import \"../shared\";\A 2: \A 3: \A 4: .dropdown button {\A 5:     height: 100%;\A 6:     border: $query-item-border-style;"; }

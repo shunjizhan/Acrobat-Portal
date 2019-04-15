@@ -1,35 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import DropDown from '../DropDown/DropDown';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { DropdownButton, Dropdown } from 'react-bootstrap';
 import './TypeSelect.css';
-
-
-/* ----- drop down menu for each token ----- */
-class DropDown extends Component {
-    state = {
-        current: this.props.dropDownData[0]
-    }
-
-    render() {
-        const { current, handleSelect, dropDownData } = this.props;
-        return (
-            <DropdownButton id="dropdown-basic-button" title={current} >
-            {
-                dropDownData.map(key => (
-                    <Dropdown.Item
-                        eventKey={key} 
-                        onSelect={handleSelect}
-                        key={key}
-                    >
-                    {key}
-                    </Dropdown.Item>
-                ))
-            }
-            </DropdownButton>
-        )
-    }
-}
 
 
 /* ----- 
