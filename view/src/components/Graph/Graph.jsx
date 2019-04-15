@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import Cytoscape from 'cytoscape';
 import CytoscapeComponent from 'react-cytoscapejs';
 import Dagre from 'cytoscape-dagre';
+import {buildGraphElementsFromGraphData} from '../../utils';
 
 Cytoscape.use(Dagre);
 
@@ -11,106 +12,104 @@ class Graph extends Component {
 
   render(){
     const { graphData }  = this.props;
-    console.log('data:', graphData);
+    // console.log('data:', graphData);
     
-    var i;
     // Create the Elements (Nodes) to be visualized
-    var elements = [];
-    var elements2 = [];
+    var elements = buildGraphElementsFromGraphData(graphData);
 
-    // From Entities
-    var nID2index = new Map();
-    for (i=0; i < graphData.entities.length; i++) {
-      const nodeID = graphData.entities[i][0];
-      const nodeTextSIndex = graphData.entities[i][2][0][0];
-      const nodeTextEIndex = graphData.entities[i][2][0][1];
-      // const nodeText = graphData.text.substring(nodeTextSIndex,nodeTextEIndex);
-      // elements.push( {
-      //   data: {
-      //     id: nodeID, 
-      //     label: nodeText
-      //   }
-      // });
-      nID2index.set(nodeID, [nodeTextSIndex, nodeTextEIndex]);
-    }
-    // From Triggers
-    for (i=0; i < graphData.triggers.length; i++) {
-      const nodeID = graphData.triggers[i][0];
-      const nodeTextSIndex = graphData.triggers[i][2][0][0];
-      const nodeTextEIndex = graphData.triggers[i][2][0][1];
-      // const nodeText = graphData.text.substring(nodeTextSIndex,nodeTextEIndex);
-      // elements.push( {
-      //   data: {
-      //     id: nodeID, 
-      //     label: nodeText
-      //   }
-      // });
-      nID2index.set(nodeID, [nodeTextSIndex, nodeTextEIndex]);
-    }
+    // // From Entities
+    // var nID2index = new Map();
+    // for (i=0; i < graphData.entities.length; i++) {
+    //   const nodeID = graphData.entities[i][0];
+    //   const nodeTextSIndex = graphData.entities[i][2][0][0];
+    //   const nodeTextEIndex = graphData.entities[i][2][0][1];
+    //   // const nodeText = graphData.text.substring(nodeTextSIndex,nodeTextEIndex);
+    //   // elements.push( {
+    //   //   data: {
+    //   //     id: nodeID, 
+    //   //     label: nodeText
+    //   //   }
+    //   // });
+    //   nID2index.set(nodeID, [nodeTextSIndex, nodeTextEIndex]);
+    // }
+    // // From Triggers
+    // for (i=0; i < graphData.triggers.length; i++) {
+    //   const nodeID = graphData.triggers[i][0];
+    //   const nodeTextSIndex = graphData.triggers[i][2][0][0];
+    //   const nodeTextEIndex = graphData.triggers[i][2][0][1];
+    //   // const nodeText = graphData.text.substring(nodeTextSIndex,nodeTextEIndex);
+    //   // elements.push( {
+    //   //   data: {
+    //   //     id: nodeID, 
+    //   //     label: nodeText
+    //   //   }
+    //   // });
+    //   nID2index.set(nodeID, [nodeTextSIndex, nodeTextEIndex]);
+    // }
 
-    // Create the Edges to be visualized
-    // First map all events to a node
-    var eID2nID = new Map();
-    for (i=0; i<graphData.events.length; i++) {
-      const eventID = graphData.events[i][0];
-      const nodeID = graphData.events[i][1];
-      eID2nID.set(eventID, nodeID);
-    }
-    // From Relatiosn
-    var nodeSet = new Set();
-    for (var i=0; i < graphData.relations.length; i++) {
-      const eventID_1 = graphData.relations[i][2][0][1];
-      const eventID_2 = graphData.relations[i][2][1][1];
-      const event_label = graphData.relations[i][1];
-      // if (event_label=='BEFORE') {
-        // continue;
-      // }
-      const sourcID = eID2nID.has(eventID_1) ? eID2nID.get(eventID_1) : eventID_1;
-      const targetID = eID2nID.has(eventID_2) ? eID2nID.get(eventID_2) : eventID_2;
+    // // Create the Edges to be visualized
+    // // First map all events to a node
+    // var eID2nID = new Map();
+    // for (i=0; i<graphData.events.length; i++) {
+    //   const eventID = graphData.events[i][0];
+    //   const nodeID = graphData.events[i][1];
+    //   eID2nID.set(eventID, nodeID);
+    // }
+    // // From Relatiosn
+    // var nodeSet = new Set();
+    // for (var i=0; i < graphData.relations.length; i++) {
+    //   const eventID_1 = graphData.relations[i][2][0][1];
+    //   const eventID_2 = graphData.relations[i][2][1][1];
+    //   const event_label = graphData.relations[i][1];
+    //   // if (event_label=='BEFORE') {
+    //     // continue;
+    //   // }
+    //   const sourcID = eID2nID.has(eventID_1) ? eID2nID.get(eventID_1) : eventID_1;
+    //   const targetID = eID2nID.has(eventID_2) ? eID2nID.get(eventID_2) : eventID_2;
 
-      var nodeText;
-      if (!nodeSet.has(sourcID)) {
-        nodeText = graphData.text.substring(nID2index.get(sourcID)[0], nID2index.get(sourcID)[1]);
-        nodeText = nodeText.length>15 ? nodeText.substring(0,15) : nodeText;
-        elements.push( {
-          data: {
-            id: sourcID,
-            label: nodeText
-          }
-        });
-        nodeSet.add(sourcID);
-      }
+    //   var nodeText;
+    //   if (!nodeSet.has(sourcID)) {
+    //     nodeText = graphData.text.substring(nID2index.get(sourcID)[0], nID2index.get(sourcID)[1]);
+    //     nodeText = nodeText.length>15 ? nodeText.substring(0,15) : nodeText;
+    //     elements.push( {
+    //       data: {
+    //         id: sourcID,
+    //         label: nodeText
+    //       }
+    //     });
+    //     nodeSet.add(sourcID);
+    //   }
 
-      if (!nodeSet.has(targetID)) {
-        nodeText = graphData.text.substring(nID2index.get(targetID)[0], nID2index.get(targetID)[1]);
-        nodeText = nodeText.length>15 ? nodeText.substring(0,15) : nodeText;
-        elements.push( {
-          data: {
-            id: targetID,
-            label: nodeText
-          }
-        });
-        nodeSet.add(targetID);
-      }
-      var color="rgb(1, 136, 203)";
-      // if (event_label=='BEFORE'){
-      //   color = 'red';
-      // }
-      // else if (event_label=='MODIFY') {
-      //   color = 'blue';
-      // }
-      // else if (event_label=='IDENTICAL') {
-      //   color = 'green';
-      // }
-      elements.push( {
-        data: {
-          source: sourcID,
-          target: targetID,
-          label: event_label,
-          arrow: 'triangle',
-          c: color
-        }
-      });
+    //   if (!nodeSet.has(targetID)) {
+    //     nodeText = graphData.text.substring(nID2index.get(targetID)[0], nID2index.get(targetID)[1]);
+    //     nodeText = nodeText.length>15 ? nodeText.substring(0,15) : nodeText;
+    //     elements.push( {
+    //       data: {
+    //         id: targetID,
+    //         label: nodeText
+    //       }
+    //     });
+    //     nodeSet.add(targetID);
+    //   }
+    //   var color="rgb(1, 136, 203)";
+    //   // if (event_label=='BEFORE'){
+    //   //   color = 'red';
+    //   // }
+    //   // else if (event_label=='MODIFY') {
+    //   //   color = 'blue';
+    //   // }
+    //   // else if (event_label=='IDENTICAL') {
+    //   //   color = 'green';
+    //   // }
+    //   elements.push( {
+    //     data: {
+    //       source: sourcID,
+    //       target: targetID,
+    //       label: event_label,
+    //       arrow: 'triangle',
+    //       c: color
+    //     }
+    //   });
       // }
 
       // else if (event_label=='MODIFY') {
@@ -146,7 +145,7 @@ class Graph extends Component {
       //     }
       //   });
       // }
-    }
+    // }
     // Layout
     const layout = {
       name: 'dagre',
