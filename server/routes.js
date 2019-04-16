@@ -4,11 +4,18 @@ const Data = require("./models/mongo/data");
 const CaseReport = require("./models/mongo/case_report");
 const searchModule = require('./controllers/search_controller.js');
 const mongo = require('mongodb');
-
 const CaseReport2 = require("./models/mongo/case_report2");
 
-//在这里我们可以建立controller，然后在controller里做api要做的事情
+const client = require('./config/neoClient.js');
+var writeResponse = require('./helpers/response').writeResponse
+var Graph = require('./controllers/graph_controller')
+var uuidv1 = require('uuid/v1')
+
 // var HomeController = require('./controllers/home_controller.js');
+var fs=require('fs');
+var testData=fs.readFileSync('testData.json', 'utf8');
+var acrobat_graph=JSON.parse(testData);
+var bodyparser=require('body-parser');
 
 module.exports = function(app) {
     // append /api for our http requests
@@ -16,11 +23,10 @@ module.exports = function(app) {
     app.use("/api", router);
 
 
-    // 这样我们call api的时候可以把前后端交互的逻辑移到controller里,比如
     // app.get('/', HomeController.index);
-    // app.get('/getData', DataController.getData);等等
+    // app.get('/getData', DataController.getData);
 
-    /* ------------------------- Database Routers ------------------------------ */
+    /* ------------------------- Mongo Database Routers ------------------------------ */
     // this is our get method
     // this method fetches all available data in our database
     router.get("/getData", (req, res) => {
@@ -53,7 +59,7 @@ module.exports = function(app) {
         });
     });
 
-    // this is our create methid
+    // this is our create method
     // this method adds new data in our database
     router.post("/putData", (req, res) => {
         let data = new Data();
@@ -73,6 +79,45 @@ module.exports = function(app) {
             return res.json({ success: true });
         });
     });
+
+    /* ------------------------- Neo4j Database Routers ------------------------------ */
+    // this is our create method
+    // this method adds new node in our database
+    router.post("/putGraphNode", (req, res, next) => {
+        nodes = acrobat_graph.Nodes;
+        for ( var i = 0; i < nodes.length; i++ ) {
+            req.body.id = nodes[i].nodeID;
+            req.body.label = nodes[i].label;
+            req.body.entityType = nodes[i].entityType;
+            // console.log(req.body);
+            Graph.create(client.getSession(req), req.body)
+            .then(response => writeResponse(res, response))
+            .catch(next)
+        }
+        // req.body.id = uuidv1()
+        // req.body.label = 'disorder'
+        // req.body.entityType = 'symptom'
+    });
+
+    // this method adds new relationship in our database
+    router.post("/putNodeRelationship", (req, res, next) => {
+        // fakeData = {'nodes':[{'label':'disorder', 'entityType':'symptom', 'id':1}],'edges':[], 'pmid':1234};
+        req.body.id1 = '37bdded0-5fcf-11e9-aad7-b1f919ae876b'
+        req.body.id2 = '4cdc8460-5fcf-11e9-aad7-b1f919ae876b'
+        req.body.relationship = 'before'
+        console.log(req);
+        Graph.buildRelation(client.getSession(req), req.body)
+            .then(response => writeResponse(res, response))
+            .catch(next)
+    });
+
+    // this method delete nodes and relationships in our database
+    router.delete("/deleteNodes", (req, res, next) => {
+        Graph.removeAll(client.getSession(req))
+            .then(response => writeResponse(res, response))
+            .catch(next)
+    });
+
 
     /* --------------------------------- Search APIs --------------------------------------- */
     // this is the method for basic text search on the data message
@@ -102,6 +147,7 @@ module.exports = function(app) {
             return res.json({ success : true, data: data });
         });
     });
+
     /* ------------------------- Machine Learning API Routers ------------------------------ */
     router.post("/getPrediction", (req, res) => {
         const params = req.body.data;
