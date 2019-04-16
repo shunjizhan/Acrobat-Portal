@@ -9,8 +9,8 @@ class QueryBuilder extends Component {
         console.log(this.props);
         let { queries: { query1, query2, relation } } = this.props;
 
-        query1 = query1.split(' ');
-        query2 = query2? query2.split(' ') : '';
+        query1 = query1.trim().split(' ');
+        query2 = query2? query2.trim().split(' ') : '';
 
         return (
             <div id='queryBuilder' >
