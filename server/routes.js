@@ -2,7 +2,7 @@ const express = require('express');
 const axios = require('axios');
 const Data = require("./models/mongo/data");
 const CaseReport = require("./models/mongo/case_report");
-const searchModule = require('./search.js');
+const searchModule = require('./controllers/search_controller.js');
 const mongo = require('mongodb');
 
 const CaseReport2 = require("./models/mongo/case_report2");
@@ -130,7 +130,7 @@ module.exports = function(app) {
     // this get API fetches a case report stored in the mongo db that has the given id
     router.post("/getCaseReportById", (req, res) => {
         const { id } = req.body;
-        // console.log(id);
+        console.log(req,'?????');
         // console.log("get case report by id API")
         // console.log(req.body);
         // console.log(searchKey);

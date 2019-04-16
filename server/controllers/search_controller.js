@@ -1,10 +1,5 @@
-var elasticsearch=require('elasticsearch');
-
-var client = new elasticsearch.Client( {
-  hosts: [
-    'https://search-acrobate-6oayszlzcxx2isu4cxe2sea3qy.us-east-2.es.amazonaws.com'
-  ]
-});
+var client = require('./../config/EsClient.js');
+var order_slop = 120;
 
 module.exports.search = function(searchData, callback) {
   console.log(searchData, 'elasticsearch')
@@ -65,7 +60,7 @@ module.exports.search = function(searchData, callback) {
               {
                 "span_near" : {
                     "clauses" : clauses,
-                    "slop" : 120,
+                    "slop" : order_slop,
                     "in_order" : true
                 }
               }
