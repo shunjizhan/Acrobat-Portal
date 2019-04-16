@@ -11,6 +11,7 @@ const Schema = mongoose.Schema;
 */
 const CaseReportSchema = new Schema(
   {
+  	pmID		: 0,
     messages	: [],
     source_files	: [],
     modifications 	: [],
