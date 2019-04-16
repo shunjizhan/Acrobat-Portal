@@ -13,7 +13,7 @@ $red: rgb(255, 77, 77);
 $deep-red: rgb(255, 51, 51);
 $grey: #808080;
 
-
+$transfer-duration: 0.2s;
 
 /* --------------- Lengths --------------- */
 $top-bar-height: 80px;
@@ -39,3 +39,22 @@ $border-radius: 5px;
     
     &:hover { background-color: $deep-blue; }
 }
+
+.switch-mode-button-style {
+    border: 2px solid rgba($blue, 0.8);
+    cursor: pointer;
+    color: $blue;
+
+    -webkit-transition-duration: $transfer-duration;  /* Safari */
+    transition-duration: $transfer-duration;
+    
+    &:hover { 
+        background-color: $blue; 
+        color: white; 
+    }
+}
+
+
+
+
+
