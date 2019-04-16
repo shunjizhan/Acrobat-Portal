@@ -139,11 +139,11 @@ module.exports = function(app) {
 
     // this method search nodes with a relationship in our database
     router.post("/searchRelation", (req, res, next) => {
-        req.body.source = "hospital";
-        req.body.target = "visited";
-        req.body.label = "MODIFY";
+        // req.body.source = "hospital";
+        // req.body.target = "visited";
+        // req.body.label = "MODIFY";
         Graph.searchRelation(client.getSession(req), req.body)
-            .then(response => writeResponse(res, response))
+            .then(response => res.json({ success : true, data: response }))
             .catch(next)
     });
 
@@ -218,8 +218,8 @@ module.exports = function(app) {
         // console.log(req.body);
         // console.log(searchKey);
 
-        var oid = new mongo.ObjectID(id)
-        CaseReport.find( {_id : oid}, (err, caseReport) => {
+        // var oid = new mongo.ObjectID(id)
+        CaseReport.find( {pmID : parseInt(id)}, (err, caseReport) => {
             if (err) return res.send(err);
             // console.log("success");
             // console.log(caseReport);

@@ -100,7 +100,7 @@ var buildRelation = function(session, relation){
 
 var searchRelation = function(session, relation){
 	relationship = relation.label;
-	let query = `MATCH (a:Entity {label: {source}})-[:`+ relationship +`]-(b:Entity {label: {target}})
+	let query = `MATCH (a:Entity {label: {source}})-[:${relationship}]-(b:Entity {label: {target}})
 				RETURN a, b`
 
 	var readTxResultPromise = session.readTransaction(function (transaction) {
