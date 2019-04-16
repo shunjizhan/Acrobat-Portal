@@ -8,8 +8,22 @@ import './TopBar.css';
 
 class TopBar extends Component {
     state = {
-        mode: 'advanced'
+        mode: 'advanced',
+        queries: {
+            query1: '',
+            queyr2: '',
+            relation: null    
+        }
     };
+
+    handleTyping = query1 => {
+        this.setState({ query1 }); 
+    }
+
+    handleAdvancedTyping = queries => {
+        console.log(queries);
+        this.setState({ queries });
+    }
 
     switchSearchMode = () => {
         const mode = this.state.mode === 'basic'? 'advanced' : 'basic';
@@ -18,12 +32,9 @@ class TopBar extends Component {
     }
 
     render() {
-        const { 
-            text, 
-            handleSearch, handleAdvancedSearch, 
-            handleTyping, handleAdvancedTyping
-        } = this.props;
-        const { mode } = this.state;
+        const { handleSearch, handleAdvancedSearch } = this.props;
+        const { mode, queries } = this.state;
+        console.log(queries);
         return (
             <div id='topBar'>  
                 <Link to="/" id='title'>
@@ -35,7 +46,7 @@ class TopBar extends Component {
                         mode === 'basic' &&
                         <SearchBar 
                             handleSearch={ handleSearch } 
-                            handleTyping={ handleTyping } 
+                            handleTyping={ this.handleTyping } 
                             handleModeSwitch={ this.switchSearchMode } 
                         />
                     }
@@ -43,14 +54,14 @@ class TopBar extends Component {
                         mode === 'advanced' &&
                         <AdvancedSearchBar 
                             handleSearch={ handleAdvancedSearch } 
-                            handleTyping={ handleAdvancedTyping } 
+                            handleTyping={ this.handleAdvancedTyping } 
                             handleModeSwitch={ this.switchSearchMode } 
                         />
                     }
                 </div>  
 
                 <div id='query-builder-container'>
-                    { text && <QueryBuilder text={text} /> } 
+                    { (queries.query1 || queries.query2) && <QueryBuilder queries={ queries } /> } 
                 </div>         
             </div>
         );

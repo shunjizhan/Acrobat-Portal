@@ -1,14 +1,26 @@
+@import "../shared";
+
+
 #queryBuilder {
-    // padding-left:10px;
     position: relative;
     width: 100%;
     font-size: 120%;
     text-align: left;
     margin-top: 10px;
-    // background-color: #e6e6e6;
 
-    // #qbText {
-    //     padding-left: 5px;
-    //     color: #FF595E;
-    // }
+    #relation-container {
+        // text-align: center;
+        // width: 100%;
+
+        #relation {
+            display: inline-block;
+            border-top: 2px solid $orange;
+            border-bottom: 2px solid $orange;
+            // background-color: rgba($orange, 0.1);
+            padding: 5px 40px;
+            // border-radius: 3px;
+            margin: 15px 0;
+        }
+
+    }
 }

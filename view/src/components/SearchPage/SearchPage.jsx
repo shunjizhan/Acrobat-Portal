@@ -8,13 +8,8 @@ import './SearchPage.css';
 
 class SearchPage extends Component {
     state = {
-        query: '',          // real search query
-        text: '',           // text when user is typing
         results: [],
     }
-
-    handleTyping = text => this.setState({ text });
-    handleAdvancedTyping = text => console.log('advanced typing: ', text);;
 
     handleSearch = query => {
         this.setState({ query });
@@ -42,17 +37,14 @@ class SearchPage extends Component {
 
 
     render() {
-        const { text, query, results } = this.state;
+        const { query, results } = this.state;
 
         return (
             <div id='searchPage'>  
                 <div id='top-bar-container'>
                     <TopBar 
-                        text={text}
                         handleSearch={ this.handleSearch } 
-                        handleTyping={ this.handleTyping } 
                         handleAdvancedSearch={ this.handleAdvancedSearch } 
-                        handleAdvancedTyping={ this.handleAdvancedTyping } 
                     /> 
                 </div>
 

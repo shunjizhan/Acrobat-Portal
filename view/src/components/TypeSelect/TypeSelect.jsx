@@ -44,6 +44,11 @@ class TypeSelect extends Component {
 TypeSelect.propTypes = {
     typeName: PropTypes.string,
     dropDownData: PropTypes.array,
+    handleSelect: PropTypes.func
 };
+
+TypeSelect.defaultProps = {
+    handleSelect: () => {}
+}
 
 export default TypeSelect;

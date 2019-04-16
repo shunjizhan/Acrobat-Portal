@@ -12,17 +12,15 @@ class AdvancedSearchBar extends Component {
     }
 
     _handleTyping = (query, which) => {
-        // 这里直接用this.state不知道会不会有什么问题
-        // 如果有问题就deep clone this.state
-        const newState = this.state;
+        const queries = { ...this.state };
         if (which === 1) {
-            newState.query1 = query;
+            queries.query1 = query;
         } else {
-            newState.query2 = query;
+            queries.query2 = query;
         }
         
-        this.props.handleTyping(newState);
-        this.setState(newState)
+        this.props.handleTyping(queries);
+        this.setState(queries);
     }
 
     handleTyping_1 = e => this._handleTyping(e.target.value, 1);
@@ -30,23 +28,25 @@ class AdvancedSearchBar extends Component {
 
 
     handleSearch = () => {
-        // 这里直接用this.state不知道会不会有什么问题
-        // 如果有问题就deep clone this.state
-        this.props.handleSearch(this.state);
+        this.props.handleSearch({ ...this.state });
     }
 
     handleModeSwitch = () => {
-        this.props.handleModeSwitch()
+        this.props.handleModeSwitch();
     }
 
     handleSelect = key => {
-        this.setState({ relation: key })
+        const queries = { ...this.state };
+        queries.relation = key;
+        
+        this.props.handleTyping(queries);
+        this.setState(queries);
     }
 
 
     render() {
         const { relation } = this.state;
-        const allRelations = ['Before', 'After', 'Overlap'];
+        const allRelations = ['BEFORE', 'AFTER', 'OVERLAP', 'MODIFY', 'IDENTICAL', 'SUBPROCEDURE'];
         return (
         <div id='search-section'>
             <div id='advanced-search-bar'>
@@ -54,7 +54,7 @@ class AdvancedSearchBar extends Component {
                     ref="AdvancedSearchBar_1"
                     type="text" 
                     className="searchText" 
-                    placeholder="relation 1" 
+                    placeholder="Relation 1" 
                     onChange={ this.handleTyping_1 }
                 />
                 <div className='drop-down-container'>
@@ -69,7 +69,7 @@ class AdvancedSearchBar extends Component {
                     type="text" 
                     className="searchText" 
                     id="searchText_2" 
-                    placeholder="relation 2" 
+                    placeholder="Relation 2" 
                     onChange={ this.handleTyping_2 }
                 />
                 <button 
