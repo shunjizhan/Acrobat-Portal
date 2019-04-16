@@ -85,31 +85,68 @@ module.exports = function(app) {
     // this method adds new node in our database
     router.post("/putGraphNode", (req, res, next) => {
         nodes = acrobat_graph.Nodes;
-        for ( var i = 0; i < nodes.length; i++ ) {
+        const create = (nodes, i) => {
             req.body.id = nodes[i].nodeID;
             req.body.label = nodes[i].label;
             req.body.entityType = nodes[i].entityType;
-            // console.log(req.body);
+            req.body.pmID = acrobat_graph.pmID;
+            console.log(i);
+
             Graph.create(client.getSession(req), req.body)
-            .then(response => writeResponse(res, response))
+            .then(response => { 
+                i++;
+                if (i < nodes.length) {
+                    create(nodes, i);
+                }else{
+                    writeResponse(res, response);
+                }
+            })
             .catch(next)
         }
-        // req.body.id = uuidv1()
-        // req.body.label = 'disorder'
-        // req.body.entityType = 'symptom'
+        create(nodes, 0);
     });
 
     // this method adds new relationship in our database
     router.post("/putNodeRelationship", (req, res, next) => {
-        // fakeData = {'nodes':[{'label':'disorder', 'entityType':'symptom', 'id':1}],'edges':[], 'pmid':1234};
-        req.body.id1 = '37bdded0-5fcf-11e9-aad7-b1f919ae876b'
-        req.body.id2 = '4cdc8460-5fcf-11e9-aad7-b1f919ae876b'
-        req.body.relationship = 'before'
-        console.log(req);
-        Graph.buildRelation(client.getSession(req), req.body)
+        edges = acrobat_graph.Edges;
+        const buildRelation = (edges, i) => {
+            req.body.source = edges[i].source;
+            req.body.target = edges[i].target;
+            req.body.label = edges[i].label;
+            console.log(i);
+
+            Graph.buildRelation(client.getSession(req), req.body)
+            .then(response => { 
+                i++;
+                if (i < edges.length) {
+                    buildRelation(edges, i);
+                }else{
+                    writeResponse(res, response);
+                }
+            })
+            .catch(next)
+        }
+        buildRelation(edges, 0);
+
+        // req.body.source = '37bdded0-5fcf-11e9-aad7-b1f919ae876b'
+        // req.body.target = '4cdc8460-5fcf-11e9-aad7-b1f919ae876b'
+        // req.body.relationship = 'before'
+        // console.log(req);
+        // Graph.buildRelation(client.getSession(req), req.body)
+        //     .then(response => writeResponse(res, response))
+        //     .catch(next)
+    });
+
+    // this method search nodes with a relationship in our database
+    router.post("/searchRelation", (req, res, next) => {
+        req.body.source = "hospital";
+        req.body.target = "visited";
+        req.body.label = "MODIFY";
+        Graph.searchRelation(client.getSession(req), req.body)
             .then(response => writeResponse(res, response))
             .catch(next)
     });
+
 
     // this method delete nodes and relationships in our database
     router.delete("/deleteNodes", (req, res, next) => {

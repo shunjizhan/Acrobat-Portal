@@ -1,6 +1,14 @@
 var Entity = require('../models/neo4j/entity')
 
 /*
+	response functions
+*/
+var _manyEntities = function (result) {
+	console.log(result.records);
+  return result.records.map(r => (new Entity(r.get('a'))))
+}
+
+/*
 	Private Functions for return id
 */
 var _returnBySingleId = function (result) {
@@ -35,12 +43,13 @@ var _handlePayloadValidation = function (err) {
 	Public Functions for Creating nodes
 */
 var create = function (session, entity) {
-  let query = 'CREATE (c:Entity {id: {id}, entityType: {entityType}, label: {label}}) RETURN c'
+  let query = 'CREATE (c:Entity {id: {id}, entityType: {entityType}, label: {label}, pmID: {pmID}}) RETURN c'
   console.log(entity);
   var writexResultPromise = session.writeTransaction(function (transaction) {
     // used transaction will be committed automatically, no need for explicit commit/rollback
     var result = transaction.run(query, {
       id: entity.id,
+      pmID: entity.pmID,
       entityType: entity.entityType,
       label: entity.label
     })
@@ -53,11 +62,12 @@ var create = function (session, entity) {
 	Public Functions for Updating nodes
 */
 var update = function (session, entity) {
-  let query = 'MATCH (c:Entity{id: {id}}) SET c += { entityType: {entityType}, label: {label}} RETURN c'
+  let query = 'MATCH (c:Entity{id: {id}}) SET c += { entityType: {entityType}, label: {label}, pmID: {pmID}} RETURN c'
   var writexResultPromise = session.writeTransaction(function (transaction) {
     // used transaction will be committed automatically, no need for explicit commit/rollback
     var result = transaction.run(query, {
       id: entity.id,
+      pmID: entity.pmID,
       entityType: entity.entityType,
       label: entity.label
     })
@@ -72,20 +82,37 @@ var update = function (session, entity) {
 */
 var buildRelation = function(session, relation){
 	// console.log(relation)
-	var relationType = relation.relationship
-	let query = 'MATCH (u:Entity {id: {id1} }), (r:Entity {id: {id2} }) CREATE (u)-[c:'+relationType+']->(r) RETURN c'
+	var relationType = relation.label
+	let query = 'MATCH (u:Entity {id: {source} }), (r:Entity {id: {target} }) CREATE (u)-[c:'+relationType+']->(r) RETURN c'
 	console.log(query)
 	var writexResultPromise = session.writeTransaction(function (transaction) {
     // used transaction will be committed automatically, no need for explicit commit/rollback
 	   	var result = transaction.run(query, {
-	      id1: relation.id1,
-	      id2: relation.id2,
+	      source: relation.source,
+	      target: relation.target,
 	    })
 	    return result
 	})
   
   return writexResultPromise.then(_returnBySingleId).catch(_handlePayloadValidation)
   // return writexResultPromise.then(() => session.readTransaction(findRelationships).then(() => session.close()));
+}
+
+var searchRelation = function(session, relation){
+	relationship = relation.label;
+	let query = `MATCH (a:Entity {label: {source}})-[:`+ relationship +`]-(b:Entity {label: {target}})
+				RETURN a, b`
+
+	var readTxResultPromise = session.readTransaction(function (transaction) {
+		// used transaction will be committed automatically, no need for explicit commit/rollback
+		var result = transaction.run(query, {
+		  source: relation.source,
+		  target: relation.target
+		})
+		return result
+	})
+
+	return readTxResultPromise.then(_manyEntities)
 }
 
 /*
@@ -109,5 +136,6 @@ module.exports = {
   create: create,
   update: update,
   buildRelation: buildRelation,
-  removeAll: removeAll
+  removeAll: removeAll,
+  searchRelation: searchRelation
 }

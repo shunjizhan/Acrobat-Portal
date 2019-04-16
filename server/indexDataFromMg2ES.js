@@ -25,7 +25,7 @@ CaseReport.find((err, data) => {
     var body = [];
     data.forEach(function(row, id) {
              body.push({ index:  { _index: 'casereport', _type: '_doc', _id: (id+1) } });
-             body.push({ id: row._id, content: row.text});
+             body.push({ id: row._id, pmID: row.pmID, content: row.text});
         })  
     
 

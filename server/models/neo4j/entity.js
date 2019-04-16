@@ -12,6 +12,10 @@ function Entity(_node) {
   if (this.label) {
     this.label = this.label.toString();
   }
+  if (this.pmID) {
+    this.pmID = _node.properties['pmID'];
+  }
+
 }
 
 module.exports = Entity;
