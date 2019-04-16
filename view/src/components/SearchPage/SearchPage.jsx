@@ -33,6 +33,20 @@ class SearchPage extends Component {
 
     handleAdvancedSearch = queries => {
         console.log('advanced search: ', queries);
+
+        if (queries === '') { return; }
+
+        axios.post("http://localhost:3001/api/searchRelation", { source: queries.query1, target: queries.query2, label: queries.relation})
+            .then(res => { 
+                const results = res.data.data.map(info => {
+                    console.log(info)
+                    return {
+                        id: info.pmID, 
+                        text: "info._source.content info._source.content info._source.content info._source.content info._source.content"
+                    }
+                })
+                this.setState({ results }) 
+            });
     }   
 
 
