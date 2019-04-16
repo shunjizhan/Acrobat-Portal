@@ -43,6 +43,12 @@ class AdvancedSearchBar extends Component {
         this.setState(queries);
     }
 
+    handleKeyDown = (e) => {
+        if (e.key === 'Enter') {
+          this.handleSearch();
+        }
+    }
+
 
     render() {
         const { relation } = this.state;
@@ -56,6 +62,7 @@ class AdvancedSearchBar extends Component {
                     className="searchText" 
                     placeholder="Relation 1" 
                     onChange={ this.handleTyping_1 }
+                    onKeyDown={ this.handleKeyDown }
                 />
                 <div className='drop-down-container'>
                     <DropDown 
@@ -71,6 +78,7 @@ class AdvancedSearchBar extends Component {
                     id="searchText_2" 
                     placeholder="Relation 2" 
                     onChange={ this.handleTyping_2 }
+                    onKeyDown={ this.handleKeyDown }
                 />
                 <button 
                     type="submit" 

@@ -5,19 +5,19 @@ import axios from 'axios'
 import './SearchPage.css';
 
 
-
 class SearchPage extends Component {
+    // we only need to save search result here
+    // queries for display is saved at TopBar Component
+    // queries for search is saved in two SearchBar Components
+    // we pass handleSearch function directly to the Searchbar Components
     state = {
         results: [],
     }
 
     handleSearch = query => {
-        this.setState({ query });
+        console.log('basic search: ', query);
 
-        if (query === ''){
-            this.setState({ results: []});
-            return;
-        }
+        if (query === '') { return; }
 
         axios.post("http://localhost:3001/api/searchDataES", { searchKey: query })
             .then(res => { 
@@ -31,13 +31,13 @@ class SearchPage extends Component {
             });
     }
 
-    handleAdvancedSearch = query => {
-        console.log('advanced search: ', query);
+    handleAdvancedSearch = queries => {
+        console.log('advanced search: ', queries);
     }   
 
 
     render() {
-        const { query, results } = this.state;
+        const { results } = this.state;
 
         return (
             <div id='searchPage'>  
@@ -48,11 +48,10 @@ class SearchPage extends Component {
                     /> 
                 </div>
 
-                { query &&
+                { results.length > 0 &&
                     <div id='search-result-container'>
                         <SearchResults 
-                            query={query}
-                            results={results} 
+                            results={ results } 
                         />      
                     </div>  
                 }  

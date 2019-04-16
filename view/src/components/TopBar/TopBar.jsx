@@ -7,8 +7,10 @@ import './TopBar.css';
 
 
 class TopBar extends Component {
+
+    // we save queries here mainly for query builder
     state = {
-        mode: 'advanced',
+        mode: 'basic',
         queries: {
             query1: '',
             queyr2: '',
@@ -17,24 +19,28 @@ class TopBar extends Component {
     };
 
     handleTyping = query1 => {
-        this.setState({ query1 }); 
+        this.setState(prevState => ({ queries: { ...prevState.queries, query1 } })); 
     }
 
     handleAdvancedTyping = queries => {
-        console.log(queries);
+        // console.log(queries);
         this.setState({ queries });
     }
 
     switchSearchMode = () => {
         const mode = this.state.mode === 'basic'? 'advanced' : 'basic';
-        this.setState({ mode });
-        console.log(this.state);
+        const queries = {
+            query1: '',
+            queyr2: '',
+            relation: null    
+        }
+        this.setState({ mode, queries });
     }
 
     render() {
         const { handleSearch, handleAdvancedSearch } = this.props;
         const { mode, queries } = this.state;
-        console.log(queries);
+        // console.log(queries);
         return (
             <div id='topBar'>  
                 <Link to="/" id='title'>

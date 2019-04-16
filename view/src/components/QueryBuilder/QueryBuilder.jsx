@@ -6,7 +6,6 @@ import './QueryBuilder.css';
 
 class QueryBuilder extends Component {
     render() {
-        console.log(this.props);
         let { queries: { query1, query2, relation } } = this.props;
 
         query1 = query1.trim().split(' ');
@@ -45,11 +44,11 @@ QueryBuilder.propTypes = {
     queries: PropTypes.object.isRequired
 };
 
-QueryBuilder.defaultProps = {
-    queries: {
-        query1: '',
-        query2: ''
-    }
-};
+// QueryBuilder.defaultProps = {
+//     queries: {
+//         query1: '',
+//         query2: ''
+//     }
+// };
 
 export default QueryBuilder;

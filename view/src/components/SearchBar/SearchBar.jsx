@@ -22,6 +22,12 @@ class SearchBar extends Component {
         this.props.handleModeSwitch()
     }
 
+    handleKeyDown = (e) => {
+        if (e.key === 'Enter') {
+          this.handleSearch();
+        }
+    }
+
 
     render() {
         return (
@@ -33,6 +39,7 @@ class SearchBar extends Component {
                     id="searchText" 
                     placeholder="search in over 1000000+ medical case reports..." 
                     onChange={ this.handleTyping }
+                    onKeyDown={ this.handleKeyDown }
                 />
                 <button 
                     type="submit" 
