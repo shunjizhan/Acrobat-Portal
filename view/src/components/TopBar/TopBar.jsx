@@ -3,6 +3,7 @@ import SearchBar from "../SearchBar/SearchBar";
 import AdvancedSearchBar from "../AdvancedSearchBar/AdvancedSearchBar";
 import QueryBuilder from '../QueryBuilder/QueryBuilder';
 import { Link } from "react-router-dom";
+import axios from 'axios'
 import './TopBar.css';
 
 
@@ -15,11 +16,30 @@ class TopBar extends Component {
             query1: '',
             queyr2: '',
             relation: null    
+        },
+        types: {
+            // array of array
+            // 只有一句话，就是[[]]
+            // 有很多句话就是，就是[[], [], ...]
+            query1: [],     
+            queyr2: []
         }
     };
 
     handleTyping = query1 => {
-        this.setState(prevState => ({ queries: { ...prevState.queries, query1 } })); 
+        axios.post('http://localhost:3001/api/getPrediction', {
+            data: { query: query1 } 
+        })
+        .then(response => {
+            const data = response.data
+            const prediction = data.prediction
+            // console.log('prediction:', prediction);
+            this.setState(prevState => ({ 
+                queries: { ...prevState.queries, query1 },
+                types: { ...prevState.types, query1: prediction }
+            })); 
+        })
+        .catch(error => { console.log(error); });
     }
 
     handleAdvancedTyping = queries => {
@@ -39,7 +59,7 @@ class TopBar extends Component {
 
     render() {
         const { handleSearch, handleAdvancedSearch } = this.props;
-        const { mode, queries } = this.state;
+        const { mode, queries, types } = this.state;
         // console.log(queries);
         return (
             <div id='topBar'>  
@@ -67,7 +87,12 @@ class TopBar extends Component {
                 </div>  
 
                 <div id='query-builder-container'>
-                    { (queries.query1 || queries.query2) && <QueryBuilder queries={ queries } /> } 
+                    { (queries.query1 || queries.query2) && 
+                        <QueryBuilder 
+                            queries={ queries } 
+                            types={ types } 
+                        /> 
+                    } 
                 </div>         
             </div>
         );

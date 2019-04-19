@@ -7,7 +7,7 @@ import './QueryItem.css';
 
 class QueryItem extends Component {
     render() {
-        const { word } = this.props;
+        const { word, type } = this.props;
 
         return (
             <div className='query-item' >
@@ -16,7 +16,7 @@ class QueryItem extends Component {
                 </div>
                 <FontAwesomeIcon icon={['fas', 'arrow-alt-right']} />
                 <TypeSelect 
-                    typeName='Entity_Type'
+                    typeName={ type }
                     dropDownData={['norm_1', 'norm_2', 'norm_3']}
                 />
             </div>
@@ -26,6 +26,7 @@ class QueryItem extends Component {
 
 QueryItem.propTypes = {
     word: PropTypes.string,
+    type: PropTypes.string
 };
 
 export default QueryItem;
