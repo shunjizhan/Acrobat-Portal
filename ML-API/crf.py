@@ -9,7 +9,7 @@ plt.style.use('ggplot')
 from itertools import chain
 
 import nltk
-nltk.download('conll2002')
+# nltk.download('conll2002')
 import sklearn
 import scipy.stats
 from sklearn.metrics import make_scorer
@@ -135,6 +135,9 @@ def predict(test_file):
     labels.remove('O')
 
     y_pred = crf.predict(X_test)
+    print(X_test)
+    print(y_pred)
+    print('')
 
     # evaluate the model
     metrics.flat_f1_score(y_test, y_pred, average='weighted', labels=labels)
@@ -147,7 +150,21 @@ def predict(test_file):
 
 # data need to be put in /Users/shunji/nltk_data/corpora/conll2002/
 # train('all.tsv')
-predict('train_new.tsv')
+# predict('test_new.tsv')
+
+
+query = 'A 4 and a half years old male child presented to our hospital for abdominal swelling.'
+query = query.split('\n')
+query = [nltk.pos_tag(sentence.split()) for sentence in query]
+query = [sent2features(s) for s in query]
+print(query)
+
+# predict the entity types
+crf = pickle.load(open("crf_model.pkl", "r"))
+prediction = crf.predict(query)
+
+print(prediction)
+
 
 
 
