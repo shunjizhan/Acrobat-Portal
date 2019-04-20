@@ -2,3 +2,4 @@ pandas
 sklearn
 flask
 flask_restful
+nltp

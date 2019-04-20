@@ -77,94 +77,77 @@ def sent2tokens(sent):
     return [token for token, postag, label in sent]
 
 
-# prepare the raw data
 
-'''
-list of list of tuple
-每个tuple是一行
-小list是一句话
-大list是整个document
+def train(train_file):
+    # prepare the raw data
+    '''
+    list of list of tuple
+    每个tuple是一行
+    小list是一句话
+    大list是整个document
 
-[
- [(u'Chevenement', u'NP', u'B-PER'),
-  (u',', u'Fc', u'O'),
-  (u'que', u'PR', u'O'),
-  (u'se', u'P0', u'O'),
-  (u'reuni\xf3', u'VMI', u'O'),
-  (u'hoy', u'RG', u'O'),
-  (u'en', u'SP', u'O'),
-  (u'la', u'DA', u'O'),
-  (u'ciudad', u'NC', u'O'),
-  (u'espa\xf1ola', u'AQ', u'O'),
-  (u'de', u'SP', u'O'),
-  (u'Santander', u'NC', u'B-LOC')],
-  [],
-  []
-  ]
+    [
+     [(u'Chevenement', u'NP', u'B-PER'),
+      (u',', u'Fc', u'O'),
+      (u'que', u'PR', u'O'),
+      (u'se', u'P0', u'O'),
+      (u'reuni\xf3', u'VMI', u'O'),
+      (u'hoy', u'RG', u'O'),
+      (u'en', u'SP', u'O'),
+      (u'la', u'DA', u'O'),
+      (u'ciudad', u'NC', u'O'),
+      (u'espa\xf1ola', u'AQ', u'O'),
+      (u'de', u'SP', u'O'),
+      (u'Santander', u'NC', u'B-LOC')],
+      [],
+      []
+      ]
 
-'''
+    '''
+    train_sents = list(nltk.corpus.conll2002.iob_sents(train_file))
+    X_train = [sent2features(s) for s in train_sents]
+    y_train = [sent2labels(s) for s in train_sents]
 
+    # train the model
+    crf_model = sklearn_crfsuite.CRF(
+        algorithm='lbfgs',
+        c1=0.1,
+        c2=0.1,
+        max_iterations=100,
+        all_possible_transitions=True
+    )
+    crf_model.fit(X_train, y_train)
 
-train_sents = list(nltk.corpus.conll2002.iob_sents('esp.train'))
-test_sents = list(nltk.corpus.conll2002.iob_sents('esp.testb'))
-
-
-# prepare the api data
-X_train = [sent2features(s) for s in train_sents]
-y_train = [sent2labels(s) for s in train_sents]
-
-X_test = [sent2features(s) for s in test_sents]
-y_test = [sent2labels(s) for s in test_sents]
-
-'''
-# train the model
-crf_model = sklearn_crfsuite.CRF(
-    algorithm='lbfgs',
-    c1=0.1,
-    c2=0.1,
-    max_iterations=100,
-    all_possible_transitions=True
-)
-crf_model.fit(X_train, y_train)
-
-# save the model
-pickle.dump(crf_model, open("crf_model.pkl", "wb"))
-'''
+    # save the model
+    pickle.dump(crf_model, open("crf_model.pkl", "wb"))
 
 
+def predict(test_file):
+    # prepare the data
+    test_sents = list(nltk.corpus.conll2002.iob_sents(test_file))
+    X_test = [sent2features(s) for s in test_sents]
+    y_test = [sent2labels(s) for s in test_sents]
+
+    # predict
+    crf = pickle.load(open("crf_model.pkl", "r"))
+
+    labels = list(crf.classes_)
+    labels.remove('O')
+
+    y_pred = crf.predict(X_test)
+
+    # evaluate the model
+    metrics.flat_f1_score(y_test, y_pred, average='weighted', labels=labels)
+
+    sorted_labels = sorted(labels, key=lambda name: (name[1:], name[0]))
+    print(metrics.flat_classification_report(
+        y_test, y_pred, labels=sorted_labels, digits=3
+    ))
 
 
-
-
-
-# load the model
-crf = pickle.load(open("crf_model.pkl", "r"))
-
-labels = list(crf.classes_)
-labels.remove('O')
-
-
-# evaluate the model
-y_pred = crf.predict(X_test)
-# pp.pprint(test_sents[:3])
-# print('-' * 50)
-# pp.pprint(y_pred[:3])
-
-
-metrics.flat_f1_score(y_test, y_pred, average='weighted', labels=labels)
-
-sorted_labels = sorted(labels, key=lambda name: (name[1:], name[0]))
-print(metrics.flat_classification_report(
-    y_test, y_pred, labels=sorted_labels, digits=3
-))
-
-
-
-
-
-
-
-
+# data need to be put in /Users/shunji/nltk_data/corpora/conll2002/
+# train('all.tsv')
+predict('train_new.tsv')
 
 
 
