@@ -6,10 +6,10 @@ import React, { Component } from "react";
 import Cytoscape from 'cytoscape';
 import CytoscapeComponent from 'react-cytoscapejs';
 import Dagre from 'cytoscape-dagre';
-import Euler from 'cytoscape-euler';
+// import Euler from 'cytoscape-euler';
 
 Cytoscape.use(Dagre);
-Cytoscape.use(Euler);
+// Cytoscape.use(Euler);
 
 
 
