@@ -20,7 +20,7 @@ class Graph extends Component {
     // Layout
     const layout = {
       name: 'dagre',
-      nodeSep: 100,
+      nodeSep: 150,
       nodeDimensionsIncludeLabels: true
       // ranker: "longest-path"
       // name: 'breadthfirst',
@@ -39,7 +39,7 @@ class Graph extends Component {
           "width": 60,
           "height": 60,
           "shape": "data(type)",
-          "background-color": "rgb(244, 149, 65)",              // node color
+          "background-color": "data(color)",              // node color
           "text-outline-color": "rgb(244, 149, 65)",
           "text-outline-opacity": 1,
           "text-outline-width": 0,
@@ -51,7 +51,8 @@ class Graph extends Component {
         "selector": "edge",
         "style": {
           "width": 3,
-          "curve-style": "straight"
+          "curve-style": "straight",
+          'label': 'data(label)'
         }
       },
       {
