@@ -44,7 +44,7 @@ var _handlePayloadValidation = function (err) {
 */
 var create = function (session, entity) {
   let query = 'CREATE (c:Entity {id: {id}, entityType: {entityType}, label: {label}, pmID: {pmID}}) RETURN c'
-  console.log(entity);
+  // console.log(entity);
   var writexResultPromise = session.writeTransaction(function (transaction) {
     // used transaction will be committed automatically, no need for explicit commit/rollback
     var result = transaction.run(query, {

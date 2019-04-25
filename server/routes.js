@@ -84,15 +84,17 @@ module.exports = function(app) {
     // this is our create method
     // this method adds new node in our database
     router.post("/putGraphNode", (req, res, next) => {
-        nodes = acrobat_graph.Nodes;
+        const { nodes, pmID } = req.body;
+        var req2 = {};
         const create = (nodes, i) => {
-            req.body.id = nodes[i].nodeID;
-            req.body.label = nodes[i].label;
-            req.body.entityType = nodes[i].entityType;
-            req.body.pmID = acrobat_graph.pmID;
+
+            req2.body.id = nodes[i].nodeID;
+            req2.body.label = nodes[i].label;
+            req2.body.entityType = nodes[i].entityType;
+            req2.body.pmID = pmID;
             console.log(i);
 
-            Graph.create(client.getSession(req), req.body)
+            Graph.create(client.getSession(req2), req2.body)
             .then(response => { 
                 i++;
                 if (i < nodes.length) {
@@ -108,14 +110,16 @@ module.exports = function(app) {
 
     // this method adds new relationship in our database
     router.post("/putNodeRelationship", (req, res, next) => {
-        edges = acrobat_graph.Edges;
+        const { edges } = req.body;
+        var req2 = {};
+
         const buildRelation = (edges, i) => {
-            req.body.source = edges[i].source;
-            req.body.target = edges[i].target;
-            req.body.label = edges[i].label;
+            req2.body.source = edges[i].source;
+            req2.body.target = edges[i].target;
+            req2.body.label = edges[i].label;
             console.log(i);
 
-            Graph.buildRelation(client.getSession(req), req.body)
+            Graph.buildRelation(client.getSession(req2), req2.body)
             .then(response => { 
                 i++;
                 if (i < edges.length) {
@@ -213,7 +217,7 @@ module.exports = function(app) {
     // this get API fetches a case report stored in the mongo db that has the given id
     router.post("/getCaseReportById", (req, res) => {
         const { id } = req.body;
-        console.log(req,'?????');
+        // console.log(req,'?????');
         // console.log("get case report by id API")
         // console.log(req.body);
         // console.log(searchKey);
@@ -227,6 +231,22 @@ module.exports = function(app) {
         });
     });
 
+    router.get("/getCaseReportByIId/:pid", (req, res) => {
+        var id  = (req.params.pid);
+        console.log(id);
+        // console.log(req.params,'?????');
+        // console.log("get case report by id API")
+        // console.log(req.body);
+        // console.log(searchKey);
+
+        // var oid = new mongo.ObjectID(id)
+        CaseReport.find( {pmID : parseInt(id)}, (err, caseReport) => {
+            if (err) return res.send(err);
+            // console.log("success");
+            // console.log(caseReport);
+            return res.json({ success: true, data: caseReport});
+        });
+    });
     // putCaseReport
     router.post("/putCaseReport", (req, res) => {
         const {pmid, txt, ann} = req.body;
