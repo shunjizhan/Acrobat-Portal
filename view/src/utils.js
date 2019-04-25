@@ -268,3 +268,70 @@ export const buildGraphElementsFromGraphData = (graphData) => {
 	}
   	return elements;
 }
+
+
+
+
+
+
+export const combineMultiWordEntity = (entity_types, tokens) => {
+    /*  args:
+        [entity_types] array of array
+        [tokens] array of array
+        outer array is the whole article, inner array is each sentence
+
+        return type: array of object
+        [{  
+            text: 'text1',
+            type: 'type1'  
+        }, {
+            text: 'text2',
+            type: 'type2' 
+        },
+        ... 
+        {
+            text: 'text3',
+            type: 'type3' 
+        }]
+
+                                                                      */
+    const _flat = arrays => [].concat.apply([], arrays);
+
+    entity_types = _flat(entity_types);
+    tokens = _flat(tokens);
+
+    const res = [];
+    let i = entity_types.length - 1;
+    while (i >= 0) {
+        let type = entity_types[i];
+        let text = tokens[i][0];
+        if (type === 'O') {
+            res.unshift({ text, type });
+            i --;
+        } else {
+            let name;
+            [type, name] = type.split('-');
+            if (type !== 'I') {
+                res.unshift({ text, type: name });
+                i --;
+            } else {
+                // this is a multi word entity
+                // look backward until find 'B'
+                let entity = text;
+                while (type === 'I') {
+                    i --;
+                    type = entity_types[i];
+                    text = tokens[i][0];
+                    [type, name] = type.split('-');
+                    entity = text + ' ' + entity;
+                }
+
+                res.unshift({ text: entity, type: name });
+                i --;
+            }
+        }
+    }
+
+    return res;
+
+};

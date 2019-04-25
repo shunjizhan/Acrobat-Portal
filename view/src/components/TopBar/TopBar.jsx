@@ -32,7 +32,7 @@ class TopBar extends Component {
             query1: [],     
             queyr2: []
         }
-    };
+    }
 
     handleTyping = query1 => {
         axios.post('http://localhost:3001/api/getPrediction', {
@@ -41,7 +41,7 @@ class TopBar extends Component {
         .then(response => {
             const { data } = response;
             const { entity_types, tokens } = data;
-            console.log(data);
+            console.log('predction: ', data);
             
             this.setState(prevState => ({ 
                 queries: { ...prevState.queries, query1 },
