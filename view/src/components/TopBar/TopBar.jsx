@@ -17,7 +17,15 @@ class TopBar extends Component {
             queyr2: '',
             relation: null    
         },
-        types: {
+        entity_types: {
+            // array of array
+            // 只有一句话，就是[[]]
+            // 有很多句话就是，就是[[], [], ...]
+            query1: [],     
+            queyr2: []
+        },
+        tokens: {
+            // query sentence after tokenization
             // array of array
             // 只有一句话，就是[[]]
             // 有很多句话就是，就是[[], [], ...]
@@ -31,12 +39,14 @@ class TopBar extends Component {
             data: { query: query1 } 
         })
         .then(response => {
-            const data = response.data
-            const prediction = data.prediction
-            // console.log('prediction:', prediction);
+            const { data } = response;
+            const { entity_types, tokens } = data;
+            console.log(data);
+            
             this.setState(prevState => ({ 
                 queries: { ...prevState.queries, query1 },
-                types: { ...prevState.types, query1: prediction }
+                entity_types: { ...prevState.entity_types, query1: entity_types },
+                tokens: { ...prevState.tokens, query1: tokens }
             })); 
         })
         .catch(error => { console.log(error); });
@@ -59,7 +69,7 @@ class TopBar extends Component {
 
     render() {
         const { handleSearch, handleAdvancedSearch } = this.props;
-        const { mode, queries, types } = this.state;
+        const { mode, queries, entity_types, tokens } = this.state;
         // console.log(queries);
         return (
             <div id='topBar'>  
@@ -90,7 +100,8 @@ class TopBar extends Component {
                     { (queries.query1 || queries.query2) && 
                         <QueryBuilder 
                             queries={ queries } 
-                            types={ types } 
+                            types={ entity_types } 
+                            tokens={ tokens } 
                         /> 
                     } 
                 </div>         

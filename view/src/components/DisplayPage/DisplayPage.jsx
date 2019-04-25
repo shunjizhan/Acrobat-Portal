@@ -28,7 +28,8 @@ class DisplayPage extends Component {
     render () {
         const { id } = this.props.match.params;
         const { docData } = this.state;
-        console.log(docData);
+        // console.log(docData);
+        console.log(this.props.location.state);
 
         return(
             <div className='display-page'>

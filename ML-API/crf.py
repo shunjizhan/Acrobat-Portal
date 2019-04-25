@@ -9,6 +9,7 @@ plt.style.use('ggplot')
 from itertools import chain
 
 import nltk
+from nltk import pos_tag, word_tokenize
 # nltk.download('conll2002')
 import sklearn
 import scipy.stats
@@ -153,11 +154,15 @@ def predict(test_file):
 # predict('test_new.tsv')
 
 
-query = 'A 4 and a half years old male child presented to our hospital for abdominal swelling.'
-query = query.split('\n')
-query = [nltk.pos_tag(sentence.split()) for sentence in query]
-query = [sent2features(s) for s in query]
+query = 'A 33-year-old man presented with left flank dull ache.\nOn the abdominal computed tomography, a solid renal mass in the upper portion of the left kidney was identified.'
+# split each sentence
+query = query.splitlines()
 print(query)
+print('')
+# add tag to each sentence tokens
+query = [pos_tag(word_tokenize(sentence)) for sentence in query]
+print(query)
+query = [sent2features(s) for s in query]
 
 # predict the entity types
 crf = pickle.load(open("crf_model.pkl", "r"))

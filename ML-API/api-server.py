@@ -67,12 +67,16 @@ class Predict(Resource):
 
         # prepare the query
         query = params['query']
+        print('query:   ', query)
         # split each sentence
-        query = query.split('\n')
+        query = query.split('\\n')
         # add tag to each sentence tokens
-        query = [pos_tag(sentence.split()) for sentence in query]
+        print('query splited:   ', query)
+        print('')
+        query_tokens = [pos_tag(word_tokenize(sentence)) for sentence in query]
+        print(query)
         # change to machine learning api format
-        query = [sent2features(s) for s in query]
+        query = [sent2features(s) for s in query_tokens]
 
         # predict the entity types
         crf = pickle.load(open("crf_model.pkl", "r"))
@@ -80,6 +84,7 @@ class Predict(Resource):
 
         # preparing a response object and storing the model's predictions
         response = {
+            'tokens': query_tokens,
             'entity_types': prediction
         }
 

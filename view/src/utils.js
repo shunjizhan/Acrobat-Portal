@@ -105,7 +105,7 @@ const addEdgeToElements = (graphData, elements, sourceID, targetID, event_label,
 	}
 
 	if (!nodeSet.has(targetID)) {
-		console.log(targetID);
+		// console.log(targetID);
 		nodeText = graphData.text.substring(nID2index.get(targetID)[0], nID2index.get(targetID)[1]);
 		nodeText = nodeText.length>15 ? nodeText.substring(0,15) : nodeText;
 		elements.push( {
@@ -258,10 +258,10 @@ export const buildGraphElementsFromGraphData = (graphData) => {
 				const eventID_2 = graphData.equivs[i][k];
 				const sourceID = eID2nID.has(eventID_1) ? eID2nID.get(eventID_1) : eventID_1;
 				const targetID = eID2nID.has(eventID_2) ? eID2nID.get(eventID_2) : eventID_2;
-				console.log(i);
-				console.log(j);
-				console.log(k);
-				console.log(eventID_2);
+				// console.log(i);
+				// console.log(j);
+				// console.log(k);
+				// console.log(eventID_2);
 				addEdgeToElements(graphData, elements, sourceID, targetID, event_label, nodeSet, nID2index, nID2nType, nType2shape, eType2color, defaultEdgeColor);
 			}
 		}

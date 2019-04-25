@@ -8,10 +8,11 @@ class QueryBuilder extends Component {
     render() {
         let { 
             queries: { query1, query2, relation }, 
-            types 
+            types,
+            tokens
         } = this.props;
 
-        // console.log(types);
+        // console.log('tokens:', tokens.query1, tokens.query1.flat());
 
         query1 = query1.trim().split(' ');
         query2 = query2? query2.trim().split(' ') : '';
@@ -19,9 +20,10 @@ class QueryBuilder extends Component {
         return (
             <div id='queryBuilder' >
             {   
-                query1.map((word, index) => {
+                tokens.query1.flat().map((token, index) => {
                     // temporarily flat all sentence to one long sentence
-                    const types1 = types.query1.flat()[index]
+                    const types1 = types.query1.flat()[index];
+                    const word = token[0]
                     return <QueryItem 
                                 word={ word } 
                                 key={ index }
@@ -50,7 +52,8 @@ class QueryBuilder extends Component {
 
 QueryBuilder.propTypes = {
     queries: PropTypes.object.isRequired,
-    types: PropTypes.object
+    types: PropTypes.object,
+    tokens: PropTypes.object,
 };
 
 // QueryBuilder.defaultProps = {
