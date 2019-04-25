@@ -1,17 +1,31 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import QueryItem from '../QueryItem/QueryItem';
-import { combineMultiWordEntity } from '../../utils'
+import Switch from '@material-ui/core/Switch';
+import { combineMultiWordEntity } from '../../utils';
+
 import './QueryBuilder.css';
 
 
 class QueryBuilder extends Component {
+    state = {
+        showO: true
+    }
+
+    handleToggle = () => {
+        this.setState(prevState => ({
+            showO: !prevState.showO
+        }));
+    }
+
     render() {
         let { 
             queries: { query1, query2, relation },      // advanced search
             types,
             tokens
         } = this.props;
+
+        const { showO } = this.state;
 
         // console.log('tokens:', tokens.query1, tokens.query1.flat());
 
@@ -23,14 +37,24 @@ class QueryBuilder extends Component {
 
         return (
             <div id='queryBuilder' >
+
+            show type O<Switch
+                checked={ this.state.showO }
+                onChange={ this.handleToggle }
+            />
+
             {   
                 queryTokens.map((token, index) => {
                     const { text, type } = token;
-                    return <QueryItem 
-                                word={ text } 
-                                key={ index }
-                                type={ type }
-                            />
+                    if (type !== 'O' || showO) {
+                        return <QueryItem 
+                                    word={ text } 
+                                    key={ index }
+                                    type={ type }
+                                />
+                    } else {
+                        return null;
+                    }
                 })
             }
 
