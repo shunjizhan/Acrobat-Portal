@@ -7,8 +7,10 @@ const testFolder = './COMPLETE/';
 const fs = require('fs');
 
 fs.readdir(testFolder, (err, files) => {
+  // var x = 0;
   files.forEach(file => {
   	if(file.substring(file.length - 4, file.length) == '.ann'){
+  		// x++;
     	fileId = parseInt(file.substring(0, file.length - 4));
     	console.log(fileId);
     	axios.post('http://localhost:3001/api/getCaseReportById/', { id:fileId })
@@ -18,22 +20,22 @@ fs.readdir(testFolder, (err, files) => {
                 var acrobat_graph = buildGraphFromGraphData(data);
                 nodes = acrobat_graph.Nodes;
                 edges = acrobat_graph.Edges;
-                console.log(nodes);
-               	// n2, ed2, pmid2 = nodes, edges, acrobat_graph.pmID;
-               	//------------------------------------------
+                // console.log(nodes);
+                // console.log(edges);
+               	//--------------------------------------------- 
                	axios.post('http://localhost:3001/api/putGraphNode/', {nodes: nodes, pmID: acrobat_graph.pmID})
                	.then(response => {
                		console.log("response");
 	            })
-	            .catch(error => { console.log(error); });
+	            .catch(error => { console.log("error in graphnode"); });
 	            // //------------------------------------------
-	            axios.post('http://localhost:3001/api/putNodeRelationship/', {edges: edges})
+	            axios.post('http://localhost:3001/api/putNodeRelationship/', {edges: edges, pmID: acrobat_graph.pmID})
                	.then(response => {
                		console.log("response");
 	            })
-	            .catch(error => { console.log(error); });
+	            .catch(error => { console.log("error in relation"); });
             })
-            .catch(error => { console.log(error); });
+            .catch(error => { console.log("error"); });
   	}
   });
 });

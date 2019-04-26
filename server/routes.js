@@ -88,19 +88,19 @@ module.exports = function(app) {
         var req2 = {};
         const create = (nodes, i) => {
 
-            req2.body.id = nodes[i].nodeID;
-            req2.body.label = nodes[i].label;
-            req2.body.entityType = nodes[i].entityType;
-            req2.body.pmID = pmID;
-            console.log(i);
+            req2.id = nodes[i].nodeID;
+            req2.label = nodes[i].label;
+            req2.entityType = nodes[i].entityType;
+            req2.pmID = pmID;
+            // console.log(i);
 
-            Graph.create(client.getSession(req2), req2.body)
+            Graph.create(client.getSession(req2), req2)
             .then(response => { 
                 i++;
                 if (i < nodes.length) {
                     create(nodes, i);
                 }else{
-                    writeResponse(res, response);
+                    // writeResponse(res, response);
                 }
             })
             .catch(next)
@@ -110,42 +110,32 @@ module.exports = function(app) {
 
     // this method adds new relationship in our database
     router.post("/putNodeRelationship", (req, res, next) => {
-        const { edges } = req.body;
+        const { edges, pmID } = req.body;
         var req2 = {};
 
         const buildRelation = (edges, i) => {
-            req2.body.source = edges[i].source;
-            req2.body.target = edges[i].target;
-            req2.body.label = edges[i].label;
-            console.log(i);
+            req2.source = edges[i].source;
+            req2.target = edges[i].target;
+            req2.label = edges[i].label;
+            req2.pmID = pmID
+            // console.log(i);
 
-            Graph.buildRelation(client.getSession(req2), req2.body)
+            Graph.buildRelation(client.getSession(req2), req2)
             .then(response => { 
                 i++;
                 if (i < edges.length) {
                     buildRelation(edges, i);
                 }else{
-                    writeResponse(res, response);
+                    // writeResponse(res, response);
                 }
             })
             .catch(next)
         }
         buildRelation(edges, 0);
-
-        // req.body.source = '37bdded0-5fcf-11e9-aad7-b1f919ae876b'
-        // req.body.target = '4cdc8460-5fcf-11e9-aad7-b1f919ae876b'
-        // req.body.relationship = 'before'
-        // console.log(req);
-        // Graph.buildRelation(client.getSession(req), req.body)
-        //     .then(response => writeResponse(res, response))
-        //     .catch(next)
     });
 
     // this method search nodes with a relationship in our database
     router.post("/searchRelation", (req, res, next) => {
-        // req.body.source = "hospital";
-        // req.body.target = "visited";
-        // req.body.label = "MODIFY";
         Graph.searchRelation(client.getSession(req), req.body)
             .then(response => res.json({ success : true, data: response }))
             .catch(next)
