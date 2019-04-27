@@ -92,10 +92,13 @@ var buildRelation = function(session, relation){
 	      target: relation.target,
 	      pmID: relation.pmID
 	    })
-	    return result
+	    return result;
 	})
-  
-  return writexResultPromise.then(_returnBySingleId).catch(_handlePayloadValidation)
+
+  	return writexResultPromise.then(
+  	response => {
+  		console.log("in graph controller");
+  	}).catch(_handlePayloadValidation)
   // return writexResultPromise.then(() => session.readTransaction(findRelationships).then(() => session.close()));
 }
 

@@ -1,45 +1,64 @@
 const mongoose = require("mongoose");
 const CaseReport = require("./models/mongo/case_report");
 const axios = require('axios');
-const dbRoute = "mongodb://shunhahaha:z132465798@ds123050.mlab.com:23050/hahaha";
+const dbRoute = require('./config/mg_database.js').url;
 var Graph = require('./controllers/graph_controller')
 const testFolder = './COMPLETE/';
 const fs = require('fs');
 
 fs.readdir(testFolder, (err, files) => {
-  // var x = 0;
-  files.forEach(file => {
-  	if(file.substring(file.length - 4, file.length) == '.ann'){
-  		// x++;
-    	fileId = parseInt(file.substring(0, file.length - 4));
-    	console.log(fileId);
-    	axios.post('http://localhost:3001/api/getCaseReportById/', { id:fileId })
-            .then(response => {
-                data = response.data.data[0];
-                // console.log(data);
-                var acrobat_graph = buildGraphFromGraphData(data);
-                nodes = acrobat_graph.Nodes;
-                edges = acrobat_graph.Edges;
-                // console.log(nodes);
-                // console.log(edges);
-               	//--------------------------------------------- 
-               	axios.post('http://localhost:3001/api/putGraphNode/', {nodes: nodes, pmID: acrobat_graph.pmID})
-               	.then(response => {
-               		console.log("response");
-	            })
-	            .catch(error => { console.log("error in graphnode"); });
-	            // //------------------------------------------
-	            axios.post('http://localhost:3001/api/putNodeRelationship/', {edges: edges, pmID: acrobat_graph.pmID})
-               	.then(response => {
-               		console.log("response");
-	            })
-	            .catch(error => { console.log("error in relation"); });
-            })
-            .catch(error => { console.log("error"); });
-  	}
-  });
+ 	var args = process.argv.slice(2);
+	files.forEach(file => {
+		if(file.substring(file.length - 4, file.length) == '.ann'){
+		fileId = parseInt(file.substring(0, file.length - 4));
+		axios.post('http://localhost:3001/api/getCaseReportById/', { id:fileId })
+	        .then(response => {
+	            data = response.data.data[0];
+	            var acrobat_graph = buildGraphFromGraphData(data);
+	            nodes = acrobat_graph.Nodes;
+	            edges = acrobat_graph.Edges;
+	            // console.log(nodes);
+	            // console.log(edges);
+	           	nodeParam = {nodes: nodes, pmID: acrobat_graph.pmID};
+	           	edgeParam = {edges: edges, pmID: acrobat_graph.pmID};
+	           	if(args[0] == 'putGraphNode'){
+	           		axios.post('http://localhost:3001/api/putGraphNode/', nodeParam)
+		           	.then(response => {
+		           		console.log("response for nodes");     		
+		            })
+		            .catch(error => { console.log("error in graphnode"); });
+	           	}
+	           	if(args[0] == 'putNodeRelationship'){
+	           		axios.post('http://localhost:3001/api/putNodeRelationship/', edgeParam)
+	               	.then(response => {
+	               		console.log("response for edges");
+		            })
+		            .catch(error => { console.log("error in relation"); });
+	           	}
+	        })
+	        .catch(error => { console.log("error"); });
+		}
+	});
 });
-// var buildGraphFromGraphData = function (session, entity)
+
+function axiosForNodes(nodeParam, callback){
+  axios.post('http://localhost:3001/api/putGraphNode/', nodeParam)
+  .then(response => {
+  	console.log("response for nodes");
+  })
+  .catch(error => { console.log("error in nodes"); });
+  callback();
+}
+
+function axiosForEdges(edgeParam, callback){
+  axios.post('http://localhost:3001/api/putNodeRelationship/', edgeParam)
+  .then(response => {
+  	console.log("response for edges");
+  })
+  .catch(error => { console.log(error); });
+  callback();
+}
+
 var buildGraphFromGraphData = function (graphData){
 	console.log(graphData);
 	var nodes = [];

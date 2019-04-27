@@ -13,8 +13,6 @@ var uuidv1 = require('uuid/v1')
 
 // var HomeController = require('./controllers/home_controller.js');
 var fs=require('fs');
-var testData=fs.readFileSync('testData.json', 'utf8');
-var acrobat_graph=JSON.parse(testData);
 var bodyparser=require('body-parser');
 
 module.exports = function(app) {
@@ -101,6 +99,7 @@ module.exports = function(app) {
                     create(nodes, i);
                 }else{
                     // writeResponse(res, response);
+                    console.log("putGraphNode");
                 }
             })
             .catch(next)
@@ -117,7 +116,7 @@ module.exports = function(app) {
             req2.source = edges[i].source;
             req2.target = edges[i].target;
             req2.label = edges[i].label;
-            req2.pmID = pmID
+            req2.pmID = pmID;
             // console.log(i);
 
             Graph.buildRelation(client.getSession(req2), req2)
@@ -126,6 +125,7 @@ module.exports = function(app) {
                 if (i < edges.length) {
                     buildRelation(edges, i);
                 }else{
+                    console.log("buildRelation");
                     // writeResponse(res, response);
                 }
             })

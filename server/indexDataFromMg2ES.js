@@ -1,14 +1,9 @@
 const mongoose = require("mongoose");
 const elasticsearch=require('elasticsearch');
 const CaseReport = require("./models/mongo/case_report");
-
-var client = new elasticsearch.Client( {
-  hosts: [
-    'https://search-acrobate-6oayszlzcxx2isu4cxe2sea3qy.us-east-2.es.amazonaws.com'
-  ]
-});
-
-const dbRoute = "mongodb://shunhahaha:z132465798@ds123050.mlab.com:23050/hahaha";
+const esclient = require("./config/esClient");
+var client = esclient.client;
+const dbRoute = require('./config/mg_database.js').url;
 
 mongoose.connect(
   dbRoute,
@@ -80,26 +75,6 @@ CaseReport.find((err, data) => {
       console.log(err);
     });
     console.log("create index");
-    // client.indices.putMapping({
-    //    "index": "casereport",
-    //    "type": "_doc",
-    //    "body": {
-    //       "_doc": {
-    //           "properties": {
-    //               "id": {
-    //                   "type": "text"
-    //               },
-    //               "content": {
-    //                   "type": "text"
-    //               }
-    //           }
-    //       }
-    //    }
-    // }, function (err, response) {
-    //   console.log(err);
-    //    // from this point on, if you don't get any error, you may call bulk.
-    // });
-    // console.log("put mappings");
 
     client.bulk({
         body: body

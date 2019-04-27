@@ -1,7 +1,9 @@
 var elasticsearch=require('elasticsearch');
+var config = require('./app.json');
+
 var client = new elasticsearch.Client( {
   hosts: [
-    'https://search-acrobate-6oayszlzcxx2isu4cxe2sea3qy.us-east-2.es.amazonaws.com'
+    config.elasticSearchHost
   ]
 });
 

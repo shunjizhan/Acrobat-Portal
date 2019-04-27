@@ -1,0 +1,12 @@
+{
+  "serverPort":"80",
+  "sslPort":"443",
+  "mongoUsername": "shunhahaha",
+  "mongoPassword": "z132465798",
+  "mongoHost":"ds123050.mlab.com",
+  "mongoPort":"23050",
+  "neo4jUrl": "bolt://35.153.192.176:33568",
+  "neo4jUsername":"neo4j",
+  "neo4jPassword":"hits-calendars-ream",
+  "elasticSearchHost":"https://search-acrobate-6oayszlzcxx2isu4cxe2sea3qy.us-east-2.es.amazonaws.com"
+}
