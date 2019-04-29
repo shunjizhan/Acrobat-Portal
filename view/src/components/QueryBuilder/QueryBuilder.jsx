@@ -18,39 +18,38 @@ class QueryBuilder extends Component {
         }));
     }
 
+    handleEntitySelect = index => type => {
+        this.props.handleEntitySelect(index, type);
+    }
+
     render() {
-        let { 
+        const { 
             queries: { query1, query2, relation },      // advanced search
-            types,
-            tokens
+            entities,
         } = this.props;
 
         const { showO } = this.state;
-
-        // console.log('tokens:', tokens.query1, tokens.query1.flat());
-
-        // query1 = query1.trim().split(' ');
-        // query2 = query2? query2.trim().split(' ') : '';
-
-        // now only for basic search
-        const queryTokens = combineMultiWordEntity(types.query1, tokens.query1);
+        // console.log(entities);
 
         return (
             <div id='queryBuilder' >
 
-            show type O<Switch
-                checked={ this.state.showO }
-                onChange={ this.handleToggle }
-            />
+                show type O
+                <Switch
+                    checked={ this.state.showO }
+                    onChange={ this.handleToggle }
+                />
 
             {   
-                queryTokens.map((token, index) => {
-                    const { text, type } = token;
+                entities.map((token, index) => {
+                    const { label, type } = token;
+                    const handleEntitySelect = this.handleEntitySelect(index);
                     if (type !== 'O' || showO) {
                         return <QueryItem 
-                                    word={ text } 
+                                    word={ label } 
                                     key={ index }
                                     type={ type }
+                                    handleEntitySelect={ handleEntitySelect }
                                 />
                     } else {
                         return null;
@@ -66,8 +65,8 @@ class QueryBuilder extends Component {
             {   query2 &&
                 query2.map((word, index) => 
                     <QueryItem 
-                        word={word} 
-                        key={index}
+                        word={ word } 
+                        key={ index }
                     />
                 )
             }
@@ -78,8 +77,8 @@ class QueryBuilder extends Component {
 
 QueryBuilder.propTypes = {
     queries: PropTypes.object.isRequired,
-    types: PropTypes.object,
-    tokens: PropTypes.object,
+    entities: PropTypes.array,
+    handleEntitySelect: PropTypes.func
 };
 
 // QueryBuilder.defaultProps = {

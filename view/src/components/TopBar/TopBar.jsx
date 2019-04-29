@@ -4,12 +4,14 @@ import AdvancedSearchBar from "../AdvancedSearchBar/AdvancedSearchBar";
 import QueryBuilder from '../QueryBuilder/QueryBuilder';
 import { Link } from "react-router-dom";
 import axios from 'axios'
+import { combineMultiWordEntity } from '../../utils';
 import './TopBar.css';
 
 
 class TopBar extends Component {
 
-    // we save queries here mainly for query builder
+    // we save detailed query tokens here for building searching data obj
+    // user typing will update this these detailed query tokens
     state = {
         mode: 'basic',
         queries: {
@@ -17,36 +19,54 @@ class TopBar extends Component {
             queyr2: '',
             relation: null    
         },
-        entity_types: {
-            // array of array
-            // 只有一句话，就是[[]]
-            // 有很多句话就是，就是[[], [], ...]
-            query1: [],     
-            queyr2: []
+        entities: []
+        /*
+        [{  
+            label: 'label1',
+            type: 'type1'  
+        }, {
+            label: 'label2',
+            type: 'type2' 
         },
-        tokens: {
-            // query sentence after tokenization
-            // array of array
-            // 只有一句话，就是[[]]
-            // 有很多句话就是，就是[[], [], ...]
-            query1: [],     
-            queyr2: []
-        }
+        ... 
+        {
+            label: 'label3',
+            type: 'type3' 
+        }]
+        */
+
+        // entity_types: {
+        //     // array of array
+        //     // 只有一句话，就是[[]]
+        //     // 有很多句话就是，就是[[], [], ...]
+        //     query1: [],     
+        //     queyr2: []
+        // },
+        // tokens: {
+        //     // query sentence after tokenization
+        //     // array of array
+        //     // 只有一句话，就是[[]]
+        //     // 有很多句话就是，就是[[], [], ...]
+        //     query1: [],     
+        //     queyr2: []
+        // }
     }
 
     handleTyping = query1 => {
+        // go over crf API to get entities
         axios.post('http://localhost:3001/api/getPrediction', {
             data: { query: query1 } 
         })
         .then(response => {
-            const { data } = response;
-            const { entity_types, tokens } = data;
-            console.log('predction: ', data);
+            const { data: { entity_types, tokens } } = response;
+            // console.log('predction: ', data);
+            const entities = combineMultiWordEntity(entity_types, tokens);
+
             
+            // update state to save current entity tokens
             this.setState(prevState => ({ 
                 queries: { ...prevState.queries, query1 },
-                entity_types: { ...prevState.entity_types, query1: entity_types },
-                tokens: { ...prevState.tokens, query1: tokens }
+                entities
             })); 
         })
         .catch(error => { console.log(error); });
@@ -55,6 +75,21 @@ class TopBar extends Component {
     handleAdvancedTyping = queries => {
         // console.log(queries);
         this.setState({ queries });
+    }
+
+    handleAdvancedSearch = () => {
+        const { entities, queries } = this.state;
+        const queryObj = {
+            query: queries.query1,    // whole query plain text
+            entities                  // array of all entities
+        };
+        this.props.handleAdvancedSearch(queryObj);
+    }
+
+    handleEntitySelect = (index, type) => {
+        const newState = { ...this.state };
+        newState.entities[index].type = type;
+        this.setState(newState);
     }
 
     switchSearchMode = () => {
@@ -68,8 +103,8 @@ class TopBar extends Component {
     }
 
     render() {
-        const { handleSearch, handleAdvancedSearch } = this.props;
-        const { mode, queries, entity_types, tokens } = this.state;
+        const { handleAdvancedSearch } = this.props;
+        const { mode, entities, queries } = this.state;
         // console.log(queries);
         return (
             <div id='topBar'>  
@@ -81,7 +116,7 @@ class TopBar extends Component {
                     {
                         mode === 'basic' &&
                         <SearchBar 
-                            handleSearch={ handleSearch } 
+                            handleSearch={ this.handleAdvancedSearch } 
                             handleTyping={ this.handleTyping } 
                             handleModeSwitch={ this.switchSearchMode } 
                         />
@@ -100,8 +135,8 @@ class TopBar extends Component {
                     { (queries.query1 || queries.query2) && 
                         <QueryBuilder 
                             queries={ queries } 
-                            types={ entity_types } 
-                            tokens={ tokens } 
+                            entities={ entities }
+                            handleEntitySelect={ this.handleEntitySelect }
                         /> 
                     } 
                 </div>         

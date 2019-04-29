@@ -282,15 +282,15 @@ export const combineMultiWordEntity = (entity_types, tokens) => {
 
         return type: array of object
         [{  
-            text: 'text1',
+            label: 'label1',
             type: 'type1'  
         }, {
-            text: 'text2',
+            label: 'label2',
             type: 'type2' 
         },
         ... 
         {
-            text: 'text3',
+            label: 'label3',
             type: 'type3' 
         }]
 
@@ -304,29 +304,29 @@ export const combineMultiWordEntity = (entity_types, tokens) => {
     let i = entity_types.length - 1;
     while (i >= 0) {
         let type = entity_types[i];
-        let text = tokens[i][0];
+        let label = tokens[i][0];
         if (type === 'O') {
-            res.unshift({ text, type });
+            res.unshift({ label, type });
             i --;
         } else {
             let name;
             [type, name] = type.split('-');
             if (type !== 'I') {
-                res.unshift({ text, type: name });
+                res.unshift({ label, type: name });
                 i --;
             } else {
                 // this is a multi word entity
                 // look backward until find 'B'
-                let entity = text;
+                let entity = label;
                 while (type === 'I') {
                     i --;
                     type = entity_types[i];
-                    text = tokens[i][0];
+                    label = tokens[i][0];
                     [type, name] = type.split('-');
-                    entity = text + ' ' + entity;
+                    entity = label + ' ' + entity;
                 }
 
-                res.unshift({ text: entity, type: name });
+                res.unshift({ label: entity, type: name });
                 i --;
             }
         }

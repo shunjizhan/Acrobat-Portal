@@ -34,8 +34,8 @@ class SearchPage extends Component {
             });
     }
 
-    handleAdvancedSearch = queries => {
-        console.log('advanced search: ', queries);
+    handleAdvancedSearch = queryObj => {
+        console.log('advanced search: ', queryObj);
     }   
 
 

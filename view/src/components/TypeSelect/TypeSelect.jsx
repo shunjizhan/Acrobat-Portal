@@ -11,25 +11,39 @@ import './TypeSelect.css';
                                             ----- */
 class TypeSelect extends Component {
     state = {
-        current: this.props.dropDownData[0]
+        currentType: this.props.typeName,
+        currentNorm: 'norm_1',
     }
 
-    handleSelect = key => {
-        this.setState({ current: key });
-        this.props.handleSelect();
+    handleSelectType = key => {
+        this.props.handleEntitySelect(key);
+        // this.props.handleSelect();
+    }
+
+    handleSelectNorm = key => {
+        this.setState({ currentNorm: key });
+        // this.props.handleSelect();
     }
 
     render() {
-        const { typeName, dropDownData } = this.props;
+        const { typeName } = this.props;
+        const typeDropDownData = ['type_1', 'type_2', 'type_3'];
+        const normDropDownData = ['norm_1', 'norm_2', 'norm_3'];
 
         return (
             <div className='type-select' >
-                { typeName }
                 <span className='drop-down-container'>
                     <DropDown 
-                        handleSelect={this.handleSelect}
-                        dropDownData={dropDownData}
-                        current={this.state.current}
+                        handleSelect={ this.handleSelectType }
+                        dropDownData={ typeDropDownData }
+                        current={ typeName }
+                    />
+                </span>
+                <span className='drop-down-container'>
+                    <DropDown 
+                        handleSelect={ this.handleSelectNorm }
+                        dropDownData={ normDropDownData }
+                        current={ this.state.currentNorm }
                     />
                 </span>
                 <FontAwesomeIcon 
@@ -43,7 +57,6 @@ class TypeSelect extends Component {
 
 TypeSelect.propTypes = {
     typeName: PropTypes.string,
-    dropDownData: PropTypes.array,
     handleSelect: PropTypes.func
 };
 

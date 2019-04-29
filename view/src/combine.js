@@ -3168,15 +3168,15 @@ const combineMultiWordEntity = (entity_types, tokens) => {
 
         return type: array of object
         [{  
-            text: 'text1',
+            label: 'text1',
             type: 'type1'  
         }, {
-            text: 'text2',
+            label: 'text2',
             type: 'type2' 
         },
         ... 
         {
-            text: 'text3',
+            label: 'text3',
             type: 'type3' 
         }]
 
@@ -3212,7 +3212,7 @@ const combineMultiWordEntity = (entity_types, tokens) => {
                     entity = text + ' ' + entity;
                 }
 
-                res.unshift({ text: entity, type: name });
+                res.unshift({ label: entity, type: name });
                 i --;
             }
         }
