@@ -77,14 +77,16 @@ class TopBar extends Component {
         this.setState({ queries });
     }
 
-    handleAdvancedSearch = () => {
+    handleSearch = () => {
         const { entities, queries } = this.state;
         const queryObj = {
             query: queries.query1,    // whole query plain text
             entities                  // array of all entities
         };
-        this.props.handleAdvancedSearch(queryObj);
+        this.props.handleSearch(queryObj);
     }
+
+    handleAdvancedSearch = queries => this.props.handleAdvancedSearch(queries);
 
     handleEntitySelect = (index, type) => {
         const newState = { ...this.state };
@@ -103,7 +105,6 @@ class TopBar extends Component {
     }
 
     render() {
-        const { handleAdvancedSearch } = this.props;
         const { mode, entities, queries } = this.state;
         // console.log(queries);
         return (
@@ -116,7 +117,7 @@ class TopBar extends Component {
                     {
                         mode === 'basic' &&
                         <SearchBar 
-                            handleSearch={ this.handleAdvancedSearch } 
+                            handleSearch={ this.handleSearch } 
                             handleTyping={ this.handleTyping } 
                             handleModeSwitch={ this.switchSearchMode } 
                         />
@@ -124,7 +125,7 @@ class TopBar extends Component {
                     {
                         mode === 'advanced' &&
                         <AdvancedSearchBar 
-                            handleSearch={ handleAdvancedSearch } 
+                            handleSearch={ this.handleAdvancedSearch } 
                             handleTyping={ this.handleAdvancedTyping } 
                             handleModeSwitch={ this.switchSearchMode } 
                         />
@@ -132,7 +133,7 @@ class TopBar extends Component {
                 </div>  
 
                 <div id='query-builder-container'>
-                    { (queries.query1 || queries.query2) && 
+                    { mode === 'basic' && 
                         <QueryBuilder 
                             queries={ queries } 
                             entities={ entities }

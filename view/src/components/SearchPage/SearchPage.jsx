@@ -13,29 +13,48 @@ class SearchPage extends Component {
         results: [],
     }
 
-    handleSearch = query => {
-        console.log(query);
-        this.setState({ query });
+    // handleSearch = query => {
+    //     console.log(query);
+    //     this.setState({ query });
 
-        if (query === ''){
-            this.setState({ results: []});
-            return;
-        }
+    //     if (query === ''){
+    //         this.setState({ results: []});
+    //         return;
+    //     }
 
-        axios.post("http://localhost:3001/api/searchDataES", { searchKey: query })
+    //     axios.post("http://localhost:3001/api/searchDataES", { searchKey: query })
+    //         .then(res => { 
+    //             const results = res.data.data.map(info => {
+    //                 return {
+    //                     id: info._source.id, 
+    //                     text: info._source.content
+    //                 }
+    //             })
+    //             this.setState({ results }) 
+    //         });
+    // }
+
+    handleAdvancedSearch = queries => {
+        console.log('advanced search: ', queries);
+
+        if (queries === '') { return; }
+
+        axios.post("http://localhost:3001/api/searchRelation", { source: queries.query1, target: queries.query2, label: queries.relation})
             .then(res => { 
                 const results = res.data.data.map(info => {
+                    console.log(info)
                     return {
-                        id: info._source.id, 
-                        text: info._source.content
+                        id: info.pmID, 
+                        text: "info._source.content info._source.content info._source.content info._source.content info._source.content"
                     }
                 })
                 this.setState({ results }) 
-            });
-    }
+            })
+            .catch(err => console.log(err));
+    }   
 
-    handleAdvancedSearch = queryObj => {
-        console.log('advanced search: ', queryObj);
+    handleSearch = queryObj => {
+        console.log('basic search: ', queryObj);
     }   
 
 
