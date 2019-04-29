@@ -27,7 +27,21 @@ class TypeSelect extends Component {
 
     render() {
         const { typeName } = this.props;
-        const typeDropDownData = ['type_1', 'type_2', 'type_3'];
+        const typeDropDownData = [
+            'Age',
+            'Sex',
+            'Disease_disorder',
+            'Nonbiological_location',
+            'Detailed_description',
+            'Duration',
+            'Therapeutic_procedure',
+            'Sign_symptom',
+            'Lab_value',
+            'Dosage',
+            'Medication',
+            'Severity',
+            'Frequency'
+        ];
         const normDropDownData = ['norm_1', 'norm_2', 'norm_3'];
 
         return (
