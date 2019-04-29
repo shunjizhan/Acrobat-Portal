@@ -253,17 +253,17 @@ export const buildGraphElementsFromGraphData = (graphData) => {
 	for (i=0; i < graphData.equivs.length; i++) {
 		const event_label = graphData.equivs[i][1];
 		for (var j=2; j< graphData.equivs[i].length-1; j++) {
-			for (var k=j+1; k<graphData.equivs[i].length; k++) {
+			// for (var k=j+1; k<graphData.equivs[i].length; k++) {
+				var k=j+1;
 				const eventID_1 = graphData.equivs[i][j];
 				const eventID_2 = graphData.equivs[i][k];
 				const sourceID = eID2nID.has(eventID_1) ? eID2nID.get(eventID_1) : eventID_1;
 				const targetID = eID2nID.has(eventID_2) ? eID2nID.get(eventID_2) : eventID_2;
-				// console.log(i);
-				// console.log(j);
-				// console.log(k);
-				// console.log(eventID_2);
+
 				addEdgeToElements(graphData, elements, sourceID, targetID, event_label, nodeSet, nID2index, nID2nType, nType2shape, eType2color, defaultEdgeColor);
-			}
+				addEdgeToElements(graphData, elements, targetID, sourceID, event_label, nodeSet, nID2index, nID2nType, nType2shape, eType2color, defaultEdgeColor);
+
+			// }
 		}
 	}
   	return elements;

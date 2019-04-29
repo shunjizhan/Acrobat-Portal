@@ -29,12 +29,12 @@ class Result extends Component {
 
 Result.propTypes = {
     text: PropTypes.string,
-    id: PropTypes.string,
+    id: PropTypes.number,
 };
 
 Result.defaultProps = {
     text: 'I do not have text ',
-    id: '12345' 
+    id: 12345 
 }
 
 export default Result;

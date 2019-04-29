@@ -13,8 +13,6 @@ var uuidv1 = require('uuid/v1')
 
 // var HomeController = require('./controllers/home_controller.js');
 var fs=require('fs');
-var testData=fs.readFileSync('testData.json', 'utf8');
-var acrobat_graph=JSON.parse(testData);
 var bodyparser=require('body-parser');
 
 module.exports = function(app) {
@@ -84,21 +82,24 @@ module.exports = function(app) {
     // this is our create method
     // this method adds new node in our database
     router.post("/putGraphNode", (req, res, next) => {
-        nodes = acrobat_graph.Nodes;
+        const { nodes, pmID } = req.body;
+        var req2 = {};
         const create = (nodes, i) => {
-            req.body.id = nodes[i].nodeID;
-            req.body.label = nodes[i].label;
-            req.body.entityType = nodes[i].entityType;
-            req.body.pmID = acrobat_graph.pmID;
-            console.log(i);
 
-            Graph.create(client.getSession(req), req.body)
+            req2.id = nodes[i].nodeID;
+            req2.label = nodes[i].label;
+            req2.entityType = nodes[i].entityType;
+            req2.pmID = pmID;
+            // console.log(i);
+
+            Graph.create(client.getSession(req2), req2)
             .then(response => { 
                 i++;
                 if (i < nodes.length) {
                     create(nodes, i);
                 }else{
-                    writeResponse(res, response);
+                    // writeResponse(res, response);
+                    console.log("putGraphNode");
                 }
             })
             .catch(next)
@@ -108,40 +109,33 @@ module.exports = function(app) {
 
     // this method adds new relationship in our database
     router.post("/putNodeRelationship", (req, res, next) => {
-        edges = acrobat_graph.Edges;
-        const buildRelation = (edges, i) => {
-            req.body.source = edges[i].source;
-            req.body.target = edges[i].target;
-            req.body.label = edges[i].label;
-            console.log(i);
+        const { edges, pmID } = req.body;
+        var req2 = {};
 
-            Graph.buildRelation(client.getSession(req), req.body)
+        const buildRelation = (edges, i) => {
+            req2.source = edges[i].source;
+            req2.target = edges[i].target;
+            req2.label = edges[i].label;
+            req2.pmID = pmID;
+            // console.log(i);
+
+            Graph.buildRelation(client.getSession(req2), req2)
             .then(response => { 
                 i++;
                 if (i < edges.length) {
                     buildRelation(edges, i);
                 }else{
-                    writeResponse(res, response);
+                    console.log("buildRelation");
+                    // writeResponse(res, response);
                 }
             })
             .catch(next)
         }
         buildRelation(edges, 0);
-
-        // req.body.source = '37bdded0-5fcf-11e9-aad7-b1f919ae876b'
-        // req.body.target = '4cdc8460-5fcf-11e9-aad7-b1f919ae876b'
-        // req.body.relationship = 'before'
-        // console.log(req);
-        // Graph.buildRelation(client.getSession(req), req.body)
-        //     .then(response => writeResponse(res, response))
-        //     .catch(next)
     });
 
     // this method search nodes with a relationship in our database
     router.post("/searchRelation", (req, res, next) => {
-        // req.body.source = "hospital";
-        // req.body.target = "visited";
-        // req.body.label = "MODIFY";
         Graph.searchRelation(client.getSession(req), req.body)
             .then(response => res.json({ success : true, data: response }))
             .catch(next)
@@ -213,7 +207,7 @@ module.exports = function(app) {
     // this get API fetches a case report stored in the mongo db that has the given id
     router.post("/getCaseReportById", (req, res) => {
         const { id } = req.body;
-        console.log(req,'?????');
+        // console.log(req,'?????');
         // console.log("get case report by id API")
         // console.log(req.body);
         // console.log(searchKey);
@@ -227,6 +221,22 @@ module.exports = function(app) {
         });
     });
 
+    router.get("/getCaseReportByIId/:pid", (req, res) => {
+        var id  = (req.params.pid);
+        console.log(id);
+        // console.log(req.params,'?????');
+        // console.log("get case report by id API")
+        // console.log(req.body);
+        // console.log(searchKey);
+
+        // var oid = new mongo.ObjectID(id)
+        CaseReport.find( {pmID : parseInt(id)}, (err, caseReport) => {
+            if (err) return res.send(err);
+            // console.log("success");
+            // console.log(caseReport);
+            return res.json({ success: true, data: caseReport});
+        });
+    });
     // putCaseReport
     router.post("/putCaseReport", (req, res) => {
         const {pmid, txt, ann} = req.body;

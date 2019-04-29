@@ -17,6 +17,7 @@
     "bootstrap": "^4.3.1",
     "cytoscape": "^3.5.2",
     "cytoscape-dagre": "^2.2.2",
+    "cytoscape-klay": "^3.1.2",
     "prop-types": "^15.7.2",
     "react": "^16.7.0",
     "react-bootstrap": "^1.0.0-beta.6",

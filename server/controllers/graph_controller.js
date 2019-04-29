@@ -44,7 +44,7 @@ var _handlePayloadValidation = function (err) {
 */
 var create = function (session, entity) {
   let query = 'CREATE (c:Entity {id: {id}, entityType: {entityType}, label: {label}, pmID: {pmID}}) RETURN c'
-  console.log(entity);
+  // console.log(entity);
   var writexResultPromise = session.writeTransaction(function (transaction) {
     // used transaction will be committed automatically, no need for explicit commit/rollback
     var result = transaction.run(query, {
@@ -83,18 +83,22 @@ var update = function (session, entity) {
 var buildRelation = function(session, relation){
 	// console.log(relation)
 	var relationType = relation.label
-	let query = 'MATCH (u:Entity {id: {source} }), (r:Entity {id: {target} }) CREATE (u)-[c:'+relationType+']->(r) RETURN c'
+	let query = 'MATCH (u:Entity {id: {source}, pmID: {pmID} }), (r:Entity {id: {target}, pmID: {pmID} }) CREATE (u)-[c:'+relationType+']->(r) RETURN c'
 	console.log(query)
 	var writexResultPromise = session.writeTransaction(function (transaction) {
     // used transaction will be committed automatically, no need for explicit commit/rollback
 	   	var result = transaction.run(query, {
 	      source: relation.source,
 	      target: relation.target,
+	      pmID: relation.pmID
 	    })
-	    return result
+	    return result;
 	})
-  
-  return writexResultPromise.then(_returnBySingleId).catch(_handlePayloadValidation)
+
+  	return writexResultPromise.then(
+  	response => {
+  		console.log("in graph controller");
+  	}).catch(_handlePayloadValidation)
   // return writexResultPromise.then(() => session.readTransaction(findRelationships).then(() => session.close()));
 }
 
