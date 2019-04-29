@@ -8,6 +8,37 @@ export const buildFontAwesomeLib = () => {
     library.add(fal, far, fas, fab)
 };
 
+const addEdge = function (graphData, nodes, edges, sourceID, targetID, event_label, nodeSet, nID2index, nID2nType){
+	var nodeText;
+	if (!nodeSet.has(sourceID)) {
+		nodeText = graphData.text.substring(nID2index.get(sourceID)[0], nID2index.get(sourceID)[1]);
+
+		nodes.push( {
+			nodeID: sourceID,
+			label: nodeText,
+			entityType: nID2nType.get(sourceID)
+		});
+		nodeSet.add(sourceID);
+	}
+
+	if (!nodeSet.has(targetID)) {
+	nodeText = graphData.text.substring(nID2index.get(targetID)[0], nID2index.get(targetID)[1]);
+
+		nodes.push( {
+			nodeID: targetID,
+			label: nodeText,
+			entityType: nID2nType.get(targetID)
+		});
+		nodeSet.add(targetID);
+	}
+
+	edges.push( {
+		source: sourceID,
+		target: targetID,
+		label: event_label
+	});
+}
+
 export const buildGraphFromGraphData = (graphData) => {
 	var nodes = [];
 	var edges = [];
@@ -56,35 +87,20 @@ export const buildGraphFromGraphData = (graphData) => {
       const sourceID = eID2nID.has(eventID_1) ? eID2nID.get(eventID_1) : eventID_1;
       const targetID = eID2nID.has(eventID_2) ? eID2nID.get(eventID_2) : eventID_2;
 
-      var nodeText;
-      if (!nodeSet.has(sourceID)) {
-        nodeText = graphData.text.substring(nID2index.get(sourceID)[0], nID2index.get(sourceID)[1]);
+      addEdge(graphData, nodes, edges, sourceID, targetID, event_label, nodeSet, nID2index, nID2nType); 
+  	}
 
-        nodes.push( {
-        	nodeID: sourceID,
-        	label: nodeText,
-        	entityType: nID2nType.get(sourceID)
-        })
-        nodeSet.add(sourceID);
-      }
+  	for (i=0; i < graphData.equivs.length; i++) {
+	   const eventID_1 = graphData.equivs[i][2][0][1];
+	   const eventID_2 = graphData.equivs[i][2][1][1];
+	   const event_label = graphData.equivs[i][1];
 
-      if (!nodeSet.has(targetID)) {
-        nodeText = graphData.text.substring(nID2index.get(targetID)[0], nID2index.get(targetID)[1]);
+	   const sourceID = eID2nID.has(eventID_1) ? eID2nID.get(eventID_1) : eventID_1;
+	   const targetID = eID2nID.has(eventID_2) ? eID2nID.get(eventID_2) : eventID_2;
 
-        nodes.push( {
-        	nodeID: targetID,
-        	label: nodeText,
-        	entityType: nID2nType.get(targetID)
-        })
-        nodeSet.add(targetID);
-      }
+	   addEdge(graphData, nodes, edges, sourceID, targetID, event_label, nodeSet, nID2index, nID2nType);
+	 }
 
-      edges.push( {
-      	source: sourceID,
-      	target: targetID,
-      	label: event_label
-      });
-  }
 	return {Nodes: nodes, Edges: edges, pmID: pmID};
 }
 
@@ -105,7 +121,6 @@ const addEdgeToElements = (graphData, elements, sourceID, targetID, event_label,
 	}
 
 	if (!nodeSet.has(targetID)) {
-		// console.log(targetID);
 		nodeText = graphData.text.substring(nID2index.get(targetID)[0], nID2index.get(targetID)[1]);
 		nodeText = nodeText.length>15 ? nodeText.substring(0,15) : nodeText;
 		elements.push( {
@@ -155,13 +170,13 @@ export const buildGraphElementsFromGraphData = (graphData) => {
 			// ["type", "rhomboid"],
 			// ["type", "diamond"],
 			// ["type", "pentagon"],
-		 // 	["type", "hexagon"],
-		 // 	["type", "concave-hexagon"],
-		 // 	["type", "heptagon"],
-		 // 	["type", "octagon"],
-		 // 	["type", "star"],
-		 // 	["type", "tag"],
-		 // 	["type", "vee"],
+		 	// ["type", "hexagon"],
+		 	// ["type", "concave-hexagon"],
+		 	// ["type", "heptagon"],
+		 	// ["type", "octagon"],
+		 	// ["type", "star"],
+		 	// ["type", "tag"],
+		 	// ["type", "vee"],
 	 	["Age", "circle"],											// Entities
 	 	["Sex", "ellipse"],
 	 	["History", "ellipse"],
@@ -239,7 +254,6 @@ export const buildGraphElementsFromGraphData = (graphData) => {
 		const event_label = graphData.relations[i][1];
 		const sourceID = eID2nID.has(eventID_1) ? eID2nID.get(eventID_1) : eventID_1;
 		const targetID = eID2nID.has(eventID_2) ? eID2nID.get(eventID_2) : eventID_2;
-
 		// SWAP AFTER TO BEFORE
 		if (event_label=='AFTER') {
 			var temp = sourceID;
@@ -253,16 +267,12 @@ export const buildGraphElementsFromGraphData = (graphData) => {
 	for (i=0; i < graphData.equivs.length; i++) {
 		const event_label = graphData.equivs[i][1];
 		for (var j=2; j< graphData.equivs[i].length-1; j++) {
-			// for (var k=j+1; k<graphData.equivs[i].length; k++) {
-				var k=j+1;
-				const eventID_1 = graphData.equivs[i][j];
-				const eventID_2 = graphData.equivs[i][k];
-				const sourceID = eID2nID.has(eventID_1) ? eID2nID.get(eventID_1) : eventID_1;
-				const targetID = eID2nID.has(eventID_2) ? eID2nID.get(eventID_2) : eventID_2;
-				addEdgeToElements(graphData, elements, sourceID, targetID, event_label, nodeSet, nID2index, nID2nType, nType2shape, eType2color, defaultEdgeColor);
-				addEdgeToElements(graphData, elements, targetID, sourceID, event_label, nodeSet, nID2index, nID2nType, nType2shape, eType2color, defaultEdgeColor);
-
-			// }
+			var k=j+1;
+			const eventID_1 = graphData.equivs[i][j];
+			const eventID_2 = graphData.equivs[i][k];
+			const sourceID = eID2nID.has(eventID_1) ? eID2nID.get(eventID_1) : eventID_1;
+			const targetID = eID2nID.has(eventID_2) ? eID2nID.get(eventID_2) : eventID_2;
+			addEdgeToElements(graphData, elements, sourceID, targetID, event_label, nodeSet, nID2index, nID2nType, nType2shape, eType2color, defaultEdgeColor);
 		}
 	}
   	return elements;
