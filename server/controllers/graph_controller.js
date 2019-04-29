@@ -4,8 +4,11 @@ var Entity = require('../models/neo4j/entity')
 	response functions
 */
 var _manyEntities = function (result) {
-	console.log(result.records);
-  return result.records.map(r => (new Entity(r.get('a'))))
+	// console.log(result.records);
+	console.log(result.records.map(r => ({ pmID: r.get('a').properties.pmID, entities: r.keys.map(k => r.get(k).properties)})));
+	// console.log(result.records.map(r => (new Entity(r.get('a')))));          // r._fields[0].properties
+	return result.records.map(r => ({ pmID: r.get('a').properties.pmID, entities: r.keys.map(k => r.get(k).properties)}));
+ 	// return result.records.map(r => (new Entity(r.get('a'))))
 }
 
 /*
@@ -113,6 +116,7 @@ var searchRelation = function(session, relation){
 		  source: relation.source,
 		  target: relation.target
 		})
+		console.log(result);
 		return result
 	})
 
