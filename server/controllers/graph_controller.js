@@ -4,11 +4,26 @@ var Entity = require('../models/neo4j/entity')
 	response functions
 */
 var _manyEntities = function (result) {
-	// console.log(result.records);
-	console.log(result.records.map(r => ({ pmID: r.get('a').properties.pmID, entities: r.keys.map(k => r.get(k).properties)})));
-	// console.log(result.records.map(r => (new Entity(r.get('a')))));          // r._fields[0].properties
-	return result.records.map(r => ({ pmID: r.get('a').properties.pmID, entities: r.keys.map(k => r.get(k).properties)}));
- 	// return result.records.map(r => (new Entity(r.get('a'))))
+  // console.log(result.records);
+  // console.log(result.records.map(r => ({ pmID: r.get('a').properties.pmID, entities: r.keys.map(k => r.get(k).properties.id)})));
+  // console.log(result.records.map(r => (new Entity(r.get('a')))));          // r._fields[0].properties
+  res = result.records.map(r => ({ pmID: r.get('a').properties.pmID, entities: r.keys.map(k => r.get(k).properties.id)}));
+  var dict = new Object();
+  for (var i = 0; i < res.length; i++) {
+    var pmID = res[i].pmID;
+    if (!dict.hasOwnProperty(pmID)){
+      dict[pmID] = new Object();
+      dict[pmID].pmID = pmID;
+      dict[pmID].entities = [];
+      dict[pmID].entities.push(res[i].entities);
+    } else{
+        dict[pmID].entities.push(res[i].entities);
+    }
+  }
+  console.log(Object.values(dict));
+  return Object.values(dict);
+  // return result.records.map(r => ({ pmID: r.get('a').properties.pmID, entities: r.keys.map(k => r.get(k).properties)}));
+  	// return result.records.map(r => (new Entity(r.get('a'))))
 }
 
 /*
@@ -107,9 +122,20 @@ var buildRelation = function(session, relation){
 
 var searchRelation = function(session, relation){
 	relationship = relation.label;
-	let query = `MATCH (a:Entity {label: {source}})-[:${relationship}]-(b:Entity {label: {target}})
-				RETURN a, b`
-
+  source = relation.source;
+  target = relation.target;
+  var query = ''
+  if(source == ''){
+    query = `MATCH (a:Entity)-[:${relationship}]-(b:Entity {label: {target}})
+        RETURN a, b`
+  }else if(target == ''){
+    query = `MATCH (a:Entity {label: {source}})-[:${relationship}]-(b:Entity)
+        RETURN a, b`
+  }else{
+    query = `MATCH (a:Entity {label: {target}})-[:${relationship}]-(b:Entity {label: {target}})
+        RETURN a, b`
+  }
+  console.log(query);
 	var readTxResultPromise = session.readTransaction(function (transaction) {
 		// used transaction will be committed automatically, no need for explicit commit/rollback
 		var result = transaction.run(query, {
