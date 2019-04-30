@@ -10,7 +10,7 @@ class SearchBar extends Component {
 
     handleTyping = e => {
         const query = e.target.value;
-        this.setState({query});
+        this.setState({ query });
         this.props.handleTyping(query);
     }
 

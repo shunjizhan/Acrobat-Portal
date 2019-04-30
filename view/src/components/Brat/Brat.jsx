@@ -46,13 +46,13 @@ class Brat extends Component {
 
 
     render () {
-        const { text, _id } = this.props.docData;
+        const { text, pmID } = this.props.docData;
 
         return(
             <div className='brat'>
                 <div className='brat-intro'>
                     <FontAwesomeIcon icon={['fal', 'file-alt']}/>
-                    Details about case report <span className='report-id'>{ _id }</span>
+                    Details about case report <span className='report-id'>{ pmID }</span>
                 </div>
 
                 <div className='report-plain-text'>{ text }</div>

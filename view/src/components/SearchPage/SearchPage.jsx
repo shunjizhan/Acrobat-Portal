@@ -11,6 +11,7 @@ class SearchPage extends Component {
     // queries for search is saved in (advanced) search
     state = {
         results: [],
+        queries: null
     }
 
     // handleSearch = query => {
@@ -45,10 +46,14 @@ class SearchPage extends Component {
                     console.log(info)
                     return {
                         id: info.pmID, 
-                        text: "info._source.content info._source.content info._source.content info._source.content info._source.content"
+                        entities: info.entities,
+                        previewText: "info._source.content info._source.content info._source.content info._source.content info._source.content"
                     }
                 })
-                this.setState({ results }) 
+                this.setState({ 
+                    queries,
+                    results 
+                }) 
             })
             .catch(err => console.log(err));
     }   
@@ -59,7 +64,7 @@ class SearchPage extends Component {
 
 
     render() {
-        const { query, results } = this.state;
+        const { queries, results } = this.state;
 
         return (
             <div id='searchPage'>  
@@ -70,11 +75,11 @@ class SearchPage extends Component {
                     /> 
                 </div>
 
-                { query &&
+                { results.length > 0 &&
                     <div id='search-result-container'>
                         <SearchResults 
-                            query={query}
-                            results={results} 
+                            queries={ queries }
+                            results={ results } 
                         />      
                     </div>  
                 }  
