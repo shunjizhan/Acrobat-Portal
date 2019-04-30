@@ -7,7 +7,10 @@ import './Result.css';
 
 class Result extends Component {
     render() {
-        const { text, id } = this.props;
+        const { 
+            queries,
+            displayData: { previewText, id, entities }
+        } = this.props;
         const displayPath = `search/${id}`;
 
         return (
@@ -18,9 +21,10 @@ class Result extends Component {
                     <Link to={{
                       pathname: displayPath,
                       state: {
-                        query: 'aaaaaaaa'
+                        entities,
+                        queries
                       }
-                    }}>{text}</Link>
+                    }}>{ previewText }</Link>
                 </span>
             </div>    
         </div>);

@@ -11,8 +11,9 @@ Cytoscape.use(Dagre);
 class Graph extends Component {
 
   render(){
-    const { graphData  }= this.props;
+    const { graphData, entities  }= this.props;
     // console.log('data:', graphData);
+    console.log('entities:', entities);
     
     // Create the Elements (Nodes) to be visualized
     var elements = buildGraphElementsFromGraphData(graphData);

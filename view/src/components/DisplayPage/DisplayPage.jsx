@@ -19,7 +19,7 @@ class DisplayPage extends Component {
         axios.post("http://localhost:3001/api/getCaseReportById", { id })
             .then(res => {
                 const data = res.data.data[0];
-                this.setState({docData: data})
+                this.setState({ docData: data })
             })
             .catch(err => console.log(err));
     }
@@ -28,19 +28,22 @@ class DisplayPage extends Component {
     render () {
         const { id } = this.props.match.params;
         const { docData } = this.state;
-        // console.log(docData);
-        console.log(this.props.location.state);
+        const { entities, queries } = this.props.location.state; 
+        console.log('queries:', queries);       
 
         return(
             <div className='display-page'>
                 { docData && 
                     <div className='brat-container'>
-                        <Brat docData={docData}/>
+                        <Brat docData={ docData }/>
                     </div> 
                 }
                 { docData && 
                     <div className='graph-container'>
-                        <Graph graphData={docData}/> 
+                        <Graph 
+                            graphData={ docData }
+                            entities={ entities }
+                        /> 
                     </div>
                 }
 
@@ -48,9 +51,9 @@ class DisplayPage extends Component {
                     <div className='loading-container'>
                         {`Loading ......`} 
                         <PacmanLoader 
-                            sizeUnit={"px"}
-                            size={150}
-                            color={'rgb(1, 136, 203)'}
+                            sizeUnit={ "px" }
+                            size={ 150 }
+                            color={ 'rgb(1, 136, 203)' }
                         />
                     </div>  
                 }

@@ -132,7 +132,7 @@ var searchRelation = function(session, relation){
     query = `MATCH (a:Entity {label: {source}})-[:${relationship}]-(b:Entity)
         RETURN a, b`
   }else{
-    query = `MATCH (a:Entity {label: {target}})-[:${relationship}]-(b:Entity {label: {target}})
+    query = `MATCH (a:Entity {label: {source}})-[:${relationship}]-(b:Entity {label: {target}})
         RETURN a, b`
   }
   console.log(query);
