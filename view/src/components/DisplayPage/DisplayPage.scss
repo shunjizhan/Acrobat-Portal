@@ -1,12 +1,44 @@
 @import "../shared";
 
+
+$display-section-border: 2px solid rgba($blue, 0.8);
 .display-page {
     position: relative;
 
-    .brat-container, {
+    .brat-intro,
+    .report-plain-text,
+    .brat-container {
         position: relative;
         width: 80%;
-        margin: auto;
+        left: 10%;
+    }
+
+    .report-plain-text {
+        padding: 20px 0;
+        margin-bottom: 20px;
+        border-bottom: 20px;
+    }
+
+    .brat-intro {
+        font-size: 200%;
+        padding-right: 30px;
+        border-bottom: $display-section-border;
+        padding: 10px 0;
+
+        svg {
+            margin-right: 15px;
+            font-size: 90%;
+            // color: $blue;
+        }
+
+        // .report-id { color: #DE639A; }
+        .report-id { color: $orange; }
+    }
+
+    .report-plain-text {
+        padding: 20px 0;
+        margin-bottom: 20px;
+        border-bottom: $display-section-border
     }
 
     .loading-container {

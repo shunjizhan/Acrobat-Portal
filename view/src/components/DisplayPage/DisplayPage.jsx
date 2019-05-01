@@ -4,6 +4,7 @@ import axios from 'axios'
 import Brat from '../Brat/Brat'
 import Graph from '../Graph/Graph'
 import { PacmanLoader } from 'react-spinners';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import './DisplayPage.css';
 
 
@@ -28,11 +29,27 @@ class DisplayPage extends Component {
     render () {
         const { id } = this.props.match.params;
         const { docData } = this.state;
-        const { entities, queries } = this.props.location.state; 
+        let text, entities, queries;
+        if (docData) { 
+            ({text} = docData);
+        }
+        if (this.props.location.state) {
+            ({ entities, queries } = this.props.location.state); 
+        }
+        
         console.log('queries:', queries);       
+        console.log('text:', text);       
 
         return(
             <div className='display-page'>
+                <div className='brat-intro'>
+                    <FontAwesomeIcon icon={['fal', 'file-alt']}/>
+                    Details about case report <span className='report-id'>{ id }</span>
+                </div>
+                { docData && 
+                    <div className='report-plain-text'>{ text }</div>
+                }
+
                 { docData && 
                     <div className='brat-container'>
                         <Brat docData={ docData }/>
