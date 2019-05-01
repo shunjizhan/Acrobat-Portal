@@ -33,7 +33,7 @@ $display-section-border: 2px solid rgba($blue, 0.8);
         border-bottom: $display-section-border;
 
         .highLight {
-            background-color: $orange;
+            background-color: rgba($orange, 0.7);
             padding: 1px 5px;
             border-radius: 2px;
         }

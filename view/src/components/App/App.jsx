@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import TitlePanel from '../TitlePanel/TitlePanel'
-import AddCaseReport from "../AddCaseReport/AddCaseReport";
 import MainPage from "../MainPage/MainPage";
 import SearchPage from "../SearchPage/SearchPage";
 import DisplayPage from "../DisplayPage/DisplayPage";
