@@ -335,3 +335,24 @@ export const combineMultiWordEntity = (entity_types, tokens) => {
     return res;
 
 };
+
+
+
+export const addHighLight = (text, tokens, className='highLight') => {
+    // basically wrap these [tokens] in [text] with span that has [className]
+    if (tokens === null) { return text; }
+
+    text = text.split(' ');
+    console.log(text);
+    tokens = new Set(tokens);
+    for (let i = 0; i < text.length; i++) {
+        let t = text[i];
+        console.log(t, tokens);
+        if (tokens.has(t)) {
+            text[i] = '<span class=' + className + '>' + t + '</span>';
+            console.log(text[i]);
+        }
+    }  
+
+    return text.join(' ');
+};

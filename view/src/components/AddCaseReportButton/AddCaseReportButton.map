@@ -1,7 +1,0 @@
-{
-"version": 3,
-"mappings": "AAAA,OAAQ,CACJ,MAAM,CAAE,cAAc,CAEtB,kBAAa,CACT,YAAY,CAAE,CAAC,CACf,KAAK,CAAE,KAAK",
-"sources": ["AddCaseReportButton.scss"],
-"names": [],
-"file": "AddCaseReportButton.css"
-}
