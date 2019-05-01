@@ -13,12 +13,6 @@ $display-section-border: 2px solid rgba($blue, 0.8);
         left: 10%;
     }
 
-    .report-plain-text {
-        padding: 20px 0;
-        margin-bottom: 20px;
-        border-bottom: 20px;
-    }
-
     .brat-intro {
         font-size: 200%;
         padding-right: 30px;
@@ -28,17 +22,21 @@ $display-section-border: 2px solid rgba($blue, 0.8);
         svg {
             margin-right: 15px;
             font-size: 90%;
-            // color: $blue;
         }
 
-        // .report-id { color: #DE639A; }
         .report-id { color: $orange; }
     }
 
     .report-plain-text {
         padding: 20px 0;
         margin-bottom: 20px;
-        border-bottom: $display-section-border
+        border-bottom: $display-section-border;
+
+        .highLight {
+            background-color: $orange;
+            padding: 1px 5px;
+            border-radius: 2px;
+        }
     }
 
     .loading-container {

@@ -4,7 +4,8 @@ import axios from 'axios'
 import Brat from '../Brat/Brat'
 import Graph from '../Graph/Graph'
 import { PacmanLoader } from 'react-spinners';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { addHighLight } from '../../utils';
 import './DisplayPage.css';
 
 
@@ -29,25 +30,33 @@ class DisplayPage extends Component {
     render () {
         const { id } = this.props.match.params;
         const { docData } = this.state;
-        let text, entities, queries;
+        let text, entities, queries, tokensToHighlight;
         if (docData) { 
             ({text} = docData);
         }
         if (this.props.location.state) {
             ({ entities, queries } = this.props.location.state); 
+            tokensToHighlight = [queries.query1, queries.query2];
         }
         
         console.log('queries:', queries);       
-        console.log('text:', text);       
+        // console.log('text:', text);       
 
         return(
             <div className='display-page'>
+
                 <div className='brat-intro'>
                     <FontAwesomeIcon icon={['fal', 'file-alt']}/>
                     Details about case report <span className='report-id'>{ id }</span>
                 </div>
+
                 { docData && 
-                    <div className='report-plain-text'>{ text }</div>
+                    <div 
+                        className='report-plain-text'
+                        dangerouslySetInnerHTML={{
+                            __html: addHighLight(text, tokensToHighlight) 
+                        }} 
+                    />
                 }
 
                 { docData && 
