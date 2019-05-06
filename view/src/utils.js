@@ -89,7 +89,7 @@ export const buildGraphFromGraphData = (graphData) => {
 }
 
 
-const addEdgeToElements = (graphData, elements, sourceID, targetID, event_label, nodeSet, nID2index, nID2nType, nType2shape, eType2color, defaultEdgeColor) => {
+const addEdgeToElements = (graphData, elements, sourceID, targetID, event_label, nodeSet, nID2index, nID2nType, nType2shape, eType2color, defaultEdgeColor, nType2color) => {
 	var nodeText;
 	if (!nodeSet.has(sourceID)) {
 		nodeText = graphData.text.substring(nID2index.get(sourceID)[0], nID2index.get(sourceID)[1]);
@@ -98,7 +98,8 @@ const addEdgeToElements = (graphData, elements, sourceID, targetID, event_label,
 			data: {
 				id: sourceID,
 				label: nodeText,
-				type: nType2shape.get( nID2nType.get(sourceID))|| "circle"
+				type: nType2shape.get( nID2nType.get(sourceID))|| "round-rectangle",
+				color: nType2color.get( nID2nType.get(sourceID)) || "green"
 			}
 		});
 		nodeSet.add(sourceID);
@@ -112,7 +113,8 @@ const addEdgeToElements = (graphData, elements, sourceID, targetID, event_label,
 			data: {
 				id: targetID,
 				label: nodeText,
-				type: nType2shape.get( nID2nType.get(targetID))|| "circle"
+				type: nType2shape.get( nID2nType.get(targetID))|| "round-rectangle",
+				color: nType2color.get( nID2nType.get(targetID)) || "green"
 			}
 		});
 		nodeSet.add(targetID);
@@ -129,17 +131,17 @@ const addEdgeToElements = (graphData, elements, sourceID, targetID, event_label,
 	});
 
 	// Double connected if overlap
-	// if (event_label!='BEFORE') {
-	// 	elements.push( {
-	// 		data: {
-	// 			source: targetID,
-	// 			target: sourceID,
-	// 			label: event_label,
-	// 			arrow: 'triangle',
-	// 			c: eType2color.get(event_label) || defaultEdgeColor
-	// 		}
-	// 	});
-	// }
+	if (event_label=='OVERLAP') {
+		elements.push( {
+			data: {
+				source: targetID,
+				target: sourceID,
+				// label: event_label,
+				arrow: 'triangle',
+				c: eType2color.get(event_label) || defaultEdgeColor
+			}
+		});
+	}
 }
 
 export const buildGraphElementsFromGraphData = (graphData) => {
@@ -163,37 +165,91 @@ export const buildGraphElementsFromGraphData = (graphData) => {
 		 // 	["type", "tag"],
 		 // 	["type", "vee"],
 	 	["Age", "circle"],											// Entities
-	 	["Sex", "ellipse"],
-	 	["History", "ellipse"],
-	 	["Nonbiological_location", "round-rectangle"],
-	 	["detailed_description", "round-rectangle"],
-	 	["biological_struture", "round-rectangle"],
-	 	["distance", "tag"],
-	 	["Lab_value", "tag"],
-	 	["Dosage", "star"],
-	 	["Severity", "bottom-round-rectangle"],
-	 	["Administration", "round-rectangle"],
+	 	["Sex", "circle"],
+	 	["History", "circle"],
+	 	["Nonbiological_location", "circle"],
+	 	["detailed_description", "circle"],
+	 	["biological_struture", "circle"],
+	 	["distance", "circle"],
+	 	["Lab_value", "circle"],
+	 	["Dosage", "circle"],
+	 	["Severity", "circle"],
+	 	["Administration", "circle"],
 
-	 	["Activity", "rectangle"],									// Triggers
-	 	["Clinical_event", "star"],
-	 	["Sign_symptom", "triangle"],
-	 	["Diagnostic_procedure", "star"],
-	 	["Duration", "tag"],
-	 	["Medication", "octagon"],
-	 	["Disease_disorder", "diamond"],
-	 	["Coreference", ""],
-	 	["Date", "tag"],
-	 	["Therapeutic_procedure", "star"]
+	 	["Activity", "round-rectangle"],									// Triggers
+	 	["Clinical_event", "round-rectangle"],
+	 	["Sign_symptom", "round-rectangle"],
+	 	["Diagnostic_procedure", "round-rectangle"],
+	 	["Duration", "round-rectangle"],
+	 	["Medication", "round-rectangle"],
+	 	["Disease_disorder", "round-rectangle"],
+	 	["Coreference", "round-rectangle"],
+	 	["Date", "round-rectangle"],
+	 	["Therapeutic_procedure", "round-rectangle"]
 	]);
+
+	var nType2color = new Map([
+
+	 	["Age", "#EDC1F0"],											// Entities
+	 	["Sex", "#EDC1F0"],
+	 	["Personal_background", "#EDC1F0"],
+	 	["Occupation", "#EDC1F0"],
+	 	["Weigh", "#EDC1F0"],
+	 	["Height", "#EDC1F0"],
+	 	["History", "ellipse"],
+	 	["Family_history", "#EDC1F0"],
+	 	["Family_member", "#EDC1F0"],
+	 	["Medication", "#2FCACA"],
+	 	["Lab", "#8f97ff"],
+	 	["Therapeutic_procedure", "#6495ed"],
+		["Diagnostic_procedure", "#9fdfff"],
+		["Sign_disease", "#f4eded"],
+		["Sign_symptom", "#DAE48B"],
+		["Disease_disorder", "#EB8315"],
+		["Activity", "#E07BAF"],
+		["Clinical_event","#E07BAF"],
+		["Outcome", "#E07BAF"],
+		["Subject", "#ffd700"],
+		["Negation", "#ffd700"],
+		["Uncertainty", "#ffd700"],
+		["Condition", "#ffd700"],
+		["Quantitative_concept", "#ffd700"],
+		["Qualitative_concept", "#ffd700"],
+		["Other_entity", "#c1cdcd"],
+		["Other_event", "#c1cdcd"],
+		["Administration", "#ffd700"],
+		["Dosage", "#ffd700"],
+		["Frequency", "#ffd700"],
+		["Cause", "#ffd700"],
+		["Complication", "#ffd700"],
+		["Severity", "#ffd700"],
+		["Location", "#ffd700"],
+		["Result_outcome", "#ffd700"],
+		["Lab_value", "#A04AF0"],
+		["Biological_structure", "#ffd700"],
+		["Detail_description", "#ffd700"],
+		["Biological_attribute", "#ffd700"],
+		["Nonbiological_location", "#ffd700"],
+		["Detailed_description", "#ffd700"],
+		["Distance", "#ffd700"],
+		["Area", "#ffd700"],
+		["Volume", "#ffd700"],
+		["Mass", "#ffd700"],
+		["Color", "#ffd700"],
+		["Shape", "#ffd700"],
+		["Texture", "#ffd700"],
+		["Coreference", "#808000"]
+	]);
+
 
 	var defaultEdgeColor = "rgb(1, 136, 203)";
 
 	var eType2color =new Map([
-		["BEFORE", "red"],
+		["BEFORE", "black"],
 		["MODIFY", "grey"],
-		["IDENTICAL", "green"],
-		["SUB_PROCEDURE", "purple"],
-		["AFTER", "red"],
+		["IDENTICAL", "black"],
+		["SUB_PROCEDURE", "black"],
+		["AFTER", "black"],
 		["OVERLAP", "black"]
 	]);
 
@@ -247,7 +303,7 @@ export const buildGraphElementsFromGraphData = (graphData) => {
 			targetID = sourceID;
 		}
 
-		addEdgeToElements(graphData, elements, sourceID, targetID, event_label, nodeSet, nID2index, nID2nType, nType2shape, eType2color, defaultEdgeColor);
+		addEdgeToElements(graphData, elements, sourceID, targetID, event_label, nodeSet, nID2index, nID2nType, nType2shape, eType2color, defaultEdgeColor, nType2color);
   	}
   	// From Equivs
 	for (i=0; i < graphData.equivs.length; i++) {
@@ -259,9 +315,8 @@ export const buildGraphElementsFromGraphData = (graphData) => {
 				const eventID_2 = graphData.equivs[i][k];
 				const sourceID = eID2nID.has(eventID_1) ? eID2nID.get(eventID_1) : eventID_1;
 				const targetID = eID2nID.has(eventID_2) ? eID2nID.get(eventID_2) : eventID_2;
-
-				addEdgeToElements(graphData, elements, sourceID, targetID, event_label, nodeSet, nID2index, nID2nType, nType2shape, eType2color, defaultEdgeColor);
-				addEdgeToElements(graphData, elements, targetID, sourceID, event_label, nodeSet, nID2index, nID2nType, nType2shape, eType2color, defaultEdgeColor);
+				addEdgeToElements(graphData, elements, sourceID, targetID, event_label, nodeSet, nID2index, nID2nType, nType2shape, eType2color, defaultEdgeColor, nType2color);
+				// addEdgeToElements(graphData, elements, targetID, sourceID, event_label, nodeSet, nID2index, nID2nType, nType2shape, eType2color, defaultEdgeColor, nType2color);
 
 			// }
 		}
@@ -270,6 +325,214 @@ export const buildGraphElementsFromGraphData = (graphData) => {
 }
 
 
+export const buildSubGraphElementsFromGraphData = (graphData, queryNodes) => {
+	var queryNodesSet = new Set();
+	var queryNodeIDPairs;
+	// console.log(queryNodes);
+	// console.log(queryNodes[0]);
+	// console.log(queryNodes[0][0]);
+	// console.log(queryNodes[0][1]);
+	// console.log(queryNodes.length);
+	for (var x =0; x <queryNodes.length; x++) {
+		queryNodeIDPairs = queryNodes[x];
+		queryNodesSet.add(queryNodeIDPairs[0]);
+		queryNodesSet.add(queryNodeIDPairs[1]);
+		// console.log(queryNodeIDPairs);
+		// console.log(queryNodeIDPairs[0]);
+		// console.log(queryNodeIDPairs[1]);
+	}
+
+	console.log("set length is ");
+	console.log(queryNodesSet.size);
+
+	var nType2shape = new Map([
+	 	["Age", "circle"],											// Entities
+	 	["Sex", "circle"],
+	 	["History", "circle"],
+	 	["Nonbiological_location", "circle"],
+	 	["detailed_description", "circle"],
+	 	["biological_struture", "circle"],
+	 	["distance", "circle"],
+	 	["Lab_value", "circle"],
+	 	["Dosage", "circle"],
+	 	["Severity", "circle"],
+	 	["Administration", "circle"],
+
+	 	["Activity", "round-rectangle"],									// Triggers
+	 	["Clinical_event", "round-rectangle"],
+	 	["Sign_symptom", "round-rectangle"],
+	 	["Diagnostic_procedure", "round-rectangle"],
+	 	["Duration", "round-rectangle"],
+	 	["Medication", "round-rectangle"],
+	 	["Disease_disorder", "round-rectangle"],
+	 	["Coreference", "round-rectangle"],
+	 	["Date", "round-rectangle"],
+	 	["Therapeutic_procedure", "round-rectangle"]
+	]);
+
+	var nType2color = new Map([
+
+	 	["Age", "#EDC1F0"],											// Entities
+	 	["Sex", "#EDC1F0"],
+	 	["Personal_background", "#EDC1F0"],
+	 	["Occupation", "#EDC1F0"],
+	 	["Weigh", "#EDC1F0"],
+	 	["Height", "#EDC1F0"],
+	 	["History", "ellipse"],
+	 	["Family_history", "#EDC1F0"],
+	 	["Family_member", "#EDC1F0"],
+	 	["Medication", "#2FCACA"],
+	 	["Lab", "#8f97ff"],
+	 	["Therapeutic_procedure", "#6495ed"],
+		["Diagnostic_procedure", "#9fdfff"],
+		["Sign_disease", "#f4eded"],
+		["Sign_symptom", "#DAE48B"],
+		["Disease_disorder", "#EB8315"],
+		["Activity", "#E07BAF"],
+		["Clinical_event","#E07BAF"],
+		["Outcome", "#E07BAF"],
+		["Subject", "#ffd700"],
+		["Negation", "#ffd700"],
+		["Uncertainty", "#ffd700"],
+		["Condition", "#ffd700"],
+		["Quantitative_concept", "#ffd700"],
+		["Qualitative_concept", "#ffd700"],
+		["Other_entity", "#c1cdcd"],
+		["Other_event", "#c1cdcd"],
+		["Administration", "#ffd700"],
+		["Dosage", "#ffd700"],
+		["Frequency", "#ffd700"],
+		["Cause", "#ffd700"],
+		["Complication", "#ffd700"],
+		["Severity", "#ffd700"],
+		["Location", "#ffd700"],
+		["Result_outcome", "#ffd700"],
+		["Lab_value", "#A04AF0"],
+		["Biological_structure", "#ffd700"],
+		["Detail_description", "#ffd700"],
+		["Biological_attribute", "#ffd700"],
+		["Nonbiological_location", "#ffd700"],
+		["Detailed_description", "#ffd700"],
+		["Distance", "#ffd700"],
+		["Area", "#ffd700"],
+		["Volume", "#ffd700"],
+		["Mass", "#ffd700"],
+		["Color", "#ffd700"],
+		["Shape", "#ffd700"],
+		["Texture", "#ffd700"],
+		["Coreference", "#808000"]
+	]);
+
+	var defaultEdgeColor = "rgb(1, 136, 203)";
+
+	var eType2color =new Map([
+		["BEFORE", "red"],
+		["MODIFY", "grey"],
+		["IDENTICAL", "green"],
+		["SUB_PROCEDURE", "purple"],
+		["AFTER", "red"],
+		["OVERLAP", "black"]
+	]);
+
+	var i;
+    // Create the Elements (Nodes) to be visualized
+    var elements = [];
+    // From Entities
+    var nID2index = new Map();
+    var nID2nType = new Map();
+    for (i=0; i < graphData.entities.length; i++) {
+		const nodeID = graphData.entities[i][0];
+		const nodeType = graphData.entities[i][1];
+		const nodeTextSIndex = graphData.entities[i][2][0][0];
+		const nodeTextEIndex = graphData.entities[i][2][0][1];
+
+		nID2index.set(nodeID, [nodeTextSIndex, nodeTextEIndex]);
+		nID2nType.set(nodeID, nodeType);
+    }
+    // From Triggers
+    for (i=0; i < graphData.triggers.length; i++) {
+		const nodeID = graphData.triggers[i][0];
+		const nodeType = graphData.triggers[i][1];
+		const nodeTextSIndex = graphData.triggers[i][2][0][0];
+		const nodeTextEIndex = graphData.triggers[i][2][0][1];
+
+		nID2index.set(nodeID, [nodeTextSIndex, nodeTextEIndex]);
+		nID2nType.set(nodeID, nodeType);
+    }
+
+    // Create the Edges to be visualized
+    // First map all events to a node
+    var eID2nID = new Map();
+    for (i=0; i<graphData.events.length; i++) {
+		const eventID = graphData.events[i][0];
+		const nodeID = graphData.events[i][1];
+		eID2nID.set(eventID, nodeID);
+    }
+    // From Relations ------------------------------------ 1st neighors
+    var nodeSet = new Set();
+    for (i=0; i < graphData.relations.length; i++) {
+    	const eventID_1 = graphData.relations[i][2][0][1];
+		const eventID_2 = graphData.relations[i][2][1][1];
+		const sourceID = eID2nID.has(eventID_1) ? eID2nID.get(eventID_1) : eventID_1;
+		const targetID = eID2nID.has(eventID_2) ? eID2nID.get(eventID_2) : eventID_2;
+		
+		if (queryNodesSet.has(sourceID) || queryNodesSet.has(targetID)) {
+			queryNodesSet.add(sourceID);
+			queryNodesSet.add(targetID);
+		}
+  	}
+  	// From Equivs ------------------------------------ 1st neighors
+  	for (i=0; i < graphData.equivs.length; i++) {
+		const event_label = graphData.equivs[i][1];
+		for (var j=2; j< graphData.equivs[i].length-1; j++) {
+			var k=j+1;
+			const eventID_1 = graphData.equivs[i][j];
+			const eventID_2 = graphData.equivs[i][k];
+			const sourceID = eID2nID.has(eventID_1) ? eID2nID.get(eventID_1) : eventID_1;
+			const targetID = eID2nID.has(eventID_2) ? eID2nID.get(eventID_2) : eventID_2;
+			if (queryNodesSet.has(sourceID) || queryNodesSet.has(targetID)) {
+				queryNodesSet.add(sourceID);
+				queryNodesSet.add(targetID);
+			}
+		}
+	}
+  	// From Relations ------------------------------------ 2nd neighors
+    for (i=0; i < graphData.relations.length; i++) {
+    	const eventID_1 = graphData.relations[i][2][0][1];
+		const eventID_2 = graphData.relations[i][2][1][1];
+		const event_label = graphData.relations[i][1];
+		const sourceID = eID2nID.has(eventID_1) ? eID2nID.get(eventID_1) : eventID_1;
+		const targetID = eID2nID.has(eventID_2) ? eID2nID.get(eventID_2) : eventID_2;
+		// SWAP AFTER TO BEFORE
+		// if (event_label=='AFTER') {
+		// 	var temp = sourceID;
+		// 	sourceID = targetID;
+		// 	targetID = sourceID;
+		// }
+		if (queryNodesSet.has(sourceID) || queryNodesSet.has(targetID)) {
+			addEdgeToElements(graphData, elements, sourceID, targetID, event_label, nodeSet, nID2index, nID2nType, nType2shape, eType2color, defaultEdgeColor, nType2color);
+		}
+  	}
+  	// From Equivs ------------------------------------ 2nd neighors
+	for (i=0; i < graphData.equivs.length; i++) {
+		const event_label = graphData.equivs[i][1];
+		for (var j=2; j< graphData.equivs[i].length-1; j++) {
+			var k=j+1;
+			const eventID_1 = graphData.equivs[i][j];
+			const eventID_2 = graphData.equivs[i][k];
+			const sourceID = eID2nID.has(eventID_1) ? eID2nID.get(eventID_1) : eventID_1;
+			const targetID = eID2nID.has(eventID_2) ? eID2nID.get(eventID_2) : eventID_2;
+			if (queryNodesSet.has(sourceID) || queryNodesSet.has(targetID)) {
+				addEdgeToElements(graphData, elements, sourceID, targetID, event_label, nodeSet, nID2index, nID2nType, nType2shape, eType2color, defaultEdgeColor, nType2color);
+			}
+		}
+	}
+
+	console.log("new set length is ");
+	console.log(queryNodesSet.size);
+
+  	return elements;
+}
 
 
 
