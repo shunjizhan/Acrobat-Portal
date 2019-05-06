@@ -5,8 +5,8 @@
   "mongoPassword": "z132465798",
   "mongoHost":"ds123050.mlab.com",
   "mongoPort":"23050",
-  "neo4jUrl": "bolt://35.153.192.176:33568",
+  "neo4jUrl": "bolt://54.237.227.129:35723",
   "neo4jUsername":"neo4j",
-  "neo4jPassword":"hits-calendars-ream",
+  "neo4jPassword":"speech-doorsteps-signaler",
   "elasticSearchHost":"https://search-acrobate-6oayszlzcxx2isu4cxe2sea3qy.us-east-2.es.amazonaws.com"
 }

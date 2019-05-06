@@ -102,7 +102,7 @@ var buildRelation = function(session, relation){
 	// console.log(relation)
 	var relationType = relation.label
 	let query = 'MATCH (u:Entity {id: {source}, pmID: {pmID} }), (r:Entity {id: {target}, pmID: {pmID} }) CREATE (u)-[c:'+relationType+']->(r) RETURN c'
-	console.log(query)
+	// console.log(query)
 	var writexResultPromise = session.writeTransaction(function (transaction) {
     // used transaction will be committed automatically, no need for explicit commit/rollback
 	   	var result = transaction.run(query, {
