@@ -59,9 +59,7 @@ class TopBar extends Component {
         })
         .then(response => {
             const { data: { entity_types, tokens } } = response;
-            // console.log('predction: ', data);
             const entities = combineMultiWordEntity(entity_types, tokens);
-
             
             // update state to save current entity tokens
             this.setState(prevState => ({ 

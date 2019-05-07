@@ -1,91 +1,53 @@
-import pandas as pd
-import pickle
+# import pickle
 import flask
 
 from flask import request
 from flask_restful import Api, Resource
-from sklearn import linear_model
-from nltk import word_tokenize, pos_tag
+# from nltk import word_tokenize, pos_tag
 
+from flair.data import Sentence
+from flair.models import SequenceTagger
 
-def _word2features(sent, i):
-    word = sent[i][0]
-    postag = sent[i][1]
-
-    features = {
-        'bias': 1.0,
-        'word.lower()': word.lower(),
-        'word[-3:]': word[-3:],
-        'word[-2:]': word[-2:],
-        'word.isupper()': word.isupper(),
-        'word.istitle()': word.istitle(),
-        'word.isdigit()': word.isdigit(),
-        'postag': postag,
-        'postag[:2]': postag[:2],
-    }
-    if i > 0:
-        word1 = sent[i-1][0]
-        postag1 = sent[i-1][1]
-        features.update({
-            '-1:word.lower()': word1.lower(),
-            '-1:word.istitle()': word1.istitle(),
-            '-1:word.isupper()': word1.isupper(),
-            '-1:postag': postag1,
-            '-1:postag[:2]': postag1[:2],
-        })
-    else:
-        features['BOS'] = True
-
-    if i < len(sent)-1:
-        word1 = sent[i+1][0]
-        postag1 = sent[i+1][1]
-        features.update({
-            '+1:word.lower()': word1.lower(),
-            '+1:word.istitle()': word1.istitle(),
-            '+1:word.isupper()': word1.isupper(),
-            '+1:postag': postag1,
-            '+1:postag[:2]': postag1[:2],
-        })
-    else:
-        features['EOS'] = True
-
-    return features
-
-
-def sent2features(sent):
-    return [_word2features(sent, i) for i in range(len(sent))]
-
+from pprint import pprint
 
 
 class Predict(Resource):
-    def get(self):
-        params = request.args
-        if params:
-            print(params['query'])
-        else:
-            print('params is none')
+    def __init__(self, model):
+        self.model = model
 
+    def get(self):
         # prepare the query
+        params = request.args
         query = params['query']
         print('query:   ', query)
-        # split each sentence
-        query = query.split('\\n')
-        # add tag to each sentence tokens
-        print('query splited:   ', query)
-        print('')
-        query_tokens = [pos_tag(word_tokenize(sentence)) for sentence in query]
-        print(query)
-        # change to machine learning api format
-        query = [sent2features(s) for s in query_tokens]
 
-        # predict the entity types
-        crf = pickle.load(open("crf_model.pkl", "r"))
-        prediction = crf.predict(query)
+        query = query.split('\\n')
+
+        # predict
+        all_tokens = []
+        all_entities = []
+        for q in query:
+            sen = Sentence(q)
+
+            self.model.predict(sen)
+            tokens = []
+            entity_types = []
+            for t in sen.tokens:
+                token = t.text
+                entity = t.tags['ner'].value
+                tokens.append(token)
+                entity_types.append(entity)
+
+            all_tokens.append(tokens)
+            all_entities.append(entity_types)
+
+        pprint(all_tokens)
+        pprint(all_entities)
 
         # preparing a response object and storing the model's predictions
         response = {
-            'tokens': query_tokens,
-            'entity_types': prediction
+            'tokens': all_tokens,
+            'entity_types': all_entities
         }
 
         # sending our response object back as json
@@ -93,8 +55,10 @@ class Predict(Resource):
 
 
 if __name__ == '__main__':
+    model = SequenceTagger.load_from_file('best-model.pt')
+
     app = flask.Flask(__name__)
     api = Api(app)
-    api.add_resource(Predict, '/')
+    api.add_resource(Predict, '/', resource_class_kwargs={'model': model})
     app.run(debug=True, port=5000)
 

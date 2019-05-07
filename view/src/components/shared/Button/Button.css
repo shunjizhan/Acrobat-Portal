@@ -1,6 +1,6 @@
 /*
 Error: File to import not found or unreadable: ../shared.
-       Load path: /Users/shunji/Acrobat-Portal/view
+       Load path: /Users/shunji/A/view
         on line 1 of view/src/components/shared/Button/Button.scss
 
 1: @import "../shared";
@@ -56,4 +56,4 @@ view/src/components/shared/Button/Button.scss:1
 body:before {
   white-space: pre;
   font-family: monospace;
-  content: "Error: File to import not found or unreadable: ../shared.\A        Load path: /Users/shunji/Acrobat-Portal/view\A         on line 1 of view/src/components/shared/Button/Button.scss\A \A 1: @import \"../shared\";\A 2: \A 3: .button {\A 4:     display: inline-block;\A 5:     position: relative;\A 6:     padding: 7px 23px;"; }
+  content: "Error: File to import not found or unreadable: ../shared.\A        Load path: /Users/shunji/A/view\A         on line 1 of view/src/components/shared/Button/Button.scss\A \A 1: @import \"../shared\";\A 2: \A 3: .button {\A 4:     display: inline-block;\A 5:     position: relative;\A 6:     padding: 7px 23px;"; }

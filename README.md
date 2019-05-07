@@ -51,6 +51,7 @@ make compile
 ## Notes
 - When install some npm package, use `npm install --save [package-name]`
 - If copy the whole project repo, use `cp -a` instead of `cp -r`, since the latter will cause some [mysterious symbolink problem](https://github.com/facebook/create-react-app/issues/200).
+- If can't install flair, first `open /Library/Developer/CommandLineTools/Packages/macOS_SDK_headers_for_macOS_10.14.pkg`
 
 
 

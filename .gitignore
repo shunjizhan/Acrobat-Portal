@@ -1,7 +1,8 @@
 # SASS cache
 .sass-cache/
 
-
+# big file
+best-model.pt
 
 
 # Logs
