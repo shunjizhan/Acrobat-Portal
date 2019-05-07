@@ -2,7 +2,11 @@ const mongoose = require("mongoose");
 const elasticsearch=require('elasticsearch');
 const CaseReport = require("./models/mongo/case_report");
 const esclient = require("./config/esClient");
-var client = esclient.client;
+var client = new elasticsearch.Client( {
+  hosts: [
+    "https://search-acrobate-6oayszlzcxx2isu4cxe2sea3qy.us-east-2.es.amazonaws.com"
+  ]
+});
 const dbRoute = require('./config/mg_database.js').url;
 
 mongoose.connect(
@@ -16,7 +20,7 @@ db.on("error", console.error.bind(console, "MongoDB connection error:"));
 
 CaseReport.find((err, data) => {
     if (err) return res.json({ success: false, error: err });
-    // console.log(data)
+    console.log(data)
     var body = [];
     data.forEach(function(row, id) {
              body.push({ index:  { _index: 'casereport', _type: '_doc', _id: (id+1) } });
@@ -41,13 +45,13 @@ CaseReport.find((err, data) => {
                 "ngrams_filter": {
                     "type": "ngram",
                     "min_gram": 3,
-                    "max_gram": 8
+                    "max_gram": 20
                 },
               },
               "tokenizer": {
                 "my_tokenizer": {
                   "type": "ngram",
-                  "min_gram": 2,
+                  "min_gram": 3,
                   "max_gram": 25,
                   "token_chars": [
                     "letter",

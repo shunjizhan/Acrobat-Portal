@@ -60,7 +60,20 @@ class SearchPage extends Component {
 
     handleSearch = queryObj => {
         console.log('basic search: ', queryObj);
-    }   
+
+        if (queryObj === {}) { return; }
+        axios.post("http://localhost:3001/api/searchNodes", queryObj)
+            .then(res => { 
+                const results = res.data.data.map(info => {
+                    return {
+                        id: info._source.pmID, 
+                        previewText: info._source.content
+                    }
+                })
+                this.setState({ results }) 
+            })
+            .catch(err => console.log(err));
+    }     
 
 
     render() {
