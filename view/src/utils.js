@@ -567,7 +567,7 @@ export const combineMultiWordEntity = (entity_types, tokens) => {
     let i = entity_types.length - 1;
     while (i >= 0) {
         let type = entity_types[i];
-        let label = tokens[i][0];
+        let label = tokens[i];
         if (type === 'O') {
             res.unshift({ label, type });
             i --;
@@ -584,7 +584,7 @@ export const combineMultiWordEntity = (entity_types, tokens) => {
                 while (type === 'I') {
                     i --;
                     type = entity_types[i];
-                    label = tokens[i][0];
+                    label = tokens[i];
                     [type, name] = type.split('-');
                     entity = label + ' ' + entity;
                 }

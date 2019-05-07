@@ -22,7 +22,7 @@ echo "
 ฿ installing machine learning api packages ...
 ----------------------------------------------"
 cd ../ML-API
-python2.7 -m pip install -r requirements.txt
+python3 -m pip install -r requirements.txt
 
 
 
