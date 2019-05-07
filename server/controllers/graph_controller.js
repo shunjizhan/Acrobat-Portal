@@ -120,6 +120,9 @@ var buildRelation = function(session, relation){
   // return writexResultPromise.then(() => session.readTransaction(findRelationships).then(() => session.close()));
 }
 
+/*
+  Public Functions for search relations
+*/
 var searchRelation = function(session, relation){
 	relationship = relation.label;
   source = relation.source;
@@ -149,6 +152,41 @@ var searchRelation = function(session, relation){
 	return readTxResultPromise.then(_manyEntities)
 }
 
+
+/*
+  Public Functions for search nodes
+*/
+var searchNodes = function(session, object){
+  entities = object.entities;
+  label_array = [];
+  type_array = [];
+  entities.forEach(function(entity) {
+    if (entity.type != 'O') {
+      label_array.push(entity.label);
+      type_array.push(entity.type);
+    }
+  })
+  label_s = label_array.map(i => `'${i}'`).join(',');
+  type_s = type_array.map(i => `'${i}'`).join(',');
+  // console.log(label_s);
+  // console.log(type_s);
+  var query = `MATCH (a:Entity)
+        WHERE a.label IN [${label_s}] and a.entityType IN [${type_s}]
+        RETURN distinct a`
+  console.log(query);
+  var readTxResultPromise = session.readTransaction(function (transaction) {
+    // used transaction will be committed automatically, no need for explicit commit/rollback
+    var result = transaction.run(query, {
+      label: object.entities,
+      entityType: object.query
+    })
+    // console.log(result, 'result');
+    return result
+  })
+
+  return readTxResultPromise.then(_manyEntities)
+}
+
 /*
 	Public Functions for Removing all nodes
 */
@@ -171,5 +209,6 @@ module.exports = {
   update: update,
   buildRelation: buildRelation,
   removeAll: removeAll,
-  searchRelation: searchRelation
+  searchRelation: searchRelation,
+  searchNodes: searchNodes
 }

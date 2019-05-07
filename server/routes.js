@@ -141,6 +141,37 @@ module.exports = function(app) {
             .catch(next)
     });
 
+    // this method search nodes with a property in our database
+    router.post("/searchNodes", (req, res, next) => {
+        var entities = req.body.entities;
+        var query = req.body.query;
+        console.log(query);
+        const pmIDSet = new Set();
+        Graph.searchNodes(client.getSession(req), req.body)
+            .then(response => {
+                console.log(response, "response");
+                response.forEach(item => pmIDSet.add(item.pmID));
+                console.log(pmIDSet, 'pmIDSet');
+                searchModule.search2(query, function(data) {
+                    targetData = [];
+                    restData = []
+                    for (i = 0; i < data.length; i++) { 
+                      data[i]._source.content = data[i]._source.content.substring(0,350)+'...';
+                      if (pmIDSet.has(data[i]._source.pmID) ) {
+                        targetData.push(data[i]);
+                        // console.log('1');
+                      }else{
+                        restData.push(data[i]);
+                        // console.log('2');
+                      }
+                    }
+                    data = targetData.concat(restData);
+                    return res.json({ success : true, data: data });
+                });
+            })
+            .catch(next)
+        
+    });
 
     // this method delete nodes and relationships in our database
     router.delete("/deleteNodes", (req, res, next) => {
@@ -167,7 +198,7 @@ module.exports = function(app) {
     });
 
     router.post('/searchDataES',(req, res) => {
-        // console.log(req.body);
+        console.log(req.body);
         const {searchKey} = req.body;
         // var req_body = new RegExp(searchKey);
         searchModule.search2(searchKey, function(data) {
