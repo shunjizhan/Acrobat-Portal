@@ -2,12 +2,14 @@ import React, { Component } from "react";
 import Cytoscape from 'cytoscape';
 import CytoscapeComponent from 'react-cytoscapejs';
 import Dagre from 'cytoscape-dagre';
+import Klay from 'cytoscape-klay';
+import Cola from 'cytoscape-cola';
 import {buildGraphElementsFromGraphData} from '../../utils';
 import {buildSubGraphElementsFromGraphData} from '../../utils';
 
 Cytoscape.use(Dagre);
-
-
+Cytoscape.use(Klay);
+Cytoscape.use(Cola);
 
 class Graph extends Component {
 
@@ -22,13 +24,27 @@ class Graph extends Component {
     // Layout
     const layout = {
       name: 'dagre',
+      // spacing: 100,
+      // borderSpacing: 20,
       nodeSep: 100,
-      nodeDimensionsIncludeLabels: true
+      // nodeDimensionsIncludeLabels: true
       // ranker: "longest-path"
       // name: 'breadthfirst',
       // directed: true,
-      // padding: 10
+      // padding: 20
     };
+
+    const layout_klay = {
+      name: 'klay'
+    }
+
+    const layout_cola = {
+      name: 'cola',
+      flow: { axis: 'y', minSeparation: 40 },
+      // flow: 'dag',
+      nodeSpacing: 30,
+      avoidOverlap: true
+    }
 
     const stylesheet = [
       {
@@ -37,22 +53,32 @@ class Graph extends Component {
           "content": "data(label)",
           "text-valign": "center",
           "text-halign": "center",
-          "width": 60,
-          "height": 60,
+          "width": 50,
+          "height": 50,
           "shape": "data(type)",
           "background-color": "data(color)",               // node color
           "text-outline-color": "rgb(244, 149, 65)",
           "text-outline-opacity": 1,
           "text-outline-width": 0,
+          "font-size": 8,
           "color": "black",                                     // text color
           "overlay-color": "#fff"
+        }
+      },
+      {
+        "selector": ':parent',
+        'style': {
+          "text-valign": "top",
+          "background-color": "#9fdfff",
+          'background-opacity': 0.333
         }
       },
       {
         "selector": "edge",
         "style": {
           "width": 3,
-          "curve-style": "straight",
+          // "curve-style": "straight",
+          'curve-style': 'bezier',
           'label': 'data(label)',
           "font-size": 10,
           "length": 10
@@ -72,15 +98,16 @@ class Graph extends Component {
         <div>
           <CytoscapeComponent 
             elements={sub_elements} 
-            style={ { width: '100%', height: '500px'}} 
-            layout={layout} 
-            stylesheet={stylesheet} ></CytoscapeComponent>
+            style={ { width: '80%', height: '500px'}} 
+            layout={layout_cola}
+            stylesheet={stylesheet} 
+          ></CytoscapeComponent>
         </div>
         <div>
           <CytoscapeComponent 
             elements={elements} 
-            style={ { width: '100%', height: '500px'}} 
-            layout={layout} 
+            style={ { width: '80%', height: '500px'}} 
+            layout={layout_cola} 
             stylesheet={stylesheet} ></CytoscapeComponent>
         </div>
       </div>
