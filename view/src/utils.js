@@ -93,7 +93,7 @@ const addEdgeToElements = (graphData, elements, sourceID, targetID, event_label,
 	var nodeText;
 	if (!nodeSet.has(sourceID)) {
 		nodeText = graphData.text.substring(nID2index.get(sourceID)[0], nID2index.get(sourceID)[1]);
-		nodeText = nodeText.length>15 ? nodeText.substring(0,15) : nodeText;
+		// nodeText = nodeText.length>20 ? nodeText.substring(0,20) : nodeText;
 		elements.push( {
 			data: {
 				id: sourceID,
@@ -108,7 +108,7 @@ const addEdgeToElements = (graphData, elements, sourceID, targetID, event_label,
 	if (!nodeSet.has(targetID)) {
 		// console.log(targetID);
 		nodeText = graphData.text.substring(nID2index.get(targetID)[0], nID2index.get(targetID)[1]);
-		nodeText = nodeText.length>15 ? nodeText.substring(0,15) : nodeText;
+		// nodeText = nodeText.length>20 ? nodeText.substring(0,20) : nodeText;
 		elements.push( {
 			data: {
 				id: targetID,
@@ -131,17 +131,69 @@ const addEdgeToElements = (graphData, elements, sourceID, targetID, event_label,
 	});
 
 	// Double connected if overlap
-	if (event_label=='OVERLAP') {
+	// if (event_label=='OVERLAP') {
+	// 	elements.push( {
+	// 		data: {
+	// 			source: targetID,
+	// 			target: sourceID,
+	// 			// label: event_label,
+	// 			arrow: 'triangle',
+	// 			c: eType2color.get(event_label) || defaultEdgeColor
+	// 		}
+	// 	});
+	// }
+}
+
+const addOverlapToElements = (graphData, elements, parentID, childID, event_label, nodeSet, nID2index, nID2nType, nType2shape, eType2color, defaultEdgeColor, nType2color) => {
+	var nodeText;
+	if (!nodeSet.has(parentID)) {
+		// nodeText = graphData.text.substring(nID2index.get(parentID)[0], nID2index.get(parentID)[1]);
+		// nodeText = nodeText.length>20 ? nodeText.substring(0,20) : nodeText;
+		nodeText = ""
 		elements.push( {
 			data: {
-				source: targetID,
-				target: sourceID,
-				// label: event_label,
-				arrow: 'triangle',
-				c: eType2color.get(event_label) || defaultEdgeColor
+				id: parentID,
+				label: nodeText,
+				type: nType2shape.get( nID2nType.get(parentID))|| "round-rectangle",
+				color: nType2color.get( nID2nType.get(parentID)) || "green"
 			}
 		});
+		nodeSet.add(parentID);
 	}
+	if (!nodeSet.has(childID)) {
+		// console.log(targetID);
+		nodeText = graphData.text.substring(nID2index.get(childID)[0], nID2index.get(childID)[1]);
+		// nodeText = nodeText.length>20 ? nodeText.substring(0,20) : nodeText;
+		elements.push( {
+			data: {
+				id: childID,
+				label: nodeText,
+				parent: parentID,
+				type: nType2shape.get( nID2nType.get(childID))|| "round-rectangle",
+				color: nType2color.get( nID2nType.get(childID)) || "green"
+			}
+		});
+		nodeSet.add(childID);
+	}
+
+	// elements.push( {
+	// 	data: {
+	// 		source: parentID,
+	// 		target: childID,
+	// 		label: "dummy",
+	// 		arrow: 'triangle',
+	// 		c: eType2color.get(event_label) || defaultEdgeColor
+	// 	}
+	// });
+	// elements.push( {
+	// 	data: {
+	// 		source: childID,
+	// 		target: parentID,
+	// 		label: "dummy",
+	// 		arrow: 'triangle',
+	// 		c: eType2color.get(event_label) || defaultEdgeColor
+	// 	}
+	// });
 }
 
 export const buildGraphElementsFromGraphData = (graphData) => {
@@ -287,14 +339,32 @@ export const buildGraphElementsFromGraphData = (graphData) => {
 		const nodeID = graphData.events[i][1];
 		eID2nID.set(eventID, nodeID);
     }
-    // From Relations
+
+
     var nodeSet = new Set();
+    var overlapID = 0;
+	var k;
+	for (i=0; i < graphData.equivs.length; i++) {
+		const event_label = graphData.equivs[i][1];
+		// var parentNode = graphData.equivs[i][2];
+		var parentNode = "OV"+overlapID;
+		for (k=2; k< graphData.equivs[i].length; k++) {
+			const childNode = graphData.equivs[i][k];
+			const parentID = eID2nID.has(parentNode) ? eID2nID.get(parentNode) : parentNode;
+			const childID = eID2nID.has(childNode) ? eID2nID.get(childNode) : childNode;
+			addOverlapToElements(graphData, elements, parentID, childID, event_label, nodeSet, nID2index, nID2nType, nType2shape, eType2color, defaultEdgeColor, nType2color);
+		}
+		overlapID += 1;
+	}
+
+    // From Relations
+    
     for (i=0; i < graphData.relations.length; i++) {
     	const eventID_1 = graphData.relations[i][2][0][1];
 		const eventID_2 = graphData.relations[i][2][1][1];
 		const event_label = graphData.relations[i][1];
-		const sourceID = eID2nID.has(eventID_1) ? eID2nID.get(eventID_1) : eventID_1;
-		const targetID = eID2nID.has(eventID_2) ? eID2nID.get(eventID_2) : eventID_2;
+		var sourceID = eID2nID.has(eventID_1) ? eID2nID.get(eventID_1) : eventID_1;
+		var targetID = eID2nID.has(eventID_2) ? eID2nID.get(eventID_2) : eventID_2;
 
 		// SWAP AFTER TO BEFORE
 		if (event_label=='AFTER') {
@@ -306,21 +376,23 @@ export const buildGraphElementsFromGraphData = (graphData) => {
 		addEdgeToElements(graphData, elements, sourceID, targetID, event_label, nodeSet, nID2index, nID2nType, nType2shape, eType2color, defaultEdgeColor, nType2color);
   	}
   	// From Equivs
-	for (i=0; i < graphData.equivs.length; i++) {
-		const event_label = graphData.equivs[i][1];
-		for (var j=2; j< graphData.equivs[i].length-1; j++) {
-			// for (var k=j+1; k<graphData.equivs[i].length; k++) {
-				var k=j+1;
-				const eventID_1 = graphData.equivs[i][j];
-				const eventID_2 = graphData.equivs[i][k];
-				const sourceID = eID2nID.has(eventID_1) ? eID2nID.get(eventID_1) : eventID_1;
-				const targetID = eID2nID.has(eventID_2) ? eID2nID.get(eventID_2) : eventID_2;
-				addEdgeToElements(graphData, elements, sourceID, targetID, event_label, nodeSet, nID2index, nID2nType, nType2shape, eType2color, defaultEdgeColor, nType2color);
-				// addEdgeToElements(graphData, elements, targetID, sourceID, event_label, nodeSet, nID2index, nID2nType, nType2shape, eType2color, defaultEdgeColor, nType2color);
+	// for (i=0; i < graphData.equivs.length; i++) {
+	// 	const event_label = graphData.equivs[i][1];
+	// 	for (var j=2; j< graphData.equivs[i].length-1; j++) {
+	// 		// for (var k=j+1; k<graphData.equivs[i].length; k++) {
+	// 			var k=j+1;
+	// 			const eventID_1 = graphData.equivs[i][j];
+	// 			const eventID_2 = graphData.equivs[i][k];
+	// 			const sourceID = eID2nID.has(eventID_1) ? eID2nID.get(eventID_1) : eventID_1;
+	// 			const targetID = eID2nID.has(eventID_2) ? eID2nID.get(eventID_2) : eventID_2;
+	// 			addEdgeToElements(graphData, elements, sourceID, targetID, event_label, nodeSet, nID2index, nID2nType, nType2shape, eType2color, defaultEdgeColor, nType2color);
+	// 			// addEdgeToElements(graphData, elements, targetID, sourceID, event_label, nodeSet, nID2index, nID2nType, nType2shape, eType2color, defaultEdgeColor, nType2color);
 
-			// }
-		}
-	}
+	// 		// }
+	// 	}
+	// }
+
+
   	return elements;
 }
 
@@ -463,6 +535,8 @@ export const buildSubGraphElementsFromGraphData = (graphData, queryNodes) => {
     // Create the Edges to be visualized
     // First map all events to a node
     var eID2nID = new Map();
+    var j;
+    var k;
     for (i=0; i<graphData.events.length; i++) {
 		const eventID = graphData.events[i][0];
 		const nodeID = graphData.events[i][1];
@@ -483,9 +557,9 @@ export const buildSubGraphElementsFromGraphData = (graphData, queryNodes) => {
   	}
   	// From Equivs ------------------------------------ 1st neighors
   	for (i=0; i < graphData.equivs.length; i++) {
-		const event_label = graphData.equivs[i][1];
-		for (var j=2; j< graphData.equivs[i].length-1; j++) {
-			var k=j+1;
+		// const event_label = graphData.equivs[i][1];
+		for (j=2; j< graphData.equivs[i].length-1; j++) {
+			k=j+1;
 			const eventID_1 = graphData.equivs[i][j];
 			const eventID_2 = graphData.equivs[i][k];
 			const sourceID = eID2nID.has(eventID_1) ? eID2nID.get(eventID_1) : eventID_1;
@@ -496,8 +570,41 @@ export const buildSubGraphElementsFromGraphData = (graphData, queryNodes) => {
 			}
 		}
 	}
-  	// From Relations ------------------------------------ 2nd neighors
-    for (i=0; i < graphData.relations.length; i++) {
+  	
+  	// From Equivs ------------------------------------ 2nd neighors
+	// for (i=0; i < graphData.equivs.length; i++) {
+	// 	const event_label = graphData.equivs[i][1];
+	// 	for (j=2; j< graphData.equivs[i].length-1; j++) {
+	// 		k=j+1;
+	// 		const eventID_1 = graphData.equivs[i][j];
+	// 		const eventID_2 = graphData.equivs[i][k];
+	// 		const sourceID = eID2nID.has(eventID_1) ? eID2nID.get(eventID_1) : eventID_1;
+	// 		const targetID = eID2nID.has(eventID_2) ? eID2nID.get(eventID_2) : eventID_2;
+	// 		if (queryNodesSet.has(sourceID) || queryNodesSet.has(targetID)) {
+	// 			addEdgeToElements(graphData, elements, sourceID, targetID, event_label, nodeSet, nID2index, nID2nType, nType2shape, eType2color, defaultEdgeColor, nType2color);
+	// 		}
+	// 	}
+	// }
+	// From Equivs ------------------------------------ 2nd neighors		REDO OVERLAP
+	var overlapID = 0
+	for (i=0; i < graphData.equivs.length; i++) {
+		const event_label = graphData.equivs[i][1];
+		// var parentNode = graphData.equivs[i][2];
+		var parentNode = "OV"+overlapID;
+		for (k=2; k< graphData.equivs[i].length; k++) {
+			const childNode = graphData.equivs[i][k];
+			const parentID = eID2nID.has(parentNode) ? eID2nID.get(parentNode) : parentNode;
+			const childID = eID2nID.has(childNode) ? eID2nID.get(childNode) : childNode;
+			
+			if (queryNodesSet.has(parentID) || queryNodesSet.has(childID)) {
+				addOverlapToElements(graphData, elements, parentID, childID, event_label, nodeSet, nID2index, nID2nType, nType2shape, eType2color, defaultEdgeColor, nType2color);
+			}
+		}
+		overlapID += 1;
+	}
+
+	// From Relations ------------------------------------ 2nd neighors
+	for (i=0; i < graphData.relations.length; i++) {
     	const eventID_1 = graphData.relations[i][2][0][1];
 		const eventID_2 = graphData.relations[i][2][1][1];
 		const event_label = graphData.relations[i][1];
@@ -510,25 +617,13 @@ export const buildSubGraphElementsFromGraphData = (graphData, queryNodes) => {
 		// 	targetID = sourceID;
 		// }
 		if (queryNodesSet.has(sourceID) || queryNodesSet.has(targetID)) {
+			console.log("sourceID is : " + sourceID);
+			console.log("targetID is : " + targetID);
 			addEdgeToElements(graphData, elements, sourceID, targetID, event_label, nodeSet, nID2index, nID2nType, nType2shape, eType2color, defaultEdgeColor, nType2color);
 		}
   	}
-  	// From Equivs ------------------------------------ 2nd neighors
-	for (i=0; i < graphData.equivs.length; i++) {
-		const event_label = graphData.equivs[i][1];
-		for (var j=2; j< graphData.equivs[i].length-1; j++) {
-			var k=j+1;
-			const eventID_1 = graphData.equivs[i][j];
-			const eventID_2 = graphData.equivs[i][k];
-			const sourceID = eID2nID.has(eventID_1) ? eID2nID.get(eventID_1) : eventID_1;
-			const targetID = eID2nID.has(eventID_2) ? eID2nID.get(eventID_2) : eventID_2;
-			if (queryNodesSet.has(sourceID) || queryNodesSet.has(targetID)) {
-				addEdgeToElements(graphData, elements, sourceID, targetID, event_label, nodeSet, nID2index, nID2nType, nType2shape, eType2color, defaultEdgeColor, nType2color);
-			}
-		}
-	}
 
-	console.log("new set length is ");
+  	console.log("new set length is ");
 	console.log(queryNodesSet.size);
 
   	return elements;
