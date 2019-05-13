@@ -78,7 +78,7 @@ module.exports = function(app) {
         });
     });
 
-    /* ------------------------- Neo4j Database Routers ------------------------------ */
+    /* ----------------------------- Neo4j Database Routers ---------------------------------- */
     // this is our create method
     // this method adds new node in our database
     router.post("/putGraphNode", (req, res, next) => {
@@ -90,7 +90,6 @@ module.exports = function(app) {
             req2.label = nodes[i].label;
             req2.entityType = nodes[i].entityType;
             req2.pmID = pmID;
-            // console.log(i);
 
             Graph.create(client.getSession(req2), req2)
             .then(response => { 
@@ -117,7 +116,6 @@ module.exports = function(app) {
             req2.target = edges[i].target;
             req2.label = edges[i].label;
             req2.pmID = pmID;
-            // console.log(i);
 
             Graph.buildRelation(client.getSession(req2), req2)
             .then(response => { 
@@ -141,7 +139,14 @@ module.exports = function(app) {
             .catch(next)
     });
 
-    // this method search nodes with a property in our database
+    // this method search nodes with multiple relationships in our database
+    router.post("/searchMultiRelations", (req, res, next) => {
+        Graph.searchRelation(client.getSession(req), req.body)
+            .then(response => res.json({ success : true, data: response }))
+            .catch(next)
+    });
+
+    // this method search nodes with their properties in our database
     router.post("/searchNodes", (req, res, next) => {
         var entities = req.body.entities;
         var query = req.body.query;
@@ -149,7 +154,6 @@ module.exports = function(app) {
         const pmIDSet = new Set();
         Graph.searchNodes(client.getSession(req), req.body)
             .then(response => {
-                console.log(response, "response");
                 response.forEach(item => pmIDSet.add(item.pmID));
                 console.log(pmIDSet, 'pmIDSet');
                 searchModule.search2(query, function(data) {
@@ -159,13 +163,12 @@ module.exports = function(app) {
                       data[i]._source.content = data[i]._source.content.substring(0,350)+'...';
                       if (pmIDSet.has(data[i]._source.pmID) ) {
                         targetData.push(data[i]);
-                        // console.log('1');
                       }else{
                         restData.push(data[i]);
-                        // console.log('2');
                       }
                     }
                     data = targetData.concat(restData);
+                    console.log(data);
                     return res.json({ success : true, data: data });
                 });
             })
@@ -181,28 +184,20 @@ module.exports = function(app) {
     });
 
 
-    /* --------------------------------- Search APIs --------------------------------------- */
+    /* --------------------------------- OLD Search APIs --------------------------------------- */
     // this is the method for basic text search on the data message
-    router.post("/searchData", (req, res) => {
+    router.post("/mongo-db/searchData", (req, res) => {
         const {id, searchKey} = req.body;
-        // console.log(req);
-        // console.log(searchKey);
-        // console.log('searchData api message');
-
         var re = new RegExp(searchKey);
-
         Data.find( { message:re }, (err, data) => {
             if (err) return res.send(err);
             return res.json({ success : true, data: data });
         });
     });
 
-    router.post('/searchDataES',(req, res) => {
-        console.log(req.body);
+    router.post('/elastic-search/searchData',(req, res) => {
         const {searchKey} = req.body;
-        // var req_body = new RegExp(searchKey);
         searchModule.search2(searchKey, function(data) {
-            // console.log(data,'server')
             for (i = 0; i < data.length; i++) { 
               data[i]._source.content = data[i]._source.content.substring(0,350)+'...';
             }
@@ -535,7 +530,6 @@ module.exports = function(app) {
         });
     });
 
-    // For Future Use If We Are Having Users
     /* --------------------------------------- SIGNUP --------------------------------------- */
 
     // app.get('/signup', function(req, res) {
