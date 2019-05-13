@@ -23,7 +23,7 @@ var _manyEntities = function (result) {
   console.log(Object.values(dict));
   return Object.values(dict);
   // return result.records.map(r => ({ pmID: r.get('a').properties.pmID, entities: r.keys.map(k => r.get(k).properties)}));
-  	// return result.records.map(r => (new Entity(r.get('a'))))
+  // return result.records.map(r => (new Entity(r.get('a'))))
 }
 
 /*
@@ -140,16 +140,36 @@ var searchRelation = function(session, relation){
   }
   console.log(query);
 	var readTxResultPromise = session.readTransaction(function (transaction) {
-		// used transaction will be committed automatically, no need for explicit commit/rollback
 		var result = transaction.run(query, {
 		  source: relation.source,
 		  target: relation.target
 		})
-		console.log(result);
 		return result
 	})
 
 	return readTxResultPromise.then(_manyEntities)
+}
+
+/*
+  Public Functions for search multiple relations
+*/
+var searchMultiRelations = function(session, relation){
+  relationship = relation.label;
+  source = relation.source;
+  target = relation.target;
+  var query = `match (a:Entity{label:"chest"})-[:MODIFY]->(b:Entity{label:"bullae"}),
+                 (c:Entity{label:"ascending"})-[:MODIFY]->(d:Entity{label:"aorta dilatation"})
+              return a, c, b, d;`
+  console.log(query);
+  var readTxResultPromise = session.readTransaction(function (transaction) {
+    var result = transaction.run(query, {
+      source: relation.source,
+      target: relation.target
+    })
+    return result
+  })
+
+  return readTxResultPromise.then(_manyEntities)
 }
 
 
@@ -168,8 +188,6 @@ var searchNodes = function(session, object){
   })
   label_s = label_array.map(i => `'${i}'`).join(',');
   type_s = type_array.map(i => `'${i}'`).join(',');
-  // console.log(label_s);
-  // console.log(type_s);
   var query = `MATCH (a:Entity)
         WHERE a.label IN [${label_s}] and a.entityType IN [${type_s}]
         RETURN distinct a`
@@ -180,7 +198,6 @@ var searchNodes = function(session, object){
       label: object.entities,
       entityType: object.query
     })
-    // console.log(result, 'result');
     return result
   })
 
@@ -210,5 +227,6 @@ module.exports = {
   buildRelation: buildRelation,
   removeAll: removeAll,
   searchRelation: searchRelation,
-  searchNodes: searchNodes
+  searchNodes: searchNodes,
+  searchMultiRelations: searchMultiRelations
 }

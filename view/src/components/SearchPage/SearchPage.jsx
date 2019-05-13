@@ -62,6 +62,7 @@ class SearchPage extends Component {
         console.log('basic search: ', queryObj);
 
         if (queryObj === {}) { return; }
+        var qur = queryObj.query;
         axios.post("http://localhost:3001/api/searchNodes", queryObj)
             .then(res => { 
                 const results = res.data.data.map(info => {
@@ -70,7 +71,10 @@ class SearchPage extends Component {
                         previewText: info._source.content
                     }
                 })
-                this.setState({ results }) 
+                this.setState({ 
+                    qur, 
+                    results 
+                }) 
             })
             .catch(err => console.log(err));
     }     
