@@ -114,6 +114,7 @@ const addEdgeToElements = (graphData, elements, sourceID, targetID, event_label,
 				id: targetID,
 				label: nodeText,
 				type: nType2shape.get( nID2nType.get(targetID))|| "round-rectangle",
+				// classes: 'multiline-auto',
 				color: nType2color.get( nID2nType.get(targetID)) || "green"
 			}
 		});
@@ -542,6 +543,12 @@ export const buildSubGraphElementsFromGraphData = (graphData, queryNodes) => {
 		const nodeID = graphData.events[i][1];
 		eID2nID.set(eventID, nodeID);
     }
+    // 1st Layer Neighbors 
+    var queryNodesSet2ndLayer = new Set();
+    for (var queryNode of queryNodesSet) {
+    	queryNodesSet2ndLayer.add(queryNode);
+    	console.log("in for each loop");
+    }
     // From Relations ------------------------------------ 1st neighors
     var nodeSet = new Set();
     for (i=0; i < graphData.relations.length; i++) {
@@ -551,8 +558,10 @@ export const buildSubGraphElementsFromGraphData = (graphData, queryNodes) => {
 		const targetID = eID2nID.has(eventID_2) ? eID2nID.get(eventID_2) : eventID_2;
 		
 		if (queryNodesSet.has(sourceID) || queryNodesSet.has(targetID)) {
-			queryNodesSet.add(sourceID);
-			queryNodesSet.add(targetID);
+			// queryNodesSet.add(sourceID);
+			// queryNodesSet.add(targetID);
+			queryNodesSet2ndLayer.add(sourceID);
+			queryNodesSet2ndLayer.add(targetID);
 		}
   	}
   	// From Equivs ------------------------------------ 1st neighors
@@ -567,6 +576,8 @@ export const buildSubGraphElementsFromGraphData = (graphData, queryNodes) => {
 			if (queryNodesSet.has(sourceID) || queryNodesSet.has(targetID)) {
 				queryNodesSet.add(sourceID);
 				queryNodesSet.add(targetID);
+				queryNodesSet2ndLayer.add(sourceID);
+				queryNodesSet2ndLayer.add(targetID);
 			}
 		}
 	}
@@ -596,7 +607,7 @@ export const buildSubGraphElementsFromGraphData = (graphData, queryNodes) => {
 			const parentID = eID2nID.has(parentNode) ? eID2nID.get(parentNode) : parentNode;
 			const childID = eID2nID.has(childNode) ? eID2nID.get(childNode) : childNode;
 			
-			if (queryNodesSet.has(parentID) || queryNodesSet.has(childID)) {
+			if (queryNodesSet2ndLayer.has(parentID) || queryNodesSet2ndLayer.has(childID)) {
 				addOverlapToElements(graphData, elements, parentID, childID, event_label, nodeSet, nID2index, nID2nType, nType2shape, eType2color, defaultEdgeColor, nType2color);
 			}
 		}
@@ -616,7 +627,7 @@ export const buildSubGraphElementsFromGraphData = (graphData, queryNodes) => {
 		// 	sourceID = targetID;
 		// 	targetID = sourceID;
 		// }
-		if (queryNodesSet.has(sourceID) || queryNodesSet.has(targetID)) {
+		if (queryNodesSet2ndLayer.has(sourceID) || queryNodesSet2ndLayer.has(targetID)) {
 			console.log("sourceID is : " + sourceID);
 			console.log("targetID is : " + targetID);
 			addEdgeToElements(graphData, elements, sourceID, targetID, event_label, nodeSet, nID2index, nID2nType, nType2shape, eType2color, defaultEdgeColor, nType2color);
@@ -624,7 +635,7 @@ export const buildSubGraphElementsFromGraphData = (graphData, queryNodes) => {
   	}
 
   	console.log("new set length is ");
-	console.log(queryNodesSet.size);
+	console.log(queryNodesSet2ndLayer.size);
 
   	return elements;
 }

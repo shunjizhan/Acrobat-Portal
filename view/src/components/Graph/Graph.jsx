@@ -62,7 +62,9 @@ class Graph extends Component {
           "text-outline-width": 0,
           "font-size": 8,
           "color": "black",                                     // text color
-          "overlay-color": "#fff"
+          "overlay-color": "#fff",
+          "text-wrap": "wrap",
+          "text-max-width": 8
         }
       },
       {
@@ -88,7 +90,8 @@ class Graph extends Component {
         "selector": "edge[arrow]",
         "style": {
           "target-arrow-shape": "data(arrow)",
-          "line-color": "data(c)"
+          "line-color": "data(c)",
+          "edge-text-rotation": "autorotate"
         }
       }
     ];
