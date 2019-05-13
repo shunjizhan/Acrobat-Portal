@@ -674,20 +674,21 @@ export const combineMultiWordEntity = (entity_types, tokens) => {
     while (i >= 0) {
         let type = entity_types[i];
         let label = tokens[i];
-        if (type === 'O') {
+        if (type === 'O' || type === 'S') {     // single token
             res.unshift({ label, type });
             i --;
         } else {
             let name;
             [type, name] = type.split('-');
-            if (type !== 'I') {
+            if (type === 'B') {
                 res.unshift({ label, type: name });
                 i --;
             } else {
+                // type I or E
                 // this is a multi word entity
                 // look backward until find 'B'
                 let entity = label;
-                while (type === 'I') {
+                while (type === 'I' || type === 'E') {
                     i --;
                     type = entity_types[i];
                     label = tokens[i];
