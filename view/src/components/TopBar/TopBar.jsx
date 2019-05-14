@@ -9,7 +9,6 @@ import './TopBar.css';
 
 
 class TopBar extends Component {
-
     // we save detailed query tokens here for building searching data obj
     // user typing will update this these detailed query tokens
     state = {

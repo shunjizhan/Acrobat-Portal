@@ -62,18 +62,25 @@ class SearchPage extends Component {
         console.log('basic search: ', queryObj);
 
         if (queryObj === {}) { return; }
-        var qur = queryObj.query;
+        var queryText = queryObj.query;
         axios.post("http://localhost:3001/api/searchNodes", queryObj)
             .then(res => { 
+                // search results
                 const results = res.data.data.map(info => {
                     return {
                         id: info._source.pmID, 
                         previewText: info._source.content
                     }
                 })
+
+                // update query plain text for DisplayPage highlight
+                const queries = {
+                    queryText,
+                    ...this.state.queries
+                }
                 this.setState({ 
-                    qur, 
-                    results 
+                    queries,
+                    results
                 }) 
             })
             .catch(err => console.log(err));

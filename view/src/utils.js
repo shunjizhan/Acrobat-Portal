@@ -717,10 +717,10 @@ export const addHighLight = (text, tokens, className='highLight') => {
     tokens = new Set(tokens);
     for (let i = 0; i < text.length; i++) {
         let t = text[i];
-        console.log(t, tokens);
+        // console.log(t, tokens);
         if (tokens.has(t)) {
             text[i] = '<span class=' + className + '>' + t + '</span>';
-            console.log(text[i]);
+            // console.log(text[i]);
         }
     }  
 
