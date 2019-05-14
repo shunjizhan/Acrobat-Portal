@@ -15,12 +15,15 @@
         position: relative;
         width: 80%;
         margin:0;
+        text-align: left;
 
         .searchText {
-            font-size: 23px;
-            width: 40%;
+            font-size: 15px;
+            width: 13%;
             border: 2px solid rgba($blue, 0.8);
             padding: 5px 10px;
+            margin-right: 5px;
+            // margin-right: 50px;
             height: 100%;
             border-radius: $border-radius;
             outline: none;
@@ -29,16 +32,12 @@
             // &:focus{ color: $orange; }
         }
 
-        #searchText_2 {
-            border-radius: $border-radius 0 0 $border-radius;
-        }
-
         #searchButton {
             position: absolute;
             right: $button-offset;
-            width: $search-bar-height;
+            width: $search-bar-height + 10px;
             height: 100%;
-            border-radius: 0 $border-radius $border-radius 0;
+            border-radius: $border-radius;
             font-size: 20px;
             @extend .search-bar-button-style;
         }
@@ -46,16 +45,18 @@
         .drop-down-container {
             // position: relative;
             display: inline-block;
-            width: 20%;
+            width: 10%;
+            margin-right: 20px;
             height: 100%;
             // margin: 0 5%;
 
             .dropdown button {
+                font-size: 80%;
                 height: 100%;
                 border: $query-item-border-style;
                 background-color: white;
                 color: black;
-                padding: 5px 20px;;
+                padding: 5px 10px;
 
                 &:active { 
                     color: black; 

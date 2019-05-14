@@ -6,41 +6,38 @@ import './AdvancedSearchBar.css';
 
 class AdvancedSearchBar extends Component {
     state = {
-        query1: '',
-        query2: '',
-        relation: 'Before'
+        allRelationQueries: [{
+            queries: ['', '', '', ''],
+            relations: ['BEFORE', 'optional', 'optional']
+        }]
     }
 
-    _handleTyping = (query, which) => {
-        const queries = { ...this.state };
-        if (which === 1) {
-            queries.query1 = query;
-        } else {
-            queries.query2 = query;
-        }
+    handleTyping = index => e => {
+        const query = e.target.value;
+        const { allRelationQueries } = { ...this.state };
+        const { queries } = allRelationQueries[0];
+        queries[index] = query;
         
-        this.props.handleTyping(queries);
-        this.setState(queries);
+        // this.props.handleTyping(queries);
+        this.setState({ allRelationQueries });
     }
-
-    handleTyping_1 = e => this._handleTyping(e.target.value, 1);
-    handleTyping_2 = e => this._handleTyping(e.target.value, 2);
-
 
     handleSearch = () => {
-        this.props.handleSearch({ ...this.state });
+        const { allRelationQueries } = { ...this.state };
+        this.props.handleSearch(allRelationQueries);
     }
 
     handleModeSwitch = () => {
         this.props.handleModeSwitch();
     }
 
-    handleSelect = key => {
-        const queries = { ...this.state };
-        queries.relation = key;
+    handleSelect = index => key => {
+        const { allRelationQueries } = { ...this.state };
+        const { relations } = allRelationQueries[0];
+        relations[index] = key;
         
-        this.props.handleTyping(queries);
-        this.setState(queries);
+        // this.props.handleTyping(queries);
+        this.setState({ allRelationQueries });
     }
 
     handleKeyDown = (e) => {
@@ -51,7 +48,7 @@ class AdvancedSearchBar extends Component {
 
 
     render() {
-        const { relation } = this.state;
+        const { relations } = this.state.allRelationQueries[0];
         const allRelations = ['BEFORE', 'AFTER', 'OVERLAP', 'MODIFY', 'IDENTICAL', 'SUBPROCEDURE'];
         return (
         <div id='search-section'>
@@ -61,23 +58,56 @@ class AdvancedSearchBar extends Component {
                     type="text" 
                     className="searchText" 
                     placeholder="Relation 1" 
-                    onChange={ this.handleTyping_1 }
+                    onChange={ this.handleTyping(0) }
                     onKeyDown={ this.handleKeyDown }
                 />
                 <div className='drop-down-container'>
                     <DropDown 
-                        handleSelect={ this.handleSelect }
+                        handleSelect={ this.handleSelect(0) }
                         dropDownData={ allRelations }
-                        current={ relation }
+                        current={ relations[0] }
                     />
                 </div>
+
                 <input 
                     ref="AdvancedSearchBar_2"
                     type="text" 
                     className="searchText" 
-                    id="searchText_2" 
                     placeholder="Relation 2" 
-                    onChange={ this.handleTyping_2 }
+                    onChange={ this.handleTyping(1) }
+                    onKeyDown={ this.handleKeyDown }
+                />
+                <div className='drop-down-container'>
+                    <DropDown 
+                        handleSelect={ this.handleSelect(1) }
+                        dropDownData={ allRelations }
+                        current={ relations[1] }
+                    />
+                </div>
+
+                <input 
+                    ref="AdvancedSearchBar_3"
+                    type="text" 
+                    className="searchText" 
+                    placeholder="Relation 3" 
+                    onChange={ this.handleTyping(2) }
+                    onKeyDown={ this.handleKeyDown }
+                />
+                <div className='drop-down-container'>
+                    <DropDown 
+                        handleSelect={ this.handleSelect(2) }
+                        dropDownData={ allRelations }
+                        current={ relations[2] }
+                    />
+                </div>
+
+                <input 
+                    ref="AdvancedSearchBar_4"
+                    type="text" 
+                    className="searchText" 
+                    id="searchText_4" 
+                    placeholder="Relation 4" 
+                    onChange={ this.handleTyping(3) }
                     onKeyDown={ this.handleKeyDown }
                 />
                 <button 
