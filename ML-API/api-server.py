@@ -1,14 +1,18 @@
-# import pickle
 import flask
 
 from flask import request
 from flask_restful import Api, Resource
-# from nltk import word_tokenize, pos_tag
+from nltk import word_tokenize
 
 from flair.data import Sentence
 from flair.models import SequenceTagger
 
 from pprint import pprint
+
+
+def tokenize(s):
+    s = s.replace('-', ' - ')       # deal with special case 17-year-old
+    return ' '.join(word_tokenize(s))
 
 
 class Predict(Resource):
@@ -19,9 +23,7 @@ class Predict(Resource):
         # prepare the query
         params = request.args
         query = params['query']
-        print('query:   ', query)
-
-        query = query.split('\\n')
+        query = [tokenize(q) for q in query.split('\\n')]
 
         # predict
         all_tokens = []
@@ -41,8 +43,8 @@ class Predict(Resource):
             all_tokens.append(tokens)
             all_entities.append(entity_types)
 
-        pprint(all_tokens)
-        pprint(all_entities)
+        # pprint(all_tokens)
+        # pprint(all_entities)
 
         # preparing a response object and storing the model's predictions
         response = {
