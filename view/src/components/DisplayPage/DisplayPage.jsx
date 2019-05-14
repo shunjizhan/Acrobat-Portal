@@ -76,14 +76,14 @@ class DisplayPage extends Component {
                         <Brat docData={ docData }/>
                     </div> 
                 }
-{/*                { docData && 
+                { docData && 
                     <div className='graph-container'>
                         <Graph 
                             graphData={ docData }
                             entities={ entities }
                         /> 
                     </div>
-                }*/}
+                }}
 
                 { !docData && 
                     <div className='loading-container'>

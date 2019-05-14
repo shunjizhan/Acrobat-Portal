@@ -20,7 +20,14 @@ class Graph extends Component {
     
     // Create the Elements (Nodes) to be visualized
     var elements = buildGraphElementsFromGraphData(graphData);
-    var sub_elements = buildSubGraphElementsFromGraphData(graphData, entities);
+    var sub_elements = [];
+    // var subgraph_width = '80%';
+    var subgraph_height = '10px';
+    if (entities) {
+      sub_elements = buildSubGraphElementsFromGraphData(graphData, entities);
+      // subgraph_width = '80%';
+      subgraph_height = '500px';
+    }
     // Layout
     const layout = {
       name: 'dagre',
@@ -101,7 +108,7 @@ class Graph extends Component {
         <div>
           <CytoscapeComponent 
             elements={sub_elements} 
-            style={ { width: '80%', height: '500px'}} 
+            style={ { width: '80%', height: subgraph_height}} 
             layout={layout_cola}
             stylesheet={stylesheet} 
           ></CytoscapeComponent>
