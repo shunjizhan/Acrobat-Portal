@@ -53,6 +53,10 @@ class TopBar extends Component {
     }
 
     handleTyping = query1 => {
+        const _isLetter = c => /^[a-zA-Z()]$/.test(c);
+        if (_isLetter(query1.charAt(query1.length - 1))) { return }
+
+        // if last typing is not alphabet
         // go over crf API to get entities
         axios.post('http://localhost:3001/api/getPrediction', {
             data: { query: query1 } 
