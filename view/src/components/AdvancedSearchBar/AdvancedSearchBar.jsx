@@ -23,7 +23,8 @@ class AdvancedSearchBar extends Component {
     }
 
     handleSearch = () => {
-        this.props.handleSearch({ ...this.state });
+        const { allRelationQueries } = { ...this.state };
+        this.props.handleSearch(allRelationQueries);
     }
 
     handleModeSwitch = () => {
