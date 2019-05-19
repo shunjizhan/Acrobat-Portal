@@ -141,7 +141,7 @@ module.exports = function(app) {
 
     // this method search nodes with multiple relationships in our database
     router.post("/searchMultiRelations", (req, res, next) => {
-        Graph.searchRelation(client.getSession(req), req.body)
+        Graph.searchMultiRelations(client.getSession(req), req.body)
             .then(response => res.json({ success : true, data: response }))
             .catch(next)
     });

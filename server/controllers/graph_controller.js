@@ -4,10 +4,11 @@ var Entity = require('../models/neo4j/entity')
 	response functions
 */
 var _manyEntities = function (result) {
-  // console.log(result.records);
+  console.log(result.records);
+  var key = result.records[0].keys[0];
   // console.log(result.records.map(r => ({ pmID: r.get('a').properties.pmID, entities: r.keys.map(k => r.get(k).properties.id)})));
   // console.log(result.records.map(r => (new Entity(r.get('a')))));          // r._fields[0].properties
-  res = result.records.map(r => ({ pmID: r.get('a').properties.pmID, entities: r.keys.map(k => r.get(k).properties.id)}));
+  res = result.records.map(r => ({ pmID: r.get(key).properties.pmID, entities: r.keys.map(k => r.get(k).properties.id)}));
   var dict = new Object();
   for (var i = 0; i < res.length; i++) {
     var pmID = res[i].pmID;
@@ -21,6 +22,7 @@ var _manyEntities = function (result) {
     }
   }
   console.log(Object.values(dict));
+  console.log(Object.values(dict)[0].entities);
   return Object.values(dict);
   // return result.records.map(r => ({ pmID: r.get('a').properties.pmID, entities: r.keys.map(k => r.get(k).properties)}));
   // return result.records.map(r => (new Entity(r.get('a'))))
@@ -124,54 +126,105 @@ var buildRelation = function(session, relation){
   Public Functions for search relations
 */
 var searchRelation = function(session, relation){
-	relationship = relation.label;
-  source = relation.source;
-  target = relation.target;
-  var query = ''
-  if(source == ''){
+    relationship = relation.label;
+    source = relation.source;
+    target = relation.target;
+    var query = ''
+    if(source == ''){
     query = `MATCH (a:Entity)-[:${relationship}]-(b:Entity {label: {target}})
         RETURN a, b`
-  }else if(target == ''){
+    }else if(target == ''){
     query = `MATCH (a:Entity {label: {source}})-[:${relationship}]-(b:Entity)
         RETURN a, b`
-  }else{
+    }else{
     query = `MATCH (a:Entity {label: {source}})-[:${relationship}]-(b:Entity {label: {target}})
         RETURN a, b`
-  }
-  console.log(query);
-	var readTxResultPromise = session.readTransaction(function (transaction) {
-		var result = transaction.run(query, {
-		  source: relation.source,
-		  target: relation.target
-		})
-		return result
-	})
+    }
+    console.log(query);
+    var readTxResultPromise = session.readTransaction(function (transaction) {
+    	var result = transaction.run(query, {
+    	  source: relation.source,
+    	  target: relation.target
+    	})
+    	return result
+    })
 
-	return readTxResultPromise.then(_manyEntities)
+    return readTxResultPromise.then(_manyEntities)
 }
 
 /*
   Public Functions for search multiple relations
 */
-var searchMultiRelations = function(session, relation){
-  relationship = relation.label;
-  source = relation.source;
-  target = relation.target;
-  var query = `match (a:Entity{label:"chest"})-[:MODIFY]->(b:Entity{label:"bullae"}),
-                 (c:Entity{label:"ascending"})-[:MODIFY]->(d:Entity{label:"aorta dilatation"})
-              return a, c, b, d;`
-  console.log(query);
-  var readTxResultPromise = session.readTransaction(function (transaction) {
-    var result = transaction.run(query, {
-      source: relation.source,
-      target: relation.target
+var searchMultiRelations = function(session, input){
+    var query = `MATCH `;
+    var varList = [];
+    for (var i = 0; i < input.length; i++) {
+        row = input[i];
+        queries = row.queries;
+        relations = row.relations;
+        query += matchQuery(queries, relations, i);
+        query += ', '
+        varList.push('v'+i+'0');
+    }
+    query = query.slice(0, -2);
+    query += ' RETURN ';
+    varList.forEach(function(element) {
+        query += element;
+        query += ',';
+    });
+    query = query.slice(0, -1);
+    console.log(query, 'query');
+    var readTxResultPromise = session.readTransaction(function (transaction) {
+    var result = transaction.run(query, {})
+        return result;
     })
-    return result
-  })
 
-  return readTxResultPromise.then(_manyEntities)
+    return readTxResultPromise.then(_manyEntities);
 }
 
+/*
+  Helper Functions for replacing quries
+*/
+var matchQuery = function(queries, relations, row){
+    var res = ``;
+    if (queries.length!=0) {
+        res += _entity(0, queries[0], row);
+    }
+    else{
+        return res;
+    }
+    for (var i = 0; i < queries.length; i++) {
+        if (queries[i+1] == '') { break;} 
+        res += ('-'+_relation(relations[i])+'->');
+        res += _entity(i+1, queries[i+1], row)
+    }
+    return res;
+}
+
+/*
+  Helper Functions for replacing entity in query
+*/
+var _entity = function(i, en, row){
+    var va = 'v'+row+i;
+    // console.log(va);
+    return `(${va}:Entity{label:'${en}'})`
+}
+
+/*
+  Helper Functions for replacing relation in query
+*/
+var _relation = function(re){
+    // console.log(re);
+    if (re == 'optional') {
+        return `[:]`;
+    }else{
+        return `[:${re}]`
+    }
+}
+
+// var matchQuery = function(e1, r, e2, va, vb){
+//     return `(${va}:Entity{label:'${e1}'})-[:${r}]->(${vb}:Entity{label:'${e2}'})`;
+// }
 
 /*
   Public Functions for search nodes
