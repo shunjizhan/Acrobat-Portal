@@ -22,8 +22,9 @@ var _manyEntities = function (result) {
     }
   }
   console.log(Object.values(dict));
-  console.log(Object.values(dict)[0].entities);
-  return Object.values(dict);
+  console.log(dict, 'dictionary');
+  // console.log(Object.values(dict)[0].entities);
+  return dict;
   // return result.records.map(r => ({ pmID: r.get('a').properties.pmID, entities: r.keys.map(k => r.get(k).properties)}));
   // return result.records.map(r => (new Entity(r.get('a'))))
 }
@@ -63,38 +64,38 @@ var _handlePayloadValidation = function (err) {
 	Public Functions for Creating nodes
 */
 var create = function (session, entity) {
-  let query = 'CREATE (c:Entity {id: {id}, entityType: {entityType}, label: {label}, pmID: {pmID}}) RETURN c'
-  // console.log(entity);
-  var writexResultPromise = session.writeTransaction(function (transaction) {
-    // used transaction will be committed automatically, no need for explicit commit/rollback
-    var result = transaction.run(query, {
-      id: entity.id,
-      pmID: entity.pmID,
-      entityType: entity.entityType,
-      label: entity.label
+    let query = 'CREATE (c:Entity {id: {id}, entityType: {entityType}, label: {label}, pmID: {pmID}}) RETURN c'
+    // console.log(entity);
+    var writexResultPromise = session.writeTransaction(function (transaction) {
+        // used transaction will be committed automatically, no need for explicit commit/rollback
+        var result = transaction.run(query, {
+            id: entity.id,
+            pmID: entity.pmID,
+            entityType: entity.entityType,
+            label: entity.label
+        })
+        return result
     })
-    return result
-  })
-  return writexResultPromise.then(_returnBySingleId).catch(_handlePayloadValidation)
+    return writexResultPromise.then(_returnBySingleId).catch(_handlePayloadValidation)
 }
 
 /*
 	Public Functions for Updating nodes
 */
 var update = function (session, entity) {
-  let query = 'MATCH (c:Entity{id: {id}}) SET c += { entityType: {entityType}, label: {label}, pmID: {pmID}} RETURN c'
-  var writexResultPromise = session.writeTransaction(function (transaction) {
-    // used transaction will be committed automatically, no need for explicit commit/rollback
-    var result = transaction.run(query, {
-      id: entity.id,
-      pmID: entity.pmID,
-      entityType: entity.entityType,
-      label: entity.label
+    let query = 'MATCH (c:Entity{id: {id}}) SET c += { entityType: {entityType}, label: {label}, pmID: {pmID}} RETURN c'
+    var writexResultPromise = session.writeTransaction(function (transaction) {
+        // used transaction will be committed automatically, no need for explicit commit/rollback
+        var result = transaction.run(query, {
+            id: entity.id,
+            pmID: entity.pmID,
+            entityType: entity.entityType,
+            label: entity.label
+        })
+        return result
     })
-    return result
-  })
 
-  return writexResultPromise.then(_returnBySingleId).catch(_handlePayloadValidation)
+    return writexResultPromise.then(_returnBySingleId).catch(_handlePayloadValidation)
 }
 
 /*
@@ -162,10 +163,17 @@ var searchMultiRelations = function(session, input){
         row = input[i];
         queries = row.queries;
         relations = row.relations;
-        query += matchQuery(queries, relations, i);
+        var matchQ = matchQuery(queries, relations, i)
+        var subQuery = matchQ[0];
+        var queriesLen = matchQ[1];
+        query += subQuery;
         query += ', '
-        varList.push('v'+i+'0');
+        console.log(queries);
+        for (var j = 0; j < queriesLen; j++) {
+            varList.push('v'+i+j);     
+        }
     }
+    console.log(varList);
     query = query.slice(0, -2);
     query += ' RETURN ';
     varList.forEach(function(element) {
@@ -187,6 +195,7 @@ var searchMultiRelations = function(session, input){
 */
 var matchQuery = function(queries, relations, row){
     var res = ``;
+    var queriesLen = 0 
     if (queries.length!=0) {
         res += _entity(0, queries[0], row);
     }
@@ -194,11 +203,14 @@ var matchQuery = function(queries, relations, row){
         return res;
     }
     for (var i = 0; i < queries.length; i++) {
-        if (queries[i+1] == '') { break;} 
+        if (queries[i+1] == '') { 
+            queriesLen = i+1;
+            break;
+        } 
         res += ('-'+_relation(relations[i])+'->');
         res += _entity(i+1, queries[i+1], row)
     }
-    return res;
+    return [res, queriesLen];
 }
 
 /*
