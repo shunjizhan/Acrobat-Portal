@@ -166,7 +166,6 @@ module.exports = function(app) {
                       if (pmIDSet.has(data[i]._source.pmID) ) {
                         data[i]._source.entities = dict[(data[i]._source.pmID).toString()].entities;
                         targetData.push(data[i]);
-                        console.log(data[i]);
                       }else{
                         restData.push(data[i]);
                       }
@@ -186,7 +185,6 @@ module.exports = function(app) {
             .then(response => writeResponse(res, response))
             .catch(next)
     });
-
 
     /* --------------------------------- OLD Search APIs --------------------------------------- */
     // this is the method for basic text search on the data message

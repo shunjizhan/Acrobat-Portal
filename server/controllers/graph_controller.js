@@ -163,13 +163,13 @@ var searchMultiRelations = function(session, input){
         row = input[i];
         queries = row.queries;
         relations = row.relations;
-        var matchQ = matchQuery(queries, relations, i)
-        var subQuery = matchQ[0];
-        var queriesLen = matchQ[1];
-        query += subQuery;
+        // var matchQ = matchQuery(queries, relations, i)
+        // var subQuery = matchQ[0];
+        // var queriesLen = matchQ[1];
+        query += matchQuery(queries, relations, i);
         query += ', '
         console.log(queries);
-        for (var j = 0; j < queriesLen; j++) {
+        for (var j = 0; j < queries.length; j++) {
             varList.push('v'+i+j);     
         }
     }
@@ -203,14 +203,14 @@ var matchQuery = function(queries, relations, row){
         return res;
     }
     for (var i = 0; i < queries.length; i++) {
-        if (queries[i+1] == '') { 
-            queriesLen = i+1;
-            break;
-        } 
+        // if (queries[i+1] == '') { 
+        //     queriesLen = i+1;
+        //     break;
+        // } 
         res += ('-'+_relation(relations[i])+'->');
         res += _entity(i+1, queries[i+1], row)
     }
-    return [res, queriesLen];
+    return res;
 }
 
 /*
