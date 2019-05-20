@@ -8,6 +8,10 @@ import { combineMultiWordEntity } from '../../utils';
 import './TopBar.css';
 
 
+/*
+    Component that contains the search bar and 
+    the query builder under the search bar
+                                                */
 class TopBar extends Component {
     // we save detailed query tokens here for building searching data obj
     // user typing will update this these detailed query tokens

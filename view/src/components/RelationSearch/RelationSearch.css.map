@@ -1,0 +1,7 @@
+{
+"version": 3,
+"mappings": "AACI,wBAAc,CACV,OAAO,CAAE,YAAY,CACrB,4EAA4B,CACxB,OAAO,CAAE,YAAY,CACrB,YAAY,CAAE,IAAI,CAK1B,kBAAQ,CACJ,KAAK,CAAE,KAAK,CACZ,MAAM,CAAE,IAAI,CACZ,UAAU,CAAC,KAAK",
+"sources": ["RelationSearch.scss"],
+"names": [],
+"file": "RelationSearch.css"
+}

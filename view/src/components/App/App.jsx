@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import TitlePanel from '../TitlePanel/TitlePanel'
+import RelationSearch from '../RelationSearch/RelationSearch'
 import MainPage from "../MainPage/MainPage";
 import SearchPage from "../SearchPage/SearchPage";
 import DisplayPage from "../DisplayPage/DisplayPage";
@@ -17,9 +17,10 @@ class App extends Component {
             <div id='app'>
                 {/*<TitlePanel />*/}
                 <Switch>
-                    <Route exact path="/" component={MainPage}/>    
-                    <Route exact path="/search" component={SearchPage}/>    
-                    <Route path="/search/:id" component={DisplayPage}/>    
+                    <Route exact path="/" component={ MainPage }/>    
+                    <Route exact path="/search" component={ SearchPage }/>    
+                    <Route path="/search/:id" component={ DisplayPage }/>    
+                    <Route exact path="/relationSearch" component={ RelationSearch }/>    
                     {/*<Route exact path="/addCaseReport" component={AddCaseReport}/>*/}
                     <Route component={() => (<h1>404!!!</h1>)} />
                 </Switch>

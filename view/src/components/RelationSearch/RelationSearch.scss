@@ -1,0 +1,16 @@
+.one_query {
+    .one_relation {
+        display: inline-block;
+        .drop-down-container, input {
+            display: inline-block;
+            margin-right: 10px;
+            // width: 30px;
+        }
+    }
+
+    .button {
+        width: 100px;
+        height: 30px;
+        margin-top:100px;
+    }
+}
