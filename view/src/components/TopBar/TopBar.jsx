@@ -16,13 +16,7 @@ class TopBar extends Component {
     // we save detailed query tokens here for building searching data obj
     // user typing will update this these detailed query tokens
     state = {
-        mode: 'basic',
-        queries: {
-            query1: '',
-            queyr2: '',
-            relation: null    
-        },
-        entities: []
+        mode: 'basic'
         /*
         [{  
             label: 'label1',
@@ -56,25 +50,7 @@ class TopBar extends Component {
     }
 
     handleTyping = query1 => {
-        const _isLetter = c => /^[a-zA-Z()]$/.test(c);
-        if (_isLetter(query1.charAt(query1.length - 1))) { return }
-
-        // if last typing is not alphabet
-        // go over crf API to get entities
-        axios.post('http://localhost:3001/api/getPrediction', {
-            data: { query: query1 } 
-        })
-        .then(response => {
-            const { data: { entity_types, tokens } } = response;
-            const entities = combineMultiWordEntity(entity_types, tokens);
-            
-            // update state to save current entity tokens
-            this.setState(prevState => ({ 
-                queries: { ...prevState.queries, query1 },
-                entities
-            })); 
-        })
-        .catch(error => { console.log(error); });
+        this.props.handleTyping(query1);
     }
 
     handleAdvancedTyping = queries => {
@@ -83,7 +59,8 @@ class TopBar extends Component {
     }
 
     handleSearch = () => {
-        const { entities, queries } = this.state;
+        const {entities} = this.props;
+        const { queries } = this.props;
         const queryObj = {
             query: queries.query1,    // whole query plain text
             entities                  // array of all entities
@@ -110,8 +87,10 @@ class TopBar extends Component {
     }
 
     render() {
-        const { mode, entities, queries } = this.state;
-        // console.log(queries);
+        const { entities, queries } = this.props;
+        console.log(entities);
+        const { mode } = this.state;
+        console.log(queries);
         return (
             <div id='topBar'>  
                 <Link to="/" id='title'>

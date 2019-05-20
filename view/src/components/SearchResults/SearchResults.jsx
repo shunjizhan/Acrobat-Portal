@@ -8,12 +8,13 @@ class SearchResults extends Component {
     state = {}
 
     render() {
-        const { results, queries } = this.props;
+        const { results, queries, entities } = this.props;
 
         return (
         <div id='searchResults'>
             {
                 results.length <= 0 ? '': results.map(eachData => {
+                    eachData.textEntities = entities;
                     return <Result 
                         displayData={ eachData }
                         key={ eachData.id }
