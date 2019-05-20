@@ -38,9 +38,9 @@ class SearchPage extends Component {
     handleAdvancedSearch = queries => {
         console.log('advanced search: ', queries);
 
-        if (queries === '') { return; }
+        if (queries === []) { return; }
 
-        axios.post("http://localhost:3001/api/searchRelation", { source: queries.query1, target: queries.query2, label: queries.relation})
+        axios.post("http://localhost:3001/api/searchMultiRelations", queries)
             .then(res => { 
                 const results = res.data.data.map(info => {
                     console.log(info)
