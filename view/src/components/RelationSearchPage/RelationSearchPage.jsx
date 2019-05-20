@@ -3,19 +3,21 @@ import { Link } from "react-router-dom";
 import axios from 'axios'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import DropDown from "../DropDown/DropDown";
-import './RelationSearch.css';
+import SearchResults from '../SearchResults/SearchResults';
+import './RelationSearchPage.css';
 
 
 /*
     Component for multi relation search
     no UI polish since it is for inner test
                                                 */
-class relationSearchPage extends Component {
+class RelationSearchPage extends Component {
     state = {
         allQueries: [{
             queries: ['', ''],
             relations: ['BEFORE']
-        }]
+        }],
+        results: []
     }
 
     handleTyping = row => index => e => {
@@ -41,8 +43,9 @@ class relationSearchPage extends Component {
 
     handleSearch = () => {
         const { allQueries } = this.state;
+        console.log(allQueries);
 
-        axios.post("http://localhost:3001/api/searchRelation", allQueries)
+        axios.post("http://localhost:3001/api/searchMultiRelations", allQueries)
             .then(res => { 
                 const results = res.data.data.map(info => {
                     console.log(info)
@@ -78,7 +81,7 @@ class relationSearchPage extends Component {
     }
 
     render() {
-        const { allQueries } = this.state;
+        const { allQueries, results, entities } = this.state;
         return (
             <div id='relationSearchPage'>
                 { allQueries.map((oneQuery, i) => 
@@ -108,6 +111,15 @@ class relationSearchPage extends Component {
                         { ' Row' }
                     </button>
                 </div>
+
+                { results.length > 0 &&
+                    <div id='search-result-container'>
+                        <SearchResults 
+                            results={ results } 
+                            entities={ entities }
+                        />      
+                    </div>  
+                }  
             </div>
         );
     }
@@ -169,4 +181,4 @@ class RelationSearch extends Component {
     }
 }
 
-export default relationSearchPage;
+export default RelationSearchPage;
