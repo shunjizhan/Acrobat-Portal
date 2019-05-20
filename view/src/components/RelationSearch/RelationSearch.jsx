@@ -40,7 +40,7 @@ class relationSearchPage extends Component {
     }
 
     handleSearch = () => {
-        console.log(this.state);
+        console.log(this.state.allQueries);
     }
 
     handleAddColumn = row => () => {
@@ -53,6 +53,15 @@ class relationSearchPage extends Component {
         console.log('add column');
     }
 
+    handleAddRow = () => {
+        const { allQueries } = { ...this.state };
+        allQueries.push({
+            queries: ['', ''],
+            relations: ['BEFORE']
+        })
+        this.setState({ allQueries });
+    }
+
     render() {
         const { allQueries } = this.state;
         return (
@@ -63,7 +72,7 @@ class relationSearchPage extends Component {
                         relations={ oneQuery.relations }
                         handleTyping={ this.handleTyping(i) }
                         handleSelect={ this.handleSelect(i) }
-                        handleAddColumn={ this.handleAddColumn(0) }
+                        handleAddColumn={ this.handleAddColumn(i) }
                         handleKeyDown={ this.handleKeyDown }
                     />
                 )}
@@ -74,6 +83,14 @@ class relationSearchPage extends Component {
                         onClick={ this.handleSearch }
                     >
                         <FontAwesomeIcon icon={['fas', 'search']} />
+                    </button>
+
+                    <button 
+                        className="button"
+                        onClick={ this.handleAddRow }
+                    >
+                        <FontAwesomeIcon icon={['fas', 'plus']} />
+                        { ' Row' }
                     </button>
                 </div>
             </div>
@@ -133,7 +150,7 @@ class RelationSearch extends Component {
                 className="button"
                 onClick={ this.handleAddColumn }
             >
-            +
+            <FontAwesomeIcon icon={['fas', 'plus']} />
             </button>
         </div>);
     }
