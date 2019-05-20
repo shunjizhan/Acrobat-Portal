@@ -9,8 +9,9 @@ class Result extends Component {
     render() {
         const { 
             queries,
-            displayData: { previewText, id, entities }
+            displayData: { previewText, id, textEntities, entities }
         } = this.props;
+        console.log(this.props.displayData);
         const displayPath = `search/${id}`;
 
         return (
@@ -21,6 +22,7 @@ class Result extends Component {
                     <Link to={{
                       pathname: displayPath,
                       state: {
+                        textEntities,
                         entities,
                         queries
                       }

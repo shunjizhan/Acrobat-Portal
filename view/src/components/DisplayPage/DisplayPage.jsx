@@ -35,18 +35,21 @@ class DisplayPage extends Component {
 
         const { id } = this.props.match.params;
         const { docData } = this.state;
-        let text, entities, queries, tokensToHighlight;
+        let text, entities, queries, tokensToHighlight, textEntities;
         if (docData) { 
             ({text} = docData);
         }
         if (this.props.location.state) {
             console.log('data:', this.props.location.state);
-            ({ entities, queries } = this.props.location.state); 
-            if (queries.query1) {   // relation search
-                tokensToHighlight = [queries.query1, queries.query2];
-            } else {                // basic search
-                tokensToHighlight = _remove_punc(queries.queryText).split(' ')
-            }
+            ({ entities, queries, textEntities } = this.props.location.state); 
+            console.log(textEntities);
+            tokensToHighlight = textEntities.map(e => (e.label));
+            console.log(tokensToHighlight);
+            // if (queries.query1) {   // relation search
+            //     tokensToHighlight = [queries.query1, queries.query2];
+            // } else {                // basic search
+            //     tokensToHighlight = _remove_punc(queries.queryText).split(' ')
+            // }
             
         }
         
