@@ -10,68 +10,116 @@ import './RelationSearch.css';
     Component for multi relation search
     no UI polish since it is for inner test
                                                 */
-class relationSearch extends Component {
+class relationSearchPage extends Component {
     state = {
-        queries: ['', ''],
-        relations: ['BEFORE']
+        allQueries: [{
+            queries: ['', ''],
+            relations: ['BEFORE']
+        }]
     }
 
-    handleTyping = index => e => {
+    handleTyping = row => index => e => {
         const query = e.target.value;
-        const { queries } = { ...this.state };
+        const { allQueries } = { ...this.state };
+        const { queries } = allQueries[row];
         queries[index] = query;
-        this.setState({ queries });
+        this.setState({ allQueries });
     }
 
-    handleSearch = () => {
-        console.log({ ...this.state });
-    }
-
-    handleSelect = index => key => {
-        const { relations } = { ...this.state };
+    handleSelect = row => index => key => {
+        const { allQueries } = { ...this.state };
+        const { relations } = allQueries[row];
         relations[index] = key;
-        this.setState({ relations });
+        this.setState({ allQueries });
     }
 
-    handleKeyDown = (e) => {
+    handleKeyDown = e => {
         if (e.key === 'Enter') {
           this.handleSearch();
         }
     }
 
-    handleAddColumn = () => {
-        const { queries, relations } = { ...this.state };
+    handleSearch = () => {
+        console.log(this.state);
+    }
+
+    handleAddColumn = row => () => {
+        const { allQueries } = { ...this.state };
+        const { queries, relations } = allQueries[row];
         queries.push('');
         relations.push('BEFORE')
-        this.setState({ queries, relations} );
+        console.log('allQueries', allQueries);
+        this.setState({ allQueries });
         console.log('add column');
     }
 
+    render() {
+        const { allQueries } = this.state;
+        return (
+            <div id='relationSearchPage'>
+                { allQueries.map((oneQuery, i) => 
+                    <RelationSearch
+                        queries={ oneQuery.queries }
+                        relations={ oneQuery.relations }
+                        handleTyping={ this.handleTyping(i) }
+                        handleSelect={ this.handleSelect(i) }
+                        handleAddColumn={ this.handleAddColumn(0) }
+                        handleKeyDown={ this.handleKeyDown }
+                    />
+                )}
+                <div>
+                    <button 
+                        type="submit" 
+                        className="button"
+                        onClick={ this.handleSearch }
+                    >
+                        <FontAwesomeIcon icon={['fas', 'search']} />
+                    </button>
+                </div>
+            </div>
+        );
+    }
+}
+
+
+
+
+class RelationSearch extends Component {
+    handleAddColumn = () => {
+        this.props.handleAddColumn();
+    }
 
     render() {
-        const { queries, relations } = this.state;
+        const { 
+            queries, 
+            relations, 
+            handleTyping, 
+            handleSelect, 
+            handleKeyDown 
+        } = this.props;
         const allRelations = ['BEFORE', 'AFTER', 'OVERLAP', 'MODIFY', 'IDENTICAL', 'SUBPROCEDURE'];
+
         const inputComponent = queries.map((word, i) => {
             if (i === queries.length - 1) {
-                return  (<div className='one_relation'>               
+                return  (<div className='one_relation' key={i}>               
                     <input 
                         type="text" 
                         className="searchText" 
-                        onChange={ this.handleTyping(i) }
-                        onKeyDown={ this.handleKeyDown }
+                        onChange={ handleTyping(i) }
+                        onKeyDown={ handleKeyDown }
                     />
                 </div>)
             } else {
-                return  (<div className='one_relation'>               
+                return  (<div className='one_relation' key={i}>               
                     <input 
                         type="text" 
                         className="searchText" 
-                        onChange={ this.handleTyping(i) }
-                        onKeyDown={ this.handleKeyDown }
+                        onChange={ handleTyping(i) }
+                        onKeyDown={ handleKeyDown }
                     />
                     <div className='drop-down-container'>
                         <DropDown 
-                            handleSelect={ this.handleSelect(i) }
+                            handleSelect={ handleSelect(i) }
                             dropDownData={ allRelations }
                             current={ relations[i] }
                         />
@@ -81,77 +129,14 @@ class relationSearch extends Component {
         })
         return (<div className='one_query'>
             { inputComponent }
-            <div>
-                <button 
-                    type="submit" 
-                    className="button"
-                    onClick={ this.handleSearch }
-                >
-                    <FontAwesomeIcon icon={['fas', 'search']} />
-                </button>
-                <button 
-                    className="button"
-                    onClick={ this.handleAddColumn }
-                >
-                +
-                </button>
-            </div>
+            <button 
+                className="button"
+                onClick={ this.handleAddColumn }
+            >
+            +
+            </button>
         </div>);
-        // return (
-        // <div id='relation_search'>
-        //     <div className='one_relation'>
-
-
-        //         <input 
-        //             type="text" 
-        //             className="searchText" 
-        //             placeholder="Relation 2" 
-        //             onChange={ this.handleTyping(1) }
-        //             onKeyDown={ this.handleKeyDown }
-        //         />
-        //         <div className='drop-down-container'>
-        //             <DropDown 
-        //                 handleSelect={ this.handleSelect(1) }
-        //                 dropDownData={ allRelations }
-        //                 current={ relations[1] }
-        //             />
-        //         </div>
-
-        //         <input 
-        //             type="text" 
-        //             className="searchText" 
-        //             placeholder="Relation 3" 
-        //             onChange={ this.handleTyping(2) }
-        //             onKeyDown={ this.handleKeyDown }
-        //         />
-        //         <div className='drop-down-container'>
-        //             <DropDown 
-        //                 handleSelect={ this.handleSelect(2) }
-        //                 dropDownData={ allRelations }
-        //                 current={ relations[2] }
-        //             />
-        //         </div>
-
-        //         <input 
-        //             ref="AdvancedSearchBar_4"
-        //             type="text" 
-        //             className="searchText" 
-        //             id="searchText_4" 
-        //             placeholder="Relation 4" 
-        //             onChange={ this.handleTyping(3) }
-        //             onKeyDown={ this.handleKeyDown }
-        //         />
-        //     </div>
-
-
-            // <button 
-            //     className="button"  
-            //     onClick={ this.handleSearch }
-            // >
-            // + row
-            // </button>
-        // </div>);
     }
 }
 
-export default relationSearch;
+export default relationSearchPage;

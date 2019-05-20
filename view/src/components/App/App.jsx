@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import RelationSearch from '../RelationSearch/RelationSearch'
+import relationSearchPage from '../RelationSearch/RelationSearch'
 import MainPage from "../MainPage/MainPage";
 import SearchPage from "../SearchPage/SearchPage";
 import DisplayPage from "../DisplayPage/DisplayPage";
@@ -20,7 +20,7 @@ class App extends Component {
                     <Route exact path="/" component={ MainPage }/>    
                     <Route exact path="/search" component={ SearchPage }/>    
                     <Route path="/search/:id" component={ DisplayPage }/>    
-                    <Route exact path="/relationSearch" component={ RelationSearch }/>    
+                    <Route exact path="/relationSearch" component={ relationSearchPage }/>    
                     {/*<Route exact path="/addCaseReport" component={AddCaseReport}/>*/}
                     <Route component={() => (<h1>404!!!</h1>)} />
                 </Switch>
