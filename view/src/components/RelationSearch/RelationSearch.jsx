@@ -40,7 +40,24 @@ class relationSearchPage extends Component {
     }
 
     handleSearch = () => {
-        console.log(this.state.allQueries);
+        const { allQueries } = this.state;
+
+        axios.post("http://localhost:3001/api/searchRelation", allQueries)
+            .then(res => { 
+                const results = res.data.data.map(info => {
+                    console.log(info)
+                    return {
+                        id: info.pmID, 
+                        entities: info.entities,
+                        previewText: "info._source.content info._source.content info._source.content info._source.content info._source.content"
+                    }
+                })
+                console.log(results);
+                this.setState({ 
+                    results 
+                }) 
+            })
+            .catch(err => console.log(err));
     }
 
     handleAddColumn = row => () => {
@@ -48,9 +65,7 @@ class relationSearchPage extends Component {
         const { queries, relations } = allQueries[row];
         queries.push('');
         relations.push('BEFORE')
-        console.log('allQueries', allQueries);
         this.setState({ allQueries });
-        console.log('add column');
     }
 
     handleAddRow = () => {
@@ -97,8 +112,6 @@ class relationSearchPage extends Component {
         );
     }
 }
-
-
 
 
 class RelationSearch extends Component {
