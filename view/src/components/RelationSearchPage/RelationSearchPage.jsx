@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import { Link } from "react-router-dom";
 import axios from 'axios'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import DropDown from "../DropDown/DropDown";
 import SearchResults from '../SearchResults/SearchResults';
+import { allQueriesToTextEntities } from '../../utils';
 import './RelationSearchPage.css';
 
 
@@ -17,7 +17,7 @@ class RelationSearchPage extends Component {
             queries: ['', ''],
             relations: ['BEFORE']
         }],
-        results: []
+        results: [],
     }
 
     handleTyping = row => index => e => {
@@ -37,11 +37,11 @@ class RelationSearchPage extends Component {
 
     handleKeyDown = e => {
         if (e.key === 'Enter') {
-          this.handleSearch();
+          this.handleRelationSearch();
         }
     }
 
-    handleSearch = () => {
+    handleRelationSearch = () => {
         const { allQueries } = this.state;
         console.log(allQueries);
 
@@ -81,7 +81,8 @@ class RelationSearchPage extends Component {
     }
 
     render() {
-        const { allQueries, results, entities } = this.state;
+        const { allQueries, results } = this.state;
+        // console.log(allQueriesToTextEntities(allQueries));
         return (
             <div id='relationSearchPage'>
                 { allQueries.map((oneQuery, i) => 
@@ -98,7 +99,7 @@ class RelationSearchPage extends Component {
                     <button 
                         type="submit" 
                         className="button"
-                        onClick={ this.handleSearch }
+                        onClick={ this.handleRelationSearch }
                     >
                         <FontAwesomeIcon icon={['fas', 'search']} />
                     </button>
@@ -116,7 +117,7 @@ class RelationSearchPage extends Component {
                     <div id='search-result-container'>
                         <SearchResults 
                             results={ results } 
-                            entities={ entities }
+                            textEntities={ allQueriesToTextEntities(allQueries) }
                         />      
                     </div>  
                 }  

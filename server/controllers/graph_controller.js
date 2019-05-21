@@ -202,7 +202,7 @@ var matchQuery = function(queries, relations, row){
     else{
         return res;
     }
-    for (var i = 0; i < queries.length; i++) {
+    for (var i = 0; i < queries.length-1; i++) {
         // if (queries[i+1] == '') { 
         //     queriesLen = i+1;
         //     break;

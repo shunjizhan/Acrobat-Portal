@@ -726,3 +726,61 @@ export const addHighLight = (text, tokens, className='highLight') => {
 
     return text.join(' ');
 };
+
+
+export const allQueriesToTextEntities = allQueries => {
+    /*
+        [allQueries]: array of object
+        [{
+            queries: ['', ''],
+            relations: ['BEFORE']
+        }]
+
+        [output]: array of object
+        [{  
+            label: 'label1',
+            type: 'type1'  
+        }, {
+            label: 'label2',
+            type: 'type2' 
+        },
+        ... 
+        {
+            label: 'label3',
+            type: 'type3' 
+        }]
+    */
+    const res = [];
+    allQueries.forEach(q => {
+        const { queries } = q;
+        queries.forEach(queryItem => {
+            res.push({
+                label: queryItem,
+                type: ''
+            })
+        });
+    });
+    return res;
+};
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

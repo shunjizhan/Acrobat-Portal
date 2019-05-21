@@ -41,21 +41,11 @@ class DisplayPage extends Component {
         }
         if (this.props.location.state) {
             console.log('data:', this.props.location.state);
-            ({ entities, queries, textEntities } = this.props.location.state); 
+            ({ entities, textEntities } = this.props.location.state); 
             console.log(textEntities);
             tokensToHighlight = textEntities.map(e => (e.label));
-            console.log(tokensToHighlight);
-            // if (queries.query1) {   // relation search
-            //     tokensToHighlight = [queries.query1, queries.query2];
-            // } else {                // basic search
-            //     tokensToHighlight = _remove_punc(queries.queryText).split(' ')
-            // }
-            
-        }
-        
-        // console.log(queries.queryText, _remove_punc(queries.queryText));
-        // console.log('tokensToHighlight:', tokensToHighlight);       
-        // console.log('text:', text);       
+            console.log(tokensToHighlight); 
+        }   
 
         return(
             <div className='display-page'>

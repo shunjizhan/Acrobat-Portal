@@ -8,7 +8,6 @@ import './Result.css';
 class Result extends Component {
     render() {
         const { 
-            queries,
             displayData: { previewText, id, textEntities, entities }
         } = this.props;
         console.log(this.props.displayData);
@@ -23,8 +22,7 @@ class Result extends Component {
                       pathname: displayPath,
                       state: {
                         textEntities,
-                        entities,
-                        queries
+                        entities
                       }
                     }}>{ previewText }</Link>
                 </span>

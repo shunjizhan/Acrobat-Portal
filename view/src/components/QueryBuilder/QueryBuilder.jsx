@@ -23,13 +23,8 @@ class QueryBuilder extends Component {
     }
 
     render() {
-        const { 
-            queries: { query1, query2, relation },      // advanced search
-            entities,
-        } = this.props;
-
+        const { entities } = this.props;
         const { showO } = this.state;
-        // console.log(entities);
 
         return (
             <div id='queryBuilder' >
@@ -57,19 +52,6 @@ class QueryBuilder extends Component {
                 })
             }
 
-            {   query2 && 
-                <div id='relation-container'>
-                    <div id='relation'>{ relation }</div>
-                </div> }
-
-            {   query2 &&
-                query2.map((word, index) => 
-                    <QueryItem 
-                        word={ word } 
-                        key={ index }
-                    />
-                )
-            }
             </div>
         );
     }
