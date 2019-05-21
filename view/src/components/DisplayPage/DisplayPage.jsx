@@ -12,7 +12,6 @@ import './DisplayPage.css';
 class DisplayPage extends Component {
     state = {
         docData: null,
-        graphData: {}
     }
 
     componentDidMount(){
@@ -28,33 +27,22 @@ class DisplayPage extends Component {
 
 
     render () {
-        const _remove_punc = string => 
-            string
-            .replace(/[.,/#!$%^&*;:{}=\-_`~()]/g,"")
-            .replace(/\s{2,}/g," ");
-
         const { id } = this.props.match.params;
         const { docData } = this.state;
-        let text, entities, queries, tokensToHighlight;
-        if (docData) { 
-            ({text} = docData);
-        }
+        let text,                   // whole plain text of the case report
+            entities,               // entities for graph
+            tokensToHighlight,      // array of tokens to highlight
+            textEntities;           // plain text highlight entities
+        if (docData) { ({ text } = docData); }
         if (this.props.location.state) {
-            console.log('data:', this.props.location.state);
-            ({ entities, queries } = this.props.location.state); 
-            if (queries.query1) {   // relation search
-                tokensToHighlight = [queries.query1, queries.query2];
-            } else {                // basic search
-                tokensToHighlight = _remove_punc(queries.queryText).split(' ')
-            }
-            
-        }
-        
-        // console.log(queries.queryText, _remove_punc(queries.queryText));
-        // console.log('tokensToHighlight:', tokensToHighlight);       
-        // console.log('text:', text);       
+            // console.log('data:', this.props.location.state);
+            ({ entities, textEntities } = this.props.location.state); 
+            // console.log(textEntities);
+            tokensToHighlight = textEntities.map(e => e.label);
+            console.log('tokensToHighlight:', tokensToHighlight); 
+        }   
 
-        return(
+        return (
             <div className='display-page'>
 
                 <div className='brat-intro'>

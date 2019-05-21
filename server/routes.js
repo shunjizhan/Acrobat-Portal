@@ -141,8 +141,8 @@ module.exports = function(app) {
 
     // this method search nodes with multiple relationships in our database
     router.post("/searchMultiRelations", (req, res, next) => {
-        Graph.searchRelation(client.getSession(req), req.body)
-            .then(response => res.json({ success : true, data: response }))
+        Graph.searchMultiRelations(client.getSession(req), req.body)
+            .then(response => res.json({ success : true, data: Object.values(response) }))
             .catch(next)
     });
 
@@ -154,14 +154,17 @@ module.exports = function(app) {
         const pmIDSet = new Set();
         Graph.searchNodes(client.getSession(req), req.body)
             .then(response => {
+                var dict = response; // Get Object
+                response = Object.values(dict); // Get Values
                 response.forEach(item => pmIDSet.add(item.pmID));
                 console.log(pmIDSet, 'pmIDSet');
-                searchModule.search2(query, function(data) {
-                    targetData = [];
-                    restData = []
+                searchModule.search2(query, function(data) { // Get ElasticSearch Data for filtering
+                    targetData = []; // Target data with priority from neo4j
+                    restData = []; // Rest search results from ElasticSearch
                     for (i = 0; i < data.length; i++) { 
-                      data[i]._source.content = data[i]._source.content.substring(0,350)+'...';
+                      data[i]._source.content = data[i]._source.content.substring(0,350)+'...'; // Trim to 350 length
                       if (pmIDSet.has(data[i]._source.pmID) ) {
+                        data[i]._source.entities = dict[(data[i]._source.pmID).toString()].entities;
                         targetData.push(data[i]);
                       }else{
                         restData.push(data[i]);
@@ -182,7 +185,6 @@ module.exports = function(app) {
             .then(response => writeResponse(res, response))
             .catch(next)
     });
-
 
     /* --------------------------------- OLD Search APIs --------------------------------------- */
     // this is the method for basic text search on the data message

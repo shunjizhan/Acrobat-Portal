@@ -8,16 +8,16 @@ class SearchResults extends Component {
     state = {}
 
     render() {
-        const { results, queries } = this.props;
+        const { results, textEntities } = this.props;
 
         return (
         <div id='searchResults'>
             {
                 results.length <= 0 ? '': results.map(eachData => {
+                    eachData.textEntities = textEntities;
                     return <Result 
                         displayData={ eachData }
                         key={ eachData.id }
-                        queries={ queries }
                     />
                 })
             }
@@ -28,7 +28,6 @@ class SearchResults extends Component {
 
 SearchResults.propTypes = {
     results: PropTypes.arrayOf(PropTypes.object).isRequired,
-    queries: PropTypes.object.isRequired,
 };
 
 SearchResults.defaultProps = {

@@ -1,36 +1,36 @@
-@import "../shared";
+// @import "../shared";
 
-.button {
-    display: inline-block;
-    position: relative;
-    padding: 7px 23px;
+// .button {
+//     display: inline-block;
+//     position: relative;
+//     padding: 7px 23px;
 
-    border-radius: 15px;
-    border: 1px solid rgba($blue, 0.8);
-    background-color: rgba($blue, 1);
-    color: white;
+//     border-radius: 15px;
+//     border: 1px solid rgba($blue, 0.8);
+//     background-color: rgba($blue, 1);
+//     color: white;
 
-    text-align: center;
-    font-size: 110%;
-    font-weight: lighter;
-    font-family: Helvetica;
+//     text-align: center;
+//     font-size: 110%;
+//     font-weight: lighter;
+//     font-family: Helvetica;
 
-    -webkit-transition-duration: $transfer-duration;  /* Safari */
-    transition-duration: $transfer-duration;
+//     -webkit-transition-duration: $transfer-duration;  /* Safari */
+//     transition-duration: $transfer-duration;
 
-    &:hover {
-        cursor: pointer;
-        background-color: white;
-        color: $blue;
-    }
+//     &:hover {
+//         cursor: pointer;
+//         background-color: white;
+//         color: $blue;
+//     }
 
-    .button-text {
-        padding-left: 8px
-    }
+//     .button-text {
+//         padding-left: 8px
+//     }
 
-    svg {
-        // padding-right: 3px;
-        font-size: 120%;
-    }
+//     svg {
+//         // padding-right: 3px;
+//         font-size: 120%;
+//     }
 
-}
+// }

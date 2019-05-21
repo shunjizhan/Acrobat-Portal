@@ -712,8 +712,13 @@ export const addHighLight = (text, tokens, className='highLight') => {
     // basically wrap these [tokens] in [text] with span that has [className]
     if (tokens === null) { return text; }
 
-    text = text.split(' ');
-    console.log(text);
+    const _remove_punc = string => 
+        string
+        .replace(/[.,/#!$%^&*;:{}=\-_`~()]/g,"")
+        .replace(/\s{2,}/g," ");
+
+    text = _remove_punc(text).split(' ');
+    console.log('text', text);
     tokens = new Set(tokens);
     for (let i = 0; i < text.length; i++) {
         let t = text[i];
@@ -726,3 +731,61 @@ export const addHighLight = (text, tokens, className='highLight') => {
 
     return text.join(' ');
 };
+
+
+export const allQueriesToTextEntities = allQueries => {
+    /*  args
+        [allQueries]: array of object
+        [{
+            queries: ['A', 'B', 'C'],
+            relations: ['BEFORE', 'BEFORE']
+        }]
+
+        return type: array of object
+        [{  
+            label: 'label1',
+            type: 'type1'  
+        }, {
+            label: 'label2',
+            type: 'type2' 
+        },
+        ... 
+        {
+            label: 'label3',
+            type: 'type3' 
+        }]
+    */
+    const res = [];
+    allQueries.forEach(q => {
+        const { queries } = q;
+        queries.forEach(queryItem => {
+            res.push({
+                label: queryItem,
+                type: ''
+            })
+        });
+    });
+    return res;
+};
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

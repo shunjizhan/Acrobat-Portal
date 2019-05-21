@@ -3,7 +3,7 @@ import TopBar from "../TopBar/TopBar";
 import SearchResults from '../SearchResults/SearchResults';
 import axios from 'axios'
 import './SearchPage.css';
-
+import { combineMultiWordEntity } from '../../utils';
 
 class SearchPage extends Component {
     // we only need to save search result here
@@ -11,99 +11,76 @@ class SearchPage extends Component {
     // queries for search is saved in (advanced) search
     state = {
         results: [],
-        queries: null
+        textEntities: [],
+        queryText: ''
     }
 
-    // handleSearch = query => {
-    //     console.log(query);
-    //     this.setState({ query });
+    handleTyping = queryText => {
+        const _isLetter = c => /^[a-zA-Z()]$/.test(c);
+        if (_isLetter(queryText.charAt(queryText.length - 1))) { return }
 
-    //     if (query === ''){
-    //         this.setState({ results: []});
-    //         return;
-    //     }
+        // if last typing is not alphabet
+        // go over crf API to get entities
+        axios.post('http://localhost:3001/api/getPrediction', {
+            data: { query: queryText } 
+        })
+        .then(response => {
+            const { data: { entity_types, tokens } } = response;
+            const textEntities = combineMultiWordEntity(entity_types, tokens);
+            
+            // update state to save current entity tokens
+            this.setState({ 
+                textEntities,
+                queryText
+            }); 
+        })
+        .catch(error => { console.log(error); });
+    }
 
-    //     axios.post("http://localhost:3001/api/searchDataES", { searchKey: query })
-    //         .then(res => { 
-    //             const results = res.data.data.map(info => {
-    //                 return {
-    //                     id: info._source.id, 
-    //                     text: info._source.content
-    //                 }
-    //             })
-    //             this.setState({ results }) 
-    //         });
-    // }
-
-    handleAdvancedSearch = queries => {
-        console.log('advanced search: ', queries);
-
-        if (queries === '') { return; }
-
-        axios.post("http://localhost:3001/api/searchRelation", { source: queries.query1, target: queries.query2, label: queries.relation})
-            .then(res => { 
-                const results = res.data.data.map(info => {
-                    console.log(info)
-                    return {
-                        id: info.pmID, 
-                        entities: info.entities,
-                        previewText: "info._source.content info._source.content info._source.content info._source.content info._source.content"
-                    }
-                })
-                this.setState({ 
-                    queries,
-                    results 
-                }) 
-            })
-            .catch(err => console.log(err));
-    }   
-
-    handleSearch = queryObj => {
+    handleSearch = () => {
+        const { textEntities, queryText } = this.state;
+        const queryObj = {
+            entities: textEntities,
+            query: queryText
+        }
         console.log('basic search: ', queryObj);
 
-        if (queryObj === {}) { return; }
-        var queryText = queryObj.query;
         axios.post("http://localhost:3001/api/searchNodes", queryObj)
             .then(res => { 
                 // search results
                 const results = res.data.data.map(info => {
                     return {
                         id: info._source.pmID, 
+                        entities: info._source.entities,
                         previewText: info._source.content
                     }
                 })
 
-                // update query plain text for DisplayPage highlight
-                const queries = {
-                    queryText,
-                    ...this.state.queries
-                }
-                this.setState({ 
-                    queries,
-                    results
-                }) 
+                this.setState({ results }) 
             })
             .catch(err => console.log(err));
     }     
 
 
     render() {
-        const { queries, results } = this.state;
+        const { results, textEntities } = this.state;
 
         return (
             <div id='searchPage'>  
                 <div id='top-bar-container'>
                     <TopBar 
+                        textEntities={ textEntities }
                         handleSearch={ this.handleSearch } 
                         handleAdvancedSearch={ this.handleAdvancedSearch } 
+                        handleTyping={ this.handleTyping } 
                     /> 
                 </div>
 
                 { results.length > 0 &&
                     <div id='search-result-container'>
                         <SearchResults 
-                            queries={ queries }
                             results={ results } 
+                            textEntities={ textEntities }
                         />      
                     </div>  
                 }  
