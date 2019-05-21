@@ -712,8 +712,13 @@ export const addHighLight = (text, tokens, className='highLight') => {
     // basically wrap these [tokens] in [text] with span that has [className]
     if (tokens === null) { return text; }
 
-    text = text.split(' ');
-    console.log(text);
+    const _remove_punc = string => 
+        string
+        .replace(/[.,/#!$%^&*;:{}=\-_`~()]/g,"")
+        .replace(/\s{2,}/g," ");
+
+    text = _remove_punc(text).split(' ');
+    console.log('text', text);
     tokens = new Set(tokens);
     for (let i = 0; i < text.length; i++) {
         let t = text[i];
@@ -729,14 +734,14 @@ export const addHighLight = (text, tokens, className='highLight') => {
 
 
 export const allQueriesToTextEntities = allQueries => {
-    /*
+    /*  args
         [allQueries]: array of object
         [{
-            queries: ['', ''],
-            relations: ['BEFORE']
+            queries: ['A', 'B', 'C'],
+            relations: ['BEFORE', 'BEFORE']
         }]
 
-        [output]: array of object
+        return type: array of object
         [{  
             label: 'label1',
             type: 'type1'  
