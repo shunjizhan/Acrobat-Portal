@@ -1,52 +1,13 @@
 import React, { Component } from 'react';
 import Modal from 'react-awesome-modal';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { Form, Row, Col } from 'react-bootstrap';
+import { Form } from 'react-bootstrap';
 import './LoginModal.css';
-
-
-// class LoginContent extends Component {
-//     state = {
-
-//     }
-
-//     render() {
-//         const { handleCloseModal, switchAction } = this.props;
-
-
-//     }
-// }
-
-
-class SignUpContent extends Component {
-    render() {
-        const { handleCloseModal, switchAction } = this.props;
-
-        return (
-            <div className='modal-inner-content'>
-                <h2>Create Account</h2>
-
-                <button onClick={ handleCloseModal }>
-                    Close
-                </button>
-
-                <button onClick={ this.handleSignUp }>
-                    Sign Up
-                </button>
-
-                <button onClick={ switchAction }>
-                    login
-                </button>
-            </div>
-        );
-    }
-}
-
 
 
 class ModalContent extends Component {
     state = {
-        currentAction: 'login',      // either login or signup
+        currentAction: 'signin',      // either signin or signup
         email: '',
         password: ''
     }
@@ -54,8 +15,8 @@ class ModalContent extends Component {
     switchAction = () => {
         this.setState(prevState => {
             const newAction = 
-                prevState.currentAction === 'login'? 
-                'signup' : 'login';
+                prevState.currentAction === 'signin'? 
+                'signup' : 'signin';
 
             return {
                 currentAction: newAction
@@ -84,25 +45,51 @@ class ModalContent extends Component {
         const { currentAction } = this.state;
 
         // confirm button types
-        const _SignInButton = <button onClick={ this.handleSignIn }>
-                                Sign In
-                             </button>
+        const _SignInButton = 
+            <button 
+                onClick={ this.handleSignIn }
+                className='confirm-button'
+            >
+                Sign In
+            </button>
 
-        const _SignUpButton = <button onClick={ this.handleSignUp }>
-                                Sign Up
-                             </button>
+        const _SignUpButton = 
+            <button 
+                onClick={ this.handleSignUp }
+                className='confirm-button'
+            >
+                Sign Up
+            </button>
 
         // action switch button types
-        const _SwitchToSignInButton = <button onClick={ this.switchAction }>
-                                switch to Sign In
-                             </button>
+        const _SwitchToSignInButton = 
+            <div>
+                already have an account?
+                <a href='#' onClick={ this.switchAction }>
+                    { ' Sign In' }
+                </a>
+            </div>
 
-        const _SwitchToSignUpButton = <button onClick={ this.switchAction }>
-                                switch to Sign Up
-                             </button>
+        const _SwitchToSignUpButton =             
+            <div>
+                don't have an account?
+                <a href='#' onClick={ this.switchAction }>
+                    { ' Sign Up' }
+                </a>
+            </div>
 
+        // button to close modal
+        const CloseModalButton = 
+            <button 
+                id='close-button'
+                onClick={ handleCloseModal 
+            }>
+                <FontAwesomeIcon icon={['far', 'times']}/>
+            </button>
+
+        // select current button types according to current action
         let ConfirmButton, SwitchActionButton, titleText;
-        if (currentAction === 'login') {
+        if (currentAction === 'signin') {
             ConfirmButton = _SignInButton;
             SwitchActionButton = _SwitchToSignUpButton;
             titleText = 'Sign In';
@@ -129,18 +116,16 @@ class ModalContent extends Component {
                     <Form.Label>Password</Form.Label>
                     <Form.Control 
                         type="password" 
-                        placeholder="Password" 
+                        placeholder="Enter password" 
                         onChange={ this.handlePasswordInput }
                     />
                 </Form.Group>
 
-                    <button onClick={ handleCloseModal }>
-                        Close
-                    </button>
-
                     { ConfirmButton }
 
                     { SwitchActionButton }
+
+                    { CloseModalButton }
             </div>
         );
     }
