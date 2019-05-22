@@ -1,28 +1,21 @@
 import React, { Component } from 'react';
 import Modal from 'react-awesome-modal';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { Form, Row, Col } from 'react-bootstrap';
 import './LoginModal.css';
 
 
-class LoginContent extends Component {
-    render() {
-        const { handleCloseModal, switchAction } = this.props;
+// class LoginContent extends Component {
+//     state = {
 
-        return (
-            <div className='modal-inner-content'>
-                <h1>Login</h1>
-                <p>This is the login page</p>
+//     }
 
-                <button onClick={ handleCloseModal }>
-                    Close
-                </button>
+//     render() {
+//         const { handleCloseModal, switchAction } = this.props;
 
-                <button onClick={ switchAction }>
-                    sign up
-                </button>
-            </div>
-        );
-    }
-}
+
+//     }
+// }
 
 
 class SignUpContent extends Component {
@@ -31,11 +24,14 @@ class SignUpContent extends Component {
 
         return (
             <div className='modal-inner-content'>
-                <h1>Sign Up</h1>
-                <p>This is the sign up </p>
+                <h2>Create Account</h2>
 
                 <button onClick={ handleCloseModal }>
                     Close
+                </button>
+
+                <button onClick={ this.handleSignUp }>
+                    Sign Up
                 </button>
 
                 <button onClick={ switchAction }>
@@ -50,7 +46,9 @@ class SignUpContent extends Component {
 
 class ModalContent extends Component {
     state = {
-        currentAction: 'login'      // either login or signup
+        currentAction: 'login',      // either login or signup
+        email: '',
+        password: ''
     }
 
     switchAction = () => {
@@ -65,24 +63,86 @@ class ModalContent extends Component {
         })
     }
 
+    handleSignIn = () => {
+        console.log(this.state);
+    }
+
+    handleSignUp = () => {
+        console.log(this.state);
+    }
+
+    handleEmailInput = e => {
+        this.setState({ email: e.target.value });
+    }
+
+    handlePasswordInput = e => {
+        this.setState({ password: e.target.value });
+    }
+
     render() {
         const { handleCloseModal } = this.props;
         const { currentAction } = this.state;
 
-        let content;
+        // confirm button types
+        const _SignInButton = <button onClick={ this.handleSignIn }>
+                                Sign In
+                             </button>
+
+        const _SignUpButton = <button onClick={ this.handleSignUp }>
+                                Sign Up
+                             </button>
+
+        // action switch button types
+        const _SwitchToSignInButton = <button onClick={ this.switchAction }>
+                                switch to Sign In
+                             </button>
+
+        const _SwitchToSignUpButton = <button onClick={ this.switchAction }>
+                                switch to Sign Up
+                             </button>
+
+        let ConfirmButton, SwitchActionButton, titleText;
         if (currentAction === 'login') {
-            content = <LoginContent 
-                        handleCloseModal={ handleCloseModal }
-                        switchAction={ this.switchAction }
-                      />
+            ConfirmButton = _SignInButton;
+            SwitchActionButton = _SwitchToSignUpButton;
+            titleText = 'Sign In';
         } else {
-            content = <SignUpContent 
-                        handleCloseModal={ handleCloseModal }
-                        switchAction={ this.switchAction }
-                      />
+            ConfirmButton = _SignUpButton;
+            SwitchActionButton = _SwitchToSignInButton;
+            titleText = 'Sign Up';
         }
 
-        return content;
+
+        return (
+            <div className='modal-inner-content'>
+                <h2>{ titleText }</h2>
+
+                <Form.Group controlId="formGroupEmail">
+                    <Form.Label>Email address</Form.Label>
+                    <Form.Control 
+                        type="email" 
+                        placeholder="Enter email"
+                        onChange={ this.handleEmailInput }
+                    />
+                </Form.Group>
+                <Form.Group controlId="formGroupPassword">
+                    <Form.Label>Password</Form.Label>
+                    <Form.Control 
+                        type="password" 
+                        placeholder="Password" 
+                        onChange={ this.handlePasswordInput }
+                    />
+                </Form.Group>
+
+                    <button onClick={ handleCloseModal }>
+                        Close
+                    </button>
+
+                    { ConfirmButton }
+
+                    { SwitchActionButton }
+            </div>
+        );
     }
 }
 
@@ -105,7 +165,7 @@ class LoginModal extends Component {
 
         return (
             <div id='login-modal'>
-                <h1>React-Modal Examples</h1>
+                <h2>React-Modal Examples</h2>
                 <input type="button" value="Open" onClick={() => this.openModal()} />
                 <Modal 
                     visible={ visible } 

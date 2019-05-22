@@ -1,6 +1,6 @@
 {
 "version": 3,
-"mappings": "AACI,iCAAqB,CACjB,MAAM,CAAE,IAAI",
+"mappings": "AACI,iCAAqB,CACjB,MAAM,CAAE,SAAS,CACjB,UAAU,CAAE,MAAM,CAElB,oCAAG,CACC,aAAa,CAAE,IAAI",
 "sources": ["LoginModal.scss"],
 "names": [],
 "file": "LoginModal.css"
