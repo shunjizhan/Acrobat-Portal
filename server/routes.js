@@ -6,6 +6,8 @@ const searchModule = require('./controllers/search_controller.js');
 const mongo = require('mongodb');
 const CaseReport2 = require("./models/mongo/case_report2");
 const User = require("./models/mongo/user");
+const bcrypt = require('bcrypt');
+const session = require('express-session')
 
 const client = require('./config/neoClient.js');
 var writeResponse = require('./helpers/response').writeResponse
@@ -535,6 +537,16 @@ module.exports = function(app) {
 
     /* --------------------------------------- SIGNUP --------------------------------------- */
 
+    app.use(session({
+        key: 'user_sid',
+        secret: 'somerandonstuffs',
+        resave: false,
+        saveUninitialized: false,
+        cookie: {
+            expires: 600000
+        }
+    }));
+
     router.post('/createUser', function(req, res) {
         console.log('craetUser API')
         console.log(req.body);
@@ -558,10 +570,46 @@ module.exports = function(app) {
         });
     });
 
+    /* --------------------------------------- SIGNIN --------------------------------------- */
+    app.post('/login', function(req, res) {
+        var email = req.body.email,
+            password = req.body.password;
+        console.log(email, password);
+        User.findOne({ email: email }).then(function (user, err) {
+            if (err) {
+                console.log("email not registered");
+                return res.json({success: false, error: err});
+            } else if (!user) {
+                var err = new Error('User not found.');
+                err.status = 401;
+                console.log(err);
+                return res.json({success: false, error: err});
+            }
+            console.log("found user");
+            bcrypt.compare(password, user.password, function (err, result) {
+                if (result === true) {
+                    return res.json({success: true});
+                } else {
+                    console.log("err3");
+                    return res.json({success: false, error: err});
+                }
+            })
+        });
+    });
+
     /* --------------------------------------- LOGOUT --------------------------------------- */
 
-    // app.get('/logout', function(req, res) {
-    //     req.logout();
-    //     res.redirect('/home/login');
-    // });
+    app.get('/logout', function(req, res, next) {
+        if (req.session) {
+            // delete session object
+            req.session.destroy(function(err) {
+                if(err) {
+                    return next(err);
+                } else {
+                    return res.redirect('/');
+                }
+            });
+        }
+    });
+
 };
