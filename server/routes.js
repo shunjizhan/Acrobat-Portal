@@ -5,6 +5,7 @@ const CaseReport = require("./models/mongo/case_report");
 const searchModule = require('./controllers/search_controller.js');
 const mongo = require('mongodb');
 const CaseReport2 = require("./models/mongo/case_report2");
+const User = require("./models/mongo/user");
 
 const client = require('./config/neoClient.js');
 var writeResponse = require('./helpers/response').writeResponse
@@ -534,12 +535,28 @@ module.exports = function(app) {
 
     /* --------------------------------------- SIGNUP --------------------------------------- */
 
-    // app.get('/signup', function(req, res) {
-    //     res.render('home/signup', {
-    //         loggedIn : req.loggedIn,
-    //         user : req.user, 
-    //         message: req.flash('signupMessage') });
-    // });
+    router.post('/createUser', function(req, res) {
+        console.log('craetUser API')
+        console.log(req.body);
+        if (!req.body.email || !req.body.password) {
+            return res.json({
+                success: false,
+                error: "INVALID INPUTS"
+            });
+        }
+        
+        let user = {};
+        user.email = req.body.email;
+        user.password = req.body.password;
+        
+        User.create(user, function(err, user) {
+            if (err) {
+                return res.json({success: false, error: err});
+            } else {
+                return res.json({success: true});
+            }
+        });
+    });
 
     /* --------------------------------------- LOGOUT --------------------------------------- */
 
