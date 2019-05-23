@@ -7,7 +7,6 @@ const mongo = require('mongodb');
 const CaseReport2 = require("./models/mongo/case_report2");
 const User = require("./models/mongo/user");
 const bcrypt = require('bcrypt');
-const session = require('express-session')
 
 const client = require('./config/neoClient.js');
 var writeResponse = require('./helpers/response').writeResponse
@@ -536,20 +535,39 @@ module.exports = function(app) {
     });
 
     /* --------------------------------------- SIGNUP --------------------------------------- */
-
-    app.use(session({
-        key: 'user_sid',
-        secret: 'somerandonstuffs',
-        resave: false,
-        saveUninitialized: false,
-        cookie: {
-            expires: 600000
+    app.use((req, res, next) => {
+        if (req.cookies.user_sid && !req.session.user) {
+            res.clearCookie('user_sid');        
         }
-    }));
+        next();
+    });
+
+    var sessionChecker = (req, res, next) => {
+        if (req.session.user && req.cookies.user_sid) {
+            // res.redirect('/dashboard');
+            // login success, nothing to do
+            console.log('found logged in cookies');
+        } else {
+            console.log('did not find logged-in cookies');
+            next();
+        }    
+    };
+
+    // app.get('/', sessionChecker, (req, res) => {
+    //     res.redirect('/login');
+    // });
+
+    // app.route('/api/createUser')
+    //     .get(sessionChecker, (req, res) => {
+    //         console.log('in sessionChecker');
+
+    //         return res.json({success: false, error: 'user found in cookie'});
+    //     });
 
     router.post('/createUser', function(req, res) {
         console.log('craetUser API')
         console.log(req.body);
+        console.log(req.session);
         if (!req.body.email || !req.body.password) {
             return res.json({
                 success: false,
@@ -565,9 +583,14 @@ module.exports = function(app) {
             if (err) {
                 return res.json({success: false, error: err});
             } else {
+                req.session.user = user;
+                console.log(" ")
+                console.log(req.session);
+                console.log(req.cookies);
                 return res.json({success: true});
             }
         });
+        
     });
 
     /* --------------------------------------- SIGNIN --------------------------------------- */
@@ -588,6 +611,7 @@ module.exports = function(app) {
             console.log("found user");
             bcrypt.compare(password, user.password, function (err, result) {
                 if (result === true) {
+                    req.session.user = user;
                     return res.json({success: true});
                 } else {
                     console.log("err3");
