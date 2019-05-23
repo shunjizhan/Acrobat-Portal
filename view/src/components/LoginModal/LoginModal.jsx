@@ -107,7 +107,7 @@ class ModalContent extends Component {
                 <Form.Group controlId="formGroupEmail">
                     <Form.Label>
                         <FontAwesomeIcon icon={['far', 'envelope']}/>
-                        Email address
+                        Email
                     </Form.Label>
                     <Form.Control 
                         type="email" 
@@ -140,10 +140,11 @@ class ModalContent extends Component {
 
 class LoginModal extends Component {
     state = {
-        visible : true
+        visible : false
     }
 
     openModal = () => {
+        console.log('openModal');
         this.setState({ visible : true });
     }
 
@@ -156,8 +157,10 @@ class LoginModal extends Component {
 
         return (
             <div id='login-modal'>
-                <h2>React-Modal Examples</h2>
-                <input type="button" value="Open" onClick={() => this.openModal()} />
+                <button id='user' onClick={ this.openModal }>
+                    <FontAwesomeIcon icon={['far', 'user-astronaut']}/>
+                    Login
+                </button>
                 <Modal 
                     visible={ visible } 
                     width="600" 

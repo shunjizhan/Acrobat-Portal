@@ -1,6 +1,19 @@
 @import "../shared";
 
 #login-modal {
+    #user {
+        font-size: 150%;
+        position: absolute;
+        right: 20px;
+        top: 10px;
+        z-index: 1;
+        border: none;
+
+        svg {
+            margin-right: 10px;
+        }
+    }
+
     .modal-inner-content {
         margin: 30px 50px;
         text-align: center;
