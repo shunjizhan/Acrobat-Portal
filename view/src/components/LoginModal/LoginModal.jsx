@@ -105,7 +105,10 @@ class ModalContent extends Component {
                 <h2>{ titleText }</h2>
 
                 <Form.Group controlId="formGroupEmail">
-                    <Form.Label>Email address</Form.Label>
+                    <Form.Label>
+                        <FontAwesomeIcon icon={['far', 'envelope']}/>
+                        Email address
+                    </Form.Label>
                     <Form.Control 
                         type="email" 
                         placeholder="Enter email"
@@ -113,7 +116,10 @@ class ModalContent extends Component {
                     />
                 </Form.Group>
                 <Form.Group controlId="formGroupPassword">
-                    <Form.Label>Password</Form.Label>
+                    <Form.Label>
+                        <FontAwesomeIcon icon={['far', 'lock-alt']}/>
+                        Password
+                    </Form.Label>
                     <Form.Control 
                         type="password" 
                         placeholder="Enter password" 
