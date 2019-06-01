@@ -594,7 +594,7 @@ module.exports = function(app) {
     });
 
     /* --------------------------------------- SIGNIN --------------------------------------- */
-    app.post('/login', function(req, res) {
+    router.post('/login', function(req, res) {
         var email = req.body.email,
             password = req.body.password;
         console.log(email, password);

@@ -158,10 +158,11 @@ class LoginModal extends Component {
             .then(res => {
                 console.log(res.data);
                 if (res.data.success === true) {
-                    alert('login success!')
+                    alert('Welcome!')
                 } else {
                     alert('login failed!')
                 }
+                this.closeModal();
             })
     }
 
