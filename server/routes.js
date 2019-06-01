@@ -658,8 +658,14 @@ module.exports = function(app) {
             console.log("found user");
             bcrypt.compare(password, user.password, function (err, result) {
                 if (result === true) {
-                    req.session.user = user;
-                    return res.json({success: true});
+                    // req.session.user = user;
+                    // return res.json({success: true});
+                    if (user.activation == false) {
+                        return res.json({success: false, error: 'Acount Not Acitivated'});
+                    } else {
+                        req.session.user = user;
+                        return res.json({success: true});
+                    }
                 } else {
                     console.log("err3");
                     return res.json({success: false, error: err});
