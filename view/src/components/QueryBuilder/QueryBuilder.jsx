@@ -58,7 +58,6 @@ class QueryBuilder extends Component {
 }
 
 QueryBuilder.propTypes = {
-    queries: PropTypes.object.isRequired,
     entities: PropTypes.array,
     handleEntitySelect: PropTypes.func
 };
