@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import TopBar from "../TopBar/TopBar";
 import SearchResults from '../SearchResults/SearchResults';
 import LoginModal from '../LoginModal/LoginModal';
-import axios from 'axios'
+import axios from 'axios';
 import './SearchPage.css';
 import { combineMultiWordEntity } from '../../utils';
 
@@ -63,23 +63,12 @@ class SearchPage extends Component {
             .catch(err => console.log(err));
     }     
 
-    handleSignIn = data => {
-        console.log(data);
-    }
-
-    handleSignUp = data => {
-        console.log(data);
-    }
-
     render() {
         const { results, textEntities } = this.state;
 
         return (
             <div id='searchPage'>  
-                <LoginModal 
-                    handleSignIn={ this.handleSignIn }
-                    handleSignUp={ this.handleSignUp }
-                />
+                <LoginModal />
 
                 <div id='top-bar-container'>
                     <TopBar 

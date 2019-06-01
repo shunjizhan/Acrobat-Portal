@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Modal from 'react-awesome-modal';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Form } from 'react-bootstrap';
+import axios from 'axios';
 import './LoginModal.css';
 
 
@@ -151,9 +152,35 @@ class LoginModal extends Component {
         this.setState({ visible : false });
     }
 
+    handleSignIn = data => {
+        console.log('signin', data);
+        axios.post("http://localhost:3001/api/login", data)
+            .then(res => {
+                console.log(res.data);
+                if (res.data.success === true) {
+                    alert('login success!')
+                } else {
+                    alert('login failed!')
+                }
+            })
+    }
+
+    handleSignUp = data => {
+        console.log('signup', data);
+        axios.post("http://localhost:3001/api/createUser", data)
+            .then(res => {
+                console.log(res.data);
+                if (res.data.success === true) {
+                    alert('sign up success!')
+                } else {
+                    alert('sign up failed!')
+                }
+                this.closeModal();
+            })
+    }
+
     render() {
         const { visible } = this.state;
-        const { handleSignUp, handleSignIn } = this.props;
 
         return (
             <div id='login-modal'>
@@ -170,8 +197,8 @@ class LoginModal extends Component {
                 >
                     <ModalContent 
                         handleCloseModal={ this.closeModal }
-                        handleSignIn={ handleSignIn }
-                        handleSignUp={ handleSignUp }
+                        handleSignIn={ this.handleSignIn }
+                        handleSignUp={ this.handleSignUp }
                     />
                 </Modal>
             </div>
