@@ -25,11 +25,11 @@ class ModalContent extends Component {
     }
 
     handleSignIn = () => {
-        console.log(this.state);
+        this.props.handleSignIn(this.state);
     }
 
     handleSignUp = () => {
-        console.log(this.state);
+        this.props.handleSignUp(this.state);
     }
 
     handleEmailInput = e => {
@@ -144,7 +144,6 @@ class LoginModal extends Component {
     }
 
     openModal = () => {
-        console.log('openModal');
         this.setState({ visible : true });
     }
 
@@ -154,6 +153,7 @@ class LoginModal extends Component {
 
     render() {
         const { visible } = this.state;
+        const { handleSignUp, handleSignIn } = this.props;
 
         return (
             <div id='login-modal'>
@@ -170,6 +170,8 @@ class LoginModal extends Component {
                 >
                     <ModalContent 
                         handleCloseModal={ this.closeModal }
+                        handleSignIn={ handleSignIn }
+                        handleSignUp={ handleSignUp }
                     />
                 </Modal>
             </div>

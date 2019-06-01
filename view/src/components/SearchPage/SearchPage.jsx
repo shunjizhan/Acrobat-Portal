@@ -63,13 +63,24 @@ class SearchPage extends Component {
             .catch(err => console.log(err));
     }     
 
+    handleSignIn = data => {
+        console.log(data);
+    }
+
+    handleSignUp = data => {
+        console.log(data);
+    }
 
     render() {
         const { results, textEntities } = this.state;
 
         return (
             <div id='searchPage'>  
-                <LoginModal />
+                <LoginModal 
+                    handleSignIn={ this.handleSignIn }
+                    handleSignUp={ this.handleSignUp }
+                />
+
                 <div id='top-bar-container'>
                     <TopBar 
                         textEntities={ textEntities }
