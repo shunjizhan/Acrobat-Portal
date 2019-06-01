@@ -4,6 +4,8 @@ const bodyParser = require("body-parser");
 const logger = require("morgan");
 const axios = require('axios');
 const cors = require('cors');
+const session = require('express-session')
+const cookieParser = require('cookie-parser');
 
 const API_PORT = 3001;
 const app = express();
@@ -30,6 +32,16 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(logger("dev"));
 app.use(cors());
+app.use(session({
+        key: 'user_sid',
+        secret: 'somerandonstuffs',
+        resave: false,
+        saveUninitialized: false,
+        cookie: {
+            expires: 600000
+        }
+    }));
+app.use(cookieParser());
 //*********************************************************************************
 //  route
 //*********************************************************************************

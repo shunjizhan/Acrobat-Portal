@@ -6,6 +6,7 @@ const searchModule = require('./controllers/search_controller.js');
 const mongo = require('mongodb');
 const CaseReport2 = require("./models/mongo/case_report2");
 const User = require("./models/mongo/user");
+const bcrypt = require('bcrypt');
 
 const client = require('./config/neoClient.js');
 var writeResponse = require('./helpers/response').writeResponse
@@ -534,10 +535,39 @@ module.exports = function(app) {
     });
 
     /* --------------------------------------- SIGNUP --------------------------------------- */
+    app.use((req, res, next) => {
+        if (req.cookies.user_sid && !req.session.user) {
+            res.clearCookie('user_sid');        
+        }
+        next();
+    });
+
+    var sessionChecker = (req, res, next) => {
+        if (req.session.user && req.cookies.user_sid) {
+            // res.redirect('/dashboard');
+            // login success, nothing to do
+            console.log('found logged in cookies');
+        } else {
+            console.log('did not find logged-in cookies');
+            next();
+        }    
+    };
+
+    // app.get('/', sessionChecker, (req, res) => {
+    //     res.redirect('/login');
+    // });
+
+    // app.route('/api/createUser')
+    //     .get(sessionChecker, (req, res) => {
+    //         console.log('in sessionChecker');
+
+    //         return res.json({success: false, error: 'user found in cookie'});
+    //     });
 
     router.post('/createUser', function(req, res) {
         console.log('craetUser API')
         console.log(req.body);
+        console.log(req.session);
         if (!req.body.email || !req.body.password) {
             return res.json({
                 success: false,
@@ -553,15 +583,57 @@ module.exports = function(app) {
             if (err) {
                 return res.json({success: false, error: err});
             } else {
+                req.session.user = user;
+                console.log(" ")
+                console.log(req.session);
+                console.log(req.cookies);
                 return res.json({success: true});
             }
+        });
+        
+    });
+
+    /* --------------------------------------- SIGNIN --------------------------------------- */
+    app.post('/login', function(req, res) {
+        var email = req.body.email,
+            password = req.body.password;
+        console.log(email, password);
+        User.findOne({ email: email }).then(function (user, err) {
+            if (err) {
+                console.log("email not registered");
+                return res.json({success: false, error: err});
+            } else if (!user) {
+                var err = new Error('User not found.');
+                err.status = 401;
+                console.log(err);
+                return res.json({success: false, error: err});
+            }
+            console.log("found user");
+            bcrypt.compare(password, user.password, function (err, result) {
+                if (result === true) {
+                    req.session.user = user;
+                    return res.json({success: true});
+                } else {
+                    console.log("err3");
+                    return res.json({success: false, error: err});
+                }
+            })
         });
     });
 
     /* --------------------------------------- LOGOUT --------------------------------------- */
 
-    // app.get('/logout', function(req, res) {
-    //     req.logout();
-    //     res.redirect('/home/login');
-    // });
+    app.get('/logout', function(req, res, next) {
+        if (req.session) {
+            // delete session object
+            req.session.destroy(function(err) {
+                if(err) {
+                    return next(err);
+                } else {
+                    return res.redirect('/');
+                }
+            });
+        }
+    });
+
 };
