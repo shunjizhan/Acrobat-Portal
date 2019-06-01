@@ -14,12 +14,15 @@
     "body-parser": "^1.18.3",
     "cookie-parser": "^1.4.4",
     "cors": "^2.8.5",
+    "crypto": "^1.0.1",
     "elasticsearch": "^15.4.1",
     "express": "^4.16.4",
     "express-session": "^1.16.1",
     "mongoose": "^5.4.6",
     "morgan": "^1.9.1",
-    "neo4j-driver": "^1.7.3"
+    "neo4j-driver": "^1.7.3",
+    "nodemailer": "^6.2.1",
+    "nodemailer-smtp-transport": "^2.7.4"
   },
   "proxy": "http://localhost:3001"
 }
