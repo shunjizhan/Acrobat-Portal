@@ -44,7 +44,6 @@ class RelationSearchPage extends Component {
     handleRelationSearch = () => {
         const { allQueries } = this.state;
         console.log(allQueries);
-
         axios.post("http://localhost:3001/api/searchMultiRelations", allQueries)
             .then(res => { 
                 const results = res.data.data.map(info => {

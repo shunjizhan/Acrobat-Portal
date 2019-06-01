@@ -3,14 +3,33 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import './Result.css';
+import axios from 'axios'
 
 
 class Result extends Component {
-    render() {
+    state = {
+        previewText : ''
+    }
+
+    componentWillMount(){
         const { 
             displayData: { previewText, id, textEntities, entities }
         } = this.props;
-        console.log(this.props.displayData);
+        axios.post("http://localhost:3001/api/getCaseReportById", {id})
+            .then(res => { 
+                console.log(res, "res");
+                const text = (res.data.data[0].text).substring(0, 350) + '...';
+                
+                this.setState({ previewText: text }) 
+            })
+            .catch(err => console.log(err));
+    }
+
+    render() {
+        const { previewText } = this.state;
+        const { 
+            displayData: { id, textEntities, entities }
+        } = this.props;
         const displayPath = `search/${id}`;
 
         return (
