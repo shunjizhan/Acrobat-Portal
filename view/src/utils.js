@@ -712,24 +712,12 @@ export const addHighLight = (text, tokens, className='highLight') => {
     // basically wrap these [tokens] in [text] with span that has [className]
     if (tokens === null) { return text; }
 
-    const _remove_punc = string => 
-        string
-        .replace(/[.,/#!$%^&*;:{}=\-_`~()]/g,"")
-        .replace(/\s{2,}/g," ");
+    for (let t of tokens) {
+        let highlight = '<span class=' + className + '>' + t + '</span>';
+        text = text.replace(t, highlight);
+    }
 
-    text = _remove_punc(text).split(' ');
-    console.log('text', text);
-    tokens = new Set(tokens);
-    for (let i = 0; i < text.length; i++) {
-        let t = text[i];
-        // console.log(t, tokens);
-        if (tokens.has(t)) {
-            text[i] = '<span class=' + className + '>' + t + '</span>';
-            // console.log(text[i]);
-        }
-    }  
-
-    return text.join(' ');
+    return text;
 };
 
 
