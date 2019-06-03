@@ -710,7 +710,7 @@ export const combineMultiWordEntity = (entity_types, tokens) => {
 
 export const addHighLight = (text, tokens, className='highLight') => {
     // basically wrap these [tokens] in [text] with span that has [className]
-    if (tokens === null) { return text; }
+    if (tokens == null) { return text; }
 
     for (let t of tokens) {
         let highlight = '<span class=' + className + '>' + t + '</span>';
