@@ -5,8 +5,9 @@
   "mongoPassword": "z132465798",
   "mongoHost":"ds123050.mlab.com",
   "mongoPort":"23050",
-  "neo4jUrl": "bolt://52.91.116.38:38428",
+  "neo4jUrl": "bolt://52.86.147.204:33034",
   "neo4jUsername":"neo4j",
-  "neo4jPassword":"flakes-clothing-gage",
+  "neo4jPassword":"stare-minerals-objectives",
   "elasticSearchHost":"https://search-acrobate-6oayszlzcxx2isu4cxe2sea3qy.us-east-2.es.amazonaws.com"
 }
+
