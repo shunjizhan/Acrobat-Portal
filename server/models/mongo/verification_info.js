@@ -1,5 +1,4 @@
 // /backend/case_report.js
-const bcrypt = require("bcrypt");
 
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
@@ -12,7 +11,7 @@ const Schema = mongoose.Schema;
 *	@param {String} description - description of the Case Report
 *	@param {{ type: Date, default: Date.now }} date - date of the Case Report
 */
-const UserSchema = new Schema(
+const VerificationInfoSchema = new Schema(
   {
     email: {
         type: String,
@@ -20,27 +19,15 @@ const UserSchema = new Schema(
         required: true,
         trim: true
     },
-    password: {
+    hash: {
         type: String,
+        unique: true,
         required: true
-    },
-    activation: {
-        type: Boolean
     }
   },
   { timestamps: true }
 );
 
-UserSchema.pre('save', function(next) {
-    var user = this;
-    bcrypt.hash(user.password, 10, function(err, hash) {
-        if (err) {
-            return next(err);
-        }
-        user.password = hash;
-        next();
-    });
-});
 
 // export the new Schema so we could modify it using Node.js
-module.exports = mongoose.model("User", UserSchema);
+module.exports = mongoose.model("VeriInfo", VerificationInfoSchema);
