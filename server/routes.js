@@ -568,8 +568,20 @@ module.exports = function(app) {
         }    
     };
 
-    router.get('/', sessionChecker, (req, res) => {
-        return res.json({success: true});
+    router.post('/getUser', sessionChecker, (req, res) => {
+        console.log(req.session);
+        if (req.session.user) {
+
+            return res.json({
+                success: true, 
+                user: req.session.user
+            });
+        }
+        else{
+            return res.json({
+                success: false
+            });
+        }
     });
 
     // app.route('/api/createUser')
@@ -631,7 +643,7 @@ module.exports = function(app) {
     });
 
     /* --------------------------------------- SIGNIN --------------------------------------- */
-    app.post('/login', function(req, res) {
+    router.post('/login', function(req, res) {
         var email = req.body.email,
             password = req.body.password;
         console.log(email, password);
@@ -653,8 +665,12 @@ module.exports = function(app) {
                     if (user.activation == false) {
                         return res.json({success: false, error: 'Acount Not Acitivated'});
                     } else {
-                        req.session.user = user;
-                        return res.json({success: true});
+                        // req.session.user = user;
+                        // console.log(req.session.user);
+                        return res.json({
+                            success: true,
+                            user
+                        });
                     }
                 } else {
                     console.log("err3");

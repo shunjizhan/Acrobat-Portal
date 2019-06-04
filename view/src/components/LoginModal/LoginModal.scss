@@ -1,13 +1,17 @@
 @import "../shared";
 
 #login-modal {
-    #user {
+    .button {
         font-size: 150%;
         position: absolute;
         right: 20px;
         top: 10px;
         z-index: 1;
         border: none;
+
+        button {
+            border: none;
+        }
 
         svg {
             margin-right: 10px;

@@ -156,9 +156,11 @@ class LoginModal extends Component {
         console.log('signin', data);
         axios.post("http://localhost:3001/api/login", data)
             .then(res => {
-                console.log(res.data);
+                // console.log(res.data);
                 if (res.data.success === true) {
-                    alert('Welcome!')
+                    const { user } = res.data;
+                    localStorage.setItem('user', JSON.stringify(user));
+                    alert('welcome!')
                 } else {
                     alert('login failed!')
                 }
@@ -180,15 +182,49 @@ class LoginModal extends Component {
             })
     }
 
+    handleSignOut = () => {
+        localStorage.clear();
+        this.forceUpdate();
+    }
+
+    showProfile = () => {
+        let user = JSON.parse(localStorage.getItem('user'));
+        const { email, createdAt } = user;
+        alert(email + '\n\n' + createdAt);
+    }
+
     render() {
         const { visible } = this.state;
 
+        let hasUser = false;
+        let user = localStorage.getItem('user');
+        if (user) { 
+            user = JSON.parse(user); 
+            hasUser = true;
+        }
+        console.log(user, hasUser);
+
+        const Button = hasUser ?
+            <div className='button'>
+                <button onClick={ this.showProfile }>
+                    <FontAwesomeIcon icon={['far', 'user-astronaut']}/>
+                    Profile
+                </button>
+                |
+                <button onClick={ this.handleSignOut }>
+                    Sign Out
+                </button>
+            </div>
+            :
+            <button onClick={ this.openModal } className='button'>
+                <FontAwesomeIcon icon={['far', 'user-astronaut']}/>
+                Login
+            </button>
+
+
         return (
             <div id='login-modal'>
-                <button id='user' onClick={ this.openModal }>
-                    <FontAwesomeIcon icon={['far', 'user-astronaut']}/>
-                    Login
-                </button>
+                { Button }
                 <Modal 
                     visible={ visible } 
                     width="600" 
