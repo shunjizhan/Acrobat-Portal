@@ -8,13 +8,10 @@ import { combineMultiWordEntity } from '../../utils';
 
 
 class SearchPage extends Component {
-    // we only need to save search result here
-    // queries for display is saved at TopBar Component
-    // queries for search is saved in (advanced) search
     state = {
-        results: [],
-        textEntities: [],
-        queryText: ''
+        results: [],                // search results
+        textEntities: [],           // predicted entities
+        queryText: ''               // query plain text
     }
 
     handleTyping = queryText => {
