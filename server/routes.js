@@ -6,11 +6,7 @@ const searchModule = require('./controllers/search_controller.js');
 const mongo = require('mongodb');
 const CaseReport2 = require("./models/mongo/case_report2");
 const User = require("./models/mongo/user");
-const VeriInfo = require("./models/mongo/verification_info");
-const crypto = require('crypto');
 const bcrypt = require('bcrypt');
-const nodemailer = require("nodemailer");
-const smtpTransport = require('nodemailer-smtp-transport');
 const client = require('./config/neoClient.js');
 var writeResponse = require('./helpers/response').writeResponse
 var Graph = require('./controllers/graph_controller')
@@ -272,6 +268,12 @@ module.exports = function(app) {
     });
     // putCaseReport
     router.post("/putCaseReport", (req, res) => {
+        if (!req.body.email || !req.body.password) {
+            return res.json({
+                success: false,
+                error: "INVALID INPUTS"
+            });
+        }
         const {pmid, txt, ann} = req.body;
         let caseReport = new CaseReport();
 
@@ -404,6 +406,12 @@ module.exports = function(app) {
 
     // putCaseReport2
     router.post("/putCaseReport2", (req, res) => {
+        if (!req.body.email || !req.body.password) {
+            return res.json({
+                success: false,
+                error: "INVALID INPUTS"
+            });
+        }
         const {txt, ann} = req.body;
         let caseReport = new CaseReport2();
 
@@ -556,9 +564,16 @@ module.exports = function(app) {
         }    
     };
 
-    // app.get('/', sessionChecker, (req, res) => {
-    //     res.redirect('/login');
-    // });
+    router.get('/', sessionChecker, (req, res) => {
+        return res.json({success: true});
+    });
+
+    // app.route('/api/createUser')
+    //     .get(sessionChecker, (req, res) => {
+    //         console.log('in sessionChecker');
+
+    //         return res.json({success: false, error: 'user found in cookie'});
+    //     });
 
     router.post('/createUser', function(req, res) {
         console.log('craetUser API')
@@ -574,74 +589,23 @@ module.exports = function(app) {
         let user = {};
         user.email = req.body.email;
         user.password = req.body.password;
-        user.activation = false;
-
+        
         User.create(user, function(err, user) {
             if (err) {
                 return res.json({success: false, error: err});
             } else {
-                var transport = nodemailer.createTransport("smtps://donleeldb%40gmail.com:"+encodeURIComponent('jklabcdefg') + "@smtp.gmail.com:465");
-                console.log('hashing email');
-                var randHash = crypto.createHash('md5').update(req.body.email).digest('hex');
-
-                let vi = new VeriInfo();
-                vi.email = req.body.email;
-                vi.hash = randHash;
-                vi.save();
-
-                link="http://"+req.get('host')+"/api/verify/"+randHash;
-                mailOptions={
-                    to : req.body.email,
-                    subject : "Please confirm your Email account",
-                    html : "Hello,<br> Please Click on the link to verify your email.<br><a href="+link+">Click here to verify</a>" 
-                }
-                console.log(mailOptions);
-                transport.sendMail(mailOptions, function(error, response){
-                    if(error){
-                        console.log(error);
-                        return res.json({success: false, err: error});
-                    }else{
-                        console.log("Message sent: " + response.message);
-                        return res.json({success: true});
-                    }
-                });
+                req.session.user = user;
+                console.log(" ")
+                console.log(req.session);
+                console.log(req.cookies);
+                return res.json({success: true});
             }
         });
         
     });
 
-    router.get('/verify/:id', function(req, res) {
-        var verificationID = req.params.id;
-        VeriInfo.findOne({ hash: verificationID}).then(function (user, err) {
-            if (err) {
-                return res.json({success: false, error: err});
-            } else if (!user) {
-                console.log("Verification link invalid");
-                return res.json({success: false, error: 'Verification link invalid'});
-            } else{
-                console.log(user);
-                User.updateOne({email: user.email},{$set:{activation:true}}, function(err){
-                    if (err) {
-                        return res.json({success: false, error:err});
-                    } else {
-                        console.log("Acount acitivated ");
-                        VeriInfo.deleteOne({ hash: verificationID}, function(err) {
-                            if (err) {
-                                return res.json({success: false, error:err});
-                            } else {
-                                console.log("Verification deleted from DB");
-                                return res.json({success: true, message: 'Acount acitivated'});
-                            }
-                        })
-                    }
-                });
-            }
-        });
-
-    });
-
     /* --------------------------------------- SIGNIN --------------------------------------- */
-    router.post('/login', function(req, res) {
+    app.post('/login', function(req, res) {
         var email = req.body.email,
             password = req.body.password;
         console.log(email, password);
@@ -658,14 +622,8 @@ module.exports = function(app) {
             console.log("found user");
             bcrypt.compare(password, user.password, function (err, result) {
                 if (result === true) {
-                    // req.session.user = user;
-                    // return res.json({success: true});
-                    if (user.activation == false) {
-                        return res.json({success: false, error: 'Acount Not Acitivated'});
-                    } else {
-                        req.session.user = user;
-                        return res.json({success: true});
-                    }
+                    req.session.user = user;
+                    return res.json({success: true});
                 } else {
                     console.log("err3");
                     return res.json({success: false, error: err});
@@ -683,7 +641,8 @@ module.exports = function(app) {
                 if(err) {
                     return next(err);
                 } else {
-                    return res.redirect('/');
+                    // return res.redirect('/');
+                    return res.json({success: true, error: err})
                 }
             });
         }

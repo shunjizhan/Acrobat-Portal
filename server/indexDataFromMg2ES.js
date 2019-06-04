@@ -23,9 +23,9 @@ CaseReport.find((err, data) => {
     console.log(data)
     var body = [];
     data.forEach(function(row, id) {
-             body.push({ index:  { _index: 'casereport', _type: '_doc', _id: (id+1) } });
-             body.push({ id: row._id, pmID: row.pmID, content: row.text});
-        })  
+         body.push({ index:  { _index: 'casereport', _type: '_doc', _id: (id+1) } });
+         body.push({ id: row._id, pmID: row.pmID, content: row.text});
+    })  
     
 
     client.indices.create({
@@ -40,13 +40,6 @@ CaseReport.find((err, data) => {
                       "filter":       ["asciifolding", "lowercase", "snowball", "stop", "stemmer"],
                       "stopwords":    "_english_"
                 }
-              },
-              "filter": {
-                "ngrams_filter": {
-                    "type": "ngram",
-                    "min_gram": 3,
-                    "max_gram": 20
-                },
               },
               "tokenizer": {
                 "my_tokenizer": {
@@ -69,7 +62,8 @@ CaseReport.find((err, data) => {
                   },
                   "content": {
                       "type": "text",
-                      "analyzer": "my_analyzer"
+                      "analyzer": "my_analyzer",
+                      "search_analyzer": "my_analyzer"
                   }
               }
             }
